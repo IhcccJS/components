@@ -1,0 +1,87 @@
+html {
+  --blue: #03a9f4;
+  --green: #24b588;
+  --orange: #ff9800;
+  --red: #f44336;
+  --black: #4c4c4c;
+  --brown: #795548;
+  --purple: #ab47bc;
+  --pink: #f06292;
+  --grey: #78909c;
+  // --grey: #9e9e9e;
+  --primary: var(--green);
+}
+
+body {
+  image-rendering: pixelated;
+
+  .blue {
+    --color: var(--blue);
+  }
+
+  .green {
+    --color: var(--green);
+  }
+
+  .orange {
+    --color: var(--orange);
+  }
+
+  .red {
+    --color: var(--red);
+  }
+
+  .black {
+    --color: var(--black);
+  }
+
+  .brown {
+    --color: var(--brown);
+  }
+
+  .purple {
+    --color: var(--purple);
+  }
+
+  .pink {
+    --color: var(--pink);
+  }
+
+  .grey {
+    --color: var(--grey);
+  }
+
+  .primary {
+    --color: var(--primary);
+  }
+
+  .color {
+    color: var(--color);
+  }
+
+  .background {
+    background-color: var(--color);
+  }
+
+  .border {
+    border-color: var(--color);
+  }
+
+  .ant-btn {
+    &:not(:disabled) {
+      &.stroke {
+        color: var(--color);
+        border-color: var(--color);
+      }
+
+      &.fill {
+        color: #fff;
+        background-color: var(--color);
+        border-color: var(--color);
+        &:hover {
+          filter: brightness(1.1);
+        }
+      }
+    }
+  }
+}

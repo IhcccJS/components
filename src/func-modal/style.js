@@ -1,0 +1,40 @@
+import { createStyles, css } from 'antd-style';
+
+export default createStyles(
+  () => {
+    return css`
+      &.func-modal.ant-modal-confirm {
+        .ant-modal-body {
+          padding: 0;
+        }
+
+        .ant-modal-confirm-content {
+          margin-top: 0;
+        }
+
+        .ant-modal-confirm-btns {
+          display: none;
+        }
+
+        .title {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 12px 20px;
+          background-color: #f1f1f1;
+
+          .titleText {
+            font-size: 16px;
+            font-weight: bold;
+          }
+        }
+
+        .content {
+          padding: 20px;
+          background-color: #ffffff;
+        }
+      }
+    `;
+  },
+  { hashPriority: 'low' },
+);

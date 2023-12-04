@@ -1,0 +1,152 @@
+import React from 'react';
+import { isString, isObject } from '@ihccc/utils';
+import { childrenSetter, childrenPropsSetter } from '../../common-form/setter';
+import getAliasName from '../getAliasName';
+
+function register(formComponents, inputDefaultProps) {
+  const componentAlias = formComponents || {};
+
+  // input
+  childrenSetter.use(
+    getAliasName(componentAlias, 'input'),
+    React.lazy(() => import('antd/lib/input/Input')),
+  );
+
+  // input-number
+  childrenSetter.use(
+    getAliasName(componentAlias, 'number'),
+    React.lazy(() => import('antd/lib/input-number')),
+  );
+
+  // password
+  childrenSetter.use(
+    getAliasName(componentAlias, 'password'),
+    React.lazy(() => import('antd/lib/input/Password')),
+  );
+
+  // textarea
+  childrenSetter.use(
+    getAliasName(componentAlias, 'textarea'),
+    React.lazy(() => import('antd/lib/input/TextArea')),
+  );
+
+  // date-picker
+  childrenSetter.use(
+    getAliasName(componentAlias, 'date'),
+    React.lazy(() => import('antd/lib/date-picker')),
+  );
+
+  // range-picker
+  childrenSetter.use(
+    getAliasName(componentAlias, 'range'),
+    React.lazy(() =>
+      import('antd/lib/date-picker/').then((module) => ({
+        default: module.RangePicker,
+      })),
+    ),
+  );
+
+  // Rate
+  childrenSetter.use(
+    getAliasName(componentAlias, 'rate'),
+    React.lazy(() => import('antd/lib/rate')),
+  );
+
+  // slider
+  childrenSetter.use(
+    getAliasName(componentAlias, 'slider'),
+    React.lazy(() => import('antd/lib/slider')),
+  );
+
+  // switch
+  childrenSetter.use(
+    getAliasName(componentAlias, 'switch'),
+    React.lazy(() => import('antd/lib/switch')),
+  );
+
+  // time-picker
+  childrenSetter.use(
+    getAliasName(componentAlias, 'time'),
+    React.lazy(() => import('antd/lib/time-picker')),
+  );
+
+  // transfer
+  childrenSetter.use(
+    getAliasName(componentAlias, 'transfer'),
+    React.lazy(() => import('antd/lib/transfer')),
+  );
+
+  // mentions
+  childrenSetter.use(
+    getAliasName(componentAlias, 'mentions'),
+    React.lazy(() => import('../../select-v2/mentions')),
+  );
+
+  // auto-complete
+  childrenSetter.use(
+    getAliasName(componentAlias, 'autoComplete'),
+    React.lazy(() => import('../../select-v2/auto-complete')),
+  );
+
+  // cascader
+  childrenSetter.use(
+    getAliasName(componentAlias, 'cascader'),
+    React.lazy(() => import('../../select-v2/cascader')),
+  );
+
+  // checkbox
+  childrenSetter.use(
+    getAliasName(componentAlias, 'checkbox'),
+    React.lazy(() => import('../../select-v2/checkbox')),
+  );
+
+  // radio
+  childrenSetter.use(
+    getAliasName(componentAlias, 'radio'),
+    React.lazy(() => import('../../select-v2/radio')),
+  );
+
+  // segmented
+  childrenSetter.use(
+    getAliasName(componentAlias, 'segmented'),
+    React.lazy(() => import('../../select-v2/segmented')),
+  );
+
+  // select
+  childrenSetter.use(
+    getAliasName(componentAlias, 'select'),
+    React.lazy(() => import('../../select-v2/select')),
+  );
+
+  // select-view
+  childrenSetter.use(
+    getAliasName(componentAlias, 'selectView'),
+    React.lazy(() => import('../../select-v2/select-view/base')),
+  );
+
+  // tree-select
+  childrenSetter.use(
+    getAliasName(componentAlias, 'treeSelect'),
+    React.lazy(() => import('../../select-v2/tree-select')),
+  );
+
+  // upload
+  childrenSetter.use(
+    getAliasName(componentAlias, 'upload'),
+    React.lazy(() => import('../../upload')),
+  );
+
+  for (let key in componentAlias) {
+    if (!isString(componentAlias[key])) {
+      childrenSetter.use(key, componentAlias[key]);
+    }
+  }
+
+  for (let key in inputDefaultProps) {
+    if (isObject(inputDefaultProps[key])) {
+      childrenPropsSetter.use(key, inputDefaultProps[key]);
+    }
+  }
+}
+
+export default register;

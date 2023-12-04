@@ -1,0 +1,67 @@
+{
+  "name": "@ihccc/components",
+  "version": "0.0.1-alpha.1",
+  "description": "A base components library extends antd",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "module": "es/index.js",
+  "files": [
+    "es",
+    "lib"
+  ],
+  "scripts": {
+    "dev": "dumi dev",
+    "build": "father build",
+    "docs:build": "dumi build",
+    "build:watch": "father dev",
+    "doctor": "father doctor",
+    "lint": "npm run lint:es && npm run lint:css",
+    "lint:css": "stylelint \"{src,test}/**/*.{css,less}\"",
+    "lint:es": "eslint \"{src,test}/**/*.{js,jsx,ts,tsx}\"",
+    "prepublishOnly": "father doctor && npm run build",
+    "start": "npm run dev"
+  },
+  "lint-staged": {
+    "*.{md,json}": [
+      "prettier --write --no-error-on-unmatched-pattern"
+    ],
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --parser=typescript --write"
+    ]
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "authors": [
+    "ihccc-cn <lccc10588@gmail.com>"
+  ],
+  "peerDependencies": {
+    "antd": "^5.1.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
+  },
+  "dependencies": {
+    "@ant-design/icons": "^4.8.0",
+    "@babel/runtime": "^7.14.0",
+    "@ihccc/hooks": "0.0.1-alpha.1",
+    "@ihccc/utils": "0.0.1-alpha.1",
+    "ahooks": "^3.7",
+    "antd-style": "^3.5.2",
+    "lodash": "^4.17.21",
+    "react-easy-crop": "^3.3.3",
+    "react-sortablejs": "^6.1.4",
+    "sortablejs": "^1.15.0"
+  },
+  "devDependencies": {
+    "@types/sortablejs": "^1.15.1",
+    "@umijs/lint": "^4.0.0",
+    "@umijs/test": "^3.0.5",
+    "dumi": "^2.2.14",
+    "eslint": "^8.23.0",
+    "father": "^4.1.0",
+    "lint-staged": "^13.0.3",
+    "prettier": "^2.7.1"
+  }
+}
