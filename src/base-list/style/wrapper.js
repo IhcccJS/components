@@ -1,18 +1,18 @@
 import { createStyles, css } from 'antd-style';
 
 export default createStyles(
-  () => {
+  ({ token }) => {
     return css`
       &.bc {
         &-base-list-wrapper {
           position: relative;
-          border-radius: 20px;
+          border-radius: ${token.borderRadius}px;
           padding: 20px;
         }
 
         &-wrapper-style {
           background-color: #fff;
-          box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+          box-shadow: ${token.boxShadowTertiary};
         }
 
         &-search-space {

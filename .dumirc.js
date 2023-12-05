@@ -44,10 +44,8 @@ export default defineConfig({
         { title: '基于Antd', description: '组件库目前完全基于 Antd' },
       ],
     },
-    footerConfig: { columns: false, bottom: 'Powered by dumi' },
-
-    siteToken: {
-      contentMaxWidth: 2000,
-    },
+    footerConfig: { columns: [], bottom: 'Powered by dumi' },
+    demo: { lazyLoading: true },
+    siteToken: { contentMaxWidth: 2000 },
   },
 });
