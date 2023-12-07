@@ -11,6 +11,7 @@ export { default as EditTable } from './edit-table';
 export { default as Feature } from './feature';
 export { default as funcModal } from './func-modal';
 export { default as ImageList } from './image-list';
+export * as Login from './login';
 export { default as ModalWrapper } from './modal-wrapper';
 export { default as LazyRender } from './lazy-render';
 export { default as ListWrapper } from './list-wrapper';

@@ -45,7 +45,7 @@ export default defineConfig({
       ],
     },
     footerConfig: { columns: [], bottom: 'Powered by dumi' },
-    demo: { lazyLoading: true },
+    // demo: { lazyLoading: true },
     siteToken: { contentMaxWidth: 2000 },
   },
 });
