@@ -8,7 +8,7 @@ export default createStyles(
           display: flex;
           flex-direction: column;
           align-items: flex-end;
-          padding: 20px;
+          padding: 20px 0;
 
           &-main {
             width: 100%;

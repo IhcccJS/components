@@ -1,10 +1,10 @@
 import React from 'react';
 import { Modal, Form, Drawer, Spin } from 'antd';
-import { isFunction } from '@ihccc/utils';
 import StepTitles from './steps';
 import Footer from './footer';
 import CommonForm from '../../common-form';
 import { useTitle, useValue, useSteps } from '../hooks';
+import { isFunction } from '@ihccc/utils';
 import { cloneSomeChildren } from '../../utils/base';
 
 const VIEWMODES = {

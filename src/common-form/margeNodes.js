@@ -1,6 +1,6 @@
 import React from 'react';
-import { isString, isArray } from '@ihccc/utils';
 import Item from './item';
+import { isString, isArray } from '@ihccc/utils';
 
 const margeNodes = (list, children, opts = {}) => {
   const { except, itemProps, allowRules = true } = opts;

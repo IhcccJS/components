@@ -5,15 +5,6 @@ import { columnSetter } from '../../columns-helper/setter';
 function register(columnInterface) {
   const columnAlias = columnInterface || {};
 
-  // 序号列
-  columnSetter.use('indexNumber', {
-    title: 'NO.',
-    key: 'indexNumber',
-    width: 'min',
-    fixed: 'left',
-    align: 'center',
-  });
-
   // ID 列
 
   // // 操作列
@@ -55,27 +46,6 @@ function register(columnInterface) {
   //   inputNode: 'number',
   //   render: ['number', { delimiter: ',' }],
   // });
-
-  // 拷贝文本
-
-  // 链接类型
-
-  // 数字类型
-
-  // 单选类型
-  // columnSetter.use(getAliasName(columnAlias, 'select'), (options) => ({
-  //   inputNode: 'select',
-  //   inputNodeProps: { options },
-  //   render: ['formater', options],
-  // }));
-
-  // 多选类型
-
-  // 点击事件
-
-  // 单图片类型
-
-  // 图片列表类型
 
   for (let key in columnAlias) {
     if (!isString(columnAlias[key])) {

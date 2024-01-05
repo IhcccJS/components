@@ -1,7 +1,10 @@
 import load from './load';
 import transform from './transform';
 import { columnSetter } from './setter';
-import useColumns from './useColumns';
+import useColumns, {
+  useColumnsAccess,
+  useColumnsTransform,
+} from './useColumns';
 
 const columnsHelper = {
   /**
@@ -12,6 +15,8 @@ const columnsHelper = {
   transform,
   fields: columnSetter,
   useColumns,
+  useColumnsAccess,
+  useColumnsTransform,
 };
 
 export default columnsHelper;

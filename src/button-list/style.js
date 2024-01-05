@@ -97,6 +97,10 @@ export default createStyles(
               flex: 1;
             }
           }
+
+          .ant-tag {
+            margin-inline-end: 0;
+          }
         }
       }
     `;

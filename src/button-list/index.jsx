@@ -1,6 +1,6 @@
 import React from 'react';
 import { Tooltip, Dropdown } from 'antd';
-import { isArray, isObject } from '@ihccc/utils';
+import { isArray, isObject, isFunction } from '@ihccc/utils';
 import { Confirm } from './buttons';
 import Space from './space';
 import { buttonSetter } from './setter';
@@ -25,6 +25,8 @@ function RenderButtons(props) {
     buttons,
     baseProps,
     renderType,
+    eventData,
+    eventMap,
     style,
   } = props;
   const { styles, cx } = useStyles();
@@ -32,23 +34,38 @@ function RenderButtons(props) {
 
   const lastIndex = buttons.length - 1;
 
-  const handleDropdownMenu = React.useCallback((buttons) => {
-    const items = buttons.map((btn) => {
-      return {
-        ...btn.props,
-        key: btn.key,
-      };
-    });
-    const onClick = (item) => {
-      for (let index = 0; index < buttons.length; index++) {
-        if (buttons[index].key === item.key) {
-          buttons[index].onClick && buttons[index].onClick(item);
-          return;
+  const eventFunction = React.useCallback(
+    (item, name) => {
+      let event = isFunction(item[name])
+        ? item[name]
+        : eventMap[item[name] || item.key];
+      if (isFunction(event)) return event?.bind(item, eventData);
+      return null;
+    },
+    [eventMap, eventData],
+  );
+
+  const handleDropdownMenu = React.useCallback(
+    (buttons) => {
+      const items = buttons.map((btn) => {
+        return {
+          ...btn.props,
+          key: btn.key,
+        };
+      });
+      const onClick = (item) => {
+        for (let index = 0; index < buttons.length; index++) {
+          if (buttons[index].key === item.key) {
+            const event = eventFunction(item, 'onClick');
+            event && item;
+            return;
+          }
         }
-      }
-    };
-    return { items, onClick };
-  }, []);
+      };
+      return { items, onClick };
+    },
+    [eventFunction],
+  );
 
   const renderbuttons = buttons.map((item, index) => {
     if (isArray(item)) {
@@ -60,6 +77,8 @@ function RenderButtons(props) {
           buttons={subButtons}
           baseProps={baseProps}
           renderType={group.type}
+          eventData={eventData}
+          eventMap={eventMap}
           key={group.key}
         />
       );
@@ -72,7 +91,11 @@ function RenderButtons(props) {
     let button = React.createElement(buttonSetter.get(btnType), {
       ...baseProps?.[btnType],
       ...item.props,
-      [eventName]: item[eventName],
+      ...(!!item.dropdown || !!item.confirm || !!item.onConfirm
+        ? {}
+        : {
+            [eventName]: eventFunction(item, eventName),
+          }),
     });
 
     if (!!item.dropdown) {
@@ -85,12 +108,12 @@ function RenderButtons(props) {
           {button}
         </Dropdown>
       );
-    } else if (!!item.onConfirm) {
+    } else if (!!item.confirm || !!item.onConfirm) {
       button = (
         <Confirm
           {...baseProps?.confirm}
           {...item.confirm}
-          onConfirm={item.onConfirm}
+          onConfirm={eventFunction(item, 'onConfirm')}
         >
           {button}
         </Confirm>
@@ -161,6 +184,7 @@ function ButtonList(props) {
     buttons,
     baseProps,
     render,
+    eventMap,
     style,
   } = props;
 
@@ -190,16 +214,20 @@ function ButtonList(props) {
       layout={layout}
       buttons={buttonList}
       baseProps={baseProps}
+      eventData={data}
+      eventMap={eventMap || {}}
       style={style}
     />
   );
 
-  return !render ? renderDom : render(data, buttonList, renderDom);
+  return !render ? renderDom : render(renderDom, data, buttonList);
 }
 
 ButtonList.defaultProps = {
   type: 'button',
   buttons: [],
 };
+
+ButtonList.button = buttonSetter;
 
 export default ButtonList;

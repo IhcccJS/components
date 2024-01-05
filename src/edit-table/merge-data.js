@@ -1,5 +1,6 @@
 function mergeData(target, source) {
   const result = [...target];
+  if (!source) return result;
 
   for (const key in source) {
     const newRow = Object.assign({}, result[key], source[key]);

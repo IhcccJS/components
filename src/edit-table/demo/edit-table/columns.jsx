@@ -12,7 +12,7 @@ const columns = [
     title: '字段索引',
     dataIndex: 'field',
     width: 'md',
-    render: 'text',
+    render: ['text'],
     inputNode: 'input',
     editAble: false,
   },
@@ -30,7 +30,7 @@ const columns = [
     title: '显示名称',
     dataIndex: 'label',
     width: 'lg',
-    render: 'text',
+    render: ['text'],
     inputNode: 'input',
   },
   {

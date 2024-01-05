@@ -28,13 +28,15 @@ function Demo() {
 
   return (
     <Card
-      bodyStyle={{
-        height: 560,
-        overflow: 'auto',
-        background: loaded ? '#C8E6C9' : '#f1f1f1',
+      styles={{
+        body: {
+          height: 560,
+          overflow: 'auto',
+          background: loaded ? '#C8E6C9' : '#f1f1f1',
+        },
       }}
     >
-      <Card bodyStyle={{ height: 1200 }}>请滑到底部</Card>
+      <Card styles={{ body: { height: 1200 } }}>请滑到底部</Card>
 
       <LazyRender threshold={50} style={{ marginTop: 20 }}>
         <LoadRun onLoad={setLoaded} />

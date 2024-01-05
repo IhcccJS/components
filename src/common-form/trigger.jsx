@@ -10,7 +10,13 @@ import ButtonList from '../button-list';
 import Item from './item';
 
 export const Base = (props) => {
-  const { resetAble = true, submitText, buttonConfig, ...restProps } = props;
+  const {
+    loading,
+    resetAble = true,
+    submitText,
+    buttonConfig,
+    ...restProps
+  } = props;
 
   const buttons = React.useMemo(() => {
     const initButtons = !resetAble
@@ -28,7 +34,8 @@ export const Base = (props) => {
 
     return initButtons.concat({
       key: 'submit',
-      props: ({ submitText }) => ({
+      props: ({ submitText, loading }) => ({
+        loading,
         type: 'primary',
         icon: <CheckOutlined />,
         htmlType: 'submit',
@@ -44,7 +51,7 @@ export const Base = (props) => {
         type="button"
         {...buttonConfig}
         buttons={buttons}
-        data={{ submitText }}
+        data={{ submitText, loading }}
       />
     </Item>
   );
@@ -52,6 +59,7 @@ export const Base = (props) => {
 
 export const Search = (props) => {
   const {
+    loading,
     full,
     important,
     fold,
@@ -80,12 +88,13 @@ export const Search = (props) => {
     items.push({
       key: 'search',
       group: 'group',
-      props: {
+      props: ({ loading }) => ({
+        loading,
         type: 'primary',
         icon: <SearchOutlined />,
         htmlType: 'submit',
         children: '查询',
-      },
+      }),
     });
 
     if (resetAble) {
@@ -108,7 +117,7 @@ export const Search = (props) => {
         layout="end"
         {...buttonConfig}
         buttons={buttons}
-        data={{ fold }}
+        data={{ fold, loading }}
       />
     </Item>
   );

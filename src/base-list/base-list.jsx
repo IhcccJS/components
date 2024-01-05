@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table } from 'antd';
+import { Table, Form } from 'antd';
 import { useControllableValue } from 'ahooks';
 import { isString, isObject, isFunction, isUndefined } from '@ihccc/utils';
 import useFullscreen from './hooks/useFullscreen';
@@ -8,10 +8,22 @@ import Wrapper from './wrapper';
 import FuncButtons from './func-buttons';
 import PopupRender from './popup-render';
 import ColumnsEditorModal from './columns-editor/modal';
+import useEvent from './hooks/useEvent';
 import columnsHelper from '../columns-helper';
 import { renderSetter } from './setter';
 
 const defaultPageSizeOptions = ['10', '20', '50', '100', '200'];
+
+const defaultEventMap = {
+  refresh: ({ ee }) => ee.emit('refresh'),
+  fullScreen: ({ ee }) => ee.emit('fullScreen'),
+  columnsEditor: ({ ee }) => ee.emit('popup', { type: 'columnsEditor' }),
+  create: ({ ee, loading }) =>
+    ee.emit('popup', {
+      type: 'create',
+      loading: loading?.create || loading?.update || false,
+    }),
+};
 
 const BaseList = React.memo(function (props) {
   const {
@@ -34,11 +46,17 @@ const BaseList = React.memo(function (props) {
     autoRequest,
     state,
     action,
-    eventEmitter,
+    eventData,
+    eventMap,
     children,
     ...restProps
   } = props;
-  const { loading, data, defaultParams } = state;
+  const { namespace, loading, defaultParams, params, data } = state;
+
+  const [searchForm] = Form.useForm();
+
+  const { eventEmitter, eventHandler } = useEvent(namespace);
+
   const [fullScreen, setFullScreen] = useControllableValue(props, {
     defaultValuePropName: 'defaultFullScreen',
     defaultValue: false,
@@ -47,19 +65,6 @@ const BaseList = React.memo(function (props) {
   });
   const defaultFullScreenRef = React.useRef();
   useFullscreen(fullScreen, fullScreenRef || defaultFullScreenRef);
-
-  const tableColumns = columnsHelper.useColumns(columns, {
-    access: Object.assign(
-      { handler: 'baseList' },
-      isString(access) ? { name: access } : access,
-    ),
-    name: name || 'list',
-    isList: true,
-    showIndex: showIndex === 'order' ? data?.page : showIndex,
-    actions: actionColumn,
-  });
-
-  const mergeColumns = useMergeColumns(tableColumns, columnsEditor);
 
   // 基础查询
   const __handle_query__ = React.useCallback(
@@ -88,6 +93,43 @@ const BaseList = React.memo(function (props) {
     [action],
   );
 
+  const _eventData = {
+    ...eventData,
+    ...extraButtonConfig?.data,
+    fullScreen,
+    loading,
+    ee: eventEmitter,
+  };
+
+  const _eventMap = {
+    ...defaultEventMap,
+    ...eventHandler,
+    ...eventMap,
+  };
+
+  // 权限过滤，visible 过滤
+  const accessFilterColumns = columnsHelper.useColumnsAccess(
+    columns,
+    Object.assign(
+      { handler: 'baseList' },
+      isString(access) ? { name: access } : access,
+    ),
+  );
+  // 用户配置过滤
+  const mergeColumns = useMergeColumns(
+    accessFilterColumns.passedData,
+    columnsEditor,
+  );
+  // 进行列表配置转换
+  const tableColumns = columnsHelper.useColumnsTransform(mergeColumns.columns, {
+    name: name || 'list',
+    isList: true,
+    showIndex: showIndex === 'order' ? data?.page : showIndex,
+    actions: actionColumn,
+    eventData: _eventData,
+    eventMap: _eventMap,
+  });
+
   const { _popups, _behaviors } = React.useMemo(() => {
     const _popups = [...(popups || [])];
     const _behaviors = {};
@@ -96,7 +138,7 @@ const BaseList = React.memo(function (props) {
       _popups.push(
         <ColumnsEditorModal
           {...config}
-          defaultValue={tableColumns}
+          defaultValue={mergeColumns.columns}
           value={mergeColumns.source}
           onOk={mergeColumns.save}
           key="columnsEditor"
@@ -109,14 +151,19 @@ const BaseList = React.memo(function (props) {
       }
     });
     return { _popups, _behaviors: { ..._behaviors, ...behaviors } };
-  }, [popups, behaviors, tableColumns, mergeColumns.source]);
+  }, [popups, behaviors, mergeColumns.source]);
 
   // 查询组件（新）
   const searchElement = React.useMemo(() => {
     return (
       searchRender &&
       searchRender({
-        initialValues: searcher?.props?.initialValues || defaultParams,
+        namespace,
+        form: searchForm,
+        initialValues: {
+          ...defaultParams,
+          ...searcher?.props?.initialValues,
+        },
         columns: mergeColumns.columns,
         loading: loading?.query,
         onSubmit: __handle_search__,
@@ -162,10 +209,15 @@ const BaseList = React.memo(function (props) {
   );
 
   React.useEffect(() => {
-    autoRequest && __handle_query__();
+    searchForm.setFieldsValue(params);
+    const isEmptyList = data.list.length === 0;
+    autoRequest && isEmptyList && __handle_query__();
     if (eventEmitter) {
-      eventEmitter.on('fullScreen', setFullScreen);
+      eventEmitter.on('fullScreen', () =>
+        setFullScreen((fullScreen) => !fullScreen),
+      );
       eventEmitter.on('page', __handle_page__);
+      eventEmitter.on('refresh', __handle_query__);
       eventEmitter.on('search', __handle_search__);
       eventEmitter.on('submit', __handle_submit__);
       Object.keys(action).forEach((key) =>
@@ -175,6 +227,7 @@ const BaseList = React.memo(function (props) {
       return () => {
         eventEmitter.off('fullScreen');
         eventEmitter.off('page');
+        eventEmitter.off('refresh');
         eventEmitter.off('search');
         eventEmitter.off('submit');
         Object.keys(action).forEach((key) => eventEmitter.off(`action/${key}`));
@@ -185,6 +238,7 @@ const BaseList = React.memo(function (props) {
   const renderDom = (
     <React.Fragment>
       <PopupRender
+        namespace={namespace}
         loading={loading}
         action={action}
         behaviors={_behaviors}
@@ -199,15 +253,11 @@ const BaseList = React.memo(function (props) {
         { className: 'bc-wrapper-style' },
         extraButtons === false ? null : (
           <FuncButtons
-            loading={loading}
             title={title}
             behaviors={_behaviors}
-            extraButtons={extraButtons}
-            buttonConfig={extraButtonConfig}
-            fullScreen={fullScreen}
-            onFullScreen={() => setFullScreen((fullScreen) => !fullScreen)}
-            onRefresh={() => __handle_query__()}
-            eventEmitter={eventEmitter}
+            buttons={extraButtons}
+            buttonConfig={{ ...extraButtonConfig, data: _eventData }}
+            eventMap={_eventMap}
           />
         ),
         React.isValidElement(children) &&
@@ -216,7 +266,7 @@ const BaseList = React.memo(function (props) {
             Object.assign(restProps, {
               loading: loading?.query || loading?.remove,
               dataSource: data.list || [],
-              columns: mergeColumns.columns,
+              columns: tableColumns,
               pagination: getPagination(data.total, data.page || {}),
             }),
           ),

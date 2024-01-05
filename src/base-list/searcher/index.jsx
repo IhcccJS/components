@@ -1,10 +1,10 @@
 import React from 'react';
 import { useControllableValue } from 'ahooks';
-import { isFunction } from '@ihccc/utils';
 import { useDefaultValue } from '../hooks';
 import Wrapper from './search-wrapper';
 import Form from '../../common-form';
 import { Search } from '../../common-form/trigger';
+import { isFunction } from '@ihccc/utils';
 
 const GRID = {
   small: { xs: 1, sm: 2, md: 3, lg: 4, xl: 5, xxl: 6 },
@@ -20,6 +20,7 @@ const FOLDSIZE = {
 
 const Searcher = (props) => {
   const {
+    loading,
     form,
     foldAble,
     // fold,
@@ -29,14 +30,13 @@ const Searcher = (props) => {
     grid,
     initialValues,
     trigger,
-    preset,
     wrapper,
     onSubmit,
     children,
   } = props;
   const [fold, setFold] = useControllableValue(props, {
-    defaultValuePropName: 'defaultFold',
     defaultValue: false,
+    defaultValuePropName: 'defaultFold',
     valuePropName: 'fold',
     trigger: 'onFoldChange',
   });
@@ -44,14 +44,11 @@ const Searcher = (props) => {
 
   const defaultValue = useDefaultValue(initialValues);
 
-  const toggleFold = React.useCallback(() => setFold((f) => !f), []);
-
-  const handleFinish = React.useCallback((values) => {
-    isFunction(onSubmit) && onSubmit(Object.assign({}, defaultValue, values));
+  const toggleFold = React.useCallback(() => {
+    setFold((f) => !f);
   }, []);
 
-  const handleItemQuery = React.useCallback((values) => {
-    formInstance.setFieldsValue(values);
+  const handleFinish = React.useCallback((values) => {
     isFunction(onSubmit) && onSubmit(Object.assign({}, defaultValue, values));
   }, []);
 
@@ -61,7 +58,7 @@ const Searcher = (props) => {
 
   return React.createElement(
     wrapper,
-    { preset, onItemQuery: handleItemQuery },
+    null,
     React.cloneElement(children, {
       form: formInstance,
       name: children?.props?.name || 'search',
@@ -70,6 +67,7 @@ const Searcher = (props) => {
       grid,
       trigger: React.isValidElement(trigger) ? (
         React.cloneElement(trigger, {
+          loading,
           foldAble: foldAble,
           fold: fold,
           onFold: toggleFold,
@@ -78,6 +76,7 @@ const Searcher = (props) => {
         <Search
           full
           important
+          loading={loading}
           foldAble={foldAble}
           fold={fold}
           onFold={toggleFold}

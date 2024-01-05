@@ -2,9 +2,18 @@ import React from 'react';
 import { usePopups } from '../hooks';
 
 function PopupRender(props) {
-  const { action, behaviors, popups, eventEmitter, loading, onSubmit } = props;
+  const {
+    namespace,
+    action,
+    behaviors,
+    popups,
+    eventEmitter,
+    loading,
+    onSubmit,
+  } = props;
 
   const __popups__ = usePopups({
+    namespace,
     action,
     popups,
     behaviors,

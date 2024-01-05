@@ -15,7 +15,9 @@ function Demo() {
 
   return (
     <Card
-      bodyStyle={{ background: '#f1f1f1', height: 400, overflowY: 'scroll' }}
+      styles={{
+        body: { background: '#f1f1f1', height: 400, overflowY: 'scroll' },
+      }}
     >
       <List
         grid={{ column: 2, gutter: 16 }}

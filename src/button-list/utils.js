@@ -22,13 +22,10 @@ export function handleButtonConfig(items, data, type) {
 
     if (!!btn.onClick) {
       if (!type && !btn.type) btn.type = 'a';
-      btn.onClick = btn.onClick.bind(btn, data);
     } else if (!!btn.onSwitch) {
       if (!btn.type) btn.type = 'switch';
-      btn.onChange = btn.onSwitch.bind(btn, data);
     } else if (!!btn.onConfirm) {
       if (!type && !btn.type) btn.type = 'a';
-      btn.onConfirm = btn.onConfirm.bind(btn, data);
     }
 
     if (type !== 'button' && btn.type !== 'button') {

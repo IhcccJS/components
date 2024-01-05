@@ -1,17 +1,18 @@
 import React from 'react';
 
-const EditCell = ({
-  editing,
-  dataIndex,
-  inputNode,
-  inputNodeProps,
-  valuePropName,
-  value,
-  onChange,
-  children,
-  style,
-  ...restProps
-}) => {
+const EditCell = (porps) => {
+  const {
+    editing,
+    dataIndex,
+    inputNode,
+    inputNodeProps,
+    valuePropName,
+    value,
+    onChange,
+    children,
+    style,
+    ...restProps
+  } = porps;
   const canEdit = editing && !!inputNode;
   return (
     <td {...restProps} style={canEdit ? { ...style, padding: '0 6px' } : style}>

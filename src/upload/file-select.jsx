@@ -39,7 +39,7 @@ const FileSelect = React.forwardRef(function (props, ref) {
     }
     el.click();
     if (onClick) onClick(e);
-  }, [inputRef.current]);
+  }, []);
 
   const onKeyDown = React.useCallback(
     (e) => {

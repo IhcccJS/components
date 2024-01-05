@@ -2,7 +2,7 @@ import React from 'react';
 import { isArray } from '@ihccc/utils';
 
 function usePopups(opts = {}) {
-  const { action, popups, behaviors, loading, onSubmit } = opts;
+  const { namespace, action, popups, behaviors, loading, onSubmit } = opts;
   const [popupsProps, setPopupsProps] = React.useState({});
 
   // 控制弹窗
@@ -37,6 +37,7 @@ function usePopups(opts = {}) {
       popups.map((popup) => {
         const props = Object.assign(
           {
+            namespace,
             loading: loading?.create || loading?.update || false,
             onCancel: close[popup.key],
           },

@@ -26,6 +26,15 @@ setOptions({
       color: '#24b588',
     },
   ],
+  标签: [
+    { label: '老实', value: '0', mode: 'tag' },
+    { label: '腼腆', value: '1', mode: 'tag' },
+    { label: '乐观', value: '2', mode: 'tag' },
+    { label: '包容', value: '3', mode: 'tag' },
+    { label: '活泼', value: '4', mode: 'tag' },
+    { label: '任性', value: '5', mode: 'tag' },
+    { label: '豁达', value: '6', mode: 'tag' },
+  ],
 });
 
 // 绑定表单元素

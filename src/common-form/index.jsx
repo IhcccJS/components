@@ -1,35 +1,43 @@
 import React from 'react';
 import isEqual from 'lodash/isEqual';
 import { Form } from 'antd';
-import { isArray, isFunction, isString } from '@ihccc/utils';
+import { isArray, isFunction, isString, isBoolean } from '@ihccc/utils';
 import CssGrid from '../css-grid';
 import Item from './item';
 import * as Trigger from './trigger';
 import margeNodes from './margeNodes';
 import columnsHelper from '../columns-helper';
 
-function collectChangeState(relationRule, formData) {
+function collectChangeState(relationRule, values, changedValues) {
   const result = {};
-  const values = Object.assign({}, formData);
+  const vals = Object.assign({}, values);
 
   if (isArray(relationRule)) {
-    relationRule.forEach((rule) => {
+    function hanleRule(rule) {
       if (isFunction(rule.value)) {
-        if (!result.formData) result.formData = {};
-        result.formData[rule.to] = rule.value(values[rule.from], values);
-        Object.assign(values, result.formData);
+        if (!result.values) result.values = {};
+        const nextState = rule.value(vals[rule.from], vals[rule.to], vals);
+        if (nextState === void 0) return;
+        result.values[rule.to] = nextState;
+        Object.assign(vals, result.values);
       }
       if (isFunction(rule.hide)) {
         if (!result.hideData) result.hideData = {};
-        result.hideData[rule.to] = Boolean(
-          rule.hide(values[rule.from], values),
-        );
+        const nextState = rule.hide(vals[rule.from], vals[rule.to], vals);
+        if (!isBoolean(nextState)) return;
+        result.hideData[rule.to] = nextState;
       }
       if (isFunction(rule.disabled)) {
         if (!result.disabledData) result.disabledData = {};
-        result.disabledData[rule.to] = Boolean(
-          rule.disabled(values[rule.from], values),
-        );
+        const nextState = rule.disabled(vals[rule.from], vals[rule.to], vals);
+        if (!isBoolean(nextState)) return;
+        result.disabledData[rule.to] = nextState;
+      }
+    }
+
+    relationRule.forEach((rule) => {
+      if (!changedValues || rule.from in changedValues) {
+        hanleRule(rule);
       }
     });
   }
@@ -39,6 +47,8 @@ function collectChangeState(relationRule, formData) {
 
 const CommonForm = React.memo((props) => {
   const {
+    name,
+    namespace,
     access,
     popupType,
     column,
@@ -72,13 +82,13 @@ const CommonForm = React.memo((props) => {
       { handler: 'form' },
       isString(access) ? { name: access } : access,
     ),
-    name: popupType || restProps.name,
+    name: popupType || name,
     isForm: true,
   });
 
   const changeRelationState = React.useCallback(
-    (values) => {
-      const changeState = collectChangeState(relation, values);
+    (values, changedValues) => {
+      const changeState = collectChangeState(relation, values, changedValues);
 
       if (Boolean(changeState.hideData)) {
         setHideFields((oldFields) =>
@@ -90,8 +100,8 @@ const CommonForm = React.memo((props) => {
           Object.assign({}, oldFields, changeState.disabledData),
         );
       }
-      if (Boolean(changeState.formData)) {
-        formInstance.setFieldsValue(changeState.formData);
+      if (Boolean(changeState.values)) {
+        formInstance.setFieldsValue(changeState.values);
       }
     },
     [formInstance],
@@ -104,10 +114,10 @@ const CommonForm = React.memo((props) => {
   }, [changeRelationState]);
 
   const handleFieldsChange = React.useCallback(
-    function (_, allValues) {
+    function (changedValues, allValues) {
       isFunction(onValuesChange) && onValuesChange.apply(nul, arguments);
       if (isArray(relation) && relation.length > 0)
-        changeRelationState(allValues);
+        changeRelationState(allValues, changedValues);
     },
     [onValuesChange, changeRelationState],
   );
@@ -159,6 +169,7 @@ const CommonForm = React.memo((props) => {
   return (
     <Form
       {...restProps}
+      name={!namespace ? name : namespace + '-' + name}
       form={formInstance}
       initialValues={initialValues}
       onValuesChange={handleFieldsChange}

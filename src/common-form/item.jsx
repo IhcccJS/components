@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form } from 'antd';
-import { isString, isArray, isObject } from '@ihccc/utils';
 import Column from '../column';
+import { isString, isArray, isObject } from '@ihccc/utils';
 import { childrenSetter } from './setter';
 
 export const Item = (props) => {

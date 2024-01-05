@@ -24,7 +24,7 @@ function formatSaveData(target, lib) {
   return target.map((item) => {
     const { align, fixed } = item;
     const key = item.key || item.dataIndex;
-    const source = lib[key];
+    const source = lib[key] || item || {};
     return Object.assign(
       { k: key, c: item._checked !== false },
       align === source.align || !align ? {} : { a: align },

@@ -1,4 +1,3 @@
-import { eventEmitter } from '@ihccc/utils';
 import { profile } from './_services';
 
 export const getInitialValues = async (id) => {
@@ -8,5 +7,3 @@ export const getInitialValues = async (id) => {
   }
   return {};
 };
-
-export const ee = eventEmitter();

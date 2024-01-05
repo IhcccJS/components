@@ -1,6 +1,8 @@
 import React from 'react';
 import Text from '../../text';
 
-const textRender = (val) => <Text label={val} />;
+function textRender(props) {
+  return (val) => <Text label={val} {...props} />;
+}
 
 export default textRender;

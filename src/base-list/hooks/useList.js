@@ -1,6 +1,7 @@
 import React from 'react';
 import unionBy from 'lodash/unionBy';
-import { useSetState } from 'ahooks';
+import { useSetState, useUpdate } from 'ahooks';
+import useListState from './useListState';
 import { isString, isObject, isFunction, isUndefined } from '@ihccc/utils';
 
 // 默认页面
@@ -64,6 +65,7 @@ const objectCall = function (object, name, defaultResult, args) {
 };
 
 function useList({
+  namespace,
   services = {},
   defaultPage,
   defaultParams: userDefaultParams,
@@ -73,16 +75,32 @@ function useList({
   onMessage,
   defineAction,
 }) {
-  const [params, setParams] = React.useState({});
-  const [formData, setFormData] = React.useState({});
-  const [loading, setLoading] = useSetState({});
-  const [defaultParams, setDefaultParams] = useSetState(userDefaultParams);
-  const [data, setData] = useSetState({
-    page: Object.assign({}, _defaultPage, defaultPage),
-    list: [],
-    total: 0,
+  const [state, setState] = useListState(namespace, {
+    params: {},
+    data: {
+      page: Object.assign({}, _defaultPage, defaultPage),
+      list: [],
+      total: 0,
+    },
   });
+  const [formData, setFormData] = React.useState({});
+  const loadingRef = React.useRef({});
+  const [defaultParams, setDefaultParams] = useSetState(userDefaultParams);
   const actionMap = React.useRef({});
+  const update = useUpdate();
+
+  const { params, data } = state;
+
+  const setParams = React.useCallback((newParams) => {
+    setState((state) => ({
+      ...state,
+      params: { ...state.params, ...newParams },
+    }));
+  }, []);
+
+  const setData = React.useCallback((newData) => {
+    setState((state) => ({ ...state, data: { ...state.data, ...newData } }));
+  }, []);
 
   const defaultParamsFilter = React.useMemo(
     () =>
@@ -120,7 +138,8 @@ function useList({
         newParams = { ...payload };
       }
 
-      setLoading({ [func.type]: true });
+      loadingRef.current[func.type] = true;
+      update();
 
       const transformedParams = await objectCall(
         defaultParamsFilter,
@@ -130,7 +149,8 @@ function useList({
       );
 
       if (transformedParams === false) {
-        setLoading({ [func.type]: false });
+        loadingRef.current[func.type] = false;
+        update();
         return;
       }
 
@@ -140,7 +160,8 @@ function useList({
         console.error(e);
         result = {};
       }
-      setLoading({ [func.type]: false });
+      loadingRef.current[func.type] = false;
+      update();
 
       const pass = objectCall(validator, func.type, _defaultValidator, [
         result,
@@ -168,8 +189,9 @@ function useList({
         newParams,
       ]);
 
-      if (tips !== false && onMessage)
+      if (tips !== false && onMessage) {
         onMessage(tips, pass ? 'success' : 'error');
+      }
 
       const actionName = objectCall(onComplete, func.type, null, [
         pass,
@@ -183,8 +205,8 @@ function useList({
 
   return {
     state: {
-      loading,
-      setLoading,
+      namespace,
+      loading: loadingRef.current,
       defaultParams,
       setDefaultParams,
       params,

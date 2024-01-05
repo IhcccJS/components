@@ -11,7 +11,7 @@ function RowSelectionAble(props) {
     ...restProps
   } = props;
 
-  if (!React.isValidElement(children)) return null;
+  if (!React.isValidElement(children) || !rowSelection) return children;
 
   const { type, selectedRowKeys, onChange } = rowSelection || {};
 
@@ -86,11 +86,20 @@ function RowSelectionAble(props) {
         children,
         Object.assign(
           {
-            allSelectionDom,
-            rowSelectionDom,
-            allSelected: checkAll,
-            allSelectEvent: onCheckAll,
-            rowSelectionEvents,
+            selection: {
+              allSelectionDom,
+              rowSelectionDom,
+              allSelected: checkAll,
+              allSelectEvent: onCheckAll,
+              rowSelectionEvents,
+
+              // rename
+              allElement: allSelectionDom,
+              rowElements: rowSelectionDom,
+              checkAll: checkAll,
+              onCheckAll: onCheckAll,
+              rowEvents: rowSelectionEvents,
+            },
             dataSource,
             rowKey,
           },

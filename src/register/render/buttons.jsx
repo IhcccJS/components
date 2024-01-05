@@ -3,13 +3,14 @@ import ButtonList from '../../button-list';
 
 function buttonRender(opts) {
   const { data, ...buttonProps } = opts || {};
-  return (...args) => {
+
+  return (value, record, index) => {
     return (
       <ButtonList
         inline
         access="actionButtons"
         {...buttonProps}
-        data={args[1]}
+        data={{ ...data, value, record, index }}
       />
     );
   };

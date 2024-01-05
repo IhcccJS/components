@@ -13,15 +13,15 @@ toc: content
 
 ## 全部编辑
 
-<code src="./demo/edit-table/demo1" background="#f5f5f5"></code>
+<code src="./demo/edit-table/demo1" background="#8c8c8c1a"></code>
 
 ## 行编辑
 
-<code src="./demo/edit-table/demo2" background="#f5f5f5"></code>
+<code src="./demo/edit-table/demo2" background="#8c8c8c1a"></code>
 
 ## 在表单内使用
 
-<code src="./demo/edit-table/demo3" background="#f5f5f5"></code>
+<code src="./demo/edit-table/demo3" background="#8c8c8c1a"></code>
 
 ## EditTable Props
 
@@ -39,10 +39,10 @@ toc: content
 
 如 `BaseList` 组件一样，`EditTable` 内对 `columns` 进行了扩充；
 
-| 名称      | 类型                                                     | 默认值      | 描述                                               |
-| :-------- | :------------------------------------------------------- | :---------- | :------------------------------------------------- |
-| inputNode | `string\| ReactNode`                                     | `undefined` | 与 `CommonForm` 组件不同，没有设置，此项将不可编辑 |
-| editAble  | `boolean \| function(record, index, editCount): boolean` | `undefined` | 是否可编辑                                         |
+| 名称      | 类型                                          | 默认值      | 描述                                               |
+| :-------- | :-------------------------------------------- | :---------- | :------------------------------------------------- |
+| inputNode | `string\| ReactNode`                          | `undefined` | 与 `CommonForm` 组件不同，没有设置，此项将不可编辑 |
+| editAble  | `boolean \| function(record, index): boolean` | `undefined` | 是否可编辑                                         |
 
 ### 使用 Ref 调用 EditTable 组件内方法
 
@@ -54,16 +54,17 @@ const etRef = React.useRef();
 
 `etRef.current` 上将会绑定的方法如下：
 
-| 名称        | 类型                                | 描述                       |
-| :---------- | :---------------------------------- | :------------------------- |
-| addToStart  | `function(): void 0`                | 在第一行添加初始数据       |
-| addToEnd    | `function(): void 0`                | 在最后一行添加初始数据     |
-| copyToStart | `function(rowData: object): void 0` | 将指定数据，添加到第一行   |
-| copyToEnd   | `function(rowData: object): void 0` | 将指定数据，添加到最后一行 |
-| edit        | `function(key): void 0`             | 将某一行设置为编辑状态     |
-| editAll     | `function(): void 0`                | 将所有行设置为编辑状态     |
-| cancel      | `function(): void 0`                | 取消编辑                   |
-| save        | `function(): void 0`                | 保存数据                   |
-| getInput    | `function(index: number): void 0`   | 根据索引，获取当前行数据   |
-| remove      | `function(index: number): void 0`   | 删除指定索引的行           |
-| clear       | `function(): void 0`                | 清空所有数据               |
+| 名称                                             | 类型                                                                         | 描述                                                                                                                          |
+| :----------------------------------------------- | :--------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------- |
+| addToStart                                       | `function(rowData?: object): void 0`                                         | 在第一行添加初始数据；<Badge>new</Badge> 可以传入初始数据，没有初始数据，会使用配置项内的参数 `inputNodeProps.defaultValue`   |
+| addToEnd                                         | `function(rowData?: object): void 0`                                         | 在最后一行添加初始数据；<Badge>new</Badge> 可以传入初始数据，没有初始数据，会使用配置项内的参数 `inputNodeProps.defaultValue` |
+| ~~copyToStart~~ <Badge type="error">废弃</Badge> | `function(rowData: object): void 0`                                          | 将指定数据，添加到第一行                                                                                                      |
+| ~~copyToEnd~~ <Badge type="error">废弃</Badge>   | `function(rowData: object): void 0`                                          | 将指定数据，添加到最后一行                                                                                                    |
+| edit                                             | `function(key?: boolean\|string): void 0`                                    | 将某一行设置为编辑状态；<Badge>new</Badge> 传 `true` 编辑全部                                                                 |
+| ~~editAll~~ <Badge type="error">废弃</Badge>     | `function(): void 0`                                                         | 将所有行设置为编辑状态                                                                                                        |
+| cancel                                           | `function(): void 0`                                                         | 取消编辑                                                                                                                      |
+| save                                             | `function(): void 0`                                                         | 保存数据                                                                                                                      |
+| getInput                                         | `function(index: number): void 0`                                            | 根据索引，获取当前行数据                                                                                                      |
+| remove                                           | `function(index: number): void 0`                                            | 删除指定索引的行                                                                                                              |
+| clear                                            | `function(): void 0`                                                         | 清空所有数据                                                                                                                  |
+| setValue <Badge type="info">New</Badge>          | `function(index: number, dataIndex: string \| string[], value: any): void 0` | 修改某行某个字段数据                                                                                                          |

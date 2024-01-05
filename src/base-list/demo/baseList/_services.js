@@ -2,25 +2,34 @@ import { FakeApi } from '@ihccc/utils';
 
 const initData = [
   {
+    avatar: 'https://picsum.photos/400?t=1',
     name: '张三',
     username: 'abc',
-    phone: '1213',
+    phone: '17844446666',
     sex: '0',
     enable: '1',
+    progress: 78.21,
+    tags: '1,2,4,5,6',
   },
   {
+    avatar: 'https://picsum.photos/400?t=2',
     name: '李晓',
     username: 'asss',
-    phone: '213213',
+    phone: '18812341234',
     sex: '1',
     enable: '0',
+    progress: 34.08,
+    tags: '2,3,6',
   },
   {
+    avatar: 'https://picsum.photos/400?t=3',
     name: '王六',
     username: 'bac2',
-    phone: '2321312',
+    phone: '15634347272',
     sex: '1',
     enable: '0',
+    progress: 89.1,
+    tags: '1,2,3,4,5,6',
   },
 ];
 
