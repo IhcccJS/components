@@ -1,0 +1,210 @@
+import React from 'react';
+import unionBy from 'lodash/unionBy';
+import { useUpdate } from 'ahooks';
+import useListState from './useListState';
+import { isString, isObject, isFunction } from '@ihccc/utils';
+
+// 默认页面
+const _defaultPage = { pageNumber: 1, pageSize: 10 };
+
+// 默认的请求接口前参数处理
+const _defaultParamsFilter = {
+  remove: ({ id }) => ({ id }),
+};
+
+// 默认的请求接口是否成功的依据
+const _defaultValidator = (result) => result?.code === '0';
+
+// 默认的请求接口反馈提示信息
+const _defaultMessage = (pass) => (pass ? false : '请求失败！');
+
+const _defaultAction = [
+  {
+    type: 'query',
+    params: 'params',
+    message: (pass) => (pass ? false : '查询失败'),
+    save: (res) => res?.data,
+  },
+  {
+    type: 'create',
+    params: 'arguments',
+    message: (pass) => '新增' + (pass ? '成功' : '失败'),
+    refresh: true,
+  },
+  {
+    type: 'update',
+    params: 'arguments',
+    message: (pass) => '更新' + (pass ? '成功' : '失败'),
+    refresh: true,
+  },
+  {
+    type: 'remove',
+    params: 'arguments',
+    message: (pass) => '删除' + (pass ? '成功' : '失败'),
+    refresh: true,
+  },
+];
+
+/**
+ * 执行对象中的方法
+ * @param {object|function} object 包含一组函数的对象，或者是函数
+ * @param {string} name object中对应的名称
+ * @param {any} defaultResult 如果是方法就执行，否则直接返回该值
+ * @param {array} args 参数数组
+ * @returns
+ */
+const objectCall = function (object, name, defaultResult, args) {
+  if (isFunction(object)) {
+    return object.apply(null, args);
+  } else if (isObject(object) && isFunction(object[name])) {
+    return object[name].apply(null, args);
+  } else if (isFunction(defaultResult)) {
+    return defaultResult.apply(null, args);
+  }
+  return defaultResult;
+};
+
+function useList({
+  namespace,
+  services = {},
+  defaultPage,
+  defaultParams: userDefaultParams,
+  paramsFilter,
+  validator,
+  onComplete,
+  onMessage,
+  defineAction,
+}) {
+  const [state, setState] = useListState(namespace, {
+    params: {},
+    data: {
+      page: Object.assign({}, _defaultPage, defaultPage),
+      list: [],
+      total: 0,
+    },
+  });
+  const loadingRef = React.useRef({});
+  const defaultParamsRef = React.useRef(userDefaultParams);
+  const actionMap = React.useRef({});
+  const update = useUpdate();
+
+  const { params, data } = state;
+
+  const setParams = React.useCallback((newParams) => {
+    setState((state) => ({
+      ...state,
+      params: { ...state.params, ...newParams },
+    }));
+  }, []);
+
+  const setData = React.useCallback((newData) => {
+    setState((state) => ({ ...state, data: { ...state.data, ...newData } }));
+  }, []);
+
+  const defaultParamsFilter = React.useMemo(
+    () => Object.assign({}, _defaultParamsFilter, paramsFilter),
+    [],
+  );
+
+  const defaultAction = React.useMemo(
+    () => unionBy(_defaultAction, defineAction),
+    [],
+  );
+
+  defaultAction.forEach((func) => {
+    if (!isFunction(services[func.type])) return;
+
+    actionMap.current[func.type] = async (payload) => {
+      // let newParams, result;
+      // if (func.params === 'params') {
+      //   if (isUndefined(payload)) {
+      //     newParams = { ...data.page, ...defaultParams, ...params };
+      //   } else {
+      //     newParams = { ...data.page, ...defaultParams, ...params, ...payload };
+      //     setParams(newParams);
+      //   }
+      // } else {
+      //   newParams = { ...payload };
+      // }
+
+      loadingRef.current[func.type] = true;
+      update();
+
+      const transformedParams = await objectCall(
+        defaultParamsFilter,
+        func.type,
+        payload,
+        [{ ...payload }],
+      );
+
+      if (transformedParams === false) {
+        loadingRef.current[func.type] = false;
+        update();
+        return;
+      }
+
+      try {
+        result = await services[func.type](transformedParams);
+      } catch (e) {
+        console.error(e);
+        result = {};
+      }
+      loadingRef.current[func.type] = false;
+      update();
+
+      const pass = objectCall(validator, func.type, _defaultValidator, [
+        result,
+      ]);
+
+      if (pass && func.refresh === true) objectCall(actionMap.current, 'query');
+
+      if (pass && isFunction(func.save)) {
+        const { pageNumber, pageSize } = transformedParams;
+        const formated = func.save(result);
+        setData({
+          page: {
+            pageNumber: formated.pageNumber || pageNumber,
+            pageSize: formated.pageSize || pageSize,
+          },
+          list: formated.list,
+          total: formated.total,
+        });
+      }
+
+      // 提示信息
+      const tips = objectCall(func, 'message', _defaultMessage, [
+        pass,
+        result,
+        transformedParams,
+      ]);
+
+      if (tips !== false && onMessage) {
+        onMessage(tips, pass ? 'success' : 'error');
+      }
+
+      const actionName = objectCall(onComplete, func.type, null, [
+        pass,
+        result,
+        transformedParams,
+      ]);
+
+      if (isString(actionName)) await objectCall(actionMap, actionName);
+    };
+  });
+
+  return {
+    state: {
+      namespace,
+      loading: loadingRef.current,
+      defaultParams: defaultParamsRef.current,
+      // setDefaultParams,
+      params,
+      setParams,
+      data,
+      setData,
+    },
+    action: actionMap.current,
+  };
+}
+
+export default useList;
