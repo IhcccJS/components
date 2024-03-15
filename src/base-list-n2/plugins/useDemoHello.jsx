@@ -1,6 +1,4 @@
 function useDemoHello(instance, props) {
-  console.log('hello update!');
-
   return {
     head: (
       <div>

@@ -17,6 +17,8 @@ function ModalSystem(props) {
 
   const [updateKey, setUpdateKey] = React.useState();
 
+  const update = React.useCallback(() => setUpdateKey({}), []);
+
   const modalStore = useCreation(
     () =>
       new ModalStore({
@@ -25,7 +27,7 @@ function ModalSystem(props) {
         defaultType,
         defaultModalProps,
         onOpenOverflow,
-        update: () => setUpdateKey({}),
+        update,
       }),
     [],
   );

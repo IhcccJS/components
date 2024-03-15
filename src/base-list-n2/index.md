@@ -17,4 +17,4 @@ BaseListV2 是 @ihccc/components 的主要组件，你可以用这个组件快�
 
 ## 普通列表
 
-<code src="./demo/base" background="#f5f5f5"></code>
+<code src="./demo/base" background="#f5f5f5" iframe="560"></code>
