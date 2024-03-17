@@ -5,6 +5,7 @@ import { ModalContext } from './context';
 
 function ModalSystem(props) {
   const {
+    debug,
     max = 10,
     container,
     defaultType = 'modal',
@@ -36,6 +37,10 @@ function ModalSystem(props) {
     () => modalStore.getRenderModal(),
     [updateKey],
   );
+
+  if (debug && !window.modalStore) {
+    window.modalStore = modalStore;
+  }
 
   // useModaler useModal 可以获取到的属性和方法
   return (

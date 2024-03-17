@@ -11,7 +11,7 @@ function useModal() {
 
     props: ['namespace', 'modals'],
 
-    content: (props) => {
+    content: React.memo((props) => {
       const { namespace, modals } = props;
 
       const { modal, elements } = Modaler.useModaler({
@@ -22,7 +22,7 @@ function useModal() {
       React.useImperativeHandle(ref, () => modal, []);
 
       return elements;
-    },
+    }),
   };
 }
 
