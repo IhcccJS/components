@@ -86,9 +86,11 @@ function RenderButtons(props) {
 
     const btnType = item.type || type || 'a';
 
-    const eventName = nodeEvent[btnType];
+    const eventName = nodeEvent[btnType] || 'event';
 
-    let button = React.createElement(buttonSetter.get(btnType), {
+    let button;
+
+    const buttonProps = {
       ...baseProps?.[btnType],
       ...item.props,
       ...(!!item.dropdown || !!item.confirm || !!item.onConfirm
@@ -96,7 +98,13 @@ function RenderButtons(props) {
         : {
             [eventName]: eventFunction(item, eventName),
           }),
-    });
+    };
+
+    if (!item.render) {
+      button = React.createElement(buttonSetter.get(btnType), buttonProps);
+    } else {
+      button = item.render(buttonProps);
+    }
 
     if (!!item.dropdown) {
       button = (
@@ -183,6 +191,7 @@ function ButtonList(props) {
     data,
     buttons,
     baseProps,
+    sortRender,
     render,
     eventMap,
     style,
@@ -201,7 +210,15 @@ function ButtonList(props) {
   );
 
   const buttonList = React.useMemo(() => {
-    return handleButtonConfig(accessHandle?.passedData || [], data, type);
+    let accessButtons = accessHandle?.passedData || [];
+    if (!!sortRender) {
+      const buttonMap = accessButtons.reduce((map, button) => {
+        map[button.key] = button;
+        return map;
+      }, {});
+      accessButtons = sortRender.map((key) => buttonMap[key]).filter(Boolean);
+    }
+    return handleButtonConfig(accessButtons, data, type);
   }, [accessHandle?.passedData, data]);
 
   const renderDom = (
