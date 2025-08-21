@@ -1,0 +1,171 @@
+.bc-card {
+  position: relative;
+  background: var(--color-bg-component);
+  border-radius: var(--size-border-radius, 6px);
+  overflow: hidden;
+
+  & + & {
+    margin-top: var(--size-cell-gap, 16px);
+  }
+
+  &-header {
+    display: flex;
+    padding: var(--size-cell-gap-sm, 8px) var(--size-cell-gap, 16px);
+  }
+
+  &-cover {
+    display: flex;
+    width: 100%;
+    text-align: center;
+    border-radius: var(--size-border-radius, 6px);
+    background: var(--color-bg-component-secondary);
+  }
+
+  &-body {
+    padding: var(--size-cell-gap, 16px);
+    box-sizing: border-box;
+  }
+
+  &-footer {
+    padding: var(--size-cell-gap-sm, 8px) var(--size-cell-gap, 16px);
+    border-top: 1px solid var(--color-border-secondary);
+  }
+
+  &-header + &-body {
+    border-top: 1px solid var(--color-border-secondary);
+  }
+
+  &-size-small {
+    .bc-card-header,
+    .bc-card-body,
+    .bc-card-footer {
+      padding: var(--size-cell-gap-sm, 8px);
+    }
+  }
+
+  &-size-middle {
+    .bc-card-header,
+    .bc-card-body,
+    .bc-card-footer {
+      padding: var(--size-cell-gap, 16px);
+    }
+
+    .bc-card-header .bc-card-title-tabs {
+      .ant-tabs-top > .ant-tabs-nav .ant-tabs-ink-bar,
+      .ant-tabs-top > div > .ant-tabs-nav .ant-tabs-ink-bar {
+        bottom: -17px;
+      }
+    }
+  }
+}
+
+.bc-card-title {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+
+  &-icon {
+    margin-right: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  // &-text {
+  // }
+
+  &-bar,
+  &-dot,
+  &-circle {
+    position: relative;
+
+    &::before {
+      content: '';
+      position: absolute;
+      box-sizing: border-box;
+      top: 50%;
+      left: 0;
+      transform: translate(0, -50%);
+    }
+  }
+
+  &-bar {
+    padding-left: 16px;
+
+    &::before {
+      width: 0;
+      height: 16px;
+      border-radius: 8px;
+      border: 2px solid var(--color-primary);
+    }
+  }
+
+  &-dot {
+    padding-left: 16px;
+
+    &::before {
+      width: 8px;
+      height: 8px;
+      border-radius: 4px;
+      background: var(--color-primary);
+    }
+  }
+
+  &-circle {
+    padding-left: 24px;
+
+    &::before {
+      width: 16px;
+      height: 16px;
+      border-radius: 8px;
+      border: 2px solid var(--color-primary);
+    }
+  }
+
+  &-tabs {
+    flex: 1 0 0;
+
+    .ant-tabs .ant-tabs-nav {
+      margin-bottom: 0;
+    }
+
+    .ant-tabs .ant-tabs-tab {
+      padding: 0;
+      font-size: 16px;
+    }
+
+    .ant-tabs .ant-tabs-tab + .ant-tabs-tab {
+      margin: 0 0 0 var(--size-cell-gap-lg);
+    }
+
+    .ant-tabs-top > .ant-tabs-nav::before,
+    .ant-tabs-top > div > .ant-tabs-nav::before {
+      display: none;
+    }
+
+    .ant-tabs > .ant-tabs-nav .ant-tabs-nav-wrap,
+    .ant-tabs > div > .ant-tabs-nav .ant-tabs-nav-wrap {
+      overflow: visible;
+    }
+
+    .ant-tabs-top > .ant-tabs-nav .ant-tabs-ink-bar,
+    .ant-tabs-top > div > .ant-tabs-nav .ant-tabs-ink-bar {
+      bottom: -8px;
+    }
+  }
+}
+
+.bc-card-extra {
+  margin-left: 8px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+  &-fold {
+    width: 100%;
+    font-size: 14px;
+    text-align: right;
+    cursor: pointer;
+  }
+}

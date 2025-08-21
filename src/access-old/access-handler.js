@@ -1,3 +1,15 @@
+// const buttonListHandler = (authority, button) => {
+//   if (!authority) return true;
+//   if (authority.status === 'disabled') {
+//     button.props = { ...button.props, disabled: true };
+//     delete button.tip;
+//     return true;
+//   } else if (authority.status === 'hidden') {
+//     return false;
+//   }
+//   return true;
+// };
+
 /**
  * 处理按钮
  */

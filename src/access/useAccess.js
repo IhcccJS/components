@@ -1,30 +1,38 @@
 import React from 'react';
-// import cloneDeep from 'lodash/cloneDeep';
 import AccessContext from './context';
 
-function useAccess(opts) {
-  const config = React.useRef(opts || {}).current;
-  const { key, keyName, name, data, handler } = config;
-
-  if (!key && name === false) return { passedData: data };
-
-  const { enable, getPathname, getHitOneFilter, getHitManyFilter } =
-    React.useContext(AccessContext);
+export function useMatchOneAccess({ data }) {
+  const { enable, getHitOneFilter } = React.useContext(AccessContext);
 
   if (!enable) return { passedData: data };
 
-  const path = (getPathname && getPathname()) || window.location.pathname;
+  return getHitOneFilter({ key });
+}
 
-  if (!!key) return getHitOneFilter({ path, key });
+export function useMatchSomeAccess({ name, keyName, handler }) {
+  const { enable, getHitManyFilter } = React.useContext(AccessContext);
 
-  const filter = React.useMemo(
-    () => getHitManyFilter({ path, name }, { keyName, handler }),
-    [getHitManyFilter],
-  );
+  if (!enable) return null;
 
-  const passedData = React.useMemo(() => filter(data), [filter, data]);
+  const filter = React.useMemo(() => getHitManyFilter({ name, keyName, handler }), []);
 
-  return { filter, passedData };
+  return { filter };
+}
+
+function useAccess(opts) {
+  const { disabled, data, key, name, keyName, handler } = opts || {};
+
+  if (disabled) return { passedData: data };
+
+  if (!!key) return useMatchOneAccess({ data, key });
+
+  const access = useMatchSomeAccess({ name, keyName, handler });
+
+  if (!access) return { passedData: data };
+
+  const passedData = React.useMemo(() => access.filter(data), [data]);
+
+  return { passedData };
 }
 
 export default useAccess;

@@ -6,9 +6,13 @@ const Access = (props) => {
 
   const access = useAccess({ key: akey });
 
+  if (!access) return children;
+
   if (access.status === 'visible') return children;
 
-  if (access.status === 'disabled') return React.cloneElement(children, { disabled: true });
+  if (access.status === 'disabled') {
+    return React.cloneElement(children, { disabled: true });
+  }
 
   return null;
 };

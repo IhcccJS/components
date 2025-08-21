@@ -1,12 +1,15 @@
 import React from 'react';
-import useLock from './useLock';
+import AccessContext from './context';
 
-const Lock = (props) => {
-  const { name, keys } = props;
+const Lock = ({ accessData }) => {
+  const accessContext = React.useContext(AccessContext);
 
-  useLock(name, keys);
+  if (!accessContext.enable) return;
 
-  return null;
+  React.useEffect(() => {
+    accessContext.addLockedAccess(accessData);
+    return () => accessContext.removeLockedAccess(accessData);
+  }, []);
 };
 
 export default Lock;
