@@ -1,8 +1,8 @@
 import React from 'react';
 import clsx from 'clsx';
 import { Tooltip, Dropdown } from 'antd';
-import Access from '@/components/@dev/access';
-import { isArray, isObject, isFunction, joinString } from '@wowon/utils';
+import { isArray, isObject, isFunction, joinString } from '@ihccc/utils';
+import Access from '../access';
 import { Confirm } from './buttons';
 import Space from './space';
 import { buttonSetter } from '@/components/@setter';

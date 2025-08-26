@@ -1,44 +1,42 @@
-import createComponent from '@/components/@comp/create-component';
+import createComponent from '../create-component';
 
-import RequestLoadMore from './plugins/plugin-request-loadMore';
-import ColumnsTransform from './plugins/plugin-columns-transform';
-import ListCommand from './plugins/plugin-list-command';
+import request from '../plugins/plugin-request-loadmore';
+import columnsTransform from '../plugins/plugin-columns-transform';
+import listCommand from '../plugins/plugin-list-command';
 
-import LayoutStyle2 from './plugins/plugin-layout-style2';
-import SearchSimple from './plugins/plugin-search-simple';
-import ListNormal from './plugins/plugin-list-normal';
-import ListLoadMore from './plugins/plugin-list-loadMore';
-import ButtonList from './plugins/plugin-button-list';
+import layout from '../plugins/plugin-layout-style2';
+import search from '../plugins/plugin-search-simple';
+import list from '../plugins/plugin-list-normal';
+import listLoadMore from '../plugins/plugin-list-loadMore';
+import buttonList from '../plugins/plugin-button-list';
 
-import ButtonCreate from './plugins/plugin-button-create';
-import ButtonRefresh from './plugins/plugin-button-refresh';
-import ButtonFullscreen from './plugins/plugin-button-fullscreen';
-import ButtonExport from './plugins/plugin-button-export';
-// import  ButtonHelp from './plugins/plugin-button-help';
+import buttonCreate from '../plugins/plugin-button-create';
+import buttonRefresh from '../plugins/plugin-button-refresh';
+import buttonFullscreen from '../plugins/plugin-button-fullscreen';
+import buttonExport from '../plugins/plugin-button-export';
 
-import Modal from './plugins/plugin-modal';
+import popup from '../plugins/plugin-popup';
 
 // 加载更多列表
 const ListOfNormal = createComponent([
   // 弹窗
-  Modal,
+  popup,
   // 工具
-  RequestLoadMore,
-  ColumnsTransform,
-  ListCommand,
+  request,
+  columnsTransform,
+  listCommand,
   // 布局
-  LayoutStyle2,
+  layout,
   // 内容
-  SearchSimple,
-  ButtonList,
-  ListNormal,
-  ListLoadMore,
+  search,
+  buttonList,
+  list,
+  listLoadMore,
   // 功能按钮
-  //  ButtonHelp,
-  ButtonExport,
-  ButtonFullscreen,
-  ButtonRefresh,
-  ButtonCreate,
+  buttonExport,
+  buttonFullscreen,
+  buttonRefresh,
+  buttonCreate,
 ]);
 
 export default ListOfNormal;

@@ -1,42 +1,40 @@
-import createComponent from '@/components/@comp/create-component';
+import createComponent from '../create-component';
 
-import RequestPagination from './plugins/plugin-request-pagination';
-// import  ColumnsTransform from './plugins/ ColumnsTransform';
+import request from '../plugins/plugin-request-pagination';
+// import  columnsTransform from '../plugins/ columnsTransform';
 
-import LayoutStyle2 from './plugins/plugin-layout-style2';
-import ListTableEditRow from './plugins/plugin-list-table-editRow';
-import ButtonList from './plugins/plugin-button-list';
+import layout from '../plugins/plugin-layout-style2';
+import list from '../plugins/plugin-list-table-editRow';
+import buttonList from '../plugins/plugin-button-list';
 
-import ButtonCreate from './plugins/plugin-button-create';
-import ButtonRefresh from './plugins/plugin-button-refresh';
-import ButtonSetting from './plugins/plugin-button-setting';
-import ButtonFullscreen from './plugins/plugin-button-fullscreen';
-import ButtonExport from './plugins/plugin-button-export';
-import ButtonTableExpand from './plugins/plugin-button-table-expand';
-// import  ButtonHelp from './plugins/plugin-button-help';
+import buttonCreate from '../plugins/plugin-button-create';
+import buttonRefresh from '../plugins/plugin-button-refresh';
+import buttonSetting from '../plugins/plugin-button-setting';
+import buttonFullscreen from '../plugins/plugin-button-fullscreen';
+import buttonExport from '../plugins/plugin-button-export';
+import buttonTableExpand from '../plugins/plugin-button-table-expand';
 
-import Modal from './plugins/plugin-modal';
+import popup from '../plugins/plugin-popup';
 
 // 编辑树表格
 const ListOfTableEditAble = createComponent([
   // 弹窗
-  Modal,
+  popup,
   // 工具
-  RequestPagination,
-  //  ColumnsTransform,
+  request,
+  //  columnsTransform,
   // 布局
-  LayoutStyle2,
+  layout,
   // 功能按钮
-  //  ButtonHelp,
-  ButtonTableExpand,
-  ButtonExport,
-  ButtonSetting,
-  ButtonFullscreen,
-  ButtonRefresh,
-  ButtonCreate,
+  buttonTableExpand,
+  buttonExport,
+  buttonSetting,
+  buttonFullscreen,
+  buttonRefresh,
+  buttonCreate,
   // 内容
-  ButtonList,
-  ListTableEditRow,
+  buttonList,
+  list,
 ]);
 
 export default ListOfTableEditAble;

@@ -1,35 +1,35 @@
-import createComponent from '@/components/@comp/create-component';
+import createComponent from '../create-component';
 
-import RequestPagination from './plugins/plugin-request-pagination';
-import ColumnsTransform from './plugins/plugin-columns-transform';
-import ItemSelections from './plugins/plugin-item-selections';
-import ListCommand from './plugins/plugin-list-command';
+import request from '../plugins/plugin-request-pagination';
+import columnsTransform from '../plugins/plugin-columns-transform';
+import ItemSelections from '../plugins/plugin-item-selections';
+import listCommand from '../plugins/plugin-list-command';
 
-import LayoutMain from './plugins/plugin-layout-main';
-import SearchNormal from './plugins/plugin-search-normal';
-import ListTable from './plugins/plugin-list-table';
-import ListNormal from './plugins/plugin-list-normal';
-import ListPagination from './plugins/plugin-list-pagination';
-import ButtonList from './plugins/plugin-button-list';
+import layout from '../plugins/plugin-layout-main';
+import search from '../plugins/plugin-search-normal';
+import list from '../plugins/plugin-list-normal';
+import list2 from '../plugins/plugin-list-table';
+import listPagination from '../plugins/plugin-list-pagination';
+import buttonList from '../plugins/plugin-button-list';
 
-import Modal from './plugins/plugin-modal';
+import popup from '../plugins/plugin-popup';
 
 // 自动请求表格
 const ListAutoRequest = createComponent([
-  Modal,
+  popup,
   // 工具
-  RequestPagination,
-  ColumnsTransform,
+  request,
+  columnsTransform,
   ItemSelections,
-  ListCommand,
+  listCommand,
   // 布局
-  LayoutMain,
-  ButtonList,
+  layout,
+  buttonList,
   // 内容
-  SearchNormal,
-  ListTable,
-  ListNormal,
-  ListPagination,
+  search,
+  list,
+  list2,
+  listPagination,
 ]);
 
 export default ListAutoRequest;

@@ -1,22 +1,22 @@
-import createComponent from '@/components/@comp/create-component';
+import createComponent from '../create-component';
 
-import RequestNone from './plugins/plugin-request-none';
-import ColumnsTransform from './plugins/plugin-columns-transform';
-import ItemSelections from './plugins/plugin-item-selections';
+import request from '../plugins/plugin-request-none';
+import columnsTransform from '../plugins/plugin-columns-transform';
+import itemSelections from '../plugins/plugin-item-selections';
 
-import LayoutMain from './plugins/plugin-layout-main';
-import ListTable from './plugins/plugin-list-table';
+import layout from '../plugins/plugin-layout-main';
+import list from '../plugins/plugin-list-table';
 
 // 翻页表格
 const ListOfTableSimple = createComponent([
   // 工具
-  RequestNone,
-  ColumnsTransform,
-  ItemSelections,
+  request,
+  columnsTransform,
+  itemSelections,
   // 布局
-  LayoutMain,
+  layout,
   // 内容
-  ListTable,
+  list,
 ]);
 
 export default ListOfTableSimple;

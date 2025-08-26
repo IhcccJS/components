@@ -1,39 +1,36 @@
-import createComponent from '@/components/@comp/create-component';
+import createComponent from '../create-component';
 
-import RequestLoadMore from './plugins/plugin-request-loadMore';
+import request  from '../plugins/plugin-request-loadmore';
 
-import LayoutStyle2 from './plugins/plugin-layout-style2';
-import SearchSimple from './plugins/plugin-search-simple';
-import ListLoadMore from './plugins/plugin-list-loadMore';
-import ButtonList from './plugins/plugin-button-list';
+import layout from '../plugins/plugin-layout-style2';
+import search from '../plugins/plugin-search-simple';
+import list from '../plugins/plugin-list-loadMore';
+import buttonList from '../plugins/plugin-button-list';
 
-import ButtonCreate from './plugins/plugin-button-create';
-import ButtonRefresh from './plugins/plugin-button-refresh';
-import ButtonFullscreen from './plugins/plugin-button-fullscreen';
-import ButtonExport from './plugins/plugin-button-export';
-// import useButtonHelp from './plugins/useButtonHelp';
+import buttonCreate from '../plugins/plugin-button-create';
+import buttonRefresh from '../plugins/plugin-button-refresh';
+import buttonFullscreen from '../plugins/plugin-button-fullscreen';
+import buttonExport from '../plugins/plugin-button-export';
 
-import Modal from './plugins/plugin-modal';
+import popup from '../plugins/plugin-popup';
 
 // 自定义渲染列表
 export const ListOfCustom = createComponent([
   // 工具
-  RequestLoadMore,
+  request,
   // 布局
-  LayoutStyle2,
+  layout,
   // 内容
-  SearchSimple,
-  ButtonList,
-  // useListCustomRender,
-  ListLoadMore,
+  search,
+  buttonList,
+  list,
   // 功能按钮
-  // useButtonHelp,
-  ButtonExport,
-  ButtonFullscreen,
-  ButtonRefresh,
-  ButtonCreate,
+  buttonExport,
+  buttonFullscreen,
+  buttonRefresh,
+  buttonCreate,
   // 弹窗
-  Modal,
+  popup,
 ]);
 
 export default ListOfCustom;
