@@ -1,4 +1,4 @@
-import { isString, isObject } from '@ihccc/utils';
+import { isString, isObject } from '@wowon/utils';
 
 export const defaultIsUploadedFile = (file) => {
   return isString(file) || (isObject(file) && file.hasOwnProperty('id'));

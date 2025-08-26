@@ -1,4 +1,4 @@
-import { isFunction, isString, isArray } from '@ihccc/utils';
+import { isFunction, isString, isArray } from '@wowon/utils';
 
 const filterOfVisible = (type) => (item) => {
   if (isFunction(item.visible)) return item.visible(type);

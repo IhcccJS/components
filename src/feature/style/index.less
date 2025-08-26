@@ -3,7 +3,7 @@
   box-sizing: border-box;
   display: inline-flex;
   align-items: center;
-  margin-right: 8px;
+  // margin-right: 8px;
   padding: 2px 8px;
   overflow: hidden;
   transition: 0.1s;
@@ -129,13 +129,7 @@
     }
     &-block.animation {
       &::before {
-        background: linear-gradient(
-          -60deg,
-          transparent 80%,
-          currentColor 80%,
-          currentColor 90%,
-          transparent 90%
-        );
+        background: linear-gradient(-60deg, transparent 80%, currentColor 80%, currentColor 90%, transparent 90%);
         opacity: 0.2;
       }
 

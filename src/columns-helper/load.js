@@ -1,4 +1,4 @@
-import { isObject, isArray } from '@ihccc/utils';
+import { isObject, isArray } from '@wowon/utils';
 import filterOfVisible from './filterOfVisible';
 
 const updateOne = (array, col) => {
@@ -25,18 +25,14 @@ function load(source) {
     // 获取指定名称的配置
     get: (keys) => {
       if (isArray(keys)) {
-        return columns.filter((item) =>
-          keys.includes(item.dataIndex || item.key),
-        );
+        return columns.filter((item) => keys.includes(item.dataIndex || item.key));
       }
       return columns;
     },
     // 获取除了指定名称的配置
     except: (keys) => {
       if (isArray(keys)) {
-        return columns.filter(
-          (item) => keys.includes(item.dataIndex || item.key) === false,
-        );
+        return columns.filter((item) => keys.includes(item.dataIndex || item.key) === false);
       }
       return columns;
     },

@@ -39,20 +39,22 @@
     position: relative;
     text-align: center;
     vertical-align: top;
-    background-color: #f5f5f5;
-    box-shadow: 0 1px 2px 1px rgba(0, 0, 0, 0.1);
-    border-radius: 2px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--size-border-radius);
     transition: 0.3s;
     overflow: hidden;
 
     &:not(.disabled):hover {
-      background-color: #f1f1f1;
+      background-color: var(--color-bg-component-hover);
     }
   }
 
   &-preview-normal {
     width: 104px;
     height: 104px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     padding: 6px;
 
     &-progress {
@@ -75,6 +77,7 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
+      align-items: center;
       overflow: hidden;
 
       p {
@@ -111,23 +114,23 @@
 
     .bc-preview-status {
       &.uploading {
-        background-color: var(--blue);
+        background-color: var(--color-status-processing);
       }
 
       &.done {
-        background-color: var(--green);
+        background-color: var(--color-status-success);
       }
 
       &.error {
-        background-color: var(--red);
+        background-color: var(--color-status-error);
       }
     }
   }
 
   &-preview-plus {
-    width: 100%;
-    height: auto;
+    height: 100%;
     padding: 16px;
+    box-sizing: border-box;
 
     &-content {
       display: flex;
@@ -142,14 +145,18 @@
       align-items: center;
       overflow: hidden;
       padding: 4px;
-      background-color: #ffffff;
+      background-color: var(--color-bg);
       border-radius: 4px;
     }
 
     &-info {
-      margin: 0 20px;
+      margin: 0 12px;
       text-align: left;
       flex: 1;
+
+      &-name {
+        word-break: break-all;
+      }
 
       p {
         word-break: break-all;
@@ -159,15 +166,15 @@
 
     .bc-preview-status {
       &.uploading {
-        color: var(--blue);
+        color: var(--color-status-processing);
       }
 
       &.done {
-        color: var(--green);
+        color: var(--color-status-success);
       }
 
       &.error {
-        color: var(--red);
+        color: var(--color-status-error);
       }
     }
   }

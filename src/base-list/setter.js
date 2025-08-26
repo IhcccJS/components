@@ -1,4 +1,4 @@
-import globalSetter from '../utils/base/globalSetter';
+import globalSetter from '../_utils/base/globalSetter';
 
 const renderSetter = globalSetter();
 

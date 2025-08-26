@@ -1,0 +1,94 @@
+@borderRadius: var(--size-border-radius, 8px);
+@colorBgLayout: var(--color-bg);
+@colorBgBase: var(--color-bg);
+@colorTextBase: var(--color-text);
+@colorTextSecondary: var(--color-text);
+@colorPrimaryBg: var(--color-bg-component);
+@colorText: var(--color-text);
+@colorTextDescription: var(--color-text-desc);
+
+.bc-task-bar {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  z-index: 2000;
+
+  &-placement {
+    &-right {
+      right: 0;
+
+      .bc-task-item {
+        border-radius: @borderRadius 0 0 @borderRadius;
+        transform: translateX(24px);
+
+        &:hover {
+          background: @colorBgLayout;
+          transform: translateX(0);
+          box-shadow: 0 2px 6px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        &-open {
+          transform: translateX(0);
+        }
+      }
+    }
+    &-top {
+      top: 64px;
+    }
+    &-bottom {
+      bottom: 32px;
+    }
+  }
+}
+
+.bc-task-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 8px 40px 8px 16px;
+  background: var(--color-bg);
+  box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.1);
+  font-weight: bold;
+  color: @colorTextBase;
+  user-select: none;
+  cursor: pointer;
+  transition: 0.2s ease-out;
+
+  &:active {
+    background: @colorBgBase;
+    color: @colorTextSecondary;
+  }
+
+  &-active {
+    background: @colorBgLayout;
+  }
+
+  &-focus {
+    color: var(--color-primary);
+    background: @colorPrimaryBg;
+
+    &:hover {
+      background: var(--color-primary);
+    }
+  }
+
+  &-prefix {
+    color: @colorText;
+    margin-right: 16px;
+  }
+
+  &-title {
+    max-width: 10em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &-close {
+    position: absolute;
+    right: 8px;
+    font-size: 14px;
+    color: @colorTextDescription;
+  }
+}

@@ -43,30 +43,32 @@ const ICON_LIST = {
   event: eventIcon,
 };
 
-function ColumnTitle({ icon, type, title, tooltip }) {
+function ColumnTitle({ title, tip }) {
   const { styles, cx } = useStyles();
 
+  if (!tip) return title;
+
+  const { icon, type, ...tooltip } = tip;
+
   const iconElement = (
-    <span className={cx(styles, 'bc-base-list-column-title-icon')}>
-      {icon || ICON_LIST[type || 'event']}
-    </span>
+    <span className={cx(styles, 'bc-base-list-column-title-icon')}>{icon || ICON_LIST[type || 'event']}</span>
   );
 
-  if (tooltip === false) {
+  if (tooltip.title === false) {
     return (
       <React.Fragment>
-        {title}
         {iconElement}
+        {title}
       </React.Fragment>
     );
   }
 
   return (
     <React.Fragment>
-      {title}
-      <Tooltip title="此列可点击" {...tooltip}>
+      <Tooltip {...tooltip} title={tooltip.title || '此列数据可点击'}>
         {iconElement}
       </Tooltip>
+      {title}
     </React.Fragment>
   );
 }

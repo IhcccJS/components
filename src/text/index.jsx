@@ -6,7 +6,7 @@ import Copy from './copy';
 import Number from './number';
 
 function Text(props) {
-  const { label, render, children } = props;
+  const { label, render = '-', children } = props;
 
   const text = React.useMemo(() => {
     const isRenderFn = isFunction(render);
@@ -28,10 +28,6 @@ function Text(props) {
 
   return text;
 }
-
-Text.defaultProps = {
-  render: '-',
-};
 
 Text.Tip = Tip;
 Text.Roll = Roll;

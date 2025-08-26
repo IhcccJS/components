@@ -1,0 +1,33 @@
+.list-item-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-cell-gap-sm, 8px);
+  padding: 8px 16px;
+  font-size: 14px;
+  color: var(--color-text);
+
+  & + & {
+    border-top: 1px solid var(--color-border-secondary, #e5e5e5);
+  }
+
+  // &-cover {
+  // }
+
+  &-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    // &-name {
+    // }
+
+    &-desc {
+      margin-top: 2px;
+      color: var(--color-text-desc, #a9a9a9);
+    }
+  }
+
+  &:hover {
+    background-color: var(--color-bg-component-secondary, #f9f9f9);
+  }
+}

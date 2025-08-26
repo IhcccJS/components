@@ -16,8 +16,8 @@ toc: content
 ```jsx
 import React from 'react';
 import { Space, Button, message } from 'antd';
-import { Upload } from '@ihccc/components';
-import '@ihccc/components/lib/style/color.less';
+import { Upload } from '@wowon/components';
+import '@wowon/components/lib/style/color.less';
 
 function Demo() {
   const [value, setValue] = React.useState([]);
@@ -52,8 +52,8 @@ export default Demo;
 
 ```jsx
 import React from 'react';
-import { Upload } from '@ihccc/components';
-import '@ihccc/components/lib/style/color.less';
+import { Upload } from '@wowon/components';
+import '@wowon/components/lib/style/color.less';
 
 function Demo() {
   const [value, setValue] = React.useState([
@@ -71,7 +71,7 @@ function Demo() {
       multiple
       value={value}
       preview={
-        <Upload.Preview.Normal
+        <Upload.Normal.Preview
           progressProps={{ type: 'line', showInfo: false }}
         />
       }
@@ -87,8 +87,8 @@ export default Demo;
 
 ```jsx
 import React from 'react';
-import { Upload } from '@ihccc/components';
-import '@ihccc/components/lib/style/color.less';
+import { Upload } from '@wowon/components';
+import '@wowon/components/lib/style/color.less';
 
 function Demo() {
   const [value, setValue] = React.useState([
@@ -105,10 +105,10 @@ function Demo() {
       multiple
       value={value}
       onChange={setValue}
-      preview={<Upload.Preview.Plus />}
+      preview={<Upload.Plus.Preview />}
       style={{ width: 500, flexDirection: 'column-reverse' }}
     >
-      <Upload.Trigger.Plus />
+      <Upload.Plus.Trigger />
     </Upload>
   );
 }
@@ -121,8 +121,8 @@ export default Demo;
 ```jsx
 import React from 'react';
 import { PaperClipOutlined, FileUnknownOutlined } from '@ant-design/icons';
-import { Upload } from '@ihccc/components';
-import '@ihccc/components/lib/style/color.less';
+import { Upload } from '@wowon/components';
+import '@wowon/components/lib/style/color.less';
 
 // isImage 文件是否是图片
 // extname 文件扩展名
@@ -148,7 +148,7 @@ function Demo() {
       multiple
       value={value}
       onChange={setValue}
-      preview={<Upload.Preview.Plus />}
+      preview={<Upload.Plus.Preview />}
       render={uploadRender}
       style={{ width: 500, flexDirection: 'column-reverse' }}
     >
@@ -175,8 +175,8 @@ import {
   FileZipOutlined,
   FileUnknownOutlined,
 } from '@ant-design/icons';
-import { Upload } from '@ihccc/components';
-import '@ihccc/components/lib/style/color.less';
+import { Upload } from '@wowon/components';
+import '@wowon/components/lib/style/color.less';
 
 const uploadRender = ({ isImage, extname }) => {
   if (isImage) return false;
@@ -209,7 +209,7 @@ export default Demo;
 
 ```jsx
 import React from 'react';
-import { Upload } from '@ihccc/components';
+import { Upload } from '@wowon/components';
 
 function Demo() {
   const [value, setValue] = React.useState([]);
@@ -232,7 +232,7 @@ export default Demo;
 
 ```jsx
 import React from 'react';
-import { Upload } from '@ihccc/components';
+import { Upload } from '@wowon/components';
 
 function Demo() {
   const [value, setValue] = React.useState(
@@ -257,7 +257,7 @@ export default Demo;
 
 ```js
 import { message } from 'antd';
-import { Upload } from '@ihccc/components';
+import { Upload } from '@wowon/components';
 
 async function onSubmit({ images }) {
   const result = await Upload.multipleUpload(
@@ -284,7 +284,7 @@ async function onSubmit({ images }) {
 | removeAble | `Boolean`                          | `true`           | 是否允许删除已选择的文件                                         |
 | value      | `array`                            | `[]`             | 值                                                               |
 | onChange   | `function`                         | `undefined`      | 值改变时的回调事件                                               |
-| preview    | `ReactNode`                        | `undefined`      | 文件预览，可以使用 `Upload.Preview` 相关组件，可以自定义         |
+| preview    | `ReactNode`                        | `undefined`      | 可以自定义文件预览                                               |
 | render     | `function(file: Upload.File): any` | `undefined`      | 用于各种文件的预览，例如显示 icon                                |
 | children   | `ReactNode`                        | `<UploadCard />` | 选择文件触发组件，可以使用 `Upload.Trigger` 相关组件，支持自定义 |
 
@@ -354,14 +354,14 @@ const files = [new Upload.File({ src: '/path/file.png', name: '' })];
 
 Upload.Trigger 是文件新增的显示组件，分为 `Upload.Trigger.Plus` 和 `Upload.Trigger.Normal`；
 
-- Upload.Trigger.Plus Props
+- Upload.Plus.Trigger Props
 
   | 名称        | 类型     | 默认值      | 描述     |
   | :---------- | :------- | :---------- | :------- |
   | title       | `string` | `undefined` | 显示标题 |
   | description | `string` | `undefined` | 显示描述 |
 
-## Upload.Preview 组件
+## Upload.Plus 组件
 
 `Upload.Preview` 是文件预览组件，分为 `Upload.Preview.Plus` 和 `Upload.Preview.Normal`；另外的，提供了 `Upload.Preview.Status` 组件用于在自定义组件中方便的显示文件上传状态；
 

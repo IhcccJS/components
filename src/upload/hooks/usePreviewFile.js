@@ -1,5 +1,5 @@
 import React from 'react';
-import { isObject, isString, getBase64 } from '@ihccc/utils';
+import { isObject, isString, getBase64 } from '@wowon/utils';
 
 function usePreviewFile(file) {
   const [result, setResult] = React.useState({});
@@ -14,8 +14,7 @@ function usePreviewFile(file) {
 
     if (file instanceof File) currentFile = file;
 
-    if (isObject(file) && file.originFileObj instanceof File)
-      currentFile = file.originFileObj;
+    if (isObject(file) && file.originFileObj instanceof File) currentFile = file.originFileObj;
 
     if (!!currentFile && /^image\/.+/.test(currentFile.type)) {
       getBase64(currentFile).then((src) => {

@@ -1,21 +1,17 @@
 import React from 'react';
+import clsx from 'clsx';
 import { Tooltip, Dropdown } from 'antd';
-import { isArray, isObject, isFunction } from '@ihccc/utils';
+import Access from '@/components/@dev/access';
+import { isArray, isObject, isFunction, joinString } from '@wowon/utils';
 import { Confirm } from './buttons';
 import Space from './space';
-import { buttonSetter } from './setter';
+import { buttonSetter } from '@/components/@setter';
 import { handleButtonConfig } from './utils';
-import useStyles from './style';
-import useAccess from '../access/useAccess';
-
-const nodeEvent = {
-  a: 'onClick',
-  button: 'onClick',
-  switch: 'onChange',
-};
+import './index.less';
 
 function RenderButtons(props) {
   const {
+    blockName,
     type,
     space,
     inline,
@@ -29,16 +25,13 @@ function RenderButtons(props) {
     eventMap,
     style,
   } = props;
-  const { styles, cx } = useStyles();
   const spaceTypeRef = React.useRef();
 
   const lastIndex = buttons.length - 1;
 
   const eventFunction = React.useCallback(
     (item, name) => {
-      let event = isFunction(item[name])
-        ? item[name]
-        : eventMap[item[name] || item.key];
+      let event = isFunction(item[name]) ? item[name] : eventMap[item[name] || item.key];
       if (isFunction(event)) return event?.bind(item, eventData);
       return null;
     },
@@ -53,11 +46,11 @@ function RenderButtons(props) {
           key: btn.key,
         };
       });
+
       const onClick = (item) => {
         for (let index = 0; index < buttons.length; index++) {
           if (buttons[index].key === item.key) {
-            const event = eventFunction(item, 'onClick');
-            event && item;
+            eventFunction(item, 'onClick')(item);
             return;
           }
         }
@@ -86,43 +79,43 @@ function RenderButtons(props) {
 
     const btnType = item.type || type || 'a';
 
-    const eventName = nodeEvent[btnType] || 'event';
+    const buttonType = buttonSetter.get(btnType);
+
+    if (!buttonType) throw new Error('unknow button type:' + btnType);
+
+    const eventName = buttonType.event || 'event';
 
     let button;
 
     const buttonProps = {
       ...baseProps?.[btnType],
-      ...item.props,
+      // ? 需求是什么
+      ...(!item.props ? eventData : item.props),
       ...(!!item.dropdown || !!item.confirm || !!item.onConfirm
         ? {}
         : {
             [eventName]: eventFunction(item, eventName),
           }),
+      id: joinString('_')('button', blockName, item.key),
     };
 
-    if (!item.render) {
-      button = React.createElement(buttonSetter.get(btnType), buttonProps);
-    } else {
-      button = item.render(buttonProps);
+    if (!!item.props) {
+      button = React.createElement(buttonType.component, buttonProps);
+    }
+
+    if (!!item.render) {
+      button = item.render(eventData, buttonProps, button);
     }
 
     if (!!item.dropdown) {
       button = (
-        <Dropdown
-          {...baseProps?.dropdown}
-          {...item.props}
-          menu={handleDropdownMenu(item.items)}
-        >
+        <Dropdown {...baseProps?.dropdown} {...item.props} menu={handleDropdownMenu(item.items)}>
           {button}
         </Dropdown>
       );
     } else if (!!item.confirm || !!item.onConfirm) {
       button = (
-        <Confirm
-          {...baseProps?.confirm}
-          {...item.confirm}
-          onConfirm={eventFunction(item, 'onConfirm')}
-        >
+        <Confirm {...baseProps?.confirm} {...item.confirm} onConfirm={eventFunction(item, 'onConfirm')}>
           {button}
         </Confirm>
       );
@@ -130,24 +123,20 @@ function RenderButtons(props) {
 
     if (!!item.tip) {
       button = (
-        <Tooltip
-          {...baseProps?.tip}
-          {...(isObject(item.tip) ? item.tip : { title: item.tip })}
-        >
+        <Tooltip {...baseProps?.tip} {...(isObject(item.tip) ? item.tip : { title: item.tip })}>
           {button}
         </Tooltip>
       );
     }
 
-    spaceTypeRef.current =
-      item.space || space || (btnType === 'a' ? 'divider' : 'empty');
+    spaceTypeRef.current = item.space || space || (btnType === 'a' ? 'divider' : 'empty');
 
     return (
       <React.Fragment key={item.key}>
         {button}
-        {((!renderType && index !== lastIndex) ||
-          (renderType === 'dropdown' && !item.group)) &&
-          space !== 'none' && <Space type={spaceTypeRef.current} />}
+        {((!renderType && index !== lastIndex) || (renderType === 'dropdown' && !item.group)) && space !== 'none' && (
+          <Space type={spaceTypeRef.current} />
+        )}
       </React.Fragment>
     );
   });
@@ -157,24 +146,17 @@ function RenderButtons(props) {
   return (
     <React.Fragment>
       <div
-        className={cx(
-          styles,
-          'bc-action-buttons',
-          layout && 'bc-action-buttons-layout-' + layout,
-          {
-            'bc-action-buttons-group': !!renderType,
-            'bc-action-buttons-inline': !!inline,
-            'bc-action-buttons-wrap': !!wrap,
-            'bc-action-buttons-reverse': !!reverse,
-          },
-        )}
+        className={clsx('bc-action-buttons', layout && 'bc-action-buttons-layout-' + layout, {
+          ['bc-action-buttons-group']: !!renderType,
+          ['bc-action-buttons-inline']: !!inline,
+          ['bc-action-buttons-wrap']: !!wrap,
+          ['bc-action-buttons-reverse']: !!reverse,
+        })}
         style={style}
       >
         {renderbuttons}
       </div>
-      {renderType && spaceTypeRef.current !== 'none' && (
-        <Space type={spaceTypeRef.current} />
-      )}
+      {renderType && spaceTypeRef.current !== 'none' && <Space type={spaceTypeRef.current} />}
     </React.Fragment>
   );
 }
@@ -182,24 +164,24 @@ function RenderButtons(props) {
 function ButtonList(props) {
   const {
     access,
-    type,
+    type = 'button',
     space,
     inline,
     wrap,
     reverse,
     layout,
     data,
-    buttons,
+    buttons = [],
     baseProps,
-    sortRender,
+    sortRenderKeys,
     render,
     eventMap,
     style,
   } = props;
 
-  if (!(buttons || []).length > 0) return null;
+  if ((buttons || []).length === 0) return null;
 
-  const accessHandle = useAccess(
+  const accessHandle = Access.useAccess(
     Object.assign(
       {
         data: buttons,
@@ -210,19 +192,28 @@ function ButtonList(props) {
   );
 
   const buttonList = React.useMemo(() => {
-    let accessButtons = accessHandle?.passedData || [];
-    if (!!sortRender) {
-      const buttonMap = accessButtons.reduce((map, button) => {
-        map[button.key] = button;
-        return map;
-      }, {});
-      accessButtons = sortRender.map((key) => buttonMap[key]).filter(Boolean);
-    }
-    return handleButtonConfig(accessButtons, data, type);
+    const accessButtons = accessHandle?.passedData || [];
+    const sortIndex = accessButtons
+      .map((item, index) => {
+        let sort = index;
+        if (item.sort !== void 0) sort = item.sort;
+        if (isArray(sortRenderKeys)) {
+          sort = sortRenderKeys.indexOf(item.key);
+        } else if (isObject(sortRenderKeys) && sortRenderKeys[item.key] !== void 0) {
+          sort = sortRenderKeys[item.key];
+        }
+        if (!sort && sort !== 0) return null;
+        return { index, sort };
+      })
+      .filter(Boolean);
+    sortIndex.sort((x, y) => x.sort - y.sort);
+    const sortedButtons = sortIndex.map((item) => accessButtons[item.index]);
+    return handleButtonConfig(sortedButtons, data, type);
   }, [accessHandle?.passedData, data]);
 
   const renderDom = (
     <RenderButtons
+      blockName={access?.name || access || ''}
       type={type}
       space={space}
       inline={inline}
@@ -239,11 +230,6 @@ function ButtonList(props) {
 
   return !render ? renderDom : render(renderDom, data, buttonList);
 }
-
-ButtonList.defaultProps = {
-  type: 'button',
-  buttons: [],
-};
 
 ButtonList.button = buttonSetter;
 

@@ -28,15 +28,12 @@ export function handleButtonConfig(items, data, type) {
       if (!type && !btn.type) btn.type = 'a';
     }
 
-    if (type !== 'button' && btn.type !== 'button') {
-      delete btn.group;
-    }
+    const btnType = btn.type || type;
+
+    if (btnType !== 'button') delete btn.group;
 
     if (!btn.hidden) {
-      if (
-        (btn.group && (btn.type === 'button' || type === 'button')) ||
-        btn.dropdown
-      ) {
+      if ((btn.group && btnType === 'button') || btn.dropdown) {
         let saveGroupInfo = groupStore[btn.group];
         let saveDropdownInfo = groupStore[btn.dropdown];
 
@@ -79,9 +76,7 @@ export function handleButtonConfig(items, data, type) {
           let groupIndex;
           if (btn.group) {
             groupIndex = saveGroupInfo.btnIndex;
-            buttonList[groupIndex].push([
-              { key: btn.dropdown, type: 'dropdown' },
-            ]);
+            buttonList[groupIndex].push([{ key: btn.dropdown, type: 'dropdown' }]);
             btnIndex = buttonList[groupIndex].length - 1;
             groupStore[btn.dropdown] = {
               btnIndex,

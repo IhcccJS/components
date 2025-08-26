@@ -1,14 +1,18 @@
 import React from 'react';
-import useStyles from './style';
+import clsx from 'clsx';
+// import useStyles from './style';
+import './style/index.less';
 
 function Number(props) {
-  const { className, label, delimiter, part, precision, ...restProps } = props;
-  const { styles, cx } = useStyles();
+  const { className, label, delimiter, part = 3, precision = -1, scale = 1, prefix, unit, ...restProps } = props;
+  // const { styles, cx } = useStyles();
 
   const value = React.useMemo(() => {
     if (/\d/.test(label) === false) return label;
 
-    let number = label;
+    let number = label * scale;
+
+    if (!number) return label;
 
     if (precision > -1) {
       const pre = 10 ** precision;
@@ -16,10 +20,7 @@ function Number(props) {
     }
 
     if (delimiter) {
-      const reg = new RegExp(
-        '\\d{1,' + part + '}(?=(\\d{' + part + '})+(\\.|$))',
-        'gy',
-      );
+      const reg = new RegExp('\\d{1,' + part + '}(?=(\\d{' + part + '})+(\\.|$))', 'gy');
       number = (number + '').replace(reg, '$&' + delimiter);
     }
 
@@ -27,16 +28,12 @@ function Number(props) {
   }, [label]);
 
   return (
-    <span className={cx(styles, 'bc-text-number', className)} {...restProps}>
+    <span className={clsx('bc-text-number', className)} {...restProps}>
+      {prefix && <span className={'bc-text-number-prefix'}>{prefix}</span>}
       {value}
+      {unit && <span className={'bc-text-number-unit'}>{unit}</span>}
     </span>
   );
 }
-
-Number.defaultProps = {
-  delimiter: false,
-  part: 3,
-  precision: -1,
-};
 
 export default Number;

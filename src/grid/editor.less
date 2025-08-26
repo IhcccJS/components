@@ -1,0 +1,55 @@
+.styled {
+  .grid,
+  .grid-floating,
+  .grid-table {
+    background-color: #d1c4e960;
+  }
+
+  tbody {
+    vertical-align: top;
+  }
+
+  .grid-item,
+  .td {
+    position: relative;
+    padding: 8px;
+    background: #7986cb60;
+    text-align: center;
+    user-select: none;
+    cursor: pointer;
+    transition: 0.2s;
+
+    &.float-left,
+    &.float-right {
+      background: #ff766c;
+    }
+
+    &:hover {
+      opacity: 0.8;
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
+
+    .no {
+      position: absolute;
+      top: 6px;
+      left: 6px;
+      font-weight: bold;
+    }
+
+    .float {
+      position: absolute;
+      top: 6px;
+      right: 6px;
+    }
+
+    .info {
+      display: inline-block;
+      margin: 4px;
+      font-size: 12px;
+      color: #fff;
+    }
+  }
+}

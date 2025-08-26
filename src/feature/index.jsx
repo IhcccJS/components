@@ -1,26 +1,28 @@
 import React from 'react';
+import clsx from 'clsx';
 import { isArray, isObject, isFunction } from '@ihccc/utils';
-import ClickAble from '../click-able';
-import useStyles from './style';
+// import ClickAble from '../click-able';
+// import useStyles from './style';
+import './style.less';
 
 const Feature = (props) => {
   const {
     className,
     label,
-    mode,
+    mode = 'text',
     icon,
     color,
     round,
-    size,
-    status,
-    animation,
-    disabled,
-    hoverAble,
+    size = 'small',
+    status = 'default',
+    animation = false,
+    disabled = false,
+    hoverAble = true,
     style,
     children,
     ...restProps
   } = props;
-  const { styles, cx } = useStyles();
+  // const { styles, cx } = useStyles();
 
   const clickAble = isFunction(restProps.onClick);
 
@@ -40,42 +42,25 @@ const Feature = (props) => {
     return Boolean(animation);
   }, [status, animation]);
 
-  const cssName = cx(styles, 'bc-feature', className, {
-    [`status-${status}`]: !customStuts && !!status,
-    [`size-${size}`]: !!size,
-    [`mode-${mode}`]: !!mode,
-    animation: !disabled && isAnimation,
-    disabled,
-    hoverAble,
-    clickAble,
-    round: (mode === 'block' || mode === 'tag') && round,
+  const cssName = clsx('bc-feature', className, {
+    [`bc-feature-mode-${mode}`]: !!mode,
+    [`bc-feature-status-${status}`]: !customStuts && !!status,
+    ['bc-feature-round']: (mode === 'block' || mode === 'tag') && round,
+    [`bc-feature-size-${size}`]: !!size,
+    ['bc-feature-animation']: !disabled && isAnimation,
+    ['bc-feature-disabled']: disabled,
+    ['bc-feature-hover-able']: hoverAble,
+    ['bc-feature-click-able']: clickAble,
   });
 
   return (
-    <ClickAble.Div
-      disabled={disabled}
-      className={cssName}
-      style={Object.assign({ color: currentColor }, style)}
-      {...restProps}
-    >
+    <div className={cssName} style={Object.assign({ color: currentColor }, style)} {...restProps}>
       {icon}
-      <span className={cx('text', { space: !!icon })}>
-        {React.isValidElement(children)
-          ? React.cloneElement(children, { label })
-          : label}
+      <span className={clsx('bc-feature-text', { 'bc-feature-space': !!icon })}>
+        {React.isValidElement(children) ? React.cloneElement(children, { label }) : label}
       </span>
-    </ClickAble.Div>
+    </div>
   );
-};
-
-Feature.defaultProps = {
-  mode: 'text',
-  round: false,
-  size: 'small',
-  status: 'default',
-  animation: false,
-  disabled: false,
-  hoverAble: true,
 };
 
 export default Feature;

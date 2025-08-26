@@ -1,0 +1,49 @@
+@gap: var(--size-cell-gap, 12px);
+
+.listLayout {
+  position: relative;
+
+  .header {
+    margin-bottom: @gap;
+  }
+
+  .toolbar {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-bottom: @gap;
+  }
+
+  .body {
+    // padding: @gap 0;
+  }
+
+  .footer {
+    display: flex;
+    margin-top: @gap;
+  }
+}
+
+.flexContainer {
+  display: flex;
+
+  &.column {
+    flex-direction: column;
+  }
+
+  &.row {
+    flex-direction: row;
+  }
+
+  &.rowReverse {
+    flex-direction: row-reverse;
+  }
+
+  &.columnReverse {
+    flex-direction: column-reverse;
+  }
+
+  .mainBody {
+    flex: 1;
+  }
+}

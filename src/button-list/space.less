@@ -1,0 +1,20 @@
+.bc-action-buttons-space {
+  &-empty {
+    display: inline-block;
+    width: var(--size-cell-gap);
+  }
+
+  &-divider {
+    position: relative;
+    display: inline-block;
+    height: 1em;
+    margin: 0 calc(var(--size-cell-gap) / 2);
+    vertical-align: middle;
+    border-left: 1px solid rgba(5, 5, 5, 0.06);
+  }
+
+  &-full {
+    display: inline-block;
+    flex: 1;
+  }
+}

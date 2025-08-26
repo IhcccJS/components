@@ -1,9 +1,41 @@
 import throttle from 'lodash/throttle';
 import request from './request';
 import UploadFile from '../upload-file';
-import { eventEmitter, isString, isArray, isFunction } from '@ihccc/utils';
+import { eventEmitter, isString, isArray, isFunction } from '@wowon/utils';
 
 export const uploadEmiter = eventEmitter();
+
+function slidingWindowPromises(promises, windowSize, onEachDone, onAllDone) {
+  let inProgress = 0;
+  let completed = 0;
+
+  function executeNext() {
+    if (completed === promises.length) {
+      onAllDone();
+      return;
+    }
+
+    while (inProgress < windowSize && completed + inProgress < promises.length) {
+      const index = completed + inProgress;
+      inProgress++;
+      promises[index]()
+        .then((result) => {
+          inProgress--;
+          completed++;
+          onEachDone(index, result);
+          executeNext();
+        })
+        .catch((error) => {
+          inProgress--;
+          completed++;
+          onEachDone(index, error);
+          executeNext();
+        });
+    }
+  }
+
+  executeNext();
+}
 
 /**
  * 多文件递归上传
@@ -18,15 +50,7 @@ function multipleUpload(url, files, opts) {
 
   const uploadFiles = isArray(files) ? files : [files];
 
-  const {
-    method = 'POST',
-    data,
-    filename,
-    headers,
-    format,
-    progressWait,
-    onProgress,
-  } = opts || {};
+  const { method = 'POST', data, filename, headers, format, progressWait, onProgress } = opts || {};
 
   const result = [];
   const needUploadFiles = [];
@@ -52,7 +76,7 @@ function multipleUpload(url, files, opts) {
 
         request(url, {
           method,
-          data,
+          data: Object.assign({}, data, file.data),
           filename,
           headers,
           file: file.source,

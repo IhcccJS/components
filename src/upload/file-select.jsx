@@ -1,18 +1,20 @@
 import React from 'react';
+import clsx from 'clsx';
 import { attrAccept, traverseFileTree } from './methods';
-import { uuid } from '@ihccc/utils';
-import useStyles from './style/file-select';
+import { uuid } from '@wowon/utils';
+// import useStyles from './style/file-select';
 
 const FileSelect = React.forwardRef(function (props, ref) {
   const {
-    beforeUpload,
     className,
+    size,
     disabled,
+    transferEvent,
     accept,
     directory,
-    multiple,
+    multiple = false,
     capture,
-    openFileDialogOnClick,
+    openFileDialogOnClick = true,
     onClick,
     onMouseEnter,
     onMouseLeave,
@@ -21,7 +23,7 @@ const FileSelect = React.forwardRef(function (props, ref) {
     style,
     ...restProps
   } = props;
-  const { styles, cx } = useStyles();
+  // const { styles, cx } = useStyles();
   const [key, setKey] = React.useState(uuid('bc'));
   const inputRef = React.useRef(ref);
 
@@ -55,15 +57,11 @@ const FileSelect = React.forwardRef(function (props, ref) {
       if (e.type === 'dragover') return;
 
       if (directory) {
-        traverseFileTree(
-          Array.prototype.slice.call(e.dataTransfer.items),
-          onChange,
-          (file) => attrAccept(file, accept),
-        );
-      } else {
-        let files = [...e.dataTransfer.files].filter((file) =>
+        traverseFileTree(Array.prototype.slice.call(e.dataTransfer.items), onChange, (file) =>
           attrAccept(file, accept),
         );
+      } else {
+        let files = [...e.dataTransfer.files].filter((file) => attrAccept(file, accept));
 
         if (multiple === false) {
           files = files.slice(0, 1);
@@ -78,23 +76,20 @@ const FileSelect = React.forwardRef(function (props, ref) {
   const onInputChange = React.useCallback(
     (e) => {
       const { files } = e.target;
-      const acceptedFiles = [...files].filter(
-        (file) => !directory || attrAccept(file, accept),
-      );
+      const acceptedFiles = [...files].filter((file) => !directory || attrAccept(file, accept));
+
       onChange(acceptedFiles);
       reset();
     },
     [onChange],
   );
 
-  const cssName = cx(styles['bc-file-select'], {
-    [styles['bc-file-select-disabled']]: disabled,
+  const cssName = clsx('bc-file-select', {
+    ['bc-file-select-disabled']: disabled,
     [className]: className,
   });
 
-  const dirProps = directory
-    ? { directory: 'directory', webkitdirectory: 'webkitdirectory' }
-    : {};
+  const dirProps = directory ? { directory: 'directory', webkitdirectory: 'webkitdirectory' } : {};
 
   const events = disabled
     ? {}
@@ -109,7 +104,7 @@ const FileSelect = React.forwardRef(function (props, ref) {
       };
 
   return (
-    <div className={cssName} style={style} {...events}>
+    <div className={cssName} style={style} {...(transferEvent ? {} : events)}>
       <input
         {...restProps}
         ref={inputRef}
@@ -124,15 +119,10 @@ const FileSelect = React.forwardRef(function (props, ref) {
         key={key}
       />
       {React.isValidElement(children)
-        ? React.cloneElement(children, { disabled })
+        ? React.cloneElement(children, { size, disabled, events: transferEvent ? events : {}, onChange })
         : children}
     </div>
   );
 });
-
-FileSelect.defaultProps = {
-  multiple: false,
-  openFileDialogOnClick: true,
-};
 
 export default FileSelect;

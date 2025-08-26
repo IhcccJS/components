@@ -1,0 +1,31 @@
+.rich-editor {
+  height: 520px;
+
+  .ql-container {
+    height: calc(100% - 16px);
+  }
+
+  .ql-toolbar.ql-snow,
+  .ql-container.ql-snow {
+    border-color: var(--color-border);
+  }
+
+  .ql-toolbar.ql-snow {
+    border-radius: var(--size-border-radius) var(--size-border-radius) 0 0;
+  }
+
+  .ql-container.ql-snow {
+    border-radius: 0 0 var(--size-border-radius) var(--size-border-radius);
+  }
+
+  .ql-snow .ql-picker {
+    color: var(--color-text);
+  }
+  .ql-snow .ql-stroke {
+    stroke: var(--color-text);
+  }
+  .ql-snow .ql-fill,
+  .ql-snow .ql-stroke.ql-fill {
+    fill: var(--color-text);
+  }
+}

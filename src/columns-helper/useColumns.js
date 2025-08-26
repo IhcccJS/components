@@ -1,38 +1,27 @@
 import React from 'react';
-import { isObject } from '@ihccc/utils';
+import { useUnmountedRef } from 'ahooks';
 import transform from './transform';
-import useAccess from '../access/useAccess';
-
-export function useColumnsAccess(columns, accessConfig) {
-  const access = useAccess(
-    Object.assign(
-      {
-        name: false,
-        keyName: 'dataIndex',
-        data: columns,
-      },
-      isObject(accessConfig) ? accessConfig : { name: accessConfig },
-    ),
-  );
-
-  return access;
-}
-
-export function useColumnsTransform(columns, config) {
-  const columnsFormated = React.useMemo(
-    () => transform(columns, config),
-    [columns, config],
-  );
-
-  return columnsFormated;
-}
+import { useMatchSomeAccess } from '../access/useAccess';
 
 function useColumns(columns, opts) {
   const { access: accessConfig, ...config } = opts || {};
+  const unmountedRef = useUnmountedRef();
+  const [source, setSource] = React.useState([]);
 
-  const access = useColumnsAccess(columns, accessConfig);
+  const matchAccess = useMatchSomeAccess({ keyName: 'dataIndex', ...accessConfig });
 
-  return useColumnsTransform(access.passedData, config);
+  React.useEffect(() => {
+    if (unmountedRef.current) return;
+    // 对 columns 权限过滤
+    const filteredData = !matchAccess ? columns : matchAccess.filter(columns);
+    setSource(filteredData);
+  }, [columns]);
+
+  // 渲染处理
+  const data = React.useMemo(() => transform(source, config), [source, config]);
+
+  // 可以通过 source 和 setSource 进行中间处理
+  return { source, setSource, data };
 }
 
 export default useColumns;

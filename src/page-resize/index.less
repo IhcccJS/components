@@ -1,0 +1,26 @@
+body {
+  & > ::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.mainBody {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--color-text, #fff);
+  background-color: var(--color-bg, #000);
+  overflow: hidden;
+}
+
+.screen {
+  position: relative;
+  width: 1920px;
+  height: 1080px;
+  transform: scale(1);
+  transform-origin: center;
+  overflow: hidden;
+}

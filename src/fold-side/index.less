@@ -1,0 +1,89 @@
+@padding: 0px;
+
+.sideContainer {
+  position: absolute;
+  top: @padding;
+  bottom: @padding;
+  z-index: 90;
+  border-radius: 2px;
+  background: var(--color-bg-popover, #fff);
+  box-shadow: 0px 0 4px 0px rgba(0, 0, 0, 0.1);
+  transition: 0.2s ease;
+
+  &.fold {
+    box-shadow: none;
+  }
+
+  .foldButton {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    transform-origin: right center;
+    padding: 24px 8px;
+    background: var(--color-bg-popover, #fff);
+    border-radius: 2px 0 0 2px;
+    font-size: 14px;
+    transition: 0.3s ease-in-out;
+    cursor: pointer;
+    transition: 0.2s;
+
+    &.textButton {
+      font-size: 12px;
+      writing-mode: vertical-lr;
+      letter-spacing: 4px;
+    }
+
+    &:hover {
+      transform: translateY(-50%) scale(1.1, 1);
+    }
+  }
+
+  &.placement-left {
+    left: @padding;
+
+    &.fold {
+      transform: translateX(calc(-100% - @padding));
+
+      .foldButton :global .anticon {
+        transform: rotateY(180deg);
+      }
+    }
+
+    .foldButton {
+      right: -30px;
+      transform: translateY(-50%);
+      transform-origin: left center;
+      border-radius: 0 2px 2px 0;
+      box-shadow: 2px 0 2px 0px rgba(0, 0, 0, 0.1);
+
+      &.textButton {
+        right: -30px;
+      }
+
+      &:hover {
+        transform: translateY(-50%) scale(1.1, 1);
+      }
+    }
+  }
+
+  &.placement-right {
+    right: @padding;
+
+    &.fold {
+      transform: translateX(calc(100% + @padding));
+
+      .foldButton :global .anticon {
+        transform: rotateY(180deg);
+      }
+    }
+
+    .foldButton {
+      left: -30px;
+      box-shadow: -2px 0 2px 0px rgba(0, 0, 0, 0.1);
+
+      &.textButton {
+        left: -30px;
+      }
+    }
+  }
+}

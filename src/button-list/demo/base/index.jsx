@@ -63,7 +63,7 @@ function Demo() {
       space="divider"
       type="button"
       buttons={buttons}
-      // sortRender={['enable', 'update', 'dissolve', 'examine', 'newButton']}
+      // sortRenderKeys={['enable', 'update', 'dissolve', 'examine', 'newButton']}
       baseProps={{
         button: { size: 'small', shape: 'round' },
         tip: { arrow: false },

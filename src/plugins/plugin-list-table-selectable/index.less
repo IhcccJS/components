@@ -1,0 +1,21 @@
+.row-active {
+  position: relative;
+  border-radius: 4px;
+  transition: none;
+
+  & > td {
+    background-color: var(--color-bg) !important;
+  }
+
+  & > td:nth-of-type(1) {
+    &::before {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: 4px;
+      background-color: var(--color-primary, #3b82f6);
+      content: '';
+    }
+  }
+}

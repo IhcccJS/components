@@ -1,4 +1,18 @@
 .bc-text {
+  &-number {
+    display: inline-block;
+    font-family: math, cursive, ui-monospace;
+
+    &-prefix {
+      margin-right: 4px;
+    }
+
+    &-unit {
+      margin-left: 4px;
+      font-weight: bold;
+    }
+  }
+
   &-roll {
     position: relative;
     display: inline-flex;
@@ -35,9 +49,11 @@
 }
 
 @keyframes text-roll {
-  0% {
+  0%,
+  10% {
     transform: translateX(0);
   }
+  90%,
   100% {
     transform: translateX(-100%);
   }

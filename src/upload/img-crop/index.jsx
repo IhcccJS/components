@@ -2,22 +2,11 @@
  * 由 antd-img-crop 进行的改造
  * https://github.com/nanxiaobei/antd-img-crop
  */
-import React, {
-  useState,
-  useCallback,
-  useMemo,
-  useRef,
-  forwardRef,
-} from 'react';
+import React, { useState, useCallback, useMemo, useRef, forwardRef } from 'react';
 import Cropper from 'react-easy-crop';
-import {
-  PlusOutlined,
-  MinusOutlined,
-  RedoOutlined,
-  UndoOutlined,
-} from '@ant-design/icons';
+import { PlusOutlined, MinusOutlined, RedoOutlined, UndoOutlined } from '@ant-design/icons';
 import { Modal, Slider, Radio, Button } from 'antd';
-import { isArray, isFunction } from '@ihccc/utils';
+import { isArray, isFunction } from '@wowon/utils';
 import UploadFile from '../upload-file';
 import useStyles from '../style/img-crop';
 
@@ -112,18 +101,18 @@ const EasyCrop = forwardRef((props, ref) => {
 
 const ImgCrop = forwardRef((props, ref) => {
   const {
-    aspect,
-    shape,
-    grid,
-    quality,
-    format,
+    aspect = 1,
+    shape = 'rect',
+    grid = true,
+    quality = true,
+    format = 'auto',
 
-    zoom,
-    rotate,
-    minZoom,
-    maxZoom,
-    fillColor,
-    maxResolution,
+    zoom = true,
+    rotate = true,
+    minZoom = 1,
+    maxZoom = 10,
+    fillColor = 'white',
+    maxResolution = 960,
 
     modalTitle,
     modalWidth,
@@ -173,9 +162,7 @@ const ImgCrop = forwardRef((props, ref) => {
         if (type === 'remove') {
           isFunction(onChange) && onChange(fileList);
         } else {
-          const currentFile = isArray(fileList)
-            ? fileList[fileList.length - 1]
-            : fileList;
+          const currentFile = isArray(fileList) ? fileList[fileList.length - 1] : fileList;
           if (!!currentFile.source) {
             fileRef.current = currentFile;
             currentFile.getSrc(setSrc);
@@ -252,9 +239,7 @@ const ImgCrop = forwardRef((props, ref) => {
     const ctx = canvas.getContext('2d');
 
     // create a max canvas to cover the source image after rotated
-    const maxLen = Math.sqrt(
-      Math.pow(naturalWidth, 2) + Math.pow(naturalHeight, 2),
-    );
+    const maxLen = Math.sqrt(Math.pow(naturalWidth, 2) + Math.pow(naturalHeight, 2));
     canvas.width = maxLen;
     canvas.height = maxLen;
 
@@ -288,17 +273,7 @@ const ImgCrop = forwardRef((props, ref) => {
     offCanvas.height = height > maxResolution ? maxResolution : height;
     offCtx.fillStyle = fillColor;
     offCtx.fillRect(0, 0, offCanvas.width, offCanvas.height);
-    offCtx.drawImage(
-      canvas,
-      0,
-      0,
-      canvas.width,
-      canvas.height,
-      0,
-      0,
-      offCanvas.width,
-      offCanvas.height,
-    );
+    offCtx.drawImage(canvas, 0, 0, canvas.width, canvas.height, 0, 0, offCanvas.width, offCanvas.height);
 
     // get the new image
     const { source, did } = fileRef.current;
@@ -316,10 +291,7 @@ const ImgCrop = forwardRef((props, ref) => {
 
     offCanvas.toBlob(
       async (blob) => {
-        let newFile = new UploadFile(
-          new File([blob], newName, { type: formatType }),
-          did,
-        );
+        let newFile = new UploadFile(new File([blob], newName, { type: formatType }), did);
         if (isFunction(onChange)) {
           onChange(singleRef.current ? newFile : [...value, newFile]);
         }
@@ -363,11 +335,7 @@ const ImgCrop = forwardRef((props, ref) => {
           {hasFormat && (
             <div className={`${pkg}-control`}>
               <span>格式：</span>
-              <Radio.Group
-                size="small"
-                value={formatVal}
-                onChange={(e) => setFormatVal(e.target.value)}
-              >
+              <Radio.Group size="small" value={formatVal} onChange={(e) => setFormatVal(e.target.value)}>
                 <Radio value="auto">自动</Radio>
                 <Radio value="image/jpeg">JPG</Radio>
                 <Radio value="image/png">PNG</Radio>
@@ -377,60 +345,23 @@ const ImgCrop = forwardRef((props, ref) => {
           {hasZoom && (
             <div className={`${pkg}-control`}>
               <span>缩放：</span>
-              <Button
-                {...btnProps}
-                icon={<MinusOutlined />}
-                onClick={subZoomVal}
-                disabled={isMinZoom}
-              />
-              <Slider
-                min={minZoom}
-                max={maxZoom}
-                step={ZOOM_STEP}
-                value={zoomVal}
-                onChange={setZoomVal}
-              />
-              <Button
-                {...btnProps}
-                icon={<PlusOutlined />}
-                onClick={addZoomVal}
-                disabled={isMaxZoom}
-              />
+              <Button {...btnProps} icon={<MinusOutlined />} onClick={subZoomVal} disabled={isMinZoom} />
+              <Slider min={minZoom} max={maxZoom} step={ZOOM_STEP} value={zoomVal} onChange={setZoomVal} />
+              <Button {...btnProps} icon={<PlusOutlined />} onClick={addZoomVal} disabled={isMaxZoom} />
             </div>
           )}
           {hasRotate && (
             <div className={`${pkg}-control`}>
               <span>旋转：</span>
-              <Button
-                {...btnProps}
-                icon={<UndoOutlined />}
-                onClick={subRotateVal}
-                disabled={isMinRotate}
-              />
-              <Slider
-                min={MIN_ROTATE}
-                max={MAX_ROTATE}
-                step={ROTATE_STEP}
-                value={rotateVal}
-                onChange={setRotateVal}
-              />
-              <Button
-                {...btnProps}
-                icon={<RedoOutlined />}
-                onClick={addRotateVal}
-                disabled={isMaxRotate}
-              />
+              <Button {...btnProps} icon={<UndoOutlined />} onClick={subRotateVal} disabled={isMinRotate} />
+              <Slider min={MIN_ROTATE} max={MAX_ROTATE} step={ROTATE_STEP} value={rotateVal} onChange={setRotateVal} />
+              <Button {...btnProps} icon={<RedoOutlined />} onClick={addRotateVal} disabled={isMaxRotate} />
             </div>
           )}
           {hasQuality && formatVal === 'image/jpeg' && (
             <div className={`${pkg}-control`}>
               <span>质量：</span>
-              <Button
-                {...btnProps}
-                icon={<MinusOutlined />}
-                onClick={subQualityVal}
-                disabled={isMinQuality}
-              />
+              <Button {...btnProps} icon={<MinusOutlined />} onClick={subQualityVal} disabled={isMinQuality} />
               <Slider
                 min={MIN_QUALITY}
                 max={MAX_QUALITY}
@@ -438,12 +369,7 @@ const ImgCrop = forwardRef((props, ref) => {
                 value={qualityVal}
                 onChange={setRualityVal}
               />
-              <Button
-                {...btnProps}
-                icon={<PlusOutlined />}
-                onClick={addQualityVal}
-                disabled={isMaxQuality}
-              />
+              <Button {...btnProps} icon={<PlusOutlined />} onClick={addQualityVal} disabled={isMaxQuality} />
             </div>
           )}
         </Modal>
@@ -451,23 +377,5 @@ const ImgCrop = forwardRef((props, ref) => {
     </>
   );
 });
-
-ImgCrop.defaultProps = {
-  aspect: 1,
-  shape: 'rect',
-  grid: true,
-  quality: true,
-  format: 'auto',
-
-  zoom: true,
-  rotate: true,
-  minZoom: 1,
-  maxZoom: 10,
-  fillColor: 'white',
-  maxResolution: 960,
-
-  value: undefined,
-  onChange: undefined,
-};
 
 export default ImgCrop;

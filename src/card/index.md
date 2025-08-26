@@ -13,7 +13,7 @@ toc: content
 
 ## 简单上手
 
-<code src="./demo/base"></code>
+<code background="#f1f1f1" src="./demo/base"></code>
 
 ## Card Props
 
@@ -30,6 +30,6 @@ toc: content
 | children   | `string`                                 | `undefined` | 主体内容                 |
 | className  | `string`                                 | `undefined` | 样式类                   |
 | classNames | `string`                                 | `undefined` | 样式类                   |
-| style      | `string`                                 | `undefined` | 唯一的索引               |
-| styles     | `string`                                 | `undefined` | 唯一的索引               |
-| onClick    | `string`                                 | `undefined` | 唯一的索引               |
+| style      | `string`                                 | `undefined` | 内联样式                 |
+| styles     | `string`                                 | `undefined` | 内联样式                 |
+| onClick    | `string`                                 | `undefined` | 点击回调                 |

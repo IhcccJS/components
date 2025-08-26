@@ -1,9 +1,9 @@
 import { Divider } from 'antd';
-// import Item from '../data-item';
+import Item from '../data-item';
 import Card, { Base, Header, Cover, Body, Footer } from './card';
 import Media from './media';
 
-// Card.Item = Item;
+Card.Item = Item;
 Card.Base = Base;
 Card.Header = Header;
 Card.Cover = Cover;

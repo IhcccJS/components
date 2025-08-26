@@ -1,10 +1,4 @@
-import {
-  uuid,
-  getBase64,
-  isString,
-  isFunction,
-  fileSizeFormatter,
-} from '@ihccc/utils';
+import { uuid, getBase64, isString, isFunction, fileSizeFormatter } from '@wowon/utils';
 
 const getExtname = (fileName) => {
   if (fileName.indexOf('.') > -1) {
@@ -34,9 +28,7 @@ class UploadFile {
     this.name = source.name || nameFromPath(source.src || '') || '';
     this.type = source.type || 'unKnow';
     this.extname = source.extname;
-    this.size = isString(source.size)
-      ? source.size
-      : fileSizeFormatter(source.size);
+    this.size = isString(source.size) ? source.size : fileSizeFormatter(source.size);
     this.percent = 0;
     this.src = source.src || '';
     this.status = 'not-upload';
@@ -47,8 +39,7 @@ class UploadFile {
     this.source = source || null;
     this.isBlob = source instanceof Blob;
     if (!this.extname) this.extname = getExtname(this.name);
-    this.isImage =
-      source.isImage || UploadFile.imageType.includes(this.extname);
+    this.isImage = source.isImage || UploadFile.imageType.includes(this.extname);
     if (this.isBlob) {
       this.size = fileSizeFormatter(source.size);
     } else {

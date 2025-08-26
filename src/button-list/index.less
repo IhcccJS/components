@@ -1,0 +1,77 @@
+.bc-action-buttons {
+  display: flex;
+  align-items: center;
+
+  &-inline {
+    display: inline-flex;
+  }
+
+  &-wrap {
+    flex-wrap: wrap;
+  }
+
+  &-layout {
+    &-start {
+      justify-content: flex-start;
+    }
+    &-center {
+      justify-content: center;
+    }
+    &-end {
+      justify-content: flex-end;
+    }
+    &-around {
+      justify-content: space-around;
+    }
+    &-between {
+      justify-content: space-between;
+    }
+    &-evenly {
+      justify-content: space-evenly;
+    }
+  }
+
+  &-reverse {
+    flex-direction: row-reverse;
+  }
+
+  &-group {
+    .ant-btn:hover {
+      z-index: 3;
+    }
+
+    .ant-btn,
+    .ant-btn.ant-btn-circle,
+    .ant-btn.ant-btn-round {
+      border-radius: 0;
+    }
+
+    .ant-btn + .ant-btn {
+      margin-left: -1px;
+    }
+
+    .ant-btn:nth-of-type(1) {
+      border-top-left-radius: var(--size-border-radius);
+      border-bottom-left-radius: var(--size-border-radius);
+    }
+
+    .ant-btn:nth-last-of-type(1) {
+      border-top-right-radius: var(--size-border-radius);
+      border-bottom-right-radius: var(--size-border-radius);
+    }
+
+    .ant-btn.ant-btn-round:nth-of-type(1) {
+      border-top-left-radius: 24px;
+      border-bottom-left-radius: 24px;
+    }
+
+    .ant-btn.ant-btn-round:nth-last-of-type(1) {
+      border-top-right-radius: 24px;
+      border-bottom-right-radius: 24px;
+    }
+  }
+
+  .ant-tag {
+    margin-inline-end: 0;
+  }
+}

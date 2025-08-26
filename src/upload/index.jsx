@@ -1,90 +1,83 @@
 import React from 'react';
-import { useUnmountedRef } from 'ahooks';
-import { isArray, isFunction, getBase64, uuid } from '@ihccc/utils';
+import { useUnmountedRef, useControllableValue } from 'ahooks';
+import clsx from 'clsx';
+import { isArray, getBase64, uuid } from '@wowon/utils';
 import FileSelect from './file-select';
-import ImgCrop from './img-crop';
+// import ImgCrop from './img-crop';
 import { multipleUpload, uploadEmiter } from './methods';
-import * as Trigger from './trigger';
 import PreviewList from './preview/list';
-import PreviewNormal from './preview/normal';
-import PreviewPlus from './preview/plus';
-import UploadStatus from './preview/upload-status';
+import * as Normal from './render/normal';
+import * as Plus from './render/plus';
+import * as Text from './render/text';
 import UploadFile from './upload-file';
-import useStyles from './style';
+// import useStyles from './style';
+import './style/file-select.less';
+import './style/index.less';
+import './style/preview.less';
+import './style/trigger.less';
 
 const Upload = React.forwardRef(function Upload(props, ref) {
   const {
     crop,
-    size,
-    max,
-    value,
-    multiple,
+    size = 'middle',
+    max = 9,
+    transferEvent,
     disabled,
-    removeAble,
-    onChange,
-    preview,
+    addAble = true,
+    removeAble = true,
+    preview = <Normal.Preview />,
     render,
-    children,
+    children = <Normal.Trigger />,
     className,
     style,
+    selectStyle,
+    value: fv,
+    onChange,
     ...restProps
   } = props;
-  const { styles, cx } = useStyles();
+  // const { styles, cx } = useStyles();
   const unmountedRef = useUnmountedRef();
-  const [fileList, setFileList] = React.useState([]);
-  const isSingle = max === 1 && !isArray(value);
+  const [value, setValue] = useControllableValue(props, {
+    defaultValue: [],
+  });
 
   const did = React.useMemo(() => uuid(), []);
 
-  const handleChange = React.useCallback(
-    (values, type) => {
-      isFunction(onChange) &&
-        onChange.apply(null, crop ? [values, type] : [values]);
-    },
-    [onChange],
-  );
+  const handleChange = React.useCallback((values, type) => {
+    setValue(...(crop ? [values, type] : [values]));
+  }, []);
 
   const handleRemove = React.useCallback(
     (index) => {
-      if (isSingle) {
-        handleChange(undefined, 'remove');
-      } else {
-        const newList = [...fileList];
-        newList.splice(index, 1);
-        handleChange(newList, 'remove');
-      }
+      const newList = [...(value || [])];
+      newList.splice(index, 1);
+      handleChange(newList, 'remove');
     },
-    [handleChange, isSingle, fileList],
+    [value, handleChange],
   );
 
   const handleSelect = React.useCallback(
     (newFileList) => {
-      if (isSingle) {
-        handleChange(new UploadFile(newFileList[0], did), 'add');
-      } else {
-        let newList = [...fileList].concat(newFileList);
-        if (newList.length > max) newList = newList.slice(-max);
-        handleChange(
-          newList.map((file) =>
-            UploadFile.is(file) ? file : new UploadFile(file, did),
-          ),
-          'add',
-        );
-      }
+      let newList = [...(value || [])].concat(newFileList);
+      if (newList.length > max) newList = newList.slice(-max);
+      handleChange(
+        newList.map((file) => (UploadFile.is(file) ? file : new UploadFile(file, did))),
+        'add',
+      );
     },
-    [handleChange, fileList, max],
+    [value, handleChange, max],
   );
 
   const updateFile = React.useCallback(
     (file) => {
-      const fileIndex = fileList.findIndex((item) => item.uid === file.uid);
+      const fileIndex = (value || []).findIndex((item) => item.uid === file.uid);
       if (fileIndex > -1) {
-        const newFileList = [...fileList];
+        const newFileList = [...value];
         newFileList.splice(fileIndex, 1, file);
-        setFileList(newFileList);
+        onChange(newFileList);
       }
     },
-    [fileList],
+    [value],
   );
 
   React.useEffect(() => {
@@ -94,39 +87,29 @@ const Upload = React.forwardRef(function Upload(props, ref) {
     return () => uploadEmiter.off('upload-' + did);
   }, [updateFile]);
 
-  React.useEffect(() => {
-    if (unmountedRef.current) return;
-    if (isSingle) {
-      setFileList(UploadFile.is(value) ? [value] : []);
-      return;
-    } else if (isArray(value)) {
-      setFileList(value.filter(UploadFile.is));
-      return;
-    }
-    setFileList([]);
-  }, [isSingle, value]);
-
-  const inLimit =
-    (isSingle && !fileList) || (isArray(fileList) && fileList.length < max);
+  const inLimit = !value || (isArray(value) && value.length < max);
 
   return (
-    <div className={cx(styles['bc-upload'], className)} style={style}>
+    <div className={clsx('bc-upload', className)} style={style}>
       <PreviewList
         disabled={disabled}
         preview={preview}
         render={render}
-        fileList={fileList}
+        fileList={value}
+        removeAble={removeAble}
         onRemove={handleRemove}
       />
-      {inLimit && (
+      {inLimit && addAble && (
         <FileSelect
           ref={ref}
           {...restProps}
+          transferEvent={transferEvent}
+          size={size}
           disabled={disabled}
-          multiple={!isSingle && multiple}
           onChange={handleSelect}
+          style={selectStyle}
         >
-          {React.cloneElement(children, { size })}
+          {children}
         </FileSelect>
       )}
     </div>
@@ -134,28 +117,11 @@ const Upload = React.forwardRef(function Upload(props, ref) {
 });
 
 Upload.File = UploadFile;
-Upload.ImgCrop = ImgCrop;
+// Upload.ImgCrop = ImgCrop;
 Upload.multipleUpload = multipleUpload;
 Upload.toBase64 = getBase64;
-Upload.Preview = {
-  Normal: PreviewNormal,
-  Plus: PreviewPlus,
-  Status: UploadStatus,
-};
-
-Upload.Trigger = {
-  Normal: Trigger.Normal,
-  Plus: Trigger.Plus,
-};
-
-Upload.defaultProps = {
-  size: 'middle',
-  max: 9,
-  multiple: false,
-  removeAble: true,
-  preview: <PreviewNormal />,
-  render: undefined,
-  children: <Trigger.Normal />,
-};
+Upload.Normal = Normal;
+Upload.Plus = Plus;
+Upload.Text = Text;
 
 export default Upload;

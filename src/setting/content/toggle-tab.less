@@ -1,0 +1,63 @@
+.bc-toggle-tabs {
+  width: 100%;
+  display: flex;
+
+  &-nav {
+    width: 240px;
+    padding-right: var(--size-cell-gap);
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid var(--color-border-secondary);
+  }
+
+  &-nav-item {
+    padding: 8px 16px;
+    border-radius: var(--size-border-radius);
+    cursor: pointer;
+    transition: 0.2s ease;
+
+    & + & {
+      margin-top: 8px;
+    }
+
+    &:hover {
+      background-color: var(--color-bg-component-hover);
+    }
+
+    &:active {
+      // background-color: var(--color-bg-component-active);
+      transform: scale(0.95);
+    }
+
+    &.bc-toggle-tabs-nav-item-active {
+      background-color: var(--color-bg-component-active);
+      color: var(--color-text-inverse);
+    }
+  }
+
+  &-content {
+    padding-left: var(--size-cell-gap);
+    flex: 1;
+  }
+
+  &-content-hidden {
+    display: none;
+  }
+}
+
+.bc-setting-form {
+  .grid-item {
+    background: var(--color-bg-component-secondary);
+    padding: var(--size-cell-gap);
+    margin-bottom: 0;
+    border-radius: 4px;
+
+    .ant-form-item-margin-offset {
+      display: none;
+    }
+
+    &.ant-form-item-with-help .ant-form-item-explain {
+      margin-top: 10px;
+    }
+  }
+}
