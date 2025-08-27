@@ -35,9 +35,9 @@ const ListOfCard = createComponent([
   buttonExport,
   buttonFullscreen,
   buttonRefresh,
-  search,
   buttonCreate,
   // 内容
+  search,
   list,
   listPagination,
 ]);

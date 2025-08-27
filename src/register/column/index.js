@@ -1,5 +1,5 @@
 import { isString } from '@ihccc/utils';
-import { columnSetter } from '../../columns-helper/setter';
+import { columnSetter } from '../../setter';
 // import getAliasName from '../getAliasName';
 
 function register(columnInterface) {

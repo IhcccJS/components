@@ -1,6 +1,5 @@
 import React from 'react';
 import clsx from 'clsx';
-import './index.less';
 
 function ListItem({ className, cover, name, extra, desc, children, onCoverMouseDown, ...restProps }) {
   return (

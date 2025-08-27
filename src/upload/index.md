@@ -16,8 +16,7 @@ toc: content
 ```jsx
 import React from 'react';
 import { Space, Button, message } from 'antd';
-import { Upload } from '@wowon/components';
-import '@wowon/components/lib/style/color.less';
+import { Upload } from '@ihccc/components';
 
 function Demo() {
   const [value, setValue] = React.useState([]);
@@ -52,8 +51,7 @@ export default Demo;
 
 ```jsx
 import React from 'react';
-import { Upload } from '@wowon/components';
-import '@wowon/components/lib/style/color.less';
+import { Upload } from '@ihccc/components';
 
 function Demo() {
   const [value, setValue] = React.useState([
@@ -87,8 +85,7 @@ export default Demo;
 
 ```jsx
 import React from 'react';
-import { Upload } from '@wowon/components';
-import '@wowon/components/lib/style/color.less';
+import { Upload } from '@ihccc/components';
 
 function Demo() {
   const [value, setValue] = React.useState([
@@ -121,8 +118,7 @@ export default Demo;
 ```jsx
 import React from 'react';
 import { PaperClipOutlined, FileUnknownOutlined } from '@ant-design/icons';
-import { Upload } from '@wowon/components';
-import '@wowon/components/lib/style/color.less';
+import { Upload } from '@ihccc/components';
 
 // isImage 文件是否是图片
 // extname 文件扩展名
@@ -175,8 +171,7 @@ import {
   FileZipOutlined,
   FileUnknownOutlined,
 } from '@ant-design/icons';
-import { Upload } from '@wowon/components';
-import '@wowon/components/lib/style/color.less';
+import { Upload } from '@ihccc/components';
 
 const uploadRender = ({ isImage, extname }) => {
   if (isImage) return false;
@@ -209,7 +204,7 @@ export default Demo;
 
 ```jsx
 import React from 'react';
-import { Upload } from '@wowon/components';
+import { Upload } from '@ihccc/components';
 
 function Demo() {
   const [value, setValue] = React.useState([]);
@@ -232,7 +227,7 @@ export default Demo;
 
 ```jsx
 import React from 'react';
-import { Upload } from '@wowon/components';
+import { Upload } from '@ihccc/components';
 
 function Demo() {
   const [value, setValue] = React.useState(
@@ -257,7 +252,7 @@ export default Demo;
 
 ```js
 import { message } from 'antd';
-import { Upload } from '@wowon/components';
+import { Upload } from '@ihccc/components';
 
 async function onSubmit({ images }) {
   const result = await Upload.multipleUpload(

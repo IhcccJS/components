@@ -1,6 +1,6 @@
 import React from 'react';
-import { isString, isArray, isObject, isFunction } from '@wowon/utils';
-import { renderSetter } from '@/components/@setter';
+import { isString, isArray, isObject, isFunction } from '@ihccc/utils';
+import { renderSetter } from '../../setter';
 
 const getRender = renderSetter.get.bind(renderSetter);
 

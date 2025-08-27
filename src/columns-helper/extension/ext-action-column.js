@@ -1,4 +1,4 @@
-import { isObject } from '@wowon/utils';
+import { isObject } from '@ihccc/utils';
 
 function run(list, options) {
   // FIXME eventData、data 在全局有命名冲突的问题

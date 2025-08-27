@@ -6,7 +6,7 @@ import React, { useState, useCallback, useMemo, useRef, forwardRef } from 'react
 import Cropper from 'react-easy-crop';
 import { PlusOutlined, MinusOutlined, RedoOutlined, UndoOutlined } from '@ant-design/icons';
 import { Modal, Slider, Radio, Button } from 'antd';
-import { isArray, isFunction } from '@wowon/utils';
+import { isArray, isFunction } from '@ihccc/utils';
 import UploadFile from '../upload-file';
 import useStyles from '../style/img-crop';
 
@@ -362,13 +362,7 @@ const ImgCrop = forwardRef((props, ref) => {
             <div className={`${pkg}-control`}>
               <span>质量：</span>
               <Button {...btnProps} icon={<MinusOutlined />} onClick={subQualityVal} disabled={isMinQuality} />
-              <Slider
-                min={MIN_QUALITY}
-                max={MAX_QUALITY}
-                step={QUALITY_STEP}
-                value={qualityVal}
-                onChange={setRualityVal}
-              />
+              <Slider min={MIN_QUALITY} max={MAX_QUALITY} step={QUALITY_STEP} value={qualityVal} onChange={setRualityVal} />
               <Button {...btnProps} icon={<PlusOutlined />} onClick={addQualityVal} disabled={isMaxQuality} />
             </div>
           )}

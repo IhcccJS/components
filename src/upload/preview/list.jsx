@@ -1,7 +1,7 @@
 import React from 'react';
 import { FileUnknownOutlined } from '@ant-design/icons';
-import Image from '@/components/@dev/image';
-import { isFunction } from '@wowon/utils';
+import Image from '../../image';
+import { isFunction } from '@ihccc/utils';
 // import { defaultFallback } from '../../image-list';
 
 const ShowImage = ({ file, fallback }) => {

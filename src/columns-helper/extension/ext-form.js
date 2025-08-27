@@ -1,5 +1,5 @@
 import React from 'react';
-import { childrenSetter, childrenPropsSetter } from '@/components/@setter';
+import { childrenSetter, childrenPropsSetter } from '../../setter';
 
 function run(item, options) {
   const { enable, getNode } = options;

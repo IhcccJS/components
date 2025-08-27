@@ -1,7 +1,7 @@
 import React from 'react';
 import clsx from 'clsx';
 import { attrAccept, traverseFileTree } from './methods';
-import { uuid } from '@wowon/utils';
+import { uuid } from '@ihccc/utils';
 // import useStyles from './style/file-select';
 
 const FileSelect = React.forwardRef(function (props, ref) {
@@ -57,9 +57,7 @@ const FileSelect = React.forwardRef(function (props, ref) {
       if (e.type === 'dragover') return;
 
       if (directory) {
-        traverseFileTree(Array.prototype.slice.call(e.dataTransfer.items), onChange, (file) =>
-          attrAccept(file, accept),
-        );
+        traverseFileTree(Array.prototype.slice.call(e.dataTransfer.items), onChange, (file) => attrAccept(file, accept));
       } else {
         let files = [...e.dataTransfer.files].filter((file) => attrAccept(file, accept));
 

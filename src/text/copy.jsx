@@ -2,12 +2,9 @@ import React from 'react';
 import { CopyOutlined, CheckOutlined, CloseOutlined } from '@ant-design/icons';
 import { Tooltip } from 'antd';
 import { copyText } from '@ihccc/utils';
-// import useStyles from './style';
-import styles from './style/index.less';
 
 function Copy(props) {
   const { value, label, children } = props;
-  // const { styles, cx } = useStyles();
   const [status, setStatus] = React.useState('none');
   const [timer, setTimer] = React.useState(null);
 
@@ -21,11 +18,11 @@ function Copy(props) {
 
   const iconList = React.useMemo(
     () => ({
-      success: <CheckOutlined className={styles['bc-text-copy-icon success']} />,
-      error: <CloseOutlined className={styles['bc-text-copy-icon error']} />,
+      success: <CheckOutlined className="bc-text-copy-icon success" />,
+      error: <CloseOutlined className="bc-text-copy-icon error" />,
       none: (
         <Tooltip title="复制">
-          <CopyOutlined className={styles['bc-text-copy-icon']} onClick={copy} />
+          <CopyOutlined className="bc-text-copy-icon" onClick={copy} />
         </Tooltip>
       ),
     }),

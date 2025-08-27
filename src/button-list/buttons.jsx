@@ -9,12 +9,13 @@ function stopPropagationEvent(event) {
   };
 }
 
-const DisabledA = (props) => <a {...props} style={{ color: '#c9c9c9', cursor: 'not-allowed' }} />;
-
-export const A = ({ disabled, onClick, children, ...props }) => {
-  if (disabled === true) return <DisabledA>{children}</DisabledA>;
+export const A = ({ disabled, onClick, children, style, ...props }) => {
   return (
-    <a {...props} onClick={stopPropagationEvent(onClick)}>
+    <a
+      {...props}
+      style={disabled ? { ...style, color: 'var(--color-text-disabled, #737373)', cursor: 'not-allowed' } : style}
+      onClick={disabled ? void 0 : stopPropagationEvent(onClick)}
+    >
       {children}
     </a>
   );

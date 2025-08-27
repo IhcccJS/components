@@ -1,8 +1,7 @@
 import React from 'react';
 import { FullscreenExitOutlined, FullscreenOutlined } from '@ant-design/icons';
 import { useFullscreen } from 'ahooks';
-import { definePlugin } from '@/components/@comp/create-component';
-import './index.less';
+import definePlugin from '../../create-component/definePlugin';
 
 export default definePlugin({
   name: 'buttonFullscreen',
@@ -15,7 +14,7 @@ export default definePlugin({
 
     // const listScroll = instance.getPlugin('listScrollHeight');
 
-    const fsClassName = fullScreenClassName || 'system-default-page-fullscreen';
+    const fsClassName = fullScreenClassName || 'bc-system-default-page-fullscreen';
 
     const ref = React.useRef();
     const [isFullscreen, { toggleFullscreen }] = useFullscreen(ref, {

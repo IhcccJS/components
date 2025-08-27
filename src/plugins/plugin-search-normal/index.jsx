@@ -1,9 +1,8 @@
 import React from 'react';
 import { DownOutlined, SearchOutlined } from '@ant-design/icons';
-import ButtonList from '@/components/@comp/button-list';
-import Form from '@/components/@comp/common-form-v2';
-import { definePlugin } from '@/components/@comp/create-component';
-import './index.less';
+import ButtonList from '../../button-list';
+import Form from '../../form';
+import definePlugin from '../../create-component/definePlugin';
 
 export default definePlugin({
   name: 'searchNormal',
@@ -20,7 +19,7 @@ export default definePlugin({
 
     const head = !searchVisible ? null : (
       <Form
-        className="normal-search-form"
+        className="bc-form-search-normal"
         type="search"
         gap={12}
         column={column}

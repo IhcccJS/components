@@ -1,4 +1,4 @@
-import { isObject, isArray } from '@wowon/utils';
+import { isObject, isArray } from '@ihccc/utils';
 import filterOfVisible from './filterOfVisible';
 
 const updateOne = (array, col) => {

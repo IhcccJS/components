@@ -1,6 +1,6 @@
 import React from 'react';
-import EditTableTree from '@/components/@comp/edit-table-v2/edit-table-tree';
-import { definePlugin } from '@/components/@comp/create-component';
+import EditTableTree from '../edit-table/edit-table-tree';
+import definePlugin from '../create-component/definePlugin';
 
 export default definePlugin({
   name: 'listTableEditRow',

@@ -1,4 +1,4 @@
-import { FakeApi } from '@wowon/utils';
+import { FakeApi } from '@ihccc/utils';
 
 const initData = [
   {

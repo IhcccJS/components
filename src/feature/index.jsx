@@ -1,9 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
 import { isArray, isObject, isFunction } from '@ihccc/utils';
-// import ClickAble from '../click-able';
-// import useStyles from './style';
-import './style.less';
 
 const Feature = (props) => {
   const {
@@ -22,7 +19,6 @@ const Feature = (props) => {
     children,
     ...restProps
   } = props;
-  // const { styles, cx } = useStyles();
 
   const clickAble = isFunction(restProps.onClick);
 

@@ -1,5 +1,5 @@
-import { isArray, isObject } from '@wowon/utils';
-import separate from '../_utils/separate';
+import { isArray, isObject } from '@ihccc/utils';
+import separate from '../utils/separate';
 import { sortPlugins, bindSubComponent } from './utils';
 
 /** 抽象类，插件化组件实现类 */

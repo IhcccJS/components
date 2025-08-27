@@ -1,6 +1,6 @@
 import React from 'react';
 import { TableOutlined, CreditCardOutlined } from '@ant-design/icons';
-import { definePlugin } from '@/components/@comp/create-component';
+import definePlugin from '../create-component/definePlugin';
 
 export default definePlugin({
   name: 'buttonSwitchRender',

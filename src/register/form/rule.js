@@ -1,5 +1,5 @@
 import { isString } from '@ihccc/utils';
-import { ruleSetter } from '../../common-form/setter';
+import { ruleSetter } from '../../setter';
 // import getAliasName from '../getAliasName';
 
 function register(ruleInterface) {

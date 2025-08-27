@@ -1,6 +1,6 @@
 @padding: 0px;
 
-.sideContainer {
+.bc-side-container {
   position: absolute;
   top: @padding;
   bottom: @padding;
@@ -10,11 +10,11 @@
   box-shadow: 0px 0 4px 0px rgba(0, 0, 0, 0.1);
   transition: 0.2s ease;
 
-  &.fold {
+  &.bc-fold {
     box-shadow: none;
   }
 
-  .foldButton {
+  .bc-fold-button {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -27,7 +27,7 @@
     cursor: pointer;
     transition: 0.2s;
 
-    &.textButton {
+    &.bc-text-button {
       font-size: 12px;
       writing-mode: vertical-lr;
       letter-spacing: 4px;
@@ -38,25 +38,25 @@
     }
   }
 
-  &.placement-left {
+  &.bc-placement-left {
     left: @padding;
 
-    &.fold {
+    &.bc-fold {
       transform: translateX(calc(-100% - @padding));
 
-      .foldButton :global .anticon {
+      .bc-fold-button :global .anticon {
         transform: rotateY(180deg);
       }
     }
 
-    .foldButton {
+    .bc-fold-button {
       right: -30px;
       transform: translateY(-50%);
       transform-origin: left center;
       border-radius: 0 2px 2px 0;
       box-shadow: 2px 0 2px 0px rgba(0, 0, 0, 0.1);
 
-      &.textButton {
+      &.bc-text-button {
         right: -30px;
       }
 
@@ -66,22 +66,22 @@
     }
   }
 
-  &.placement-right {
+  &.bc-placement-right {
     right: @padding;
 
-    &.fold {
+    &.bc-fold {
       transform: translateX(calc(100% + @padding));
 
-      .foldButton :global .anticon {
+      .bc-fold-button :global .anticon {
         transform: rotateY(180deg);
       }
     }
 
-    .foldButton {
+    .bc-fold-button {
       left: -30px;
       box-shadow: -2px 0 2px 0px rgba(0, 0, 0, 0.1);
 
-      &.textButton {
+      &.bc-text-button {
         left: -30px;
       }
     }

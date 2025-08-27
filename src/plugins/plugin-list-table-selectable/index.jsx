@@ -1,8 +1,7 @@
 import React from 'react';
 import { Table } from 'antd';
 import { useControllableValue } from 'ahooks';
-import './index.less';
-import { definePlugin } from '@/components/@comp/create-component';
+import definePlugin from '../../create-component/definePlugin';
 
 export default definePlugin({
   name: 'listTableSelectAble',
@@ -28,7 +27,7 @@ export default definePlugin({
     });
 
     const rowClassName = React.useCallback(
-      (record) => (record[rowKey] === selected?.[rowKey] ? 'row-active' : ''),
+      (record) => (record[rowKey] === selected?.[rowKey] ? 'bc-ant-table-row-active' : ''),
       [selected],
     );
 

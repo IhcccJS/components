@@ -1,6 +1,7 @@
 import React from 'react';
 import { createJSONEditor } from 'vanilla-jsoneditor';
-import { definePlugin } from '@/components/@comp/create-component';
+import definePlugin from '../create-component/definePlugin';
+
 function filterUnchangedProps(props, prevProps) {
   return Object.fromEntries(Object.entries(props).filter(([key, value]) => value !== prevProps[key]));
 }

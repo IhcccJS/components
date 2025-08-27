@@ -1,5 +1,5 @@
 import { isString } from '@ihccc/utils';
-import { renderSetter } from '../../base-list/setter';
+import { renderSetter } from '../../setter';
 import getAliasName from '../getAliasName';
 
 import text from './text';

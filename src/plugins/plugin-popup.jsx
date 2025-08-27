@@ -1,6 +1,6 @@
 // import React from 'react';
-import Modaler from '@/components/@comp/modaler';
-import { definePlugin } from '@/components/@comp/create-component';
+import Popuper from '../popuper';
+import definePlugin from '../create-component/definePlugin';
 
 export default definePlugin({
   name: 'modalManage',
@@ -11,7 +11,7 @@ export default definePlugin({
   main(instance, props) {
     const { namespace, modal: userModal } = props;
 
-    const { modal } = Modaler.useModaler({
+    const { modal } = Popuper.usePopuper({
       namespace,
       items: [...(instance.collection.modalItem || []), ...(userModal || [])],
     });

@@ -1,5 +1,5 @@
 ---
-title: Modaler
+title: Popuper
 nav:
   title: 组件
   order: 2
@@ -11,7 +11,7 @@ toc: content
 apiHeader: false
 ---
 
-# Modaler 弹窗管理
+# Popuper 弹窗管理
 
 通过将弹窗内容渲染在页面外层，来实现弹窗的跨页面控制。
 
@@ -31,7 +31,7 @@ apiHeader: false
 ```jsx | pure
 import React from 'react';
 import { Space, Button } from 'antd';
-import { Modaler } from '@wowon/components';
+import { Popuper } from '@ihccc/components';
 
 const Profile = ({ title, data = {}, onStatusChange }) => {
   return (
@@ -47,7 +47,7 @@ const Profile = ({ title, data = {}, onStatusChange }) => {
 
 function UserPage() {
 
-  const { modal } = Modaler.useModaler({
+  const { modal } = Popuper.usePopuper({
     namespace: 'user',
     popups: [{
       name: 'profile',
@@ -77,10 +77,10 @@ function UserPage() {
 function Demo() {
   return (
     <div style={{ padding: 20, maxHeight: 960, overflow: 'auto' }}>
-      <Modaler.System>
-        <Modaler.TaskBar />
+      <Popuper.System>
+        <Popuper.TaskBar />
         <UserPage />
-      </Modaler.System>
+      </Popuper.System>
     </div>
   );
 }
@@ -94,7 +94,7 @@ export default Demo;
 
 <code src="./demo/base" iframe="640" transform></code>
 
-## Modaler.System Props
+## Popuper.System Props
 
 全局容器
 
@@ -107,7 +107,7 @@ export default Demo;
 | openOffset   | `number`                     | `undefined` | 弹窗之间打开间隙   |
 | children     | `ReactNode`                  | `undefined` | 页面内容           |
 
-## Modaler.useModaler Props
+## Popuper.usePopuper Props
 
 定义弹窗 hooks
 
@@ -146,7 +146,7 @@ taskData
 | icon    | `any`     | `undefined` | 图标     |
 | visible | `boolean` | `undefined` | 是否显示 |
 
-## Modaler.useModal Props
+## Popuper.usePopup Props
 
 | 名称     | 类型     | 默认值      | 描述               |
 | :------- | :------- | :---------- | :----------------- |

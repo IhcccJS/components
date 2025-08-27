@@ -1,7 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
-import { isFunction } from '@wowon/utils';
-import './layout.less';
+import { isFunction } from '@ihccc/utils';
 
 const LayoutStyle = 'card';
 
@@ -10,9 +9,7 @@ const Layout = React.forwardRef(function Layout(
   ref,
 ) {
   const headNode = head && !inlineHead && (
-    <div className={clsx('list-layout-header', { ['list-layout-style-' + layoutStyle]: LayoutStyle === layoutStyle })}>
-      {head}
-    </div>
+    <div className={clsx('list-layout-header', { ['list-layout-style-' + layoutStyle]: LayoutStyle === layoutStyle })}>{head}</div>
   );
 
   const toolNode = !inlineHead
@@ -54,9 +51,7 @@ const Layout = React.forwardRef(function Layout(
     const mainBody = (
       <React.Fragment>
         {headNode}
-        <div
-          className={clsx('list-layout-body', { ['list-layout-style-' + layoutStyle]: LayoutStyle === layoutStyle })}
-        >
+        <div className={clsx('list-layout-body', { ['list-layout-style-' + layoutStyle]: LayoutStyle === layoutStyle })}>
           {toolNode}
           <div
             className={clsx('list-layout-content', {

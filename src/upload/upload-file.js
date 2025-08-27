@@ -1,4 +1,4 @@
-import { uuid, getBase64, isString, isFunction, fileSizeFormatter } from '@wowon/utils';
+import { uuid, getBase64, isString, isFunction, fileSizeFormatter } from '@ihccc/utils';
 
 const getExtname = (fileName) => {
   if (fileName.indexOf('.') > -1) {

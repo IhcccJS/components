@@ -1,12 +1,16 @@
 import TaskBar from './task-bar';
 import System from './system';
-import Modaler from './modaler';
+import Popuper from './modaler';
 import useModaler from './useModaler';
 import useModal from './useModal';
 
-Modaler.TaskBar = TaskBar;
-Modaler.System = System;
-Modaler.useModaler = useModaler;
-Modaler.useModal = useModal;
+Popuper.TaskBar = TaskBar;
+Popuper.System = System;
+Popuper.usePopuper = useModaler;
+Popuper.usePopup = useModal;
+/** @deprecated 使用 usePopuper 替代 */
+Popuper.useModaler = useModaler;
+/** @deprecated 使用 usePopup 替代 */
+Popuper.useModal = useModal;
 
-export default Modaler;
+export default Popuper;

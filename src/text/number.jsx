@@ -1,11 +1,8 @@
 import React from 'react';
 import clsx from 'clsx';
-// import useStyles from './style';
-import './style/index.less';
 
 function Number(props) {
   const { className, label, delimiter, part = 3, precision = -1, scale = 1, prefix, unit, ...restProps } = props;
-  // const { styles, cx } = useStyles();
 
   const value = React.useMemo(() => {
     if (/\d/.test(label) === false) return label;

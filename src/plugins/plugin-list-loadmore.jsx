@@ -1,7 +1,7 @@
 import React from 'react';
 import { AppstoreAddOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
-import { definePlugin } from '@/components/@comp/create-component';
+import definePlugin from '../create-component/definePlugin';
 
 export default definePlugin({
   name: 'listLoadMore',
@@ -21,16 +21,9 @@ export default definePlugin({
           }}
         >
           {request.data.loadOver ? (
-            <span style={{ color: 'var(--color-text-desc)', fontSize: 14 }}>
-              - 已经加载完了，总计 {request.data.total} 项 -
-            </span>
+            <span style={{ color: 'var(--color-text-desc)', fontSize: 14 }}>- 已经加载完了，总计 {request.data.total} 项 -</span>
           ) : (
-            <Button
-              type="primary"
-              loading={request.loading}
-              icon={<AppstoreAddOutlined />}
-              onClick={() => request.loadMore()}
-            >
+            <Button type="primary" loading={request.loading} icon={<AppstoreAddOutlined />} onClick={() => request.loadMore()}>
               加载更多...
             </Button>
           )}

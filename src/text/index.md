@@ -70,20 +70,21 @@ export default Demo;
 ```jsx
 import React from 'react';
 import { Space, Input } from 'antd';
-import { Text, Select, Feature } from '@ihccc/components';
+import { setOptions, Text, Select, Formater, Feature } from '@ihccc/components';
 
-function Demo() {
-  const { Formater } = Select.register({
-    desc: [
-      { label: '短文本', value: '0', mode: 'text', status: 'warning' },
-      {
-        label: '你会看到一串很长的文字，他是通过 <Formater /> 组件渲染出来的！',
-        value: '1',
-        mode: 'tag',
-        status: 'info',
-      },
-    ],
-  });
+setOptions({
+  desc: [
+    { label: '短文本', value: '0', mode: 'text', status: 'warning' },
+    {
+      label: '你会看到一串很长的文字，他是通过 <Formater /> 组件渲染出来的！',
+      value: '1',
+      mode: 'tag',
+      status: 'info',
+    },
+  ],
+});
+
+function Demo() { 
 
   return (
     <Space direction="vertical" size="large">

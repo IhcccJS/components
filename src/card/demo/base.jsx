@@ -1,5 +1,4 @@
 import { Card } from '@ihccc/components';
-import '@ihccc/components/lib/card/index.less';
 
 function Demo() {
   return (

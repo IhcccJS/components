@@ -2,7 +2,7 @@ import React from 'react';
 import { LoadingOutlined, PoweroffOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
 import { useInterval } from 'ahooks';
-import { definePlugin } from '@/components/@comp/create-component';
+import definePlugin from '../create-component/definePlugin';
 
 function CountDownButton({ delay, callback, ...restProps }) {
   const [enable, setEnable] = React.useState(false);

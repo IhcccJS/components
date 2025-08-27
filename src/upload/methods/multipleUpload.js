@@ -1,41 +1,41 @@
 import throttle from 'lodash/throttle';
 import request from './request';
 import UploadFile from '../upload-file';
-import { eventEmitter, isString, isArray, isFunction } from '@wowon/utils';
+import { eventEmitter, isString, isArray, isFunction } from '@ihccc/utils';
 
 export const uploadEmiter = eventEmitter();
 
-function slidingWindowPromises(promises, windowSize, onEachDone, onAllDone) {
-  let inProgress = 0;
-  let completed = 0;
+// function slidingWindowPromises(promises, windowSize, onEachDone, onAllDone) {
+//   let inProgress = 0;
+//   let completed = 0;
 
-  function executeNext() {
-    if (completed === promises.length) {
-      onAllDone();
-      return;
-    }
+//   function executeNext() {
+//     if (completed === promises.length) {
+//       onAllDone();
+//       return;
+//     }
 
-    while (inProgress < windowSize && completed + inProgress < promises.length) {
-      const index = completed + inProgress;
-      inProgress++;
-      promises[index]()
-        .then((result) => {
-          inProgress--;
-          completed++;
-          onEachDone(index, result);
-          executeNext();
-        })
-        .catch((error) => {
-          inProgress--;
-          completed++;
-          onEachDone(index, error);
-          executeNext();
-        });
-    }
-  }
+//     while (inProgress < windowSize && completed + inProgress < promises.length) {
+//       const index = completed + inProgress;
+//       inProgress++;
+//       promises[index]()
+//         .then((result) => {
+//           inProgress--;
+//           completed++;
+//           onEachDone(index, result);
+//           executeNext();
+//         })
+//         .catch((error) => {
+//           inProgress--;
+//           completed++;
+//           onEachDone(index, error);
+//           executeNext();
+//         });
+//     }
+//   }
 
-  executeNext();
-}
+//   executeNext();
+// }
 
 /**
  * 多文件递归上传

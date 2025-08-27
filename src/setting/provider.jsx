@@ -1,8 +1,28 @@
 import React from 'react';
 import { SettingContext } from './context';
 
+// 从缓存内获取设置信息，实现用户修改设置后进行保存
+// const { setting, setInitialState } = useModel('@@initialState', (model) => {
+//   return {
+//     // loading: model.loading,
+//     setting: model.initialState?.setting,
+//     setInitialState: model.setInitialState,
+//   };
+// });
+
+// const onChange = React.useCallback((setting) => {
+//   setInitialState((state) => {
+//     const globalState = {
+//       ...state,
+//       setting: { ...state.setting, ...(isFunction(setting) ? setting(state.setting) : setting) },
+//     };
+//     setStorage(STORAGE_NAMES.userSetting, globalState.setting);
+//     return globalState;
+//   });
+// }, []);
+
 /** 向页面提供用户设置配置 */
-function SettingProvider({ submitButton, initailValues, options, onChange, children }) {
+function SettingProvider({ submitButton, setting, defaultSetting, options, onChange, children }) {
   const allOptions = React.useMemo(() => {
     const [global, ...innerPage] = options.filter((i) => !!i);
 
@@ -32,7 +52,7 @@ function SettingProvider({ submitButton, initailValues, options, onChange, child
   }, []);
 
   return (
-    <SettingContext.Provider value={{ initailValues, options: allOptions, submitButton, onChange }}>
+    <SettingContext.Provider value={{ setting, defaultSetting, options: allOptions, submitButton, onChange }}>
       {children}
     </SettingContext.Provider>
   );

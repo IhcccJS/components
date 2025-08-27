@@ -6,10 +6,7 @@ export default defineConfig({
   base: '/', // 根路径
   publicPath: '/', // 静态文件路径
   favicons: [],
-  styles: [
-    'div.site-features { max-width: 1152px; }',
-    'section.dumi-default-header-left{ width: 320px; }',
-  ],
+  styles: ['div.site-features { max-width: 1152px; }', 'section.dumi-default-header-left{ width: 320px; }', '/components.min.css'],
   themeConfig: {
     // github: "https://github.com/IhcccJS/components",
     name: '@ihccc/components',
@@ -25,13 +22,11 @@ export default defineConfig({
         },
         {
           title: '面向业务',
-          description:
-            '本库组件在业务开发时经常使用的组件，使复杂的业务简单快捷实现是 @ihccc/components 的目标',
+          description: '本库组件在业务开发时经常使用的组件，使复杂的业务简单快捷实现是 @ihccc/components 的目标',
         },
         {
           title: '功能强大',
-          description:
-            '复杂的问题简单化，重复的代码精炼化，只需要简单的引入和搭配，即可实现复杂的功能',
+          description: '复杂的问题简单化，重复的代码精炼化，只需要简单的引入和搭配，即可实现复杂的功能',
         },
         {
           title: '简单上手',

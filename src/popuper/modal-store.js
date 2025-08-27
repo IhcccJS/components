@@ -1,6 +1,6 @@
 import React from 'react';
-import { isFunction, eventEmitter } from '@wowon/utils';
-import separate from '../_utils/separate';
+import { isFunction, eventEmitter } from '@ihccc/utils';
+import separate from '../utils/separate';
 import defaultContainer from './container';
 import { ContentContext } from './context';
 

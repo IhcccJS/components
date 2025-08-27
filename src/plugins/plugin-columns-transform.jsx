@@ -1,7 +1,7 @@
 import React from 'react';
-import { isString } from '@wowon/utils';
-import columnsHelper from '@/components/@dev/columns-helper';
-import { definePlugin } from '@/components/@comp/create-component';
+import { isString } from '@ihccc/utils';
+import columnsHelper from '../columns-helper';
+import definePlugin from '../create-component/definePlugin';
 
 export default definePlugin({
   name: 'columnsTransform',

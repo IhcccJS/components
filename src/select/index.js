@@ -10,13 +10,14 @@ import SelectView from './select-view/base';
 import TreeSelect from './tree-select';
 
 import useOptions from './hooks/useOptions';
-import store from './store';
+import optionStore from './store';
 
-const setOptions = store.set.bind(store);
-const delOptions = store.del.bind(store);
-const showOptions = store.show.bind(store);
+const setOptions = optionStore.set.bind(optionStore);
+const delOptions = optionStore.del.bind(optionStore);
+const showOptions = optionStore.show.bind(optionStore);
 
 export {
+  optionStore,
   setOptions,
   delOptions,
   showOptions,

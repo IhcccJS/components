@@ -1,5 +1,5 @@
 import React from 'react';
-import { isObject, isString, getBase64 } from '@wowon/utils';
+import { isObject, isString, getBase64 } from '@ihccc/utils';
 
 function usePreviewFile(file) {
   const [result, setResult] = React.useState({});

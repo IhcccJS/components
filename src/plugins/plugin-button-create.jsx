@@ -1,5 +1,5 @@
 import { PlusOutlined } from '@ant-design/icons';
-import { definePlugin } from '@/components/@comp/create-component';
+import definePlugin from '../create-component/definePlugin';
 
 export default definePlugin({
   name: 'buttonCreate',

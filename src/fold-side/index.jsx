@@ -1,8 +1,7 @@
 import React from 'react';
+import clsx from 'clsx';
 import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 import { useUnmountedRef, useControllableValue } from 'ahooks';
-import clsx from 'clsx';
-import styles from './index.less';
 
 function FoldSide(props) {
   const { title, placement = 'right', renderOnFirstOpen, className, style, children } = props;
@@ -23,15 +22,15 @@ function FoldSide(props) {
 
   return (
     <div
-      className={clsx(styles.sideContainer, className, {
-        [styles['placement-' + placement]]: !!styles['placement-' + placement],
-        [styles.fold]: fold,
+      className={clsx('bc-side-container', className, {
+        ['bc-placement-' + placement]: !!placement,
+        'bc-fold': fold,
       })}
       style={style}
     >
       <div
-        className={clsx(styles.foldButton, {
-          [styles.textButton]: !!title,
+        className={clsx('bc-fold-button', {
+          'bc-text-button': !!title,
         })}
         onClick={() => setFold(!fold)}
       >

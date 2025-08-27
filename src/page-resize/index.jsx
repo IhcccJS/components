@@ -2,7 +2,6 @@ import React from 'react';
 import useUnmountedRef from 'ahooks/lib/useUnmountedRef';
 import debounce from 'lodash/debounce';
 import clsx from 'clsx';
-import styles from './index.less';
 
 const LayoutContext = React.createContext({});
 
@@ -66,7 +65,7 @@ function PageResize(props) {
   return (
     <LayoutContext.Provider value={{}}>
       <div
-        className={clsx(styles.mainBody, className)}
+        className={clsx('bc-page-resize-body', className)}
         style={{
           ...style,
           // width: window.screen.width,
@@ -74,7 +73,7 @@ function PageResize(props) {
         }}
       >
         <div
-          className={styles.screen}
+          className="bc-page-resize-container"
           style={{
             ...contentStyle,
             width: designWidth,

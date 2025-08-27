@@ -1,4 +1,4 @@
-import assign from '@/components/@comp/_utils/assign';
+import assign from '../../utils/assign';
 
 function run(item, options) {
   const { enable, name } = options;

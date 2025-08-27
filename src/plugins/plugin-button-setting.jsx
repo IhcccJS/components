@@ -1,6 +1,6 @@
 import { SettingOutlined } from '@ant-design/icons';
-import { useSetting } from '@/components/@dev/setting';
-import { definePlugin } from '@/components/@comp/create-component';
+import useSetting from '../setting/useSetting';
+import definePlugin from '../create-component/definePlugin';
 
 export default definePlugin({
   name: 'buttonSetting',

@@ -1,6 +1,5 @@
 import React from 'react';
 import clsx from 'clsx';
-import './toggle-tab.less';
 
 function ToggleTabs({ tabs, contentStyle }) {
   const [index, setIndex] = React.useState(0);
@@ -19,11 +18,7 @@ function ToggleTabs({ tabs, contentStyle }) {
         ))}
       </div>
       {tabs.map((item, i) => (
-        <div
-          className={clsx('bc-toggle-tabs-content', i !== index && 'bc-toggle-tabs-content-hidden')}
-          style={contentStyle}
-          key={item.key}
-        >
+        <div className={clsx('bc-toggle-tabs-content', i !== index && 'bc-toggle-tabs-content-hidden')} style={contentStyle} key={item.key}>
           {item.children}
         </div>
       ))}

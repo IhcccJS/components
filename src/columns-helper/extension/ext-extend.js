@@ -1,6 +1,6 @@
-import { isFunction, isArray } from '@wowon/utils';
-import assign from '@/components/@comp/_utils/assign';
-import { columnSetter } from '@/components/@setter';
+import { isFunction, isArray } from '@ihccc/utils';
+import assign from '../../utils/assign';
+import { columnSetter } from '../../setter';
 
 function extendColumn(column) {
   const extendName = column.extend || column.extendDeep;

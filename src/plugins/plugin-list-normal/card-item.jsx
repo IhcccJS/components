@@ -1,6 +1,6 @@
 import React from 'react';
 import { List, Popover } from 'antd';
-import Card from '@/components/@dev/card';
+import Card from '../../card';
 
 function CardItem({ data, index, columnsRender, selection, children, ...restProps }) {
   const { title, cover, avatar, name, description, extra, action, item, float } = React.useMemo(() => {

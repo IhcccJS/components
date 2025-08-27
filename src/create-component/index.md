@@ -1,22 +1,22 @@
 
 
-#  运行流程
+#  createComponent
 
 collection
 
-运行前初始化，最先执行；核心代码会将插件列表内所有 initialStore 先执行，创建收集数据的集合
+运行前初始化，最先执行；核心代码会将插件列表内所有 collection 先执行，创建收集数据的容器
 
-useBefore
+before
 
 运行前 hook，用于返回预设的配置、选项；可以获取到 props，但是获取不到其他插件的返回实例
 
-useMain
+main
 
-主要代码，用于返回实例数据；可以获取到 props，以及已经运行的插件的返回实例
+主 hook，用于返回实例数据；可以获取到 props，以及已经运行的插件的返回实例
 
 ## demo
 
-```jsx
+```jsx | pure
 const Plugin = {
   /** 名称，用于插件索引其他插件 */
   name: 'demoPlugin',

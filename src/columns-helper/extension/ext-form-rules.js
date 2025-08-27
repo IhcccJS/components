@@ -1,5 +1,5 @@
-import { ruleSetter } from '@/components/@setter';
-import { isFunction, isString } from '@wowon/utils';
+import { isFunction, isString } from '@ihccc/utils';
+import { ruleSetter } from '../../setter';
 
 function run(item, options) {
   const { enable } = options;

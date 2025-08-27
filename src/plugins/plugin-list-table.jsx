@@ -1,6 +1,6 @@
 import React from 'react';
 import { Table } from 'antd';
-import { definePlugin } from '@/components/@comp/create-component';
+import definePlugin from '../create-component/definePlugin';
 
 export default definePlugin({
   name: 'listTable',

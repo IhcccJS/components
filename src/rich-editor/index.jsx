@@ -1,9 +1,7 @@
 import React from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import Modaler from '@/components/@comp/modaler';
-import { uploadRead } from '@/utils/file-read';
-import './index.less';
+import Popuper from '../popuper';
 
 const formats = [
   'header',
@@ -46,9 +44,10 @@ const toolbar = {
 };
 
 function RichEditor(props, ref) {
+  const { imageFormat, onUploadFile } = props;
   const quillRef = React.useRef(null);
 
-  const modal = Modaler.useModal();
+  const popup = Popuper.usePopup();
 
   const modules = React.useMemo(() => {
     const image = () => {
@@ -56,17 +55,17 @@ function RichEditor(props, ref) {
         const quill = quillRef.current.getEditor();
         files.forEach((file) => {
           const range = quill.getSelection();
-          quill.insertEmbed(range?.index || 0, 'image', uploadRead.preview(file.source.url));
+          quill.insertEmbed(range?.index || 0, 'image', imageFormat?.(file) || '');
         });
       };
-      modal.open('global/sys-upload', { onSuccess });
+      onUploadFile?.({ popup, onSuccess });
     };
     return {
       toolbar: { ...toolbar, handlers: { image } },
     };
   }, []);
 
-  return <ReactQuill ref={quillRef} modules={modules} formats={formats} {...props} className="rich-editor" />;
+  return <ReactQuill ref={quillRef} modules={modules} formats={formats} {...props} className="bc-rich-editor" />;
 }
 
 export default React.forwardRef(RichEditor);

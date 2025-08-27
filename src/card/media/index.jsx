@@ -1,6 +1,5 @@
 import React from 'react';
 import clsx from 'clsx';
-import './index.less';
 
 function Media(props) {
   const { className, title, avatar, description, children, ...rest } = props;

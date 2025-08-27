@@ -1,11 +1,10 @@
 import React from 'react';
 import { ImportOutlined, ExportOutlined } from '@ant-design/icons';
 import { saveAs } from 'file-saver';
-import Card from '@/components/@dev/card';
-import Form from '@/components/@comp/common-form-v2';
-import ButtonList from '@/components/@comp/button-list';
-import Upload from '@/components/@comp/upload';
-import { text } from '@/common/style/preset';
+import ButtonList from '../../button-list';
+import Card from '../../card';
+import Form from '../../form';
+import Upload from '../../upload';
 import { SettingContext } from '../context';
 import ToggleTabs from './toggle-tabs';
 import Panel from './panel';
@@ -54,15 +53,11 @@ const buttons = [
 const eventMap = {
   import: async ({ setSetting }, [uploadFile]) => {
     if (!uploadFile) return;
-    const data = await loadJson(uploadFile.source);
-    setSetting(data);
+    setSetting(await loadJson(uploadFile.source));
   },
-  export: ({ data, filterSettingValue, exportName }) => {
-    const saveData = filterSettingValue(data);
-    saveJson(
-      saveData,
-      [exportName || '系统设置', new Date().toLocaleString().replace(/\/|\s|\:/g, ''), '.json'].join(''),
-    );
+  export: ({ setting, filterSettingValue, exportName }) => {
+    const saveData = filterSettingValue(setting);
+    saveJson(saveData, [exportName || '系统设置', new Date().toLocaleString().replace(/\/|\s|\:/g, ''), '.json'].join(''));
   },
 };
 
@@ -70,13 +65,13 @@ const eventMap = {
 function SettingCenter({ exportName, extraButtons = {} }) {
   const [tab, onTabChange] = React.useState('base');
 
-  const { initailValues, options, submitButton, onChange } = React.useContext(SettingContext);
+  const { setting, options, submitButton, onChange } = React.useContext(SettingContext);
 
   const [gloablForm] = Form.useForm();
 
   React.useEffect(() => {
-    gloablForm.setFieldsValue(initailValues);
-  }, [initailValues]);
+    gloablForm.setFieldsValue(setting);
+  }, [setting]);
 
   const globalSetting = (
     <Form
@@ -86,7 +81,7 @@ function SettingCenter({ exportName, extraButtons = {} }) {
       group={options.globalGroup.length > 0}
       type="base"
       layout="vertical"
-      initialValues={initailValues}
+      initialValues={setting}
       gap={'20px'}
       column={2}
       columns={options.global}
@@ -134,15 +129,15 @@ function SettingCenter({ exportName, extraButtons = {} }) {
       footer={
         <React.Fragment>
           <div style={{ marginBottom: 20 }}>
-            <p className={text.desc}>* 支持将设置保存到本地</p>
-            <p className={text.desc}>* 支持导入本地设置</p>
-            <p className={text.desc}>* 文件格式为 json</p>
+            <p className="bc-text-desc">* 支持将设置保存到本地</p>
+            <p className="bc-text-desc">* 支持导入本地设置</p>
+            <p className="bc-text-desc">* 文件格式为 json</p>
           </div>
 
           <ButtonList
             {...extraButtons}
             buttons={buttons.concat(extraButtons.buttons || [])}
-            data={{ exportName, data: initailValues, setSetting: onChange, filterSettingValue, ...extraButtons.data }}
+            data={{ exportName, setting, setSetting: onChange, filterSettingValue, ...extraButtons.data }}
             eventMap={{ ...eventMap, ...extraButtons.eventMap }}
           />
         </React.Fragment>

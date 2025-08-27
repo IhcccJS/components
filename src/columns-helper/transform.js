@@ -1,4 +1,4 @@
-import { isString, isArray, isObject, isFunction } from '@wowon/utils';
+import { isString, isArray, isObject, isFunction } from '@ihccc/utils';
 import defaultExtension from './extension';
 import filterOfVisible from './filterOfVisible';
 
@@ -20,9 +20,7 @@ function transform(columnsSource, opts) {
   columns = [...columnsSource];
 
   // 先处理用户方法，这样用户修改的数据可以被 defaultExtension 接着处理
-  const transformExtList = (transformExtension || beforeExtension || [])
-    .concat(defaultExtension)
-    .concat(afterExtension || []);
+  const transformExtList = (transformExtension || beforeExtension || []).concat(defaultExtension).concat(afterExtension || []);
 
   // 对处理方法进行分类
   const { listExtension, itemExtension } = transformExtList.reduce(

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelections } from 'ahooks';
 import { Checkbox } from 'antd';
-import { definePlugin } from '@/components/@comp/create-component';
+import definePlugin from '../create-component/definePlugin';
 
 function useRowSelection(list, options) {
   const selection = useSelections(list, { defaultSelected: options.defaultSelected, itemKey: options.rowKey });
@@ -62,12 +62,7 @@ export default definePlugin({
               key: 'toggleAll',
               render: ({ isEmpty, allSelected, partiallySelected, selected, onClick }) => {
                 return (
-                  <Checkbox
-                    disabled={isEmpty}
-                    indeterminate={partiallySelected}
-                    checked={allSelected}
-                    onChange={onClick}
-                  >
+                  <Checkbox disabled={isEmpty} indeterminate={partiallySelected} checked={allSelected} onChange={onClick}>
                     {`${allSelected ? '取消' : '全选'}（${selected.length}）`}
                   </Checkbox>
                 );

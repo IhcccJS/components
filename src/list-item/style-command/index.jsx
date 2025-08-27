@@ -1,6 +1,5 @@
 import React from 'react';
 import clsx from 'clsx';
-import './index.less';
 
 function ListItem({ icon, name, desc, onClick }) {
   return (

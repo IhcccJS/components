@@ -1,6 +1,6 @@
 import React from 'react';
 import { isString, isObject } from '@ihccc/utils';
-import { childrenSetter, childrenPropsSetter } from '../../common-form/setter';
+import { childrenSetter, childrenPropsSetter } from '../../setter';
 import getAliasName from '../getAliasName';
 
 function register(formComponents, inputDefaultProps) {
@@ -79,55 +79,55 @@ function register(formComponents, inputDefaultProps) {
   // mentions
   childrenSetter.use(
     getAliasName(componentAlias, 'mentions'),
-    React.lazy(() => import('../../select-v2/mentions')),
+    React.lazy(() => import('../../select/mentions')),
   );
 
   // auto-complete
   childrenSetter.use(
     getAliasName(componentAlias, 'autoComplete'),
-    React.lazy(() => import('../../select-v2/auto-complete')),
+    React.lazy(() => import('../../select/auto-complete')),
   );
 
   // cascader
   childrenSetter.use(
     getAliasName(componentAlias, 'cascader'),
-    React.lazy(() => import('../../select-v2/cascader')),
+    React.lazy(() => import('../../select/cascader')),
   );
 
   // checkbox
   childrenSetter.use(
     getAliasName(componentAlias, 'checkbox'),
-    React.lazy(() => import('../../select-v2/checkbox')),
+    React.lazy(() => import('../../select/checkbox')),
   );
 
   // radio
   childrenSetter.use(
     getAliasName(componentAlias, 'radio'),
-    React.lazy(() => import('../../select-v2/radio')),
+    React.lazy(() => import('../../select/radio')),
   );
 
   // segmented
   childrenSetter.use(
     getAliasName(componentAlias, 'segmented'),
-    React.lazy(() => import('../../select-v2/segmented')),
+    React.lazy(() => import('../../select/segmented')),
   );
 
   // select
   childrenSetter.use(
     getAliasName(componentAlias, 'select'),
-    React.lazy(() => import('../../select-v2/select')),
+    React.lazy(() => import('../../select/select')),
   );
 
   // select-view
   childrenSetter.use(
     getAliasName(componentAlias, 'selectView'),
-    React.lazy(() => import('../../select-v2/select-view/base')),
+    React.lazy(() => import('../../select/select-view/base')),
   );
 
   // tree-select
   childrenSetter.use(
     getAliasName(componentAlias, 'treeSelect'),
-    React.lazy(() => import('../../select-v2/tree-select')),
+    React.lazy(() => import('../../select/tree-select')),
   );
 
   // upload

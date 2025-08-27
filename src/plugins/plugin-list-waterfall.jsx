@@ -1,6 +1,6 @@
 import React from 'react';
-import Waterfall from '@/components/@dev/waterfall';
-import { definePlugin } from '@/components/@comp/create-component';
+// import Waterfall from '../waterfall';
+import definePlugin from '../create-component/definePlugin';
 
 export default definePlugin({
   name: 'listWaterfall',
@@ -14,7 +14,8 @@ export default definePlugin({
     // const listScroll = instance.getPlugin('listScrollHeight');
     // const buttonExpandAble = instance.getPlugin('buttonExpandAble');
 
-    const content = <Waterfall {...waterfallProps} dataSource={request.data.list} />;
+    // const content = <Waterfall {...waterfallProps} dataSource={request.data.list} />;
+    const content = null;
 
     return { children: content };
   },

@@ -1,5 +1,5 @@
+import definePlugin from '../../create-component/definePlugin';
 import Layout from './layout';
-import { definePlugin } from '@/components/@comp/create-component';
 
 export default definePlugin({
   name: 'layout',

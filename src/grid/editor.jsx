@@ -1,5 +1,5 @@
 import React from 'react';
-import ButtonList from '@/components/@comp/button-list';
+import ButtonList from '../button-list';
 import GridFloating from './grid-floating';
 import GridTable from './grid-table';
 import Grid from './grid';

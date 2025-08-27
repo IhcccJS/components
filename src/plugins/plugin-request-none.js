@@ -1,5 +1,5 @@
 import React from 'react';
-import { definePlugin } from '@/components/@comp/create-component';
+import definePlugin from '../create-component/definePlugin';
 
 export default definePlugin({
   name: 'request',

@@ -1,6 +1,6 @@
 // import React from 'react';
 // import ColumnTitle from '../column-title';
-import { isString, isFunction } from '@wowon/utils';
+import { isString, isFunction } from '@ihccc/utils';
 
 function run(item, options) {
   const { enable, eventMap } = options;

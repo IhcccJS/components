@@ -1,6 +1,6 @@
 // import React from 'react';
-import { useApi } from '@wowon/hooks';
-import { definePlugin } from '@/components/@comp/create-component';
+import { useApi } from '@ihccc/hooks';
+import definePlugin from '../create-component/definePlugin';
 // import { useMemoryGet, useMemorySet } from '@/utils/hooks/useMemory';
 
 export default definePlugin({

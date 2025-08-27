@@ -1,8 +1,9 @@
 import React from 'react';
 import template from 'lodash/template';
-import useHistory from '@/components/@dev/transition-route/useHistory';
-import { isArray, isFunction } from '@wowon/utils';
-import { definePlugin } from '@/components/@comp/create-component';
+import { isArray, isFunction } from '@ihccc/utils';
+import useHistory from '../transition-route/useHistory';
+import definePlugin from '../create-component/definePlugin';
+
 const isUrlOrPath = (path) => /^http|^\//.test(path);
 
 // 为了兼容不同的方法回调

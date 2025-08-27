@@ -2,8 +2,7 @@ import React from 'react';
 import { createPortal } from 'react-dom';
 import { MinusOutlined, CloseOutlined } from '@ant-design/icons';
 import clsx from 'clsx';
-import ButtonList from '@/components/@comp/button-list';
-import './index.less';
+import ButtonList from '../button-list';
 
 // TODO 弹窗打开关闭需要模拟 antd 效果，但是缩放原点对不上打开触发位置
 // function getScroll(w, top) {
@@ -170,12 +169,7 @@ function Popup(props, ref) {
     <div
       id={id}
       ref={ref}
-      className={clsx(
-        'popup-root',
-        open && openAsync && 'popup-open',
-        cancelMask && 'popup-mask-event',
-        classNames.root,
-      )}
+      className={clsx('popup-root', open && openAsync && 'popup-open', cancelMask && 'popup-mask-event', classNames.root)}
       style={open || openAsync ? { ...styles.root, zIndex } : { ...styles.root, display: 'none' }}
     >
       {mask !== false && mask !== null && <div className="popup-mask" style={styles.mask} onClick={onCancel}></div>}

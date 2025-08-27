@@ -1,5 +1,5 @@
 import React from 'react';
-import Formater from '../../select-v2/formater';
+import Formater from '../../select/formater';
 
 const formatRender = (options) => {
   return (val) => {

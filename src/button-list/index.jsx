@@ -3,28 +3,13 @@ import clsx from 'clsx';
 import { Tooltip, Dropdown } from 'antd';
 import { isArray, isObject, isFunction, joinString } from '@ihccc/utils';
 import Access from '../access';
+import { buttonSetter } from '../setter';
 import { Confirm } from './buttons';
 import Space from './space';
-import { buttonSetter } from '@/components/@setter';
 import { handleButtonConfig } from './utils';
-import './index.less';
 
 function RenderButtons(props) {
-  const {
-    blockName,
-    type,
-    space,
-    inline,
-    wrap,
-    reverse,
-    layout,
-    buttons,
-    baseProps,
-    renderType,
-    eventData,
-    eventMap,
-    style,
-  } = props;
+  const { blockName, type, space, inline, wrap, reverse, layout, buttons, baseProps, renderType, eventData, eventMap, style } = props;
   const spaceTypeRef = React.useRef();
 
   const lastIndex = buttons.length - 1;
@@ -195,8 +180,7 @@ function ButtonList(props) {
     const accessButtons = accessHandle?.passedData || [];
     const sortIndex = accessButtons
       .map((item, index) => {
-        let sort = index;
-        if (item.sort !== void 0) sort = item.sort;
+        let sort = item.sort || index;
         if (isArray(sortRenderKeys)) {
           sort = sortRenderKeys.indexOf(item.key);
         } else if (isObject(sortRenderKeys) && sortRenderKeys[item.key] !== void 0) {

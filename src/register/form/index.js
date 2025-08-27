@@ -1,27 +1,8 @@
 // import React from 'react';
-import {
-  Input,
-  InputNumber,
-  DatePicker,
-  Rate,
-  Slider,
-  Switch,
-  TimePicker,
-  Transfer,
-} from 'antd';
+import { Input, InputNumber, DatePicker, Rate, Slider, Switch, TimePicker, Transfer } from 'antd';
 import { isString, isObject } from '@ihccc/utils';
-import { childrenSetter, childrenPropsSetter } from '../../common-form/setter';
-import {
-  AutoComplete,
-  Cascader,
-  Checkbox,
-  Mentions,
-  Radio,
-  Segmented,
-  Select,
-  SelectView,
-  TreeSelect,
-} from '../../select-v2';
+import { childrenSetter, childrenPropsSetter } from '../../setter';
+import { AutoComplete, Cascader, Checkbox, Mentions, Radio, Segmented, Select, SelectView, TreeSelect } from '../../select';
 import Upload from '../../upload';
 import getAliasName from '../getAliasName';
 
@@ -44,10 +25,7 @@ function register(inputComponents, inputDefaultProps) {
   childrenSetter.use(getAliasName(componentAlias, 'date'), DatePicker);
 
   // range-picker
-  childrenSetter.use(
-    getAliasName(componentAlias, 'range'),
-    DatePicker.RangePicker,
-  );
+  childrenSetter.use(getAliasName(componentAlias, 'range'), DatePicker.RangePicker);
 
   // Rate
   childrenSetter.use(getAliasName(componentAlias, 'rate'), Rate);
@@ -68,10 +46,7 @@ function register(inputComponents, inputDefaultProps) {
   childrenSetter.use(getAliasName(componentAlias, 'mentions'), Mentions);
 
   // auto-complete
-  childrenSetter.use(
-    getAliasName(componentAlias, 'autoComplete'),
-    AutoComplete,
-  );
+  childrenSetter.use(getAliasName(componentAlias, 'autoComplete'), AutoComplete);
 
   // cascader
   childrenSetter.use(getAliasName(componentAlias, 'cascader'), Cascader);

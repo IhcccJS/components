@@ -1,10 +1,10 @@
 import React from 'react';
 import get from 'lodash/get';
 import { List } from 'antd';
-import { isFunction } from '@wowon/utils';
+import { isFunction } from '@ihccc/utils';
 import CardItem from './card-item';
 import ListItem from './list-item';
-import { definePlugin } from '@/components/@comp/create-component';
+import definePlugin from '../../create-component/definePlugin';
 
 const defaultRenderComponent = {
   card: CardItem,

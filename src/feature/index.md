@@ -307,16 +307,14 @@ function Demo() {
 export default Demo;
 ```
 
-## 配合 `Select.register` 方法一起使用
-
-`Select.register` 方法生成的组件，已经内置了`Feature`，只要选项包含`mode`字段，即可启用
+## 配合 `setOptions` 方法一起使用
 
 ```jsx
 import React from 'react';
 import { Space, Button } from 'antd';
-import { Feature, Select, Text } from '@ihccc/components';
+import { setOptions, Formater, Feature, Select, Text } from '@ihccc/components';
 
-const { Formater } = Select.register({
+ setOptions({
   'test-type': [
     { label: '默认配置', value: 0, mode: 'text', status: 'default' },
     { label: '默认状态点', value: 1, mode: 'badge', status: 'default' },

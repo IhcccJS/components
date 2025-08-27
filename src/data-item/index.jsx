@@ -1,7 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
 import StyleSeed from './style-seed';
-import './index.less';
 
 function DataItem({
   className,
@@ -17,11 +16,7 @@ function DataItem({
   ...restProps
 }) {
   return (
-    <div
-      className={clsx(styleSeed.item, classNames.root, className)}
-      style={{ ...style, ...styles.root }}
-      {...restProps}
-    >
+    <div className={clsx(styleSeed.item, classNames.root, className)} style={{ ...style, ...styles.root }} {...restProps}>
       {(!!icon || !!label) && (
         <div className={clsx(styleSeed.head, classNames.head)} style={styles.head}>
           {icon && (

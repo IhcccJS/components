@@ -1,5 +1,5 @@
 import { isString } from '@ihccc/utils';
-import { formatSetter } from '../../common-form/setter';
+import { formatSetter } from '../../setter';
 // import getAliasName from '../getAliasName';
 
 function register(formatInterface) {

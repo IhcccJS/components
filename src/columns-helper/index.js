@@ -1,6 +1,6 @@
 import load from './load';
+import { columnSetter } from '../setter';
 import transform from './transform';
-import { columnSetter } from '@/components/@setter';
 import useColumns from './useColumns';
 
 const columnsHelper = {

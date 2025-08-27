@@ -1,7 +1,7 @@
 import React from 'react';
-import { useApi } from '@wowon/hooks';
+import { useApi } from '@ihccc/hooks';
 // import { useMemoryGet, useMemorySet } from '@/utils/hooks/useMemory';
-import { definePlugin } from '@/components/@comp/create-component';
+import definePlugin from '../create-component/definePlugin';
 
 export default definePlugin({
   name: 'request',

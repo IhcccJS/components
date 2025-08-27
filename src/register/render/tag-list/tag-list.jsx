@@ -1,7 +1,7 @@
 import React from 'react';
 import { Popover } from 'antd';
 import { isObject } from '@ihccc/utils';
-import Formater from '../../../select-v2/formater';
+import Formater from '../../../select/formater';
 import Feature from '../../../feature';
 import useStyles from './style';
 
@@ -21,12 +21,7 @@ function TagList({ popover, data, max, options }) {
 
   const tagList = list.map((value) => {
     if (!options) {
-      return (
-        <Feature
-          mode="tag"
-          {...(isObject(value) ? value : { label: value, key: value })}
-        />
-      );
+      return <Feature mode="tag" {...(isObject(value) ? value : { label: value, key: value })} />;
     } else {
       return <Formater options={options} value={value} key={value} />;
     }
@@ -35,12 +30,7 @@ function TagList({ popover, data, max, options }) {
   if (!!extra) {
     const extraTagList = extra.map((value) => {
       if (!options) {
-        return (
-          <Feature
-            mode="tag"
-            {...(isObject(value) ? value : { label: value, key: value })}
-          />
-        );
+        return <Feature mode="tag" {...(isObject(value) ? value : { label: value, key: value })} />;
       } else {
         return <Formater options={options} value={value} key={value} />;
       }

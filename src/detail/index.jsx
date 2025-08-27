@@ -1,27 +1,13 @@
 import React from 'react';
 import get from 'lodash/get';
-import { isString } from '@wowon/utils';
-import { Grid } from '@/components/@dev/grid';
-import columnsHelper from '@/components/@dev/columns-helper';
+import { isString } from '@ihccc/utils';
+import columnsHelper from '../columns-helper';
+import Grid from '../grid';
 import DataItem from '../data-item';
 import { DetailContext } from './context';
 
 const Detail = (props) => {
-  const {
-    className,
-    style,
-    access,
-    name,
-    column,
-    columns,
-    data,
-    gap,
-    border,
-    eventData,
-    eventMap,
-    colProps,
-    children,
-  } = props;
+  const { className, style, access, name, column, columns, data, gap, border, eventData, eventMap, colProps, children } = props;
 
   const profileColumns = columnsHelper.useColumns(columns, {
     enable: {

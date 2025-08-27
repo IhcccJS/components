@@ -1,6 +1,6 @@
 import React from 'react';
 import { Popover, Empty } from 'antd';
-import { Grid } from '@/components/@dev/grid';
+import Grid from '../grid';
 import Image from './index';
 
 function GridImages({ column, gap, items, more = [], ...restProps }) {

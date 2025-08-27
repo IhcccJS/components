@@ -1,5 +1,5 @@
-import { formatSetter } from '@/components/@setter';
-import { isArray } from '@wowon/utils';
+import { isArray } from '@ihccc/utils';
+import { formatSetter } from '../../setter';
 
 function run(item, options) {
   const { enable } = options;

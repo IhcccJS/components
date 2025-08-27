@@ -1,10 +1,11 @@
-import core from '@/components/@comp/base-list/core';
+import createComponent from '../create-component';
 
-import useColumnsTransform from './plugins/useColumnsTransform';
-import useTableTreeActionButton from './plugins/useTableTreeActionButton';
-import useTableList from './plugins/useTableList';
-import useEditList from './plugins/useEditList';
+import ColumnsTransform from './plugins/columns-transform';
+import TableTreeActionButton from './plugins/table-tree-action-button';
+import TableList from './plugins/table-list';
+import EditList from './plugins/edit-list';
+import Layout from './plugins/layout';
 
-const EditTable = core([useEditList, useTableTreeActionButton, useColumnsTransform, useTableList]);
+const EditTable = createComponent([Layout, EditList, TableTreeActionButton, ColumnsTransform, TableList]);
 
 export default EditTable;

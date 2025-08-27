@@ -1,6 +1,6 @@
 import React from 'react';
-import Form from '@/components/@comp/common-form';
-import { definePlugin } from '@/components/@comp/create-component';
+import Form from '../common-form';
+import definePlugin from '../create-component/definePlugin';
 
 export default definePlugin({
   name: 'searchNormal',
