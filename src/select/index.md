@@ -19,7 +19,7 @@ toc: content
 
 ```jsx
 import React from 'react';
-import { setOptions, SelectV2 } from '@ihccc/components';
+import { setOptions, Select } from '@ihccc/components';
 
 setOptions({
   sex: [
@@ -31,7 +31,7 @@ setOptions({
 function Demo() {
   const [value, setValue] = React.useState(null);
   return (
-    <SelectV2
+    <Select
       options="sex"
       value={value}
       onChange={setValue}
@@ -50,7 +50,7 @@ export default Demo;
 ```jsx
 import React from 'react';
 import { Space, Input } from 'antd';
-import { SelectV2 } from '@ihccc/components';
+import { Select } from '@ihccc/components';
 import { FakeApi } from '@ihccc/utils';
 
 const initData = [
@@ -96,7 +96,7 @@ function Demo() {
         value={name}
         onChange={e => setName(e.target.value)}
       />
-      <SelectV2
+      <Select
         options={queryUser}
         value={value}
         onChange={setValue}
@@ -148,7 +148,7 @@ export default Demo;
 ```jsx
 import React from 'react';
 import { Space } from 'antd';
-import { setOptions, SelectV2 } from '@ihccc/components';
+import { setOptions, Select } from '@ihccc/components';
 
 setOptions({
   member: [
@@ -163,7 +163,7 @@ function Demo() {
 
   return (
     <Space>
-      <SelectV2
+      <Select
         showSearch
         options="member"
         fieldNames={{ label: 'name', value: 'id' }}
@@ -171,7 +171,7 @@ function Demo() {
         onChange={setValue}
         style={{ width: 200 }}
       />
-      <SelectV2
+      <Select
         showSearch
         options="member"
         fieldNames={{ label: 'name', value: 'id' }}
@@ -193,7 +193,7 @@ export default Demo;
 ```jsx
 import React from 'react';
 import { Space } from 'antd';
-import { setOptions, SelectV2, Radio, Checkbox, Segmented, Mentions, AutoComplete, Formater } from '@ihccc/components';
+import { setOptions, Select, Radio, Checkbox, Segmented, Mentions, AutoComplete, Formater } from '@ihccc/components';
 
 setOptions({
   emoji: [
@@ -219,19 +219,19 @@ function Demo() {
   return (
     <Space direction="vertical" size="large">
       <Space>
-        <SelectV2
+        <Select
           options="sex"
           value={code}
           onChange={setCache}
           style={{ width: 200 }}
         />
-        <SelectV2
+        <Select
           options="emoji"
           value={value}
           onChange={setValue}
           style={{ width: 200 }}
         />
-        <SelectV2
+        <Select
           options="type"
           value={value}
           onChange={setValue}

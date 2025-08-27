@@ -5,21 +5,17 @@ import accessHandler from './access-handler';
 
 const defaultGetAccessKey = (el) => {
   const pathname = window.location?.pathname || '';
-  return [
-    el.key,
-    `${el.name || ''}:${el.key || ''}`.replace(':', ''),
-    `${pathname}:${el.name || ''}:${el.key || ''}`.replace('::', ':'),
-  ];
+  return [el.key, `${el.name || ''}:${el.key || ''}`.replace(':', ''), `${pathname}:${el.name || ''}:${el.key || ''}`.replace('::', ':')];
 };
 
 const System = (props) => {
-  const { getAccessKey, accessData, handlers, children } = props;
+  const { getAccessKey = defaultGetAccessKey, data, handlers, children } = props;
 
   const handleFilterEvents = React.useRef(Object.assign(accessHandler, handlers)).current;
 
-  const accessMapRef = React.useRef(accessData);
+  const accessMapRef = React.useRef(data);
   // TODO 实时 update
-  accessMapRef.current = accessData;
+  accessMapRef.current = data;
 
   const addLockedAccess = React.useCallback((lockedAccess) => {
     Object.assign(accessMapRef.current, lockedAccess);
@@ -32,14 +28,14 @@ const System = (props) => {
   }, []);
 
   const checkAccessData = React.useCallback((el) => {
-    const fullKey = (getAccessKey || defaultGetAccessKey)(el);
+    const fullKey = getAccessKey?.(el);
 
     if (Array.isArray(fullKey)) {
       for (let index = 0; index < fullKey.length; index++) {
         const authority = accessMapRef.current[fullKey[index]];
         if (!!authority) return authority;
       }
-      return;
+      return {};
     }
     const authority = accessMapRef.current[fullKey];
     if (!!authority) return authority;

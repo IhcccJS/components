@@ -1,7 +1,7 @@
 import React from 'react';
 import AccessContext from './context';
 
-export function useMatchOneAccess({ data }) {
+export function useMatchOneAccess({ data, key }) {
   const { enable, getHitOneFilter } = React.useContext(AccessContext);
 
   if (!enable) return { passedData: data };

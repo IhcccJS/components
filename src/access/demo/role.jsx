@@ -48,10 +48,19 @@ const roleList = [
 function Demo() {
   const [role, setRole] = React.useState('admin');
 
-  const data = React.useMemo(() => accessData.filter((item) => item.role === role), [role]);
+  const data = React.useMemo(
+    () =>
+      accessData
+        .filter((item) => item.role === role)
+        .reduce((store, item) => {
+          store[item.key] = item;
+          return store;
+        }, {}),
+    [role],
+  );
 
   return (
-    <Access.System data={data} handlers={{ buttonList: roleButtonList }}>
+    <Access.System data={data} handlers={{ buttonList: roleButtonList }} key={role}>
       {/* <Access.Lock name="search" keys={{ search: { status: 'visible' } }} />
       <Access.Lock name="list" keys={{ remove: { status: 'visible' } }} /> */}
       <Radio options={roleList} value={role} onChange={(e) => setRole(e.target.value)} />

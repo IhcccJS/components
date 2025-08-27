@@ -1,16 +1,16 @@
 .bc-action-buttons-space {
   &-empty {
     display: inline-block;
-    width: var(--size-cell-gap);
+    width: var(--size-cell-gap, 16px);
   }
 
   &-divider {
     position: relative;
     display: inline-block;
     height: 1em;
-    margin: 0 calc(var(--size-cell-gap) / 2);
+    margin: 0 calc(var(--size-cell-gap, 16px) / 2);
     vertical-align: middle;
-    border-left: 1px solid rgba(5, 5, 5, 0.06);
+    border-left: 1px solid var(--color-border-secondary, #e5e5e5);
   }
 
   &-full {

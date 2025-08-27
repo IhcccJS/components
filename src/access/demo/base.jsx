@@ -15,7 +15,10 @@ const accessData = [
 function Demo() {
   return (
     <Access.System
-      data={accessData}
+      data={accessData.reduce((store, item) => {
+        store[item.key] = item;
+        return store;
+      }, {})}
       // handlers={{ buttonList: buttonListHandler }}
     >
       <Space direction="vertical">

@@ -11,9 +11,9 @@ toc: content
 
 # Access 权限
 
-<!-- ## 简单上手
+## 简单上手
 
-<code src="./demo/base"></code> -->
+<code src="./demo/base"></code>
 
 ## 动态修改
 
@@ -28,17 +28,21 @@ toc: content
 
 ## Access.System Props
 
-| 名称     | 类型     | 默认值      | 描述     |
-| :------- | :------- | :---------- | :------- |
-| data     | `string` | `undefined` | 校验数据 |
-| handlers | `object` | `undefined` | 处理方法 |
+| 名称         | 类型             | 默认值      | 描述               |
+| :----------- | :--------------- | :---------- | :----------------- |
+| getAccessKey | `(el) => string` | `-`         | 设置元素的校验值   |
+| data         | `string`         | `undefined` | 校验数据           |
+| handlers     | `object`         | `undefined` | 处理方法           |
+| children     | `ReactNode`      | `undefined` | 需要控制权限的内容 |
 
 
 ## Access.useAccess
 
-| 名称    | 类型     | 默认值      | 描述     |
-| :------ | :------- | :---------- | :------- |
-| key     | `string` | `undefined` | 校验数据 |
-| name    | `object` | `undefined` | 处理方法 |
-| keyName | `object` | `undefined` | 处理方法 |
-| handler | `object` | `undefined` | 处理方法 |
+| 名称     | 类型      | 默认值      | 描述     |
+| :------- | :-------- | :---------- | :------- |
+| disabled | `boolean` | `undefined` | 是否禁用 |
+| data     | `[]`      | `undefined` | 校验数据 |
+| key      | `string`  | `undefined` | 权限值   |
+| name     | `object`  | `undefined` | 处理方法 |
+| keyName  | `object`  | `undefined` | 处理方法 |
+| handler  | `object`  | `undefined` | 处理方法 |
