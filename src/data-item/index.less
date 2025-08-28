@@ -1,5 +1,7 @@
+@prefix: ~'bc-data-item';
+
 // 详情数据样式
-.data-item {
+.@{prefix} {
   display: flex;
   color: var(--color-text, #393939);
   font-size: 14px;
@@ -38,7 +40,7 @@
   }
 }
 
-.data-item-detail-simple {
+.@{prefix}-detail-simple {
   flex-direction: column;
 
   &-head {
@@ -59,7 +61,7 @@
 }
 
 // 统计卡片样式
-.data-item-count {
+.@{prefix}-count {
   border-radius: var(--size-border-radius-lg, 8px);
   padding: var(--size-cell-gap, 16px);
   background-color: currentColor;

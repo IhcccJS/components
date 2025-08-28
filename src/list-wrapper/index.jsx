@@ -3,8 +3,7 @@ import { Spin, Empty } from 'antd';
 import { isArray, isObject, isFunction } from '@ihccc/utils';
 
 function ListWrapper(props) {
-  const { loading, alias, empty, children, ...restProps } = props;
-  const data = props[alias];
+  const { loading, data, alias, empty, children, ...restProps } = props;
 
   const hasData = React.useMemo(() => {
     if (isObject(data)) return Object.keys(data).length > 0;
@@ -14,9 +13,9 @@ function ListWrapper(props) {
 
   const childrenNode = () => {
     if (hasData) {
-      if (isFunction(children)) return children(restProps);
-      if (React.isValidElement(children))
-        return React.cloneElement(children, restProps);
+      const childrenProps = Object.assign({ [alias]: data }, restProps);
+      if (React.isValidElement(children)) return React.cloneElement(children, childrenProps);
+      if (isFunction(children)) return children(childrenProps);
     }
     return empty;
   };

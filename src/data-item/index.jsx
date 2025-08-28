@@ -15,8 +15,9 @@ function DataItem({
   styles = {},
   ...restProps
 }) {
+  console.log(styleSeed);
   return (
-    <div className={clsx(styleSeed.item, classNames.root, className)} style={{ ...style, ...styles.root }} {...restProps}>
+    <div className={clsx(styleSeed.root, classNames.root, className)} style={{ ...style, ...styles.root }} {...restProps}>
       {(!!icon || !!label) && (
         <div className={clsx(styleSeed.head, classNames.head)} style={styles.head}>
           {icon && (

@@ -147,10 +147,12 @@ export default Demo;
 ## Text.Tip Props
 
 更多配置参考 [`Tooptip`](https://ant.design/components/tooltip-cn/) 组件
-| 名称  | 类型     | 默认值      | 描述                                                                  |
-| :---- | :------- | :---------- | :-------------------------------------------------------------------- |
-| label | `string` | `undefined` | 显示文本                                                              |
-| max   | `number` | `10`        | 如果`label`字符长度超过`max`时，会截断，额外的内容由`Tooptip`组件展示 |
+| 名称   | 类型                 | 默认值      | 描述                                                                  |
+| :----- | :------------------- | :---------- | :-------------------------------------------------------------------- |
+| label  | `string`             | `undefined` | 显示文本                                                              |
+| max    | `number`             | `10`        | 如果`label`字符长度超过`max`时，会截断，额外的内容由`Tooptip`组件展示 |
+| rule   | `start\|center\|end` | `end`       | 隐藏符号位于字符中的位置                                              |
+| symbol | `string`             | `...`       | 隐藏符号                                                              |
 
 
 ## Text.Number Props
@@ -161,15 +163,22 @@ export default Demo;
 | delimiter | `string  \| false` | `false`     | 分割符       |
 | part      | `number`           | `3`         | 分割位数     |
 | precision | `number`           | `-1`        | 显示小数位数 |
+| scale     | `number`           | `1`         | 缩放         |
+| prefix    | `any`              | `undefined` | 前缀内容     |
+| unit      | `any`              | `undefined` | 单位内容     |
+| className | `string`           | `undefined` | 根元素类名   |
+| style     | `string`           | `undefined` | 内联样式     |
 
 ## Text.Roll Props
 
-| 名称     | 类型               | 默认值      | 描述                     |
-| :------- | :----------------- | :---------- | :----------------------- |
-| label    | `string`           | `undefined` | 显示文本                 |
-| width    | `string \| number` | `120`       | 滚动区域宽度             |
-| enable   | `boolean`          | `true`      | 是否滚动                 |
-| duration | `number`           | `500`       | 单字滚动时间，单位：`ms` |
+| 名称      | 类型               | 默认值      | 描述                     |
+| :-------- | :----------------- | :---------- | :----------------------- |
+| label     | `string`           | `undefined` | 显示文本                 |
+| width     | `string \| number` | `120`       | 滚动区域宽度             |
+| enable    | `boolean`          | `true`      | 是否滚动                 |
+| duration  | `number`           | `500`       | 单字滚动时间，单位：`ms` |
+| className | `string`           | `undefined` | 根元素类名               |
+| style     | `string`           | `undefined` | 内联样式                 |
 
 ## Text.Copy Props
 

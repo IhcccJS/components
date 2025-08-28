@@ -25,7 +25,6 @@ function Demo() {
   const [disabled, setDisabled] = React.useState(false);
   const [round, setRound] = React.useState(false);
   const [size, setSize] = React.useState('small');
-  const [click, setClick] = React.useState(false);
 
   const modeArray = ['text', 'badge', 'tag', 'block'];
 
@@ -37,8 +36,6 @@ function Demo() {
     'info',
     'other',
   ];
-
-  const event = (info) => (click ? () => message.success(info) : undefined);
 
   return (
     <Space direction="vertical" size="large">
@@ -53,7 +50,6 @@ function Demo() {
               size={size}
               mode={mode}
               status={status}
-              onClick={event(`${mode} - ${status}`)}
               key={status}
             />
           ))}
@@ -76,9 +72,6 @@ function Demo() {
           value={size}
           onChange={(e) => setSize(e.target.value)}
         />
-        <Button type="primary" onClick={() => setClick(!click)}>
-          {click ? '取消事件' : '监听事件'}
-        </Button>
       </Space>
     </Space>
   );
@@ -105,7 +98,7 @@ const customStuts = {
   warn2: '#FF9800',
   warn3: '#F44336',
   default: '#607D8B',
-  outline: '#9E9E9E',
+  offline: '#9E9E9E',
   online: '#3F51B5',
 };
 
@@ -155,10 +148,10 @@ function Demo() {
       <Space size="large">
         <Feature label="tag - default" mode="tag" color={customStuts} />
         <Feature
-          label="text - outline"
+          label="text - offline"
           mode="text"
           color={customStuts}
-          status="outline"
+          status="offline"
         />
         <Feature
           label="text - online"
@@ -410,16 +403,16 @@ export default Demo;
 
 ## Feature Props
 
-| 名称      | 类型               | 默认值      | 描述                                                                                 |
-| :-------- | :----------------- | :---------- | :----------------------------------------------------------------------------------- |
-| label     | `string`           | `undefined` | 显示内容                                                                             |
-| mode      | `string`           | `text`      | 表现形式（`text` \| `badge` \| `tag` \| `block`）                                    |
-| icon      | `ReactNode`        | `undefined` | 图标前缀                                                                             |
-| color     | `string \| object` | `undefined` | 自定义颜色，优先级高于 `status`，或者定义一个状态颜色映射对象 `{ statusKey: color }` |
-| round     | `boolean`          | `false`     | 圆角                                                                                 |
-| size      | `string`           | `small`     | 尺寸（`small` \| `middle` \| `large`）                                               |
-| status    | `string`           | `default`   | 状态（`default` \| `success` \| `warning` \| `error` \| `info` \| `other`）          |
-| animation | `boolean \| array` | `false`     | 是否执行动画，如果是数组，则元素是指定要执行动画的状态值                             |
-| disabled  | `boolean`          | `false`     | 是否禁用、禁用后不会执行 `onClick`事件                                               |
-| hoverAble | `boolean`          | `true`      | 悬浮状态                                                                             |
-| children  | `ReactNode`        | `undefined` | 可以嵌套使用组件来扩展功能                                                           |
+| 名称      | 类型                                            | 默认值      | 描述                                                                                 |
+| :-------- | :---------------------------------------------- | :---------- | :----------------------------------------------------------------------------------- |
+| label     | `string`                                        | `undefined` | 显示内容                                                                             |
+| mode      | `text\|badge\|tag\|block`                       | `text`      | 表现形式                                                                             |
+| icon      | `ReactNode`                                     | `undefined` | 图标前缀                                                                             |
+| color     | `string\|object`                                | `undefined` | 自定义颜色，优先级高于 `status`，或者定义一个状态颜色映射对象 `{ statusKey: color }` |
+| round     | `boolean`                                       | `false`     | 圆角                                                                                 |
+| size      | `small\|middle\|large`                          | `small`     | 尺寸                                                                                 |
+| status    | `default\|success\|warning\|error\|info\|other` | `default`   | 状态                                                                                 |
+| animation | `boolean\|TStatus[]`                            | `false`     | 是否执行动画，如果是数组，则元素是指定要执行动画的状态值                             |
+| disabled  | `boolean`                                       | `false`     | 是否禁用、禁用后不会执行 `onClick`事件                                               |
+| hoverAble | `boolean`                                       | `true`      | 悬浮状态                                                                             |
+| children  | `ReactNode`                                     | `undefined` | 可以嵌套使用组件来扩展功能                                                           |

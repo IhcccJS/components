@@ -1,5 +1,5 @@
 ---
-title: Login
+title: 登录表单 Login
 nav:
   title: 组件
   order: 2
@@ -27,21 +27,21 @@ toc: content
 
 用户名密码登录
 
-| 名称    | 类型                       | 默认值      | 描述     |
-| :------ | :------------------------- | :---------- | :------- |
-| loading | `boolean`                  | `undefined` | 加载状态 |
-| size    | `small \| middle \| large` | `undefined` | 表单尺寸 |
+| 名称    | 类型                   | 默认值      | 描述     |
+| :------ | :--------------------- | :---------- | :------- |
+| loading | `boolean`              | `undefined` | 加载状态 |
+| size    | `small\|middle\|large` | `undefined` | 表单尺寸 |
 
 ## Login.EmailForm Props
 
 邮箱验证码登录
 
-| 名称      | 类型                       | 默认值      | 描述           |
-| :-------- | :------------------------- | :---------- | :------------- |
-| loading   | `boolean`                  | `undefined` | 加载状态       |
-| size      | `small \| middle \| large` | `undefined` | 表单尺寸       |
-| timecount | `number`                   | `undefined` | 验证码倒计时   |
-| onSend    | `() => Promise<void>`      | `undefined` | 发送验证码事件 |
+| 名称      | 类型                   | 默认值      | 描述           |
+| :-------- | :--------------------- | :---------- | :------------- |
+| loading   | `boolean`              | `undefined` | 加载状态       |
+| size      | `small\|middle\|large` | `undefined` | 表单尺寸       |
+| timecount | `number`               | `undefined` | 验证码倒计时   |
+| onSend    | `() => Promise<void>`  | `undefined` | 发送验证码事件 |
 
 ## Login.LoginForm Props
 

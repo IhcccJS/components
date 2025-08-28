@@ -35,7 +35,7 @@ function RenderButtons(props) {
       const onClick = (item) => {
         for (let index = 0; index < buttons.length; index++) {
           if (buttons[index].key === item.key) {
-            eventFunction(item, 'onClick')(item);
+            eventFunction(item, 'onClick')?.(item);
             return;
           }
         }

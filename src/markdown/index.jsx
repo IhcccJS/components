@@ -1,4 +1,5 @@
 import React from 'react';
+import clsx from 'clsx';
 import markdownit from 'markdown-it';
 import hljs from 'highlight.js';
 
@@ -27,15 +28,9 @@ md.renderer.rules.link_open = function (tokens, idx, options, env, self) {
   return defaultRender(tokens, idx, options, env, self);
 };
 
-function MarkDown({ content }) {
+function MarkDown({ className, style, content }) {
   const domString = React.useMemo(() => md.render(content || ''), [content]);
-  return (
-    <article
-      className="markdown-body"
-      dangerouslySetInnerHTML={{ __html: domString }}
-      style={{ width: 500, maxHeight: '72vh', overflow: 'auto' }}
-    />
-  );
+  return <article className={clsx('bc-markdown markdown-body', className)} dangerouslySetInnerHTML={{ __html: domString }} style={style} />;
 }
 
 export default MarkDown;

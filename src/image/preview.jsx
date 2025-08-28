@@ -12,7 +12,7 @@ function ImagePreview({ defaultReader, readerOption, children }) {
     group = group || __GROUP_ID__++;
     if (!imagesRef.current[group]) imagesRef.current[group] = [];
     let index = imagesRef.current[group].indexOf(src);
-    // 会不会存在插入相同图片时，顺序错误的情况？？
+    // FIXME 会不会存在插入相同地址图片时，顺序错误的情况？？
     if (index === -1) {
       index = imagesRef.current[group].length;
       imagesRef.current[group].push(src);

@@ -6,7 +6,13 @@ export default defineConfig({
   base: '/', // 根路径
   publicPath: '/', // 静态文件路径
   favicons: [],
-  styles: ['div.site-features { max-width: 1152px; }', 'section.dumi-default-header-left{ width: 320px; }', '/components.min.css'],
+  styles: [
+    '/theme/default-light/index.css',
+    '/theme/ant.var.css',
+    '/components.min.css',
+    'div.site-features { max-width: 1152px; }',
+    'section.dumi-default-header-left{ width: 320px; }',
+  ],
   themeConfig: {
     // github: "https://github.com/IhcccJS/components",
     name: '@ihccc/components',

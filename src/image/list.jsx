@@ -3,12 +3,12 @@ import { Popover, Empty } from 'antd';
 import Grid from '../grid';
 import Image from './index';
 
-function GridImages({ column, gap, items, more = [], ...restProps }) {
+function GridImages({ column = 3, gap, items, more = [], ...restProps }) {
   return (
     <Grid
       transferStyle
       column={column}
-      option={{ gap }}
+      gap={gap}
       template={items
         .map((img, idx) => ({
           key: idx,
@@ -38,7 +38,7 @@ function List({ max, items, showEmpty, ...restProps }) {
           ? {
               key: '__more__',
               element: (
-                <Popover title="更多" content={<GridImages {...restProps} items={overflow} />}>
+                <Popover title="更多" forceRender content={<GridImages {...restProps} items={overflow} />}>
                   <a style={{ display: 'flex', alignItems: 'center', padding: '0 12px' }}>查看更多</a>
                 </Popover>
               ),

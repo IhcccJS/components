@@ -4,7 +4,7 @@ import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 import { useUnmountedRef, useControllableValue } from 'ahooks';
 
 function FoldSide(props) {
-  const { title, placement = 'right', renderOnFirstOpen, className, style, children } = props;
+  const { title, placement = 'left', renderOnFirstOpen, className, style, children } = props;
 
   const unmountedRef = useUnmountedRef();
   const [firstOpen, setFirstOpen] = React.useState(false);

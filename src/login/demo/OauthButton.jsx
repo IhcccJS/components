@@ -1,6 +1,5 @@
 import React from 'react';
-import { Card } from 'antd';
-import { Login } from '@ihccc/components';
+import { Card, Login } from '@ihccc/components';
 
 function Demo() {
   return (

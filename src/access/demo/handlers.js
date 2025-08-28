@@ -3,7 +3,7 @@ export const roleButtonList = (authority, button) => {
 
   if (authority.status === 'disabled') {
     if (authority.role === 'guest') {
-      button.onClick = () => {
+      button[!button.confirm ? 'onClick' : 'onConfirm'] = () => {
         alert('你点击了功能：' + button.key);
       };
       delete button.props.href;
@@ -19,7 +19,7 @@ export const roleButtonList = (authority, button) => {
     if (!!authority.icon) {
       button.props = { ...button.props, icon: authority.icon };
     }
-    return true;
+    return button;
   }
 
   return false;

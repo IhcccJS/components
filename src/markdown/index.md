@@ -1,5 +1,5 @@
 ---
-title: Markdown
+title: Md内容渲染 Markdown
 nav:
   title: 组件
   order: 2
@@ -9,14 +9,18 @@ group:
 toc: content
 ---
 
-# Markdown `Markdown` 内容渲染
+# Markdown `Md` 内容渲染
 
-<!-- ## 简单上手
+需要额外安装 `highlight.js`
 
-<code src="./demo/base"></code> -->
+## 简单上手
+
+<code src="./demo/base"></code>
 
 ## Markdown Props
 
-| 名称 | 类型     | 默认值      | 描述       |
-| :--- | :------- | :---------- | :--------- |
-| akey | `string` | `undefined` | 唯一的索引 |
+| 名称      | 类型                    | 默认值      | 描述     |
+| :-------- | :---------------------- | :---------- | :------- |
+| content   | `string`                | `undefined` | 内容     |
+| className | `string`                | `undefined` | 样式类   |
+| style     | `ElementCSSInlineStyle` | `undefined` | 内联样式 |

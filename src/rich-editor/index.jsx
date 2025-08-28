@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
+import clsx from 'clsx';
 import Popuper from '../popuper';
 
 const formats = [
@@ -44,7 +44,7 @@ const toolbar = {
 };
 
 function RichEditor(props, ref) {
-  const { imageFormat, onUploadFile } = props;
+  const { className, imageFormat, onUploadFile, ...restProps } = props;
   const quillRef = React.useRef(null);
 
   const popup = Popuper.usePopup();
@@ -53,7 +53,7 @@ function RichEditor(props, ref) {
     const image = () => {
       const onSuccess = (files) => {
         const quill = quillRef.current.getEditor();
-        files.forEach((file) => {
+        (files || []).forEach((file) => {
           const range = quill.getSelection();
           quill.insertEmbed(range?.index || 0, 'image', imageFormat?.(file) || '');
         });
@@ -65,7 +65,7 @@ function RichEditor(props, ref) {
     };
   }, []);
 
-  return <ReactQuill ref={quillRef} modules={modules} formats={formats} {...props} className="bc-rich-editor" />;
+  return <ReactQuill ref={quillRef} modules={modules} formats={formats} {...restProps} className={clsx('bc-rich-editor', className)} />;
 }
 
 export default React.forwardRef(RichEditor);

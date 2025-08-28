@@ -13,9 +13,7 @@ function Text(props) {
     return isRenderFn ? render(label) : label;
   }, [label, render]);
 
-  if (React.isValidElement(children)) {
-    return React.cloneElement(children, { label: text });
-  }
+  if (React.isValidElement(children)) return React.cloneElement(children, { label: text });
 
   return text;
 }

@@ -1,3 +1,7 @@
+import ListWrapper from './list-wrapper';
+
+export { ListWrapper, ListWrapper as DataChecker };
+
 export { default as Access } from './access';
 export * from './base-list';
 export { default as ButtonList } from './button-list';
@@ -18,7 +22,7 @@ export { default as Grid } from './grid';
 export { default as Image } from './image';
 export { default as LazyRender } from './lazy-render';
 export { default as ListItem } from './list-item';
-export { default as ListWrapper } from './list-wrapper';
+// export { default as ListWrapper } from './list-wrapper';
 export * as Login from './login';
 export { default as Markdown } from './markdown';
 export { default as PageResize } from './page-resize';

@@ -13,7 +13,8 @@ function usePreview(src, option) {
   }, []);
 
   const previewSrc = React.useMemo(() => {
-    const imgReader = readerOption[reader || defaultReader] || reader;
+    if (!enable) return src;
+    const imgReader = (readerOption || {})[reader || defaultReader] || reader;
     return !!imgReader && !!imgReader.preview ? imgReader.preview(src) : src;
   }, [reader, src]);
 
