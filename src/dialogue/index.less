@@ -36,7 +36,7 @@
 
   &-content {
     width: fit-content;
-    background: #e9e9e9;
+    background: var(--color-bg-component-secondary, #f9f9f9);
     border-radius: 0 var(--size-border-radius-lg, 8px) var(--size-border-radius-lg, 8px) var(--size-border-radius-lg, 8px);
     padding: 8px;
     word-break: break-word;
@@ -73,8 +73,9 @@
     }
 
     .@{prefix}-message-content {
-      background: #e3f2fd;
+      background: var(--color-primary, #3b82f6);
       border-radius: var(--size-border-radius-lg, 8px) 0 var(--size-border-radius-lg, 8px) var(--size-border-radius-lg, 8px);
+      color: var(--color-text-inverse, #f8fafc);
     }
 
     :global .ant-avatar {

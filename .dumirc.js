@@ -6,7 +6,9 @@ export default defineConfig({
   base: '/', // 根路径
   publicPath: '/', // 静态文件路径
   favicons: [],
+  scripts: ['/theme-change.js'],
   styles: [
+    '/theme/default-dark/index.css',
     '/theme/default-light/index.css',
     '/theme/ant.var.css',
     '/components.min.css',

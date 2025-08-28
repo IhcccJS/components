@@ -22,7 +22,7 @@ export function Item({ className, colSpan, rowSpan, transferStyle, style, onClic
 
 // https://grid.layoutit.com/
 const Grid = React.forwardRef(function Grid(
-  { border, template = [], column, gap, option = {}, transferStyle, onItemClick, className, style, children },
+  { border, template = [], column, gap, cellPadding, option = {}, transferStyle, onItemClick, className, style, children },
   ref,
 ) {
   return (
@@ -39,6 +39,7 @@ const Grid = React.forwardRef(function Grid(
         // padding: option.gap,
         gap: gap || option.gap,
         gridTemplateColumns: `repeat(${column || 1}, 1fr)`,
+        '--grid-cell-padding': cellPadding,
         ...style,
       }}
     >

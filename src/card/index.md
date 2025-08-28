@@ -13,7 +13,7 @@ toc: content
 
 ## 简单上手
 
-<code background="#f1f1f1" src="./demo/base"></code>
+<code background="var(--color-bg, #f1f1f1)" src="./demo/base"></code>
 
 ## Card Props
 

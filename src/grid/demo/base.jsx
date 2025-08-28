@@ -1,13 +1,6 @@
 import React from 'react';
 import { Grid } from '@ihccc/components';
-
-const Block = ({ index }) => {
-  return (
-    <div style={{ padding: 4, background: '#03a9f4', borderRadius: 8, color: '#fff', height: '100%', boxSizing: 'border-box' }}>
-      {index}
-    </div>
-  );
-};
+import Block from './block';
 
 const list = [
   { key: '1', element: <Block index={1} /> },
@@ -28,7 +21,7 @@ function Demo() {
   return (
     <React.Fragment>
       <h2>通常用法</h2>
-      <Grid column={6} gap="8px">
+      <Grid column={6} gap="8px" cellPadding="8px">
         <Grid.Item>
           <Block index={1} />
         </Grid.Item>
@@ -68,7 +61,7 @@ function Demo() {
       </Grid>
 
       <h2>数据渲染、边框</h2>
-      <Grid border template={list} column={6} gap="1px" style={{ marginTop: 16 }} />
+      <Grid border template={list} column={6} cellPadding="8px" style={{ marginTop: 16 }} />
     </React.Fragment>
   );
 }

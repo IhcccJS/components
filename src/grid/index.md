@@ -23,6 +23,7 @@ toc: content
 | template      | `array`                  | `undefined` | 以数据方式渲染                                               |
 | column        | `number`                 | `undefined` | 列数                                                         |
 | gap           | `string`                 | `undefined` | 网格间隔                                                     |
+| cellPadding   | `string`                 | `undefined` | `border` 模式下，网格内间距                                  |
 | transferStyle | `boolean`                | `undefined` | 使用 `template` 情况下，是否将网格样式参数，传递到内容元素上 |
 | onItemClick   | `(index: number) => any` | `undefined` | 使用 `template` 情况下，点击每个网格元素的回调               |
 | className     | `string`                 | `undefined` | 样式类                                                       |
