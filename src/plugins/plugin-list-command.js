@@ -12,6 +12,7 @@ const getRowData = (context, args) => {
   return { record: args[1], data: context.data };
 };
 
+// TODO 使用 eventMap 而非 command
 export default definePlugin({
   name: 'listCommand',
   priority: 'CONTENT',

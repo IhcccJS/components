@@ -3,9 +3,9 @@ import React from 'react';
 import { SettingContext } from './context';
 
 function useSetting() {
-  const { setting, onChange, options } = React.useContext(SettingContext);
+  const { enable, setting, onChange, options } = React.useContext(SettingContext);
 
-  return { data: setting, setData: onChange, options };
+  return { enable, data: setting, setData: onChange, options };
 }
 
 export default useSetting;

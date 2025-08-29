@@ -1,25 +1,34 @@
 import { defineConfig } from 'dumi';
 
+const BASE_PATH = '/ihccc-components';
+
 export default defineConfig({
+  define: {
+    BASE_PATH,
+  },
   outputPath: 'dist-components',
   hash: true,
-  base: '/', // 根路径
-  publicPath: '/', // 静态文件路径
-  favicons: [],
-  scripts: ['/theme-change.js'],
+  base: `${BASE_PATH}`, // 根路径
+  publicPath: `${BASE_PATH}/`, // 静态文件路径
+  // resolve: {
+  //   atomDirs: [{ type: 'util', dir: 'src' }],
+  // },
+  favicons: [
+    // `${BASE_PATH}/logo.png`
+  ],
+  scripts: [`${BASE_PATH}/theme-change.js`],
   styles: [
-    '/theme/default-dark/index.css',
-    '/theme/default-light/index.css',
-    '/theme/ant.var.css',
-    '/components.min.css',
-    'div.site-features { max-width: 1152px; }',
-    'section.dumi-default-header-left{ width: 320px; }',
+    `${BASE_PATH}/theme/default-dark/index.css`,
+    `${BASE_PATH}/theme/default-light/index.css`,
+    `${BASE_PATH}/theme/ant.var.css`,
+    `${BASE_PATH}/components.min.css`,
+    `${BASE_PATH}/reset.css`,
   ],
   themeConfig: {
-    // github: "https://github.com/IhcccJS/components",
     name: '@ihccc/components',
     title: '@ihccc/components',
     logo: '',
+    // logo: `${BASE_PATH}/logo.png`,
     hero: {
       description: '🎯 面向业务开发的强化版组件库',
       actions: [{ type: 'primary', text: '开始使用', link: '/guide' }],

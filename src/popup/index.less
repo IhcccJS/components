@@ -1,4 +1,6 @@
-.popup {
+@prefix: ~'bc-popup';
+
+.@{prefix} {
   &-root {
     position: fixed;
     top: 0;
@@ -15,28 +17,26 @@
     right: 0;
     bottom: 0;
     z-index: var(--z-index-popup, 500);
-    background-color: rgba(0, 0, 0, 0.25);
+    background-color: var(--color-bg-mask, rgba(0, 0, 0, 0.3));
     opacity: 0;
     // backdrop-filter: blur(4px);
-    transition: 0.2s ease;
+    transition: 0.3s ease-in-out;
   }
 
   &-main {
     position: relative;
     top: 100px;
+    z-index: var(--z-index-popup, 500);
     margin: 0 auto;
     opacity: 0;
-    transform: rotateY(0) scale(0);
-    transition: 0.2s linear;
+    transform: scale(0.2);
+    transition: 0.3s ease-in-out;
   }
 
   &-content {
     border-radius: var(--size-border-radius);
     background-color: var(--color-bg-popover);
-    box-shadow:
-      0 6px 16px 0 rgba(0, 0, 0, 0.08),
-      0 3px 6px -4px rgba(0, 0, 0, 0.12),
-      0 9px 28px 8px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 9px 28px 8px rgba(0, 0, 0, 0.05);
   }
 
   &-header {
@@ -62,20 +62,19 @@
     color: var(--color-text-heading);
     font-weight: 600;
     font-size: 16px;
-    line-height: 1.5;
     word-wrap: break-word;
   }
 
-  &-open .popup-mask {
+  &-open .@{prefix}-mask {
     opacity: 1;
   }
 
-  &-open .popup-main {
+  &-open .@{prefix}-main {
     opacity: 1;
-    transform: rotateY(0) scale(1);
+    transform: scale(1);
   }
 
-  &-focus .popup-content {
+  &-focus .@{prefix}-content {
     box-shadow: 0 0px 12px 0 rgba(0, 0, 0, 0.25);
   }
 
@@ -83,12 +82,12 @@
     pointer-events: none;
   }
 
-  &-mask-event .popup-main {
+  &-mask-event .@{prefix}-main {
     pointer-events: all;
   }
 }
 
-.bc-popup-drag-handler {
+.@{prefix}-drag-handler {
   flex: 1;
   cursor: move;
 }

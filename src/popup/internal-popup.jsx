@@ -19,7 +19,7 @@ function InternalPopup(props) {
       mask={false}
       cancelMask
       zIndex={modalRef.zIndex}
-      classNames={{ root: modalRef.focus ? 'popup-focus' : '' }}
+      classNames={{ root: modalRef.focus ? 'bc-popup-focus' : '' }}
       onPopupClick={focus}
       onHide={async () => {
         const execute = await onHide?.(modalRef);

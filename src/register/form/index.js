@@ -2,7 +2,7 @@
 import { Input, InputNumber, DatePicker, Rate, Slider, Switch, TimePicker, Transfer } from 'antd';
 import { isString, isObject } from '@ihccc/utils';
 import { childrenSetter, childrenPropsSetter } from '../../setter';
-import { AutoComplete, Cascader, Checkbox, Mentions, Radio, Segmented, Select, SelectView, TreeSelect } from '../../select';
+import { AutoComplete, Cascader, Checkbox, Mentions, RadioGroup, Segmented, Select, SelectView, TreeSelect } from '../../select';
 import Upload from '../../upload';
 import getAliasName from '../getAliasName';
 
@@ -54,8 +54,8 @@ function register(inputComponents, inputDefaultProps) {
   // checkbox
   childrenSetter.use(getAliasName(componentAlias, 'checkbox'), Checkbox);
 
-  // radio
-  childrenSetter.use(getAliasName(componentAlias, 'radio'), Radio);
+  // RadioGroup
+  childrenSetter.use(getAliasName(componentAlias, 'radio'), RadioGroup);
 
   // segmented
   childrenSetter.use(getAliasName(componentAlias, 'segmented'), Segmented);

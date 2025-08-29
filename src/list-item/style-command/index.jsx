@@ -3,11 +3,11 @@ import clsx from 'clsx';
 
 function ListItem({ icon, name, desc, onClick }) {
   return (
-    <div className={clsx('list-item')} onClick={onClick}>
-      {icon && <div className="list-item-icon">{icon}</div>}
-      <div className="list-item-info">
-        <div className="list-item-info-name">{name}</div>
-        <div className="list-item-info-desc">{desc}</div>
+    <div className={clsx('bc-list-item-command')} onClick={onClick}>
+      {icon && <div className="bc-list-item-command-icon">{icon}</div>}
+      <div className="bc-list-item-command-info">
+        <div className="bc-list-item-command-info-name">{name}</div>
+        <div className="bc-list-item-command-info-desc">{desc}</div>
       </div>
     </div>
   );

@@ -39,8 +39,8 @@ const ListOfTable = createComponent([
   buttonCreate,
   // 内容
   search,
-  list,
   list2,
+  list,
   //  ListJsonDataViewer,
   listPagination,
 ]);

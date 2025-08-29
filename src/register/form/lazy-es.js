@@ -103,7 +103,7 @@ function register(formComponents, inputDefaultProps) {
   // radio
   childrenSetter.use(
     getAliasName(componentAlias, 'radio'),
-    React.lazy(() => import('../../select/radio')),
+    React.lazy(() => import('../../select/radio-group')),
   );
 
   // segmented

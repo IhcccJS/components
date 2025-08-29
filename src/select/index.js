@@ -3,7 +3,7 @@ import Cascader from './cascader';
 import Checkbox from './checkbox';
 import Formater from './formater';
 import Mentions from './mentions';
-import Radio from './radio';
+import RadioGroup from './radio-group';
 import Segmented from './segmented';
 import Select from './select';
 import SelectView from './select-view/base';
@@ -27,7 +27,9 @@ export {
   Checkbox,
   Formater,
   Mentions,
-  Radio,
+  /** @deprecated 使用 RadioGroup 替代 */
+  RadioGroup as Radio,
+  RadioGroup,
   Segmented,
   Select,
   SelectView,

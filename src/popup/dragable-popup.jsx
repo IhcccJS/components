@@ -6,7 +6,7 @@ import Draggable from 'react-draggable';
 const HANDLE_CLASS = 'bc-popup-drag-handler';
 
 function DragablePopup(props) {
-  const { dragAble = true, handleClassName, classNames, ...restProps } = props;
+  const { dragAble = true, handleClassName, classNames = {}, ...restProps } = props;
   const [bounds, setBounds] = React.useState({
     left: 0,
     top: 0,

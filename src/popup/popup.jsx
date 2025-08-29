@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom';
 import { MinusOutlined, CloseOutlined } from '@ant-design/icons';
 import clsx from 'clsx';
 import ButtonList from '../button-list';
+import './index.less';
 
 // TODO 弹窗打开关闭需要模拟 antd 效果，但是缩放原点对不上打开触发位置
 // function getScroll(w, top) {
@@ -122,9 +123,9 @@ function Popup(props, ref) {
   const buttonsData = { ...extraButton.data, onHide, onCancel, onOk };
 
   const headerNode = header || (
-    <div className="popup-header-default">
-      <div className={clsx('popup-header-title', classNames.title)}>{title}</div>
-      <div className="popup-header-buttons">
+    <div className="bc-popup-header-default">
+      <div className={clsx('bc-popup-header-title', classNames.title)}>{title}</div>
+      <div className="bc-popup-header-buttons">
         {extra}
         <ButtonList
           space="none"
@@ -137,7 +138,7 @@ function Popup(props, ref) {
   );
 
   const footerNode = footer || (
-    <div className="popup-footer-default">
+    <div className="bc-popup-footer-default">
       <ButtonList
         layout="end"
         buttons={[...(footerButton.buttons || []), ...interalFooterButtons]}
@@ -148,17 +149,17 @@ function Popup(props, ref) {
   );
 
   const popupNode = (
-    <div ref={popupRef} className={clsx('popup-content', classNames.content)} onClick={onPopupClick}>
+    <div ref={popupRef} className={clsx('bc-popup-content', classNames.content)} onClick={onPopupClick}>
       {header !== false && header !== null && (
-        <div className="popup-header" style={styles.header}>
+        <div className="bc-popup-header" style={styles.header}>
           {headerNode}
         </div>
       )}
-      <div className="popup-body" style={styles.body}>
+      <div className="bc-popup-body" style={styles.body}>
         {children}
       </div>
       {footer !== false && footer !== null && (
-        <div className="popup-footer" style={styles.footer}>
+        <div className="bc-popup-footer" style={styles.footer}>
           {footerNode}
         </div>
       )}
@@ -169,14 +170,14 @@ function Popup(props, ref) {
     <div
       id={id}
       ref={ref}
-      className={clsx('popup-root', open && openAsync && 'popup-open', cancelMask && 'popup-mask-event', classNames.root)}
+      className={clsx('bc-popup-root', open && openAsync && 'bc-popup-open', cancelMask && 'bc-popup-mask-event', classNames.root)}
       style={open || openAsync ? { ...styles.root, zIndex } : { ...styles.root, display: 'none' }}
     >
-      {mask !== false && mask !== null && <div className="popup-mask" style={styles.mask} onClick={onCancel}></div>}
+      {mask !== false && mask !== null && <div className="bc-popup-mask" style={styles.mask} onClick={onCancel}></div>}
       <div
         ref={thisPopupRef}
-        className={clsx('popup-main', classNames.main)}
-        style={{ ...styles.popup, top, width, zIndex /** transformOrigin: originPosition */ }}
+        className={clsx('bc-popup-main', classNames.main)}
+        style={{ ...styles.main, top, width, zIndex /**, transformOrigin: originPosition */ }}
         onTransitionEnd={onTransitionEnd}
       >
         {popupRender?.(popupNode) || popupNode}

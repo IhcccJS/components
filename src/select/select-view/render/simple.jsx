@@ -3,6 +3,7 @@ import clsx from 'clsx';
 import { List } from 'antd';
 // import ListView from '../../../list-view';
 
+// todo 重写为 grid + list-item
 function ViewSimple({ disabled, loading, grid, direction = 'horizontal', fieldNames, options, isActive, onClick, style }) {
   return (
     <List

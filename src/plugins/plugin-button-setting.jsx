@@ -10,7 +10,9 @@ export default definePlugin({
   before(_, props) {
     const { namespace, buttonEnabled = {} } = props;
 
-    const { options } = useSetting();
+    const { enable, options } = useSetting();
+
+    if (!enable) return;
 
     const currentOptions = options.innerOptions[namespace] || {};
 

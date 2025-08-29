@@ -12,6 +12,10 @@ function SelectView(props) {
     defaultValue: multiple ? [] : void 0,
   });
 
+  React.useEffect(() => {
+    setValue(multiple ? [] : void 0);
+  }, [multiple]);
+
   const alias = React.useMemo(
     () =>
       Object.assign(

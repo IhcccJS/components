@@ -29,7 +29,7 @@ toc: content
 | children   | `string`      | `undefined`         | 内容         |
 | className  | `string`      | `undefined`         | 根元素类名   |
 | style      | `string`      | `undefined`         | 内联样式     |
-| classNames | `TClassNames` | `undefined`         | 样式类       |
+| classNames | `TClassNames` | `undefined`         | 样式类集合   |
 | styles     | `TStyles`     | `undefined`         | 内联样式集合 |
 
 

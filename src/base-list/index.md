@@ -11,9 +11,9 @@ toc: content
 
 # BaseList 列表
 
-<!-- ## 简单上手
+## 简单上手
 
-<code src="./demo/base"></code> -->
+<code background="var(--color-bg, #f1f1f1)" src="./demo/base" ></code>
 
 ## BaseList Props
 

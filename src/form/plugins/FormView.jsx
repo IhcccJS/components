@@ -30,6 +30,8 @@ function FormLayout(props) {
 const FormView = definePlugin({
   name: 'FormView',
   priority: 'Layout',
+  props: ['form'],
+  subComponent: { Item: Form.Item, useForm: Form.useForm },
   expose: [{ name: 'formInstance', source: 'form' }],
   elementKeys: ['content'],
   collection() {
@@ -41,8 +43,6 @@ const FormView = definePlugin({
       onFormValuesChange: [],
     };
   },
-  subComponent: { Item: Form.Item, useForm: Form.useForm },
-  props: ['form'],
   main(_, props) {
     const { form } = props;
 

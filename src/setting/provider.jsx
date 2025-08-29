@@ -52,7 +52,7 @@ function SettingProvider({ submitButton, setting, defaultSetting, options, onCha
   }, []);
 
   return (
-    <SettingContext.Provider value={{ setting, defaultSetting, options: allOptions, submitButton, onChange }}>
+    <SettingContext.Provider value={{ enable: true, setting, defaultSetting, options: allOptions, submitButton, onChange }}>
       {children}
     </SettingContext.Provider>
   );

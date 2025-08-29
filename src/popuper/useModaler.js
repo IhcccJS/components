@@ -4,6 +4,7 @@ import { ModalContext } from './context';
 const None = () => {};
 
 const NoEnableRes = {
+  elements: [],
   modal: {
     open: None,
     hide: None,
@@ -20,7 +21,7 @@ function useModaler(config) {
   React.useEffect(() => {
     if (!namespace || !items) return;
     if (!modalContext.enable) {
-      console.error('<Modaler.System /> 组件没有在全局挂载！');
+      console.warn('<Modaler.System /> 组件没有在全局挂载！');
       return;
     }
     modalContext.setNamespace(namespace); // 设置当前的命名空间
