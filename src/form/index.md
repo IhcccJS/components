@@ -1,5 +1,5 @@
 ---
-title: Form
+title: Form 表单
 nav:
   title: 组件
   order: 2
@@ -11,9 +11,9 @@ toc: content
 
 # Form 表单
 
-<!-- ## 简单上手
+## 简单上手
 
-<code src="./demo/base"></code> -->
+<code src="./demo/base"></code>
 
 ## Form Props
 

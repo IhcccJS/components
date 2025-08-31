@@ -17,7 +17,7 @@ apiHeader: false
 - [x] [ButonList 按钮组](/components/button-list)
 - [x] [Card 卡片](/components/card)
 - [x] [CodeViewer 代码片段](/components/code-viewer)
-- [ ] [CommonForm 表单](/components/form)
+- [ ] [Form 表单](/components/form)
 - [x] [DataItem 数据项](/components/data-item)
 - [ ] [Detail 详情](/components/detail)
 - [x] [Dialogue 对话列表](/components/dialogue)

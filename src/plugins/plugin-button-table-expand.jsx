@@ -56,7 +56,7 @@ export default definePlugin({
   main(_, props) {
     const { buttonEnabled = {}, expandable, table = {}, rowKey: _rowKey = 'key' } = props;
 
-    if (buttonEnabled.refresh === false) return;
+    if (buttonEnabled.tableExpand === false) return;
 
     const rowKey = _rowKey || table.rowKey || 'key';
 

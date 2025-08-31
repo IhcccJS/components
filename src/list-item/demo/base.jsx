@@ -7,7 +7,7 @@ function Demo() {
   return (
     <Flex vertical gap="16px" style={{ width: 400 }}>
       <ListItem.StyleCard
-        cover={<img src="/哆啦A梦.png" alt="cover" style={{ height: 120 }} />}
+        cover={<img src="/ihccc-components/哆啦A梦.png" alt="cover" style={{ height: 120 }} />}
         extra="更多信息"
         name="哆啦A梦"
         desc="来自未来的机器猫"

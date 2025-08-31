@@ -1,5 +1,5 @@
 import React from 'react';
-import './gloabl';
+import './global';
 import { ListOfTable } from '@ihccc/components';
 import columns, { actionButtons } from './columns/role';
 import { query, remove } from './services/role';

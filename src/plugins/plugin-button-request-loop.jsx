@@ -4,16 +4,16 @@ import { Button } from 'antd';
 import { useInterval } from 'ahooks';
 import definePlugin from '../create-component/definePlugin';
 
-function CountDownButton({ delay, callback, ...restProps }) {
+function CountDownButton({ duration, callback, ...restProps }) {
   const [enable, setEnable] = React.useState(false);
-  const [countDown, setCountDown] = React.useState(delay);
+  const [countDown, setCountDown] = React.useState(duration);
 
   useInterval(
     () => {
       setCountDown((c) => {
         if (c - 1 === 0) {
           callback?.();
-          return delay;
+          return duration;
         }
         return c - 1;
       });
@@ -41,7 +41,7 @@ export default definePlugin({
   priority: 'CONTENT',
   props: ['buttonEnabled'],
   before(_, props) {
-    const { buttonEnabled = {} } = props;
+    const { buttonEnabled = {}, duration = 5 } = props;
 
     if (buttonEnabled.requestLoop === false) return;
 
@@ -49,7 +49,7 @@ export default definePlugin({
       button: {
         key: 'requestLoopToggle',
         tip: '定时刷新',
-        props: ({ request }) => ({ delay: 5, callback: request.refresh }),
+        props: ({ request }) => ({ duration, callback: request.refresh }),
         // #FIXME: Cannot update a component (`ForwardRef`) while rendering a different component (`RenderButtons`). To locate the bad setState() call inside `RenderButtons`
         render: CountDownButton,
       },
