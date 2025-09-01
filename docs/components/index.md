@@ -13,13 +13,14 @@ apiHeader: false
 ## 组件
 
 - [x] [Access 权限控制](/components/access)
-- [ ] [BaseList 基础列表](/components/base-list)
+- [x] [BaseList 基础列表](/components/base-list)
 - [x] [ButonList 按钮组](/components/button-list)
 - [x] [Card 卡片](/components/card)
 - [x] [CodeViewer 代码片段](/components/code-viewer)
-- [ ] [Form 表单](/components/form)
+- [ ] [Config 配置项](/components/config)
+- [x] [Form 表单](/components/form)
 - [x] [DataItem 数据项](/components/data-item)
-- [ ] [Detail 详情](/components/detail)
+- [x] [Detail 详情](/components/detail)
 - [x] [Dialogue 对话列表](/components/dialogue)
 - [ ] [EditTable 编辑表格](/components/edit-table)
 - [x] [Feature 状态特征](/components/feature)
@@ -32,16 +33,16 @@ apiHeader: false
 - [x] [Login 登录表单](/components/login)
 - [x] [Markdown markdown 内容渲染](/components/markdown)
 - [x] [Popup 弹出层](/components/popup)
-- [ ] [Popuper 弹出层管理](/components/popuper)
-- [ ] [PageResize 页面兼容]
+- [x] [Popuper 弹出层管理](/components/popuper)
+- [ ] [PageResize 页面兼容](/components/page-resize)
 - [x] [RichEditor 富文本编辑器](/components/rich-editor)
-- [ ] [Setting 用户系统设置]
+- [ ] [Setting 用户系统设置](/components/setting)
 - [x] [Select 选择，这是一系列组件的合集，可以直接调用配置好的数据选项](/components/select)
 - [x] [Text 文本](/components/text)
-- [ ] [Theme 主题切换]
-- [ ] [Tour 用户引导]
-- [ ] [TransitionRoute 路由动画]
-- [ ] [Upload 上传](/components/upload)
+- [ ] [Theme 主题切换](/components/theme)
+- [ ] [Tour 用户引导](/components/tour)
+- [ ] [TransitionRoute 路由动画](/components/transition-route)
+- [x] [Upload 上传](/components/upload)
 - [ ] WaterFall 瀑布流列表
 - [ ] MapL7 l7 地图渲染
   - 加载互联网底图、离线底图、无底图渲染

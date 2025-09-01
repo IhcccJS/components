@@ -15,7 +15,6 @@ function DataItem({
   styles = {},
   ...restProps
 }) {
-  console.log(styleSeed);
   return (
     <div className={clsx(styleSeed.root, classNames.root, className)} style={{ ...style, ...styles.root }} {...restProps}>
       {(!!icon || !!label) && (

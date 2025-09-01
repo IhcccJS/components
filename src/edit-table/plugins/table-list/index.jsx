@@ -10,7 +10,7 @@ const TableList = definePlugin({
 
     const { action } = instance.getPlugin('EditList');
     const { tableColumns, cell } = instance.getPlugin('ColumnsTransform');
-    console.log(tableProps, action, tableColumns, cell);
+    // console.log(tableProps, action, tableColumns, cell);
 
     return {
       content: (

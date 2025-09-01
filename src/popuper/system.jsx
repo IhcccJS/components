@@ -9,7 +9,7 @@ function ModalSystem(props) {
     max = 10,
     container,
     eventEmitter,
-    defaultType = 'modal',
+    defaultType = 'popup',
     defaultModalProps,
     onOpenOverflow,
     // openPosition,

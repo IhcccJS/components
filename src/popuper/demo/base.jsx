@@ -2,7 +2,7 @@ import React from 'react';
 import { UserOutlined, CloudSyncOutlined, EditOutlined } from '@ant-design/icons';
 import { Space, Button, Form, Input, Spin } from 'antd';
 import { Popuper } from '@ihccc/components';
-import { profile } from '../services';
+import { profile } from './services';
 
 function getName() {
   return ['张三', '李晓'][Math.floor(Math.random() * 2)];
@@ -291,7 +291,7 @@ function Demo() {
   return (
     <div style={{ padding: 20, maxHeight: 960, overflow: 'auto' }}>
       <Popuper.System
-        defaultModalProps={{ modal: { dragAble: true, cancelMask: true } }}
+        // defaultModalProps={{ modal: { dragAble: true, cancelMask: true } }}
         onOpenOverflow={() => {
           console.warn('弹窗打开上限！！！');
         }}

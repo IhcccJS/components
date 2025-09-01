@@ -29,7 +29,7 @@ toc: content
 | tabs       | `TabsProps`                              | `undefined` | 将卡片头部渲染为 `tabs` 栏 |
 | children   | `string`                                 | `undefined` | 主体内容                   |
 | className  | `string`                                 | `undefined` | 样式类                     |
-| style      | `string`                                 | `undefined` | 内联样式                   |
+| style      | `ElementCSSInlineStyle`                  | `undefined` | 内联样式                   |
 | classNames | `TClassNames`                            | `undefined` | 样式类集合                 |
 | styles     | `TStyles`                                | `undefined` | 内联样式集合               |
 | onClick    | `string`                                 | `undefined` | 点击回调                   |

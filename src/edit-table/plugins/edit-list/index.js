@@ -1,6 +1,6 @@
 import React from 'react';
 import cloneDeep from 'lodash/cloneDeep';
-import { useDynamicList, useMemoizedFn } from 'ahooks';
+import { useDynamicList, useMemoizedFn, useControllableValue } from 'ahooks';
 import definePlugin from '../../../create-component/definePlugin';
 
 const ROW_INDEX_NAME = '_index';
@@ -10,7 +10,8 @@ const EditList = definePlugin({
   priority: 'TOOL',
   props: ['dataSource', 'formatList', 'onChange', 'onSave'],
   expose: { name: 'action', source: 'action' },
-  main(_, { formatList, dataSource = [], onChange, onSave }) {
+  main(_, props) {
+    const { formatList, dataSource = [], onChange, onSave } = props;
     const action = useDynamicList(dataSource);
 
     React.useEffect(() => {
@@ -18,7 +19,12 @@ const EditList = definePlugin({
     }, [dataSource]);
 
     const cacheRef = React.useRef([]);
-    const [editing, setEditing] = React.useState(false);
+    const [editing, setEditing] = useControllableValue(props, {
+      defaultValue: false,
+      defaultValuePropName: 'defaultEditing',
+      valuePropName: 'editing',
+      trigger: 'onEditingChange',
+    });
     const [updateRow, setUpdateRow] = React.useState();
 
     const data = React.useMemo(() => {
@@ -33,8 +39,8 @@ const EditList = definePlugin({
     });
 
     const setFieldValue = useMemoizedFn((record, column, value) => {
-      if (!cacheRef.current[index]) cacheRef.current[index] = {};
       const index = record[ROW_INDEX_NAME];
+      if (!cacheRef.current[index]) cacheRef.current[index] = {};
       const dataIndex = column.name || column.dataIndex;
 
       cacheRef.current[index][dataIndex] = value;

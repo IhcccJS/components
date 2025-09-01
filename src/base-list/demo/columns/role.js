@@ -21,7 +21,7 @@ export default [
     title: '备注',
     dataIndex: 'remark',
     width: 'e16',
-    visible: ['list'],
+    visible: ['list', 'profile'],
     listRender: { as: 'description' },
   },
   {
@@ -29,14 +29,14 @@ export default [
     dataIndex: 'createTime',
     width: 'e12',
     listRender: { as: 'extra' },
-    visible: ['list'],
+    visible: ['list', 'profile'],
   },
   {
     title: '更新时间',
     dataIndex: 'updateTime',
     width: 'e12',
     listRender: { as: 'extra' },
-    visible: ['list'],
+    visible: ['list', 'profile'],
   },
 ];
 

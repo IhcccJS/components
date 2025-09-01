@@ -37,7 +37,7 @@ toc: content
 | baseProps      | [`propsObject`](#特别类型)                   | `undefined` | 默认的组件参数                                                                                                        |
 | sortRenderKeys | `array\|object`                              | `undefined` | 设置按钮排序，优先级更高                                                                                              |
 | render         | `function(renderDom, data, buttonList): any` | `undefined` | 自定义渲染按钮列表                                                                                                    |
-| eventMap       | { [eventKey]: function }                     | `undefined` | 按钮列表响应的事件列表，如果在这里定义了事件，按钮的 onClick 只需要指定 `eventKey` 即可                               |
+| eventMap       | `{ [eventKey]: function }`                   | `undefined` | 按钮列表响应的事件列表，如果在这里定义了事件，按钮的 onClick 只需要指定 `eventKey` 即可                               |
 
 ### buttonItem
 

@@ -149,7 +149,7 @@ toc: content
 | :--------------------- | :----------------- | :---------- | :----------------------------------- |
 | access                 | `TAccess`          | `undefined` | 权限配置                             |
 | name                   | `string`           | `list`      | 列表过滤名称                         |
-| columns                | `TColumns[]`       | `[]`        | 列表列配置项                         |
+| columns                | `TColumnItem[]`    | `[]`        | 列表列配置项                         |
 | columnsTransformConfig | `TUseColumns`      | `{}`        | `useColumns` 配置                    |
 | actionColumn           | `TActionColumn`    | `{}`        | 操作列配置                           |
 | actionButtons          | `TButtons`         | `[]`        | 操作列按钮配置                       |
@@ -354,7 +354,7 @@ toc: content
 | request    | `TRequest`    | `{}`        | 默认搜索参数配置 |
 | foldConfig | `TFoldConfig` | `undefined` | 折叠配置         |
 | columns    | `TColumn[]`   | `{}`        | 手动隐藏此按钮   |
-| column     | `number`      | 6           | 列数             |
+| column     | `number`      | `6`         | 列数             |
 
 
 ### plugin-search-simple
@@ -371,38 +371,109 @@ toc: content
 
 ### TTableProps
 
+查看 antd `Table` 组件
+
 ### TButtonListProps
+
+查看 `ButtonList` 组件
 
 ### TTableExpandable
 
+查看 antd `Table` 组件 `expandable` 配置项
+
 ### TAccess
+
+```ts
+type TAccess = string | {
+  name?: string;
+  handler?: (auth: any, element: any) => element | boolean;
+};
+```
 
 ### TUseColumns
 
 ### TActionColumn
 
+查看 `columns/TColumnItem`
+
 ### TButtons
+
+查看 `ButtonList` 组件 `buttons` 配置
 
 ### TEventData
 
+```ts
+type TEventData = Record<string, any>;
+```
+
 ### TEventMap
+
+```ts
+type TEventMap = Record<string, function>;
+```
 
 ### TItemSelections
 
+```ts
+type TItemSelections = {
+  type?: 'radio';
+  disabled?: (item: any) => boolean;
+  defaultSelected?: any[];
+  selected?: any[];
+};
+```
+
 ### TRenderContent
+
+```ts
+type TRenderContent = {
+  place?: 'inner' | 'outer';
+  direction?: 'column' | 'row' | 'column-reverse' | 'row-reverse';
+  content?: ReactNode;
+} | ({ header: ReactNode, toolbar: ReactNode, footer: ReactNode, content: ReactNode, body: ReactNode }) => ReactNode;
+```
 
 ### TListProps
 
+查看 antd `List` 组件
+
 ### TRenderList
+
+```ts
+type TRenderList = {
+  type?: 'card';
+  renderComponent?: Record<string, ReactComponent>;
+  itemProps?: Record<string, any> | ({ data: any, index: number, selection: TSelection }) => Record<string, any>;
+};
+```
 
 ### TCommand
 
+```ts
+type TCommand = Record<string, string | function>;
+```
+
 ### TPaginationProps
+
+查看 antd `Pagination` 组件
 
 ### TWaterfallProps
 
+查看 `Waterfall` 组件
+
 ### TRequest
+
+查看 `useApi` hooks
 
 ### TFoldConfig
 
+```ts
+type TFoldConfig = {
+  defaultFold?: boolean;
+  size?: number;
+};
+```
+
 ### TFormProps
+
+查看 `Form` 组件
