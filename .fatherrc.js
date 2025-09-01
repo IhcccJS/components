@@ -5,4 +5,7 @@ export default defineConfig({
   esm: { output: 'es', ignores: ['src/**/demo/**/*'] },
   // cjs: { output: 'lib', ignores: ['src/**/demo/**/*'] },
   umd: { entry: 'src/style/index.js', name: 'ihc', output: 'dist' },
+  prebundle: {
+    extraExternals: { antd: 'antd' },
+  },
 });

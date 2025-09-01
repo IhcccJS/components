@@ -5,47 +5,53 @@ import { ruleSetter } from '../../setter';
 function register(ruleInterface) {
   const ruleAlias = ruleInterface || {};
 
-  // 必填
-  ruleSetter.use('required', (message) => ({
-    required: true,
-    message: message || '请输入必填项',
-  }));
+  // // 必填
+  // ruleSetter.use(getAliasName(ruleAlias, 'required'), function (message) {
+  //   console.log(this, message);
 
-  // 数字
-  ruleSetter.use('isNumber', (message) => ({
-    pattern: /^\d+$/,
-    message: message || '输入项不是数字',
-  }));
+  //   return {
+  //     required: true,
+  //     message: message || '请输入必填项',
+  //   };
+  // });
 
-  // 手机号码
-  ruleSetter.use('isTelephone', (message) => ({
-    // pattern: /1[2-9]\d{9}/,
-    message: message || '输入项不是手机号码',
-  }));
+  // // 数字
+  // ruleSetter.use(getAliasName(ruleAlias, 'isNumber'), (message) => ({
+  //   pattern: /^\d+$/,
+  //   message: message || '输入项不是数字',
+  // }));
 
-  // 邮箱
-  ruleSetter.use('isEmail', (message) => ({
-    // pattern: /1[2-9]\d{9}/,
-    message: message || '输入项不是邮箱',
-  }));
+  // // 手机号码
+  // ruleSetter.use(getAliasName(ruleAlias, 'isTelephone'), (message) => ({
+  //   // pattern: /1[2-9]\d{9}/,
+  //   message: message || '输入项不是手机号码',
+  // }));
 
-  // 身份证
-  ruleSetter.use('isIdcard', (message) => ({
-    // pattern: /1[2-9]\d{9}/,
-    message: message || '输入项不是身份证',
-  }));
+  // // 邮箱
+  // ruleSetter.use(getAliasName(ruleAlias, 'isEmail'), (message) => ({
+  //   // pattern: /1[2-9]\d{9}/,
+  //   message: message || '输入项不是邮箱',
+  // }));
 
-  // 路径
-  ruleSetter.use('isPath', (message) => ({
-    // pattern: /1[2-9]\d{9}/,
-    message: message || '输入项不是路径信息',
-  }));
+  // // 身份证
+  // ruleSetter.use(getAliasName(ruleAlias, 'isIdcard'), (message) => ({
+  //   // pattern: /1[2-9]\d{9}/,
+  //   message: message || '输入项不是身份证',
+  // }));
 
-  // url 地址
-  ruleSetter.use('isUrl', (message) => ({
-    // pattern: /1[2-9]\d{9}/,
-    message: message || '输入项不是 url 地址',
-  }));
+  // // 路径
+  // ruleSetter.use(getAliasName(ruleAlias, 'isPath'), (message) => ({
+  //   // pattern: /1[2-9]\d{9}/,
+  //   message: message || '输入项不是路径信息',
+  // }));
+
+  // // url 地址
+  // ruleSetter.use(getAliasName(ruleAlias, 'isUrl'), (message) => ({
+  //   // pattern: /1[2-9]\d{9}/,
+  //   message: message || '输入项不是 url 地址',
+  // }));
+
+  // console.log(ruleSetter);
 
   for (let key in ruleAlias) {
     if (!isString(ruleAlias[key])) {

@@ -9,7 +9,7 @@ export { default as Card } from './card';
 export { default as CodeViewer } from './code-viewer';
 export { default as columnsHelper } from './columns-helper';
 export { default as Config } from './config';
-export { default as createComponent } from './create-component';
+export { default as createComponent, definePlugin } from './create-component';
 export { default as CssMotion } from './css-motion';
 export { default as DataItem } from './data-item';
 export { default as Detail } from './detail';

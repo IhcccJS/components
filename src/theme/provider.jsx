@@ -6,7 +6,7 @@ import { ThemeContext } from './context';
 export const changeTheme = () => {};
 
 export const getChangeTheme = function (getSetting) {
-  const changeTheme = (theme) => {
+  const changeAtOnce = (theme) => {
     try {
       if (theme === void 0) {
         const setting = getSetting();
@@ -27,11 +27,11 @@ export const getChangeTheme = function (getSetting) {
     //在不支持的浏览器里不做动画
     if (event === null) event = { clientX: window.innerWidth / 2, clientY: window.innerHeight / 2 };
     if (!document.startViewTransition || !event) {
-      changeTheme(theme);
+      changeAtOnce(theme);
       return;
     }
     // 开始一次视图过渡：
-    const transition = document.startViewTransition(() => changeTheme(theme));
+    const transition = document.startViewTransition(() => changeAtOnce(theme));
 
     await transition.ready;
 
@@ -50,20 +50,20 @@ export const getChangeTheme = function (getSetting) {
 
   return {
     /** 修改主题 */
-    changeTheme,
+    atOnce: changeAtOnce,
     /** 修改主题带动画 */
-    changeThemeTransitional,
+    transitional: changeThemeTransitional,
   };
 };
 
-function ThemeProvider({ theme, list, toggle, onChange, updateTheme, children }) {
+function ThemeProvider({ theme, list, toggle, onChange, changeTheme, children }) {
   const mouseEventRef = React.useRef(false);
 
   const changeThemeInternal = React.useCallback((themeKey, event) => {
     if ((!themeKey && themeKey !== 0) || !onChange) return;
     const theme = typeof themeKey === 'number' ? list[themeKey] : list.find((item) => item.value === themeKey);
     if (!theme) return;
-    updateTheme?.(theme, event);
+    changeTheme?.(theme, event);
   }, []);
 
   const setTheme = React.useCallback((themeKey, event) => {

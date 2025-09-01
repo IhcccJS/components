@@ -1,6 +1,7 @@
 import React from 'react';
 import { useUnmountedRef } from 'ahooks';
 import { TransitionContext } from '../context';
+import { ConfigContext } from '../../config/context';
 
 /** 默认转场样式类名 */
 const TRANSITION_CLASSNAMES = {
@@ -12,19 +13,17 @@ const TRANSITION_CLASSNAMES = {
 
 const isUrl = (path) => /^(\w+?:)*?\/\/.+$/.test(path);
 
-const onPathChange = (type, pathname) => {
+const onPathChange = (type, pathname, history) => {
   if (isUrl(pathname)) {
     window.location[type](pathname);
   } else {
-    // todo 使用 config 组件传递的 history
-    // history[type](pathname);
+    history[type](pathname);
   }
 };
 
 function TransitionRoute({ defaultTransitionClassNames, children }) {
   const unmountedRef = useUnmountedRef();
-  // todo 使用 config 组件传递的 location
-  const location = {};
+  const { location, history } = React.useContext(ConfigContext);
   // 页面转场执行元素 ref
   const transitionRef = React.useRef();
   /**
@@ -124,7 +123,7 @@ function TransitionRoute({ defaultTransitionClassNames, children }) {
     const classNames = configRef.current['out'] || [];
     // 没有状态，执行跳转
     if (classNames.length < 2) {
-      onPathChange?.(type, pathname);
+      onPathChange?.(type, pathname, history);
       return;
     }
     // 重置一个新对象，会导致再次执行入场动画
@@ -159,7 +158,7 @@ function TransitionRoute({ defaultTransitionClassNames, children }) {
         } else {
           // console.log('出场完毕，执行跳转');
           // 没有状态，执行跳转
-          onPathChange?.(type, pathname);
+          onPathChange?.(type, pathname, history);
         }
       }
     },
