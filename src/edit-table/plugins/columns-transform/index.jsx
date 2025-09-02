@@ -24,9 +24,9 @@ const transferEditCell = {
         return {
           editing: opts.canEdit(column.editAble, record),
           component: React.createElement(
-            column.inputNode,
-            Object.assign({}, column.inputNodeProps, {
-              [valuePropName]: get(record, column.dataIndex, column.inputNodeProps?.defaultValue),
+            column.input || column.inputNode,
+            Object.assign({}, column.inputProps, column.inputNodeProps, {
+              [valuePropName]: get(record, column.dataIndex, column.inputProps?.defaultValue || column.inputNodeProps?.defaultValue),
               onChange: (event) => opts.setFieldValue?.(record, column, getValue(valuePropName, event)),
             }),
           ),

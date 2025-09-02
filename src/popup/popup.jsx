@@ -3,7 +3,6 @@ import { createPortal } from 'react-dom';
 import { MinusOutlined, CloseOutlined } from '@ant-design/icons';
 import clsx from 'clsx';
 import ButtonList from '../button-list';
-import './index.less';
 
 // TODO 弹窗打开关闭需要模拟 antd 效果，但是缩放原点对不上打开触发位置
 // function getScroll(w, top) {

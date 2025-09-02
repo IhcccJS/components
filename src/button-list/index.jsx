@@ -2,6 +2,7 @@ import React from 'react';
 import clsx from 'clsx';
 import { Tooltip, Dropdown } from 'antd';
 import { isArray, isObject, isFunction, joinString } from '@ihccc/utils';
+import UnknowElement from '../utils/unknow-element';
 import Access from '../access';
 import { buttonSetter } from '../setter';
 import { Confirm } from './buttons';
@@ -64,15 +65,20 @@ function RenderButtons(props) {
 
     const btnType = item.type || type || 'a';
 
-    const buttonType = buttonSetter.get(btnType);
+    let buttonType = buttonSetter.get(btnType);
 
-    if (!buttonType) throw new Error('unknow button type:' + btnType);
+    if (!buttonType) {
+      console.warn('unknow button type:' + btnType);
+      buttonType.component = UnknowElement;
+      buttonType.props = { type: btnType };
+    }
 
     const eventName = buttonType.event || 'event';
 
     let button;
 
     const buttonProps = {
+      ...buttonType.props,
       ...baseProps?.[btnType],
       // ? 需求是什么
       ...(!item.props ? eventData : item.props),

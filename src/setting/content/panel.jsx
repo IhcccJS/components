@@ -6,15 +6,17 @@ import { SettingContext } from '../context';
 function SettingPanel(props) {
   const { prefix } = props;
 
-  const { setting, options, submitButton, onChange } = React.useContext(SettingContext);
-
-  const currentOptions = options.innerOptions[prefix] || {};
+  const { enable, setting, options, submitButton, onChange } = React.useContext(SettingContext);
 
   const [panelForm] = Form.useForm();
 
   React.useEffect(() => {
     panelForm.setFieldsValue(setting);
   }, [setting]);
+
+  if (!enable) return;
+
+  const currentOptions = options.innerOptions[prefix] || {};
 
   return (
     <Form

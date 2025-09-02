@@ -1,10 +1,10 @@
 import createComponent from '../create-component';
 
-import request  from '../plugins/plugin-request-loadmore';
+import request from '../plugins/plugin-request-loadmore';
 
 import layout from '../plugins/plugin-layout-style2';
 import search from '../plugins/plugin-search-simple';
-import list from '../plugins/plugin-list-loadMore';
+import list from '../plugins/plugin-list-loadmore';
 import buttonList from '../plugins/plugin-button-list';
 
 import buttonCreate from '../plugins/plugin-button-create';

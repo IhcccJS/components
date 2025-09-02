@@ -4,7 +4,7 @@ import request from '../plugins/plugin-request-pagination';
 // import  columnsTransform from '../plugins/ columnsTransform';
 
 import layout from '../plugins/plugin-layout-style2';
-import list from '../plugins/plugin-list-table-editRow';
+import list from '../plugins/plugin-list-table-edit-row';
 import buttonList from '../plugins/plugin-button-list';
 
 import buttonCreate from '../plugins/plugin-button-create';

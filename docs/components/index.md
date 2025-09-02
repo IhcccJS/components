@@ -19,6 +19,7 @@ apiHeader: false
 - [x] [CodeViewer 代码片段](/components/code-viewer)
 - [ ] [Config 配置项](/components/config)
 - [x] [Form 表单](/components/form)
+- [x] [DataChecker 列表包裹组件](/components/data-checker)
 - [x] [DataItem 数据项](/components/data-item)
 - [x] [Detail 详情](/components/detail)
 - [x] [Dialogue 对话列表](/components/dialogue)
@@ -29,7 +30,6 @@ apiHeader: false
 - [x] [Image 图片](/components/image)
 - [ ] [LazyRender 懒加载]
 - [x] [ListItem 列表项](/components/list-item)
-- [x] [ListWrapper 列表包裹组件](/components/list-wrapper)
 - [x] [Login 登录表单](/components/login)
 - [x] [Markdown markdown 内容渲染](/components/markdown)
 - [x] [Popup 弹出层](/components/popup)

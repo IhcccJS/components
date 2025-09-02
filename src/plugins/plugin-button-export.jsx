@@ -1,7 +1,7 @@
 import React from 'react';
 import { Flex, Button, Typography } from 'antd';
 import { ExportOutlined } from '@ant-design/icons';
-import { saveAs } from 'file-saver';
+import { saveAs } from '@ihccc/utils';
 import definePlugin from '../create-component/definePlugin';
 
 const { Paragraph } = Typography;

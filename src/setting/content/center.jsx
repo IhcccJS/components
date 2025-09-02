@@ -1,6 +1,6 @@
 import React from 'react';
 import { ImportOutlined, ExportOutlined } from '@ant-design/icons';
-import { saveAs } from 'file-saver';
+import { saveAs } from '@ihccc/utils';
 import ButtonList from '../../button-list';
 import Card from '../../card';
 import Form from '../../form';

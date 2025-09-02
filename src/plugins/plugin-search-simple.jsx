@@ -1,5 +1,5 @@
 import React from 'react';
-import Form from '../common-form';
+import Form from '../form';
 import definePlugin from '../create-component/definePlugin';
 
 export default definePlugin({

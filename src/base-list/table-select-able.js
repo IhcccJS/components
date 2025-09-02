@@ -6,7 +6,7 @@ import itemSelections from '../plugins/plugin-item-selections';
 
 import layout from '../plugins/plugin-layout-main';
 import search from '../plugins/plugin-search-normal';
-import list from '../plugins/plugin-list-table-selectAble';
+import list from '../plugins/plugin-list-table-selectable';
 import listPagination from '../plugins/plugin-list-pagination';
 import buttonList from '../plugins/plugin-button-list';
 

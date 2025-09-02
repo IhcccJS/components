@@ -2,8 +2,8 @@ import React from 'react';
 import { Spin, Empty } from 'antd';
 import { isArray, isObject, isFunction } from '@ihccc/utils';
 
-function ListWrapper(props) {
-  const { loading, data, alias, empty, children, ...restProps } = props;
+function DataChecker(props) {
+  const { loading = false, data, alias = 'data', empty = <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />, children, ...restProps } = props;
 
   const hasData = React.useMemo(() => {
     if (isObject(data)) return Object.keys(data).length > 0;
@@ -23,10 +23,4 @@ function ListWrapper(props) {
   return <Spin spinning={loading} children={childrenNode()} />;
 }
 
-ListWrapper.defaultProps = {
-  loading: false,
-  alias: 'data',
-  empty: <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />,
-};
-
-export default ListWrapper;
+export default DataChecker;

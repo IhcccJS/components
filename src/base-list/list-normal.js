@@ -7,7 +7,7 @@ import listCommand from '../plugins/plugin-list-command';
 import layout from '../plugins/plugin-layout-style2';
 import search from '../plugins/plugin-search-simple';
 import list from '../plugins/plugin-list-normal';
-import listLoadMore from '../plugins/plugin-list-loadMore';
+import listLoadMore from '../plugins/plugin-list-loadmore';
 import buttonList from '../plugins/plugin-button-list';
 
 import buttonCreate from '../plugins/plugin-button-create';

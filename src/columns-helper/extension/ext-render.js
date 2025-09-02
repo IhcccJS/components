@@ -1,8 +1,11 @@
 import React from 'react';
 import { isString, isArray, isObject, isFunction } from '@ihccc/utils';
 import { renderSetter } from '../../setter';
+import UnknowElement from '../../utils/unknow-element';
 
 const getRender = renderSetter.get.bind(renderSetter);
+
+const unknowRender = (type) => React.createElement(UnknowElement, { type });
 
 const isSetterKey = (item) => {
   return isString(item) || isArray(item) || isObject(item);
@@ -16,8 +19,10 @@ function run(item, options) {
   // 转换 render
   if (isString(item.renderType)) {
     item.render = getRender([item.renderType].concat(item.renderProps));
+    if (!item.render) item.render = () => unknowRender(item.renderType);
   } else if (isSetterKey(item.render)) {
     item.render = getRender(item.render);
+    if (!item.render) item.render = () => unknowRender(JSON.stringify(item.render));
   }
 
   // 修改渲染方法的 this 指向
