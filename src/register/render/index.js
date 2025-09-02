@@ -5,13 +5,17 @@ import getAliasName from '../getAliasName';
 import text from './text';
 import number from './number';
 import tip from './tip';
-import eventLink from './event-link';
+import roll from './roll';
+// import eventLink from './event-link';
 import formater from './formater';
 import progress from './progress';
 import buttons from './buttons';
 import tagList from './tag-list';
 import qrcode from './qrcode';
 import avatar from './avatar';
+import image from './image';
+import imageList from './image-list';
+import link from './link';
 
 function register(renderComponents) {
   const componentAlias = renderComponents || {};
@@ -25,8 +29,12 @@ function register(renderComponents) {
   // tip
   renderSetter.use(getAliasName(componentAlias, 'tip'), tip);
 
+  // roll
+  renderSetter.use(getAliasName(componentAlias, 'roll'), roll);
+
   // eventLink
-  renderSetter.use(getAliasName(componentAlias, 'eventLink'), eventLink);
+  // renderSetter.use(getAliasName(componentAlias, 'eventLink'), eventLink);
+  renderSetter.use(getAliasName(componentAlias, 'link'), link);
 
   // formater
   renderSetter.use(getAliasName(componentAlias, 'formater'), formater);
@@ -45,6 +53,8 @@ function register(renderComponents) {
   // json 数据
 
   // 图片
+  renderSetter.use(getAliasName(componentAlias, 'image'), image);
+  renderSetter.use(getAliasName(componentAlias, 'imageList'), imageList);
 
   // boolean 值渲染
 

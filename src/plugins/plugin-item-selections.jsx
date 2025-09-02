@@ -60,7 +60,7 @@ export default definePlugin({
             }
           : {
               key: 'toggleAll',
-              render: ({ isEmpty, allSelected, partiallySelected, selected, onClick }) => {
+              render: ({ isEmpty, allSelected, partiallySelected, selected }, { onClick }) => {
                 return (
                   <Checkbox disabled={isEmpty} indeterminate={partiallySelected} checked={allSelected} onChange={onClick}>
                     {`${allSelected ? '取消' : '全选'}（${selected.length}）`}

@@ -9,7 +9,7 @@ function qrcodeRender(props) {
     if (popover === false) return qrcode;
 
     return (
-      <Popover overlayInnerStyle={{ padding: 0 }} content={qrcode} {...popover}>
+      <Popover styles={{ body: { padding: 0 } }} content={qrcode} {...popover}>
         {val}
       </Popover>
     );
