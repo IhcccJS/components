@@ -22,7 +22,6 @@ export default definePlugin({
         name="search"
         grid={{ xs: 1, sm: 1, md: 2, lg: 3, xl: 4, xxl: 4 }}
         onFinish={(values) => request.search(values)}
-        trigger={<Form.Trigger.Search foldAble={false} />}
       />
     );
 

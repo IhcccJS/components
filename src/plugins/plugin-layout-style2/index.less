@@ -1,18 +1,19 @@
+@prefix: ~'bc-list-layout-style2';
 @gap: var(--size-cell-gap, 12px);
 
-.listLayout {
+.@{prefix} {
   position: relative;
   background: var(--color-bg-component, #fff);
   padding: @gap;
   box-sizing: border-box;
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.1);
 
-  .header {
+  &-header {
     margin-bottom: @gap;
     border-bottom: 1px solid var(--color-border, #f1f1f1);
   }
 
-  .toolbar {
+  &-toolbar {
     position: relative;
     display: flex;
     align-items: center;
@@ -21,36 +22,36 @@
     margin-bottom: @gap;
   }
 
-  .body {
+  &-body {
     // padding: @gap 0;
   }
 
-  .footer {
+  &-footer {
     display: flex;
     margin-top: @gap;
   }
 }
 
-.flexContainer {
+.@{prefix}-container {
   display: flex;
 
-  &.column {
+  .@{prefix}-column {
     flex-direction: column;
   }
 
-  &.row {
+  .@{prefix}-row {
     flex-direction: row;
   }
 
-  &.rowReverse {
+  .@{prefix}-rowReverse {
     flex-direction: row-reverse;
   }
 
-  &.columnReverse {
+  .@{prefix}-columnReverse {
     flex-direction: column-reverse;
   }
 
-  .mainBody {
+  .@{prefix}-main-body {
     flex: 1;
   }
 }

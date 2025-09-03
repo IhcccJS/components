@@ -41,7 +41,7 @@ const buttons = [
   {
     key: 'import',
     props: { icon: <ImportOutlined />, children: '导入本地文件' },
-    render: ({ onClick }, btn) => (
+    render: (_data, { onClick }, btn) => (
       <Upload accept=".json" value={[]} onChange={onClick}>
         {React.cloneElement(btn, { onClick: null })}
       </Upload>

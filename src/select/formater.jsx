@@ -23,25 +23,25 @@ function Formater({ value = '', labelKey = 'label', render, color, options = [],
 
   const result = React.useMemo(() => {
     let formated = optionMap[value];
-    if (isFunction(render)) return render(Object.assign({}, formated), value);
-    return formated;
+    if (isFunction(render)) return render(Object.assign({}, formated), value) || {};
+    return formated || {};
   }, [value, render, optionMap]);
 
   const currentColor = React.useMemo(() => {
     if (isObject(color)) return color[value];
-    return color || result?.color;
-  }, [color, result?.color, value]);
+    return color || result.color;
+  }, [color, result.color, value]);
 
   if (React.isValidElement(children)) {
     const { color: childColor, animation } = children.props;
     return React.cloneElement(children, {
       ...result,
       color: childColor || currentColor,
-      animation: animation || result?.animation,
+      animation: animation || result.animation,
     });
   }
 
-  if (result?.hasOwnProperty('mode') || !!restProps.mode) {
+  if (result.hasOwnProperty('mode') || !!restProps.mode) {
     return React.createElement(Feature, Object.assign({}, result, restProps));
   }
 

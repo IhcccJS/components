@@ -1,49 +1,50 @@
+@prefix: ~'bc-list-layout-empty';
 @gap: var(--size-cell-gap, 12px);
 
-.listLayout {
+.@{prefix} {
   position: relative;
 
-  .header {
+  &-header {
     margin-bottom: @gap;
   }
 
-  .toolbar {
+  &-toolbar {
     position: relative;
     display: flex;
     align-items: center;
     margin-bottom: @gap;
   }
 
-  .body {
+  &-body {
     // padding: @gap 0;
   }
 
-  .footer {
+  &-footer {
     display: flex;
     margin-top: @gap;
   }
 }
 
-.flexContainer {
+.@{prefix}-container {
   display: flex;
 
-  &.column {
+  .@{prefix}-column {
     flex-direction: column;
   }
 
-  &.row {
+  .@{prefix}-row {
     flex-direction: row;
   }
 
-  &.rowReverse {
+  .@{prefix}-rowReverse {
     flex-direction: row-reverse;
   }
 
-  &.columnReverse {
+  .@{prefix}-columnReverse {
     flex-direction: column-reverse;
   }
 
-  .mainBody {
+  .@{prefix}-main-body {
     flex: 1;
   }
 }

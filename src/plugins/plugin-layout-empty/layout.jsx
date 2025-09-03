@@ -1,6 +1,5 @@
 import React from 'react';
 import clsx from 'clsx';
-import styles from './index.less';
 
 const Layout = React.forwardRef(({ className, head, buttonBar, children, footer, renderContent = {} }, ref) => {
   const renderPlace = renderContent.place || 'inner';
@@ -8,30 +7,30 @@ const Layout = React.forwardRef(({ className, head, buttonBar, children, footer,
 
   const mainBody = (
     <React.Fragment>
-      {head && <div className={styles.header}> {head}</div>}
-      {buttonBar && <div className={styles.toolbar}>{buttonBar}</div>}
+      {head && <div className="bc-list-layout-empty-header"> {head}</div>}
+      {buttonBar && <div className="bc-list-layout-empty-toolbar">{buttonBar}</div>}
       <div
-        className={clsx(styles.body, {
-          [styles.flexContainer]: renderPlace === 'inner',
-          [styles[renderDirection]]: renderPlace === 'inner',
+        className={clsx('bc-list-layout-empty-body', {
+          'bc-list-layout-empty-container': renderPlace === 'inner',
+          ['bc-list-layout-empty-' + renderDirection]: renderPlace === 'inner',
         })}
       >
         {children}
         {renderPlace === 'inner' && renderContent.content}
       </div>
-      {footer && <div className={styles.footer}>{footer}</div>}
+      {footer && <div className="bc-list-layout-empty-footer">{footer}</div>}
     </React.Fragment>
   );
 
   return (
     <div ref={ref}>
       <div
-        className={clsx(styles.listLayout, className, {
-          [styles.flexContainer]: renderPlace === 'outer',
-          [styles[renderDirection]]: renderPlace === 'outer',
+        className={clsx('bc-list-layout-empty', className, {
+          'bc-list-layout-empty-container': renderPlace === 'outer',
+          ['bc-list-layout-empty-' + renderDirection]: renderPlace === 'outer',
         })}
       >
-        {renderPlace === 'outer' ? <div className={styles.mainBody}>{mainBody}</div> : mainBody}
+        {renderPlace === 'outer' ? <div className="bc-list-layout-empty-main-body">{mainBody}</div> : mainBody}
         {renderPlace === 'outer' && renderContent.content}
       </div>
     </div>

@@ -5,8 +5,13 @@ import { useApi } from '@ihccc/hooks';
 import { isObject, isArray } from '@ihccc/utils';
 import store from '../store';
 
+const NoneQuery = () => {
+  console.warn('没有配置请求函数，已使用空函数替代！');
+};
+
 // 处理请求选项
 function useQueryOptions(config, defaultConfig) {
+  console.log(config, defaultConfig);
   const { autoRunWait, query, params, initialData, ...restOption } = {
     autoRunWait: -1,
     initialData: [],
@@ -16,7 +21,7 @@ function useQueryOptions(config, defaultConfig) {
   };
   const initData = React.useRef(initialData).current;
 
-  const request = useApi(query, {
+  const request = useApi(query || NoneQuery, {
     initialData: initData,
     ...restOption,
   });

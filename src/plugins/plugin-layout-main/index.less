@@ -1,6 +1,7 @@
+@prefix: ~'bc-list-layout';
 @gap: var(--size-cell-gap-lg, 24px);
 
-.list-layout {
+.@{prefix} {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -20,10 +21,10 @@
   }
 }
 
-.list-layout-header + .list-layout-body,
-.list-layout-toolbar + .list-layout-content,
-.list-layout-toolbar-between + .list-layout-content,
-.list-layout-content + .list-layout-footer {
+.@{prefix}-header + .@{prefix}-body,
+.@{prefix}-toolbar + .@{prefix}-content,
+.@{prefix}-toolbar-between + .@{prefix}-content,
+.@{prefix}-content + .@{prefix}-footer {
   margin-top: @gap;
 }
 
@@ -51,8 +52,8 @@
   }
 }
 
-.list-layout-header.list-layout-style-card,
-.list-layout-body.list-layout-style-card {
+.@{prefix}-header.@{prefix}-style-card,
+.@{prefix}-body.@{prefix}-style-card {
   background: var(--color-bg-component, #fff);
   border-radius: var(--size-border-radius, 6px);
   padding: var(--size-cell-gap, 16px);
