@@ -1,11 +1,9 @@
 import { GithubFilled, LockOutlined, MailOutlined, SafetyCertificateOutlined, UserOutlined } from '@ant-design/icons';
-import { version, Button, Checkbox, Divider, Form, Input, Tabs } from 'antd';
+import { Button, Checkbox, Divider, Form, Input, Tabs } from 'antd';
 import React from 'react';
 
 import useStyles from '../style';
 import VerifyCode from './verify-code';
-
-console.log(version);
 
 export function UserPasswordForm({ loading, size, ...restProps }) {
   const { styles, cx } = useStyles();

@@ -123,9 +123,6 @@ class BaseSystem {
     }
 
     for (let plugin of this.plugins) {
-      // 收集默认内容元素
-      if (!!plugin.content) this._collection(plugin.content);
-
       // 收集定义的上下文
       if (!!plugin.context) Object.assign(this.context, plugin.context);
 
@@ -162,6 +159,8 @@ class BaseSystem {
   main(...args) {
     for (let plugin of this.plugins) {
       const mainFn = plugin.main || plugin.useMain;
+      // 收集默认内容元素
+      if (!!plugin.content) this._collection(plugin.content);
 
       if (!mainFn) continue;
 

@@ -3,10 +3,9 @@ import { Popover } from 'antd';
 import { isObject } from '@ihccc/utils';
 import Formater from '../../../select/formater';
 import Feature from '../../../feature';
-import useStyles from './style';
 
 function TagList({ popover, data, max, options }) {
-  const { styles, cx } = useStyles();
+  // const { styles, cx } = useStyles();
 
   const { list, extra } = React.useMemo(() => {
     if (data.length > max) {
@@ -40,7 +39,7 @@ function TagList({ popover, data, max, options }) {
       <React.Fragment>
         {tagList}
         <Popover content={extraTagList} {...popover}>
-          <span className={cx(styles, 'bc-tag-more')}>+ {extra.length}</span>
+          <span className="bc-tag-list-more">+ {extra.length}</span>
         </Popover>
       </React.Fragment>
     );

@@ -26,7 +26,7 @@ function run(item, options) {
   }
 
   // 修改渲染方法的 this 指向
-  if (item.render) {
+  if (!!item.render) {
     const oldRender = item.render;
 
     item.render = function () {

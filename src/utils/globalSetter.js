@@ -25,18 +25,13 @@ class GlobalSetter {
 
     if (isObject(name)) {
       const { type, params } = name;
-      return (
-        isFunction(this.store.get(type)) &&
-        this.store.get(type).call(this, params)
-      );
+      const fun = this.store.get(type);
+      return isFunction(fun) && fun.call(this, params);
     }
 
     if (isArray(name)) {
-      const [type] = name;
-      return (
-        isFunction(this.store.get(type)) &&
-        this.store.get(type).apply(this, name.slice(1))
-      );
+      const func = this.store.get(name[0]);
+      return isFunction(func) && func.apply(this, name.slice(1));
     }
   }
 }

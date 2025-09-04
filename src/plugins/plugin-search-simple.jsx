@@ -1,27 +1,42 @@
 import React from 'react';
+import ButtonList from '../button-list';
 import Form from '../form';
 import definePlugin from '../create-component/definePlugin';
 
 export default definePlugin({
-  name: 'searchNormal',
-  priority: (priority) => priority.CONTENT + 1,
+  name: 'search',
+  priority: 'CONTENT',
   required: ['layout', 'request'],
-  props: [],
+  props: ['columns', 'search'],
   main(instance, props) {
-    const { namespace, columns, searchSimple = {} } = props;
+    const { columns, search = {} } = props;
 
     const { request } = instance.getPlugin('request');
 
     const buttonBar = (
       <Form
-        {...searchSimple}
-        namespace={namespace}
+        type="search"
         layout="inline"
-        variant="filled"
+        column={5}
         columns={columns}
-        name="search"
-        grid={{ xs: 1, sm: 1, md: 2, lg: 3, xl: 4, xxl: 4 }}
+        {...search}
         onFinish={(values) => request.search(values)}
+        actionColumn={({ actionColumnColSpan }) => {
+          return {
+            key: '$$search',
+            colSpan: actionColumnColSpan,
+            style: { alignItems: 'flex-start' },
+            element: (
+              <ButtonList
+                layout="end"
+                buttons={[
+                  { key: 'reset', group: 'search', props: { htmlType: 'reset', children: '重置' } },
+                  { key: 'submit', group: 'search', props: { htmlType: 'submit', type: 'primary', children: '查询' } },
+                ]}
+              />
+            ),
+          };
+        }}
       />
     );
 

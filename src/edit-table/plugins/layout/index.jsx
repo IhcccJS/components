@@ -1,7 +1,7 @@
 import definePlugin from '../../../create-component/definePlugin';
 
 function LayoutEditTable({ content }) {
-  return <div>{content}</div>;
+  return <div style={{ width: '100%' }}>{content}</div>;
 }
 
 const Layout = definePlugin({

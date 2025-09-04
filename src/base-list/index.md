@@ -15,7 +15,7 @@ toc: content
 
 ## 简单上手
 
-<code background="var(--color-bg, #f1f1f1)" src="./demo/base" ></code>
+<code background="var(--color-bg, #f1f1f1)" src="./demo/custom" ></code>
 
 ## Table plugins
 
@@ -361,11 +361,10 @@ toc: content
 
 在列表左上角，按钮栏左侧添加一个搜索栏
 
-| 名称         | 类型         | 默认值      | 描述             |
-| :----------- | :----------- | :---------- | :--------------- |
-| namespace    | `string`     | `undefined` | 当前页面唯一命名 |
-| columns      | `TColumn[]`  | `[]`        | 表单配置项       |
-| searchSimple | `TFormProps` | `{}`        | 搜索表单配置     |
+| 名称    | 类型         | 默认值 | 描述         |
+| :------ | :----------- | :----- | :----------- |
+| columns | `TColumn[]`  | `[]`   | 表单配置项   |
+| search  | `TFormProps` | `{}`   | 搜索表单配置 |
 
 ## 特别类型
 

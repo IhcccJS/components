@@ -1,10 +1,10 @@
 import System from './system-react';
 
-function create(plugins) {
+function create() {
+  const componentName = arguments.length > 1 ? arguments[0] : 'PluginComponent';
+  const plugins = arguments.length > 1 ? arguments[1] : arguments[0];
   // 插件列表
   let pluginList = System.sortPlugins(plugins);
-
-  const componentName = arguments.length > 1 ? arguments[0] : 'PluginComponent';
 
   const component = new System(componentName, pluginList);
 
