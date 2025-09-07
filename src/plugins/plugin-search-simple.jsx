@@ -20,6 +20,8 @@ export default definePlugin({
         column={5}
         columns={columns}
         {...search}
+        // 默认设置 100% 宽度；当搜索栏和按钮栏中一行时，保证搜索栏要撑满左侧空间；有更好方案可替换此操作
+        style={{ width: '100%', ...search.style }}
         onFinish={(values) => request.search(values)}
         actionColumn={({ actionColumnColSpan }) => {
           return {

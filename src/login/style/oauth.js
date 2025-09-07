@@ -34,7 +34,7 @@ export default createStyles(
 
       &.arrow {
         font-size: 36px;
-        color: var(--primary);
+        color: var(--color-primary, #3b82f6);
       }
 
       &.desc {

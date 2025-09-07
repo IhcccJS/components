@@ -4,7 +4,7 @@ export default createStyles(
   () => {
     return css`
       &.prefixIcon {
-        color: var(--primary);
+        color: var(--color-primary, #3b82f6);
       }
 
       &.other {

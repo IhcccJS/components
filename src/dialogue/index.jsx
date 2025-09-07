@@ -10,9 +10,9 @@ export function UserMessage({ self, data, header, footer, className, style }) {
           <span>{data.name}</span>
           <span className="bc-dialogue-message-time">{data.time}</span>
         </div>
-        <div className="bc-dialogue-message-header">{header}</div>
+        {header && <div className="bc-dialogue-message-header">{header}</div>}
         <div className="bc-dialogue-message-content">{data.content}</div>
-        <div className="bc-dialogue-message-footer">{footer}</div>
+        {footer && <div className="bc-dialogue-message-footer">{footer}</div>}
       </div>
     </div>
   );

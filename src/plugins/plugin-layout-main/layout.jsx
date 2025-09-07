@@ -55,8 +55,8 @@ const Layout = React.forwardRef(function Layout(
           {toolNode}
           <div
             className={clsx('bc-list-layout-content', {
-              ['flex-container']: renderPlace === 'inner',
-              ['flex-container-' + renderDirection]: renderPlace === 'inner',
+              ['bc-list-layout-container']: renderPlace === 'inner',
+              ['bc-list-layout-container-' + renderDirection]: renderPlace === 'inner',
             })}
           >
             {renderPlace === 'inner' && renderContent.content}
@@ -70,13 +70,13 @@ const Layout = React.forwardRef(function Layout(
     renderListNode = (
       <React.Fragment>
         {renderPlace === 'outer' && renderContent.content}
-        {renderPlace === 'outer' ? <div className={'flex-container-main-body'}>{mainBody}</div> : mainBody}
+        {renderPlace === 'outer' ? <div className={'bc-list-layout-container-main-body'}>{mainBody}</div> : mainBody}
       </React.Fragment>
     );
 
     extendClassName = {
-      ['flex-container']: renderPlace === 'outer',
-      ['flex-container-' + renderDirection]: renderPlace === 'outer',
+      ['bc-list-layout-container']: renderPlace === 'outer',
+      ['bc-list-layout-container-' + renderDirection]: renderPlace === 'outer',
     };
   }
 

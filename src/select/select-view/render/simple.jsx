@@ -11,35 +11,41 @@ function ViewSimple({ disabled, loading, grid, direction = 'horizontal', fieldNa
       grid={{ gutter: 16, ...grid }}
       dataSource={options}
       style={style}
-      renderItem={(item) => (
-        <List.Item key={item[fieldNames.value]}>
-          <div
-            className={clsx(
-              'bc-select-item-default',
-              ['bc-select-item-' + direction],
-              (disabled || item.disabled) && 'bc-select-item-disabled',
-              isActive(item) && 'bc-select-item-active',
-            )}
-            {...(disabled || item.disabled ? {} : { onClick: () => onClick(item) })}
-          >
-            {item[fieldNames.cover] && <img className="'bc-select-item-cover'" src={item[fieldNames.cover]} alt="cover" />}
-            {(item[fieldNames.label] || item[fieldNames.description]) && (
-              <div className="bc-select-item-info">
-                {item[fieldNames.label] && (
-                  <div className="bc-select-item-label" title={item[fieldNames.label]}>
-                    {item[fieldNames.label]}
-                  </div>
-                )}
-                {item[fieldNames.description] && (
-                  <div className="bc-select-item-desc" title={item[fieldNames.description]}>
-                    {item[fieldNames.description]}
-                  </div>
-                )}
-              </div>
-            )}
-          </div>
-        </List.Item>
-      )}
+      renderItem={(item) => {
+        let coverNode = item[fieldNames.cover];
+        if (typeof item[fieldNames.cover] === 'string') {
+          coverNode = <img className="bc-select-item-cover" src={item[fieldNames.cover]} alt="cover" />;
+        }
+        return (
+          <List.Item key={item[fieldNames.value]}>
+            <div
+              className={clsx(
+                'bc-select-item-default',
+                ['bc-select-item-' + direction],
+                (disabled || item.disabled) && 'bc-select-item-disabled',
+                isActive(item) && 'bc-select-item-active',
+              )}
+              {...(disabled || item.disabled ? {} : { onClick: () => onClick(item) })}
+            >
+              {coverNode && <div>{coverNode}</div>}
+              {(item[fieldNames.label] || item[fieldNames.description]) && (
+                <div className="bc-select-item-info">
+                  {item[fieldNames.label] && (
+                    <div className="bc-select-item-label" title={item[fieldNames.label]}>
+                      {item[fieldNames.label]}
+                    </div>
+                  )}
+                  {item[fieldNames.description] && (
+                    <div className="bc-select-item-desc" title={item[fieldNames.description]}>
+                      {item[fieldNames.description]}
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+          </List.Item>
+        );
+      }}
     />
   );
 }

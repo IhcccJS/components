@@ -12,7 +12,7 @@ const Layout = React.forwardRef(({ className, head, buttonBar, children, footer,
       <div
         className={clsx('bc-list-layout-empty-body', {
           'bc-list-layout-empty-container': renderPlace === 'inner',
-          ['bc-list-layout-empty-' + renderDirection]: renderPlace === 'inner',
+          ['bc-list-layout-empty-container-' + renderDirection]: renderPlace === 'inner',
         })}
       >
         {children}
@@ -27,10 +27,10 @@ const Layout = React.forwardRef(({ className, head, buttonBar, children, footer,
       <div
         className={clsx('bc-list-layout-empty', className, {
           'bc-list-layout-empty-container': renderPlace === 'outer',
-          ['bc-list-layout-empty-' + renderDirection]: renderPlace === 'outer',
+          ['bc-list-layout-empty-container-' + renderDirection]: renderPlace === 'outer',
         })}
       >
-        {renderPlace === 'outer' ? <div className="bc-list-layout-empty-main-body">{mainBody}</div> : mainBody}
+        {renderPlace === 'outer' ? <div className="bc-list-layout-empty-container-main-body">{mainBody}</div> : mainBody}
         {renderPlace === 'outer' && renderContent.content}
       </div>
     </div>

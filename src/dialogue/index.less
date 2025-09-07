@@ -29,9 +29,13 @@
     width: 100%;
     display: flex;
     align-items: center;
-    margin-bottom: 8px;
+    margin-bottom: var(--size-cell-gap-sm, 8px);
     font-size: 15px;
     color: #9f9f9f;
+  }
+
+  &-header {
+    margin-bottom: var(--size-cell-gap-sm, 8px);
   }
 
   &-content {
@@ -50,10 +54,8 @@
     }
   }
 
-  &-action {
-    margin-top: 8px;
-    opacity: 0;
-    transition: 0.2s ease-in;
+  &-footer {
+    margin-top: var(--size-cell-gap-sm, 8px);
   }
 
   &-self {
@@ -81,10 +83,6 @@
     :global .ant-avatar {
       transform: scaleX(-1);
     }
-  }
-
-  &:hover .@{prefix}-message-action {
-    opacity: 1;
   }
 }
 

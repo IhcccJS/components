@@ -12,7 +12,7 @@ const Layout = React.forwardRef(({ className, head, buttonBar, children, footer,
       <div
         className={clsx('bc-list-layout-style2-body', {
           'bc-list-layout-style2-container': renderPlace === 'inner',
-          ['bc-list-layout-style2-' + renderDirection]: renderPlace === 'inner',
+          ['bc-list-layout-style2-container-' + renderDirection]: renderPlace === 'inner',
         })}
       >
         {children}
@@ -27,10 +27,10 @@ const Layout = React.forwardRef(({ className, head, buttonBar, children, footer,
       <div
         className={clsx('bc-list-layout-style2', className, {
           'bc-list-layout-style2-container': renderPlace === 'outer',
-          ['bc-list-layout-style2-' + renderDirection]: renderPlace === 'outer',
+          ['bc-list-layout-style2-container-' + renderDirection]: renderPlace === 'outer',
         })}
       >
-        {renderPlace === 'outer' ? <div className="bc-list-layout-style2-main-body">{mainBody}</div> : mainBody}
+        {renderPlace === 'outer' ? <div className="bc-list-layout-style2-container-main-body">{mainBody}</div> : mainBody}
         {renderPlace === 'outer' && renderContent.content}
       </div>
     </div>
