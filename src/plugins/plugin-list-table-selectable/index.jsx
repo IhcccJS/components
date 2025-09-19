@@ -59,6 +59,7 @@ export default definePlugin({
         dataSource={request.data.list}
         columns={tableColumns.data}
         style={{ flex: 1, overflow: 'hidden', ...tableProps.style }}
+        rowKey={rowKey || tableProps.rowKey}
       />
     );
 
