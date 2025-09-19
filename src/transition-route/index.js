@@ -1,5 +1,5 @@
-import Transition from './transition';
-import Page from './transition/page';
+import Transition from './animation/provider';
+import Page from './animation/page';
 import Link from './link';
 import useHistory from './useHistory';
 import { TransitionContext } from './context';

@@ -26,7 +26,6 @@ import '../select/select-view/render/index.less';
 import '../setting/content/toggle-tab.less';
 import '../text/index.less';
 import '../transition-route/animation/index.less';
-import '../transition-route/transition/index.less';
 import '../upload/style/file-select.less';
 import '../upload/style/index.less';
 import '../upload/style/preview.less';

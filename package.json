@@ -1,6 +1,6 @@
 {
   "name": "@ihccc/components",
-  "version": "0.1.0-alpha.11",
+  "version": "0.1.0-local.2",
   "description": "A base components library extends antd",
   "license": "MIT",
   "main": "lib/index.js",
