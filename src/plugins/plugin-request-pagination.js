@@ -2,6 +2,7 @@ import React from 'react';
 import { useApi } from '@ihccc/hooks';
 import definePlugin from '../create-component/definePlugin';
 // import { useMemoryGet, useMemorySet } from '@/utils/hooks/useMemory';
+import promiseFn from '../utils/promise-fn';
 
 // 刷新，当前分页，当前查询参数
 // 查询，重置分页，新的查询参数
@@ -10,12 +11,12 @@ import definePlugin from '../create-component/definePlugin';
 export default definePlugin({
   name: 'request',
   priority: 'TOOL',
-  props: ['namespace', 'query'],
+  props: ['namespace', 'request'],
   expose: [{ name: 'request', source: 'request' }],
   main(_, props) {
-    const { namespace, query } = props;
+    // const { namespace } = props;
 
-    const { pageSize, defaultParams, format, ...requestProps } = props.request || {};
+    const { query, pageSize, defaultParams, format, ...requestProps } = props.request || {};
 
     // const { noData, initialData } = useMemoryGet(namespace, {
     //   data: { list: [], total: 0 },
@@ -31,7 +32,7 @@ export default definePlugin({
     };
     const [page, setPage] = React.useState(initialData.page);
 
-    const request = useApi(query || (() => ({})), {
+    const request = useApi(query || promiseFn, {
       auto: noData,
       initialData: initialData.data,
       // #FIXME: 重新打开页面，refresh 不会携带任何参数

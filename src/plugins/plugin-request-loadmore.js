@@ -2,24 +2,27 @@ import React from 'react';
 import { useApi } from '@ihccc/hooks';
 // import { useMemoryGet, useMemorySet } from '@/utils/hooks/useMemory';
 import definePlugin from '../create-component/definePlugin';
+import promiseFn from '../utils/promise-fn';
 
 export default definePlugin({
   name: 'request',
   priority: 'TOOL',
-  props: ['namespace', 'query', 'request'],
+  props: ['namespace', 'request'],
   expose: [{ name: 'request', source: 'request' }],
   main(_, props) {
-    const { namespace, query, request: requestProps = {} } = props;
+    // const { namespace } = props;
+
+    const { query, pageSize, defaultParams, format, ...requestProps } = props.request || {};
 
     // const { noData, initialData } = useMemoryGet(namespace, {
     //   data: { list: [], total: 0 },
-    //   page: { pageNumber: 1, pageSize: requestProps.pageSize || 10 },
+    //   page: { pageNumber: 1, pageSize: pageSize || 10 },
     // });
     const { noData, initialData } = {
       noData: true,
       initialData: {
         data: { list: [], total: 0 },
-        page: { pageNumber: 1, pageSize: requestProps.pageSize || 10 },
+        page: { pageNumber: 1, pageSize: pageSize || 10 },
       },
     };
     const [page, setPage] = React.useState(initialData.page);
@@ -27,14 +30,14 @@ export default definePlugin({
     const lastDataRef = React.useRef(initialData.data.list);
 
     // #FIXME: useApi 暴露了多余的 runNext 方法
-    const request = useApi(query, {
+    const request = useApi(query || promiseFn, {
       auto: noData,
       initialData: initialData.data,
-      defaultParams: { ...requestProps.defaultParams, ...page },
+      defaultParams: { ...defaultParams, ...page },
       successCode: '0',
       format: (data, params) => {
         const { pageNumber } = params?.[0] || page;
-        const { list, total } = requestProps.format?.(data) || data || initialData.data;
+        const { list, total } = format?.(data) || data || initialData.data;
         let result;
         if (pageNumber > page.pageNumber) {
           result = { list: lastDataRef.current.concat(list), total };
@@ -49,10 +52,11 @@ export default definePlugin({
         const { pageNumber, pageSize } = params?.[0] || page;
         setPage({ pageNumber, pageSize });
       },
+      ...requestProps,
     });
 
     const search = (params) => {
-      request.run({ ...requestProps.defaultParams, ...params, pageNumber: 1 });
+      request.run({ ...defaultParams, ...params, pageNumber: 1 });
     };
 
     const loadMore = () => {

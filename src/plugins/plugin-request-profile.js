@@ -2,14 +2,17 @@
 import { useApi } from '@ihccc/hooks';
 import definePlugin from '../create-component/definePlugin';
 // import { useMemoryGet, useMemorySet } from '@/utils/hooks/useMemory';
+import promiseFn from '../utils/promise-fn';
 
 export default definePlugin({
   name: 'request',
   priority: 'TOOL',
-  props: ['namespace', 'query', 'request'],
+  props: ['namespace', 'request'],
   expose: [{ name: 'request', source: 'request' }],
   main(_, props) {
-    const { namespace, query, request: requestProps = {} } = props;
+    // const { namespace } = props;
+
+    const { query, defaultParams, ...requestProps } = props.request || {};
 
     // const { noData, initialData } = useMemoryGet(namespace, {
     //   data: {},
@@ -22,10 +25,11 @@ export default definePlugin({
       },
     };
 
-    const request = useApi(query || (() => ({})), {
+    const request = useApi(query || promiseFn, {
       auto: noData,
       initialData: initialData.data,
-      defaultParams: { ...requestProps.defaultParams },
+      defaultParams: { ...defaultParams },
+      ...requestProps,
     });
 
     // useMemorySet(namespace, { data: request.data });
