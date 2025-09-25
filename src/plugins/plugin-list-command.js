@@ -30,20 +30,20 @@ export default definePlugin({
         if (typeof commandLine === 'string') {
           events[key] = function () {
             const { data, record } = getRowData(this, arguments);
-            const { modal } = data;
+            const { popup } = data;
             if (isUrlOrPath(commandLine)) {
               navigation('push', template(commandLine)(record));
               return;
             }
 
-            const modalParams = { ...(isFunction(params) ? params(record) : params) };
+            const popupParams = { ...(isFunction(params) ? params(record) : params) };
             // 修改弹窗标题
-            if (!!modalParams.title) modalParams.title = template(modalParams.title)(record);
+            if (!!popupParams.title) popupParams.title = template(popupParams.title)(record);
 
             // FIXME: 要不要在这里默认ID，是否需要调个位置，这可能导致表单dom的 id 变的不确定
             const id = record?.['id'] || '_no_id';
             const { request } = instance.getPlugin('request');
-            modal.open(commandLine, { id, record, onSuccess: request.refresh, ...modalParams });
+            popup.open(commandLine, { id, record, onSuccess: request.refresh, ...popupParams });
           };
         } else if (typeof commandLine === 'function') {
           events[key] = function () {

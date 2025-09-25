@@ -1,16 +1,14 @@
 import React from 'react';
-// TODO 应该改名为 PopupStore
-import PopupStore from './modal-store';
-// TODO 应该改名为 PopupContext
-import { ModalContext as PopupContext } from './context';
+import PopupStore from './popup-store';
+import { PopupContext } from './context';
 
-function ModalSystem(props) {
+function PopupSystem(props) {
   const {
     max = 10,
     container,
     eventEmitter,
     defaultType = 'popup',
-    defaultModalProps,
+    defaultPopupProps,
     onOpenOverflow,
     // openPosition,
     // openOffset,
@@ -26,14 +24,14 @@ function ModalSystem(props) {
       max,
       container,
       defaultType,
-      defaultModalProps,
+      defaultPopupProps,
       onOpenOverflow,
       update,
     });
 
-    // useModaler useModal 可以获取到的属性和方法
+    // usePopuper usePopup 可以获取到的属性和方法
     return {
-      modalStore: popupStore,
+      popupStore,
       namespace: popupStore.namespace,
       setNamespace: popupStore.setNamespace.bind(popupStore),
       getTask: popupStore.getTask.bind(popupStore),
@@ -49,7 +47,7 @@ function ModalSystem(props) {
     };
   });
 
-  const [outerElements, innerElements] = React.useMemo(() => popupInstance.modalStore.getRenderModal(), [updateKey]);
+  const [outerElements, innerElements] = React.useMemo(() => popupInstance.popupStore.getRenderPopup(), [updateKey]);
 
   React.useEffect(() => {
     if (!eventEmitter) return;
@@ -86,4 +84,4 @@ function ModalSystem(props) {
   );
 }
 
-export default ModalSystem;
+export default PopupSystem;

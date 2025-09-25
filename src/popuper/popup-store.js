@@ -4,21 +4,21 @@ import separate from '../utils/separate';
 import defaultContainer from './container';
 import { ContentContext } from './context';
 
-const DEFAULT_MODAL_ZINDEX = {
+const DEFAULT_POPUP_ZINDEX = {
   normal: 500,
   focus: 501,
 };
 
 const isFilterKey = (key) => key !== void 0 && key !== null;
 
-class ModalStore {
-  constructor({ max, container, defaultType, defaultModalProps, onOpenOverflow, update }) {
+class PopupStore {
+  constructor({ max, container, defaultType, defaultPopupProps, onOpenOverflow, update }) {
     // 当前命名空间名称
     this.namespace = null;
     // 已经注册的内容列表
     this.registry = new Map();
     // 创建的弹窗以及内容
-    this.modalList = new Map();
+    this.popupList = new Map();
     // 渲染索引
     this.renderIndex = -1;
     // 最大打开数量
@@ -26,14 +26,14 @@ class ModalStore {
     // 默认渲染的弹窗类型
     this.defaultType = defaultType || 'popup';
     // 默认弹窗参数
-    this.defaultModalProps = defaultModalProps;
+    this.defaultPopupProps = defaultPopupProps;
     // 弹窗容器集合 { modal: Modal, drawer: Drawer, ... }
     this.container = Object.assign({}, defaultContainer, container);
     // open 超出最大打开数量回调
     this.onOpenOverflow = onOpenOverflow;
     // 弹窗打开的层级
-    this.modalZIndex = {
-      ...DEFAULT_MODAL_ZINDEX,
+    this.popupZIndex = {
+      ...DEFAULT_POPUP_ZINDEX,
     };
 
     // 强制更新组件
@@ -75,7 +75,7 @@ class ModalStore {
     };
     this.registry.set(key, item);
     if (item.preload) {
-      this._createModal(item);
+      this._createPopup(item);
       if (item.props?.open) this.open(key);
     }
   }
@@ -94,7 +94,7 @@ class ModalStore {
     this.registry.forEach((item, key) => {
       if (item.namespace === this.namespace && !item.keep) {
         this.registry.delete(key);
-        this.modalList.delete(key);
+        this.popupList.delete(key);
       }
     });
     this.update();
@@ -114,11 +114,11 @@ class ModalStore {
   getMounted(name) {
     const key = this.getKey(name);
     if (!key) return false;
-    return this.modalList.has(key);
+    return this.popupList.has(key);
   }
 
   // 创建指定的弹窗内容
-  _createModal(item) {
+  _createPopup(item) {
     // namespace,
     // name,
     // key,
@@ -130,19 +130,19 @@ class ModalStore {
     // props: {},
     this.renderIndex += 1;
 
-    const modalConfig = {
+    const popupConfig = {
       namespace: item.namespace,
       name: item.name,
       key: item.key,
       type: item.type,
       element: React.memo(item.content),
-      zIndex: this.modalZIndex.normal,
+      zIndex: this.popupZIndex.normal,
       renderIndex: this.renderIndex,
       open: false,
       focus: false,
       source: item,
       props: {
-        ...this.defaultModalProps?.[item.type],
+        ...this.defaultPopupProps?.[item.type],
         ...item.props,
       },
       transfer: item.transfer,
@@ -154,7 +154,7 @@ class ModalStore {
 
     const mountedKey = item.repeatKey || item.key;
 
-    const modalRef = {
+    const popupRef = {
       bringToTop: () => this.bringToTop(mountedKey),
       open: () => this.open(mountedKey),
       hide: () => this.hide(mountedKey),
@@ -162,38 +162,37 @@ class ModalStore {
       destroy: () => this.destroy(mountedKey),
     };
 
-    this.modalList.set(mountedKey, {
-      ...modalConfig,
-      modalRef,
+    this.popupList.set(mountedKey, {
+      ...popupConfig,
+      popupRef,
     });
   }
 
   // 更新内容配置，如果要修改深层数据，config 传回调进行修改
-  setModalConfig(name, config) {
+  setPopupConfig(name, config) {
     const key = this.getKey(name);
     if (!key) return;
-    const modalItem = this.modalList.get(key);
-    const nextConfig = isFunction(config) ? config(modalItem) : { ...modalItem, ...config };
-    this.modalList.set(key, nextConfig);
+    const popupItem = this.popupList.get(key);
+    const nextConfig = isFunction(config) ? config(popupItem) : { ...popupItem, ...config };
+    this.popupList.set(key, nextConfig);
     this.update();
   }
 
   // 删除指定的弹窗内容
-  _removeModal(name) {
+  _removePopup(name) {
     const key = this.getKey(name);
     if (!key) return;
-    if (this.modalList.has(key)) {
+    if (this.popupList.has(key)) {
       this.renderIndex -= 1;
-      this.modalList.delete(key);
+      this.popupList.delete(key);
     }
   }
 
   // 获取弹窗是否打开状态
-  getModalOpen(name) {
+  getPopupOpen(name) {
     const key = this.getKey(name);
-    if (!key) return;
-    const modalItem = this.modalList.get(key);
-    return modalItem?.open || false;
+    if (!key) return false;
+    return this.popupList.get(key)?.open || false;
   }
 
   // 设置弹窗组件的参数
@@ -202,7 +201,7 @@ class ModalStore {
     if (!key) return;
     const mounted = this.getMounted(key);
     if (mounted === false) return;
-    this.setModalConfig(name, (config) => ({
+    this.setPopupConfig(name, (config) => ({
       ...config,
       props: { ...config.props, ...props },
     }));
@@ -210,17 +209,17 @@ class ModalStore {
   }
 
   // 获取弹窗组件的参数
-  // getModalProps(name) {
+  // getPopupProps(name) {
   // const key = this.getKey(name);
   //   if (!key) return;
-  //   const config = this.modalList.get(key);
+  //   const config = this.popupList.get(key);
   //   return config?.props || {};
   // }
 
   // 打开指定的弹窗
   open(name, props = {}) {
     if (props.open === false) return;
-    if (this.modalList.size >= this.max) {
+    if (this.popupList.size >= this.max) {
       this.onOpenOverflow?.();
       return;
     }
@@ -231,19 +230,19 @@ class ModalStore {
       // 重复打开，需要对每个重复打开的弹窗配置不同的key，可以使用数据中的 key 作为不会重复的 key
       const repeatKey = item.repeat?.getKey?.(props) || props?.key;
       if (!isFilterKey(repeatKey)) {
-        console.error('set config: "repeat: { getKey: (data) => data.key }" when open same modal again.');
+        console.error('set config: "repeat: { getKey: (data) => data.key }" when open same popup again.');
         return;
       }
       key = [name, repeatKey].join('/');
       if (!this.getMounted(key)) {
-        this._createModal({ ...item, repeatKey: this.getKey(key) });
+        this._createPopup({ ...item, repeatKey: this.getKey(key) });
       }
     } else if (!mounted && !item.repeat) {
       // 未创建并且不能重复打开
-      this._createModal(item);
+      this._createPopup(item);
     }
     // 设置弹窗的参数
-    this.setModalConfig(key, (config) => ({
+    this.setPopupConfig(key, (config) => ({
       ...config,
       open: true,
       props: { ...config.props, ...props },
@@ -259,11 +258,11 @@ class ModalStore {
     if (!key) return;
     const mounted = this.getMounted(key);
     if (mounted === false) return;
-    this.setModalConfig(key, (config) => ({
+    this.setPopupConfig(key, (config) => ({
       ...config,
       open: false,
       focus: false,
-      zIndex: this.modalZIndex.normal,
+      zIndex: this.popupZIndex.normal,
       props: { ...config.props, ...props },
     }));
     this.update();
@@ -273,7 +272,7 @@ class ModalStore {
   _afterClose(name, callback) {
     callback?.();
     // 弹窗关闭后删除
-    this._removeModal(name);
+    this._removePopup(name);
     this.update();
   }
 
@@ -283,9 +282,9 @@ class ModalStore {
     if (!key) return;
     const mounted = this.getMounted(key);
     if (mounted === false) return;
-    if (this.getModalOpen(key)) {
+    if (this.getPopupOpen(key)) {
       // 更新弹窗内的关闭后回调方法
-      this.setModalConfig(key, { _readyClose: true });
+      this.setPopupConfig(key, { _readyClose: true });
       this.hide(key);
     } else {
       this.destroy(key);
@@ -296,7 +295,7 @@ class ModalStore {
   toggle(name) {
     const key = this.getKey(name);
     if (!key) return;
-    if (this.getModalOpen(key)) {
+    if (this.getPopupOpen(key)) {
       this.hide(key);
     } else {
       this.open(key);
@@ -305,7 +304,7 @@ class ModalStore {
 
   // 销毁指定的弹窗
   destroy(name) {
-    this._removeModal(name);
+    this._removePopup(name);
     this.update();
   }
 
@@ -314,11 +313,11 @@ class ModalStore {
     const key = this.getKey(name);
     if (!key) return;
 
-    this.modalList.forEach((item, _key) => {
+    this.popupList.forEach((item, _key) => {
       const focus = _key === key;
       if (item.focus !== focus) {
-        const zIndex = focus ? this.modalZIndex.focus : this.modalZIndex.normal;
-        this.setModalConfig(_key, { focus, zIndex });
+        const zIndex = focus ? this.popupZIndex.focus : this.popupZIndex.normal;
+        this.setPopupConfig(_key, { focus, zIndex });
       }
     });
     this.update();
@@ -326,7 +325,7 @@ class ModalStore {
 
   // 获取当前创建的弹窗列表
   getTask() {
-    return Array.from(this.modalList).map(([key, item]) => ({
+    return Array.from(this.popupList).map(([key, item]) => ({
       namespace: item.namespace,
       name: item.name,
       open: item.open,
@@ -340,23 +339,23 @@ class ModalStore {
   }
 
   // 获取渲染的弹窗
-  getRenderModal() {
+  getRenderPopup() {
     const renderOuter = [];
     const renderInner = [];
 
-    this.modalList.forEach((item, key) => {
-      const { modalRef, ...attr } = item;
-      const modalComp = this.container[item.type];
+    this.popupList.forEach((item, key) => {
+      const { popupRef, ...attr } = item;
+      const popupComp = this.container[item.type];
 
-      if (!modalComp) {
-        throw new Error('No modal type of ' + item.type + '!');
+      if (!popupComp) {
+        throw new Error('Not exist popup type of ' + item.type + '!');
       }
 
-      const [contentProps, modalProps] = separate(item.props, item.transfer);
+      const [contentProps, popupProps] = separate(item.props, item.transfer);
 
       const content = React.createElement(
         ContentContext.Provider,
-        // useModal 可以获取到的属性
+        // usePopup 可以获取到的属性
         { value: { enable: true, ...item } },
         React.createElement(item.element, {
           ...contentProps,
@@ -365,21 +364,21 @@ class ModalStore {
       );
 
       // 弹窗组件内能获取到的属性和方法
-      const _modalRef = Object.assign({}, item.modalRef, attr);
+      const _popupRef = Object.assign({}, item.popupRef, attr);
 
       const extraProps = item._readyClose
         ? {
-            afterClose: () => this._afterClose(key, modalProps?.afterClose),
+            afterClose: () => this._afterClose(key, popupProps?.afterClose),
           }
         : {};
 
       const renderDom = React.createElement(
-        modalComp,
+        popupComp,
         {
-          ...modalProps,
+          ...popupProps,
           ...extraProps,
           open: item.open,
-          modalRef: _modalRef,
+          popupRef: _popupRef,
           key,
         },
         content,
@@ -393,4 +392,4 @@ class ModalStore {
   }
 }
 
-export default ModalStore;
+export default PopupStore;

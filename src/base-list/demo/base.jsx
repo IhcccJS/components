@@ -49,8 +49,7 @@ function Demo() {
   return (
     <ListOfTable
       namespace="role"
-      query={query}
-      request={{ format }}
+      request={{ query, format, cacheKey: 'baseList', staleTime: -1 }}
       columns={columns}
       eventData={{ renderType, setRenderType }}
       eventMap={eventMap}

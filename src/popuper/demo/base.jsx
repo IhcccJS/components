@@ -145,7 +145,7 @@ function Buttons({ label, onOpen, onTransfer, onHide, onClose }) {
   );
 }
 
-const modalFooter = [
+const popupFooter = [
   {
     key: 'cancel',
     props: { children: '取消' },
@@ -174,7 +174,7 @@ function UserPage() {
     return false;
   };
 
-  const { modal } = Popuper.usePopuper({
+  const { popup } = Popuper.usePopuper({
     namespace: 'user',
     items: [
       {
@@ -208,7 +208,7 @@ function UserPage() {
       {
         name: 'updateFormWithFooter',
         content: UpdateFormWithFooter,
-        props: { title: '调用内容事件', onOk, onCancel, buttons: modalFooter },
+        props: { title: '调用内容事件', onOk, onCancel, buttons: popupFooter },
         transfer: ['name'],
         events: true,
         taskData: { icon: <EditOutlined /> },
@@ -220,9 +220,9 @@ function UserPage() {
     <Space direction="vertical">
       <Buttons
         label="用户"
-        onOpen={() => modal.open('profile', { name: Math.random() })}
+        onOpen={() => popup.open('profile', { name: Math.random() })}
         onTransfer={() =>
-          modal.setProps('profile', {
+          popup.setProps('profile', {
             name: '123',
             data: {
               name: Math.random(),
@@ -231,13 +231,13 @@ function UserPage() {
             },
           })
         }
-        onHide={() => modal.hide('profile')}
-        onClose={() => modal.close('profile')}
+        onHide={() => popup.hide('profile')}
+        onClose={() => popup.close('profile')}
       />
       <Buttons
         label="工单"
         onOpen={() =>
-          modal.open('order', {
+          popup.open('order', {
             key: Math.floor(Math.random() * 10),
             data: {
               name: Math.random(),
@@ -248,15 +248,15 @@ function UserPage() {
       />
       <Buttons
         label="请求详情"
-        onOpen={() => modal.open('fetchProfile', { name: '张三' })}
-        onTransfer={() => modal.setProps('fetchProfile', { name: getName() })}
-        onHide={() => modal.hide('fetchProfile')}
-        onClose={() => modal.close('fetchProfile')}
+        onOpen={() => popup.open('fetchProfile', { name: '张三' })}
+        onTransfer={() => popup.setProps('fetchProfile', { name: getName() })}
+        onHide={() => popup.hide('fetchProfile')}
+        onClose={() => popup.close('fetchProfile')}
       />
       <Buttons
         label="内容调用弹窗外事件"
         onOpen={() =>
-          modal.open('updateFormWithoutFooter', {
+          popup.open('updateFormWithoutFooter', {
             data: {
               name: Math.random(),
               age: Math.random(),
@@ -265,7 +265,7 @@ function UserPage() {
           })
         }
         onTransfer={() =>
-          modal.setProps('updateFormWithoutFooter', {
+          popup.setProps('updateFormWithoutFooter', {
             data: {
               name: Math.random(),
               age: Math.random(),
@@ -273,15 +273,15 @@ function UserPage() {
             },
           })
         }
-        onHide={() => modal.hide('updateFormWithoutFooter')}
-        onClose={() => modal.close('updateFormWithoutFooter')}
+        onHide={() => popup.hide('updateFormWithoutFooter')}
+        onClose={() => popup.close('updateFormWithoutFooter')}
       />
       <Buttons
         label="弹窗外调用内容事件"
-        onOpen={() => modal.open('updateFormWithFooter', { name: '张三' })}
-        onTransfer={() => modal.setProps('updateFormWithFooter', { name: getName() })}
-        onHide={() => modal.hide('updateFormWithFooter')}
-        onClose={() => modal.close('updateFormWithFooter')}
+        onOpen={() => popup.open('updateFormWithFooter', { name: '张三' })}
+        onTransfer={() => popup.setProps('updateFormWithFooter', { name: getName() })}
+        onHide={() => popup.hide('updateFormWithFooter')}
+        onClose={() => popup.close('updateFormWithFooter')}
       />
     </Space>
   );
@@ -291,7 +291,7 @@ function Demo() {
   return (
     <div style={{ padding: 20, maxHeight: 960, overflow: 'auto' }}>
       <Popuper.System
-        // defaultModalProps={{ modal: { dragAble: true, cancelMask: true } }}
+        // defaultPopupProps={{ popup: { dragAble: true, cancelMask: true } }}
         onOpenOverflow={() => {
           console.warn('弹窗打开上限！！！');
         }}

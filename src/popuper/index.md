@@ -56,7 +56,7 @@ TItemsConfig
 | taskData        | `object`         | `undefined` | 任务栏相关参数                 |
 | repeat          | `repeatConfig`   | `undefined` | 弹窗可以重复打开               |
 
-type="modal" props
+type="popup" props
 
 | 名称       | 类型      | 默认值      | 描述                         |
 | :--------- | :-------- | :---------- | :--------------------------- |
@@ -75,4 +75,4 @@ taskData
 
 | 名称     | 类型     | 默认值      | 描述               |
 | :------- | :------- | :---------- | :----------------- |
-| modalRef | `string` | `undefined` | 默认使用的弹窗容器 |
+| popupRef | `string` | `undefined` | 默认使用的弹窗容器 |

@@ -2,15 +2,15 @@ import React from 'react';
 import DragablePopup from './dragable-popup';
 
 function InternalPopup(props) {
-  const { modalRef, onHide, onCancel, ...restProps } = props;
+  const { popupRef, onHide, onCancel, ...restProps } = props;
 
   const focus = () => {
-    if (!modalRef.focus) modalRef.bringToTop();
+    if (!popupRef.focus) popupRef.bringToTop();
   };
 
   const popupId = React.useMemo(() => {
-    if (!modalRef.key) return '';
-    return 'popup_' + modalRef.key.replace(/\/|\-/g, '_');
+    if (!popupRef.key) return '';
+    return 'popup_' + popupRef.key.replace(/\/|\-/g, '_');
   }, []);
 
   return (
@@ -18,16 +18,16 @@ function InternalPopup(props) {
       id={popupId}
       mask={false}
       cancelMask
-      zIndex={modalRef.zIndex}
-      classNames={{ root: modalRef.focus ? 'bc-popup-focus' : '' }}
+      zIndex={popupRef.zIndex}
+      classNames={{ root: popupRef.focus ? 'bc-popup-focus' : '' }}
       onPopupClick={focus}
       onHide={async () => {
-        const execute = await onHide?.(modalRef);
-        if (execute !== false) modalRef.hide();
+        const execute = await onHide?.(popupRef);
+        if (execute !== false) popupRef.hide();
       }}
       onCancel={async () => {
-        const execute = await onCancel?.(modalRef);
-        if (execute !== false) modalRef.close();
+        const execute = await onCancel?.(popupRef);
+        if (execute !== false) popupRef.close();
       }}
       {...restProps}
     />

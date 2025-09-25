@@ -3,21 +3,19 @@ import Popuper from '../popuper';
 import definePlugin from '../create-component/definePlugin';
 
 export default definePlugin({
-  name: 'modalManage',
+  name: 'popup',
   priority: 'COLLECTING',
-  props: ['namespace', 'modal'],
-  collection: () => ({ modalItem: [] }),
-  expose: [{ name: 'modal', source: 'modal' }],
+  props: ['namespace', 'popup'],
+  collection: () => ({ popup: [] }),
+  expose: [{ name: 'popup', source: 'popup' }],
   main(instance, props) {
-    const { namespace, modal: userModal } = props;
+    const { namespace, popup: userPopup } = props;
 
-    const { modal } = Popuper.usePopuper({
+    const { popup } = Popuper.usePopuper({
       namespace,
-      items: [...(instance.collection.modalItem || []), ...(userModal || [])],
+      items: [...(instance.collection.popup || []), ...(userPopup || [])],
     });
 
-    return {
-      modal: modal,
-    };
+    return { popup };
   },
 });

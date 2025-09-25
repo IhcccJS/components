@@ -29,7 +29,7 @@ export default definePlugin({
       },
 
       event: {
-        setting: ({ modal }) => modal.open('global/sys-setting', { prefix: namespace }),
+        setting: ({ popup }) => popup.open('global/sys-setting', { prefix: namespace }),
       },
     };
   },

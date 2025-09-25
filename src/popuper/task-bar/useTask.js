@@ -1,8 +1,8 @@
 import React from 'react';
-import { ModalContext } from '../context';
+import { PopupContext } from '../context';
 
 function useTask({ inClose = false, inNamespace = false }) {
-  const { task, toggle, bringToTop, close } = React.useContext(ModalContext);
+  const { task, toggle, bringToTop, close } = React.useContext(PopupContext);
 
   const list = React.useMemo(() => {
     if (!inClose && !inNamespace) return task;

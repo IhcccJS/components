@@ -9,13 +9,13 @@ export default definePlugin({
   priority: 'CONTENT',
   props: [],
   main(instance, props) {
-    const { searchAble = true, request: userRequest, columns = [], column = 6, foldConfig } = props;
+    const { search = {}, request: userRequest, columns = [], column = 6 } = props;
 
     const { request } = instance.getPlugin('request');
 
     const [searchVisible, setSearchVisible] = React.useState(true);
 
-    if (!searchAble) return;
+    if (search.visible === false) return;
 
     const head = !searchVisible ? null : (
       <Form
@@ -24,8 +24,7 @@ export default definePlugin({
         gap={12}
         column={column}
         initialValues={userRequest?.defaultParams}
-        foldConfig={foldConfig}
-        columns={columns.map((item) => ({ ...item, itemProps: null, rules: [] }))}
+        columns={search.allowRules ? columns : columns.map((item) => ({ ...item, itemProps: null, rules: [] }))}
         onFinish={(values) => request.search(values)}
         actionColumn={({ foldEnable, foldState, setFoldState, actionColumnColSpan }) => {
           return {
@@ -54,6 +53,8 @@ export default definePlugin({
             ),
           };
         }}
+        {...search.formProps}
+        foldConfig={search.foldConfig}
       />
     );
 

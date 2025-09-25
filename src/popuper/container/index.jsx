@@ -1,15 +1,15 @@
 import { Drawer } from 'antd';
 import InternalPopup from '../../popup/internal-popup';
 
-function WrapperDrawer({ modalRef, onCancel, ...restProps }) {
+function WrapperDrawer({ popupRef, onCancel, ...restProps }) {
   const handleCancel = async () => {
-    const execute = await onCancel?.(modalRef);
-    if (execute !== false) modalRef.close();
+    const execute = await onCancel?.(popupRef);
+    if (execute !== false) popupRef.close();
   };
 
   // const handleOk = async () => {
-  //   const execute = await onOk?.(modalRef);
-  //   if (execute !== false) modalRef.close();
+  //   const execute = await onOk?.(popupRef);
+  //   if (execute !== false) popupRef.close();
   // };
 
   return <Drawer {...restProps} onClose={handleCancel} />;

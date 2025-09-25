@@ -22,10 +22,10 @@ export default definePlugin({
       },
 
       event: {
-        help: ({ modal }) => modal.open('help'),
+        help: ({ popup }) => popup.open('help'),
       },
 
-      modalItem: {
+      popup: {
         name: 'help',
         content: HelpContent,
         props: { title: '用户帮助', footer: null },

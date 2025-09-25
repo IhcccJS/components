@@ -13,15 +13,14 @@ export default definePlugin({
 
     const { request } = instance.getPlugin('request');
 
+    if (search.visible === false) return;
+
     const buttonBar = (
       <Form
         type="search"
         layout="inline"
         column={5}
         columns={columns}
-        {...search}
-        // 默认设置 100% 宽度；当搜索栏和按钮栏中一行时，保证搜索栏要撑满左侧空间；有更好方案可替换此操作
-        style={{ width: '100%', ...search.style }}
         onFinish={(values) => request.search(values)}
         actionColumn={({ actionColumnColSpan }) => {
           return {
@@ -39,6 +38,9 @@ export default definePlugin({
             ),
           };
         }}
+        {...search.formProps}
+        // 默认设置 100% 宽度；当搜索栏和按钮栏中一行时，保证搜索栏要撑满左侧空间；有更好方案可替换此操作
+        style={{ width: '100%', ...search.formProps?.style }}
       />
     );
 

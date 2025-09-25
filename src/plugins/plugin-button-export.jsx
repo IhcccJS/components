@@ -47,10 +47,10 @@ export default definePlugin({
       },
 
       event: {
-        export: ({ modal, request }) => modal.open('export', { data: request.data }),
+        export: ({ popup, request }) => popup.open('export', { data: request.data }),
       },
 
-      modalItem: {
+      popup: {
         name: 'export',
         keep: true,
         content: ExportContent,

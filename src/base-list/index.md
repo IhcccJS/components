@@ -15,7 +15,7 @@ toc: content
 
 ## 简单上手
 
-<code background="var(--color-bg, #f1f1f1)" src="./demo/custom" ></code>
+<code background="var(--color-bg, #f1f1f1)" src="./demo/base" ></code>
 
 ## Table plugins
 
@@ -302,17 +302,17 @@ toc: content
 | 名称      | 类型               | 默认值      | 描述             |
 | :-------- | :----------------- | :---------- | :--------------- |
 | namespace | `string`           | `undefined` | 当前页面唯一命名 |
-| modal     | `TModalRegister[]` | `{}`        | 弹窗配置项       |
+| popup     | `TPopupRegister[]` | `{}`        | 弹窗配置项       |
 
 
 ### plugin-request-loadmore
 
 页面请求数据的方式使用加载更多请求
 
-| 名称    | 类型       | 默认值      | 描述       |
-| :------ | :--------- | :---------- | :--------- |
-| query   | `function` | `undefined` | 请求方法   |
-| request | `TRequest` | `{}`        | 请求配置项 |
+| 名称          | 类型       | 默认值      | 描述       |
+| :------------ | :--------- | :---------- | :--------- |
+| request.query | `function` | `undefined` | 请求方法   |
+| request       | `TRequest` | `{}`        | 请求配置项 |
 
 
 ### plugin-request-none
@@ -328,43 +328,45 @@ toc: content
 
 页面请求数据的方式使用分页请求
 
-| 名称    | 类型       | 默认值      | 描述       |
-| :------ | :--------- | :---------- | :--------- |
-| query   | `function` | `undefined` | 请求方法   |
-| request | `TRequest` | `{}`        | 请求配置项 |
+| 名称          | 类型       | 默认值      | 描述       |
+| :------------ | :--------- | :---------- | :--------- |
+| request.query | `function` | `undefined` | 请求方法   |
+| request       | `TRequest` | `{}`        | 请求配置项 |
 
 
 ### plugin-request-profile
 
 页面请求详情数据
 
-| 名称    | 类型       | 默认值      | 描述       |
-| :------ | :--------- | :---------- | :--------- |
-| query   | `function` | `undefined` | 请求方法   |
-| request | `TRequest` | `{}`        | 请求配置项 |
+| 名称          | 类型       | 默认值      | 描述       |
+| :------------ | :--------- | :---------- | :--------- |
+| request.query | `function` | `undefined` | 请求方法   |
+| request       | `TRequest` | `{}`        | 请求配置项 |
 
 
 ### plugin-search-normal
 
 在列表上方，添加一个搜索栏
 
-| 名称       | 类型          | 默认值      | 描述             |
-| :--------- | :------------ | :---------- | :--------------- |
-| searchAble | `boolean`     | `true`      | 是否渲染搜索栏   |
-| request    | `TRequest`    | `{}`        | 默认搜索参数配置 |
-| foldConfig | `TFoldConfig` | `undefined` | 折叠配置         |
-| columns    | `TColumn[]`   | `{}`        | 手动隐藏此按钮   |
-| column     | `number`      | `6`         | 列数             |
+| 名称              | 类型          | 默认值      | 描述             |
+| :---------------- | :------------ | :---------- | :--------------- |
+| request           | `TRequest`    | `{}`        | 默认搜索参数配置 |
+| columns           | `TColumn[]`   | `{}`        | 手动隐藏此按钮   |
+| column            | `number`      | `6`         | 列数             |
+| search.visible    | `boolean`     | `true`      | 是否渲染搜索栏   |
+| search.foldConfig | `TFoldConfig` | `undefined` | 折叠配置         |
+| search.formProps  | `TFormProps`  | `{}`        | 搜索表单配置     |
 
 
 ### plugin-search-simple
 
 在列表左上角，按钮栏左侧添加一个搜索栏
 
-| 名称    | 类型         | 默认值 | 描述         |
-| :------ | :----------- | :----- | :----------- |
-| columns | `TColumn[]`  | `[]`   | 表单配置项   |
-| search  | `TFormProps` | `{}`   | 搜索表单配置 |
+| 名称             | 类型         | 默认值 | 描述           |
+| :--------------- | :----------- | :----- | :------------- |
+| columns          | `TColumn[]`  | `[]`   | 表单配置项     |
+| search.visible   | `boolean`    | `true` | 是否渲染搜索栏 |
+| search.formProps | `TFormProps` | `{}`   | 搜索表单配置   |
 
 ## 特别类型
 
@@ -459,6 +461,10 @@ type TCommand = Record<string, string | function>;
 ### TWaterfallProps
 
 查看 `Waterfall` 组件
+
+### TPopupRegister
+
+查看 `Popuper` 组件
 
 ### TRequest
 
