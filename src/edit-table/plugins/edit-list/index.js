@@ -9,7 +9,7 @@ const EditList = definePlugin({
   name: 'EditList',
   priority: 'TOOL',
   props: ['dataSource', 'formatList', 'onChange', 'onSave'],
-  expose: { name: 'action', source: 'action' },
+  expose: [{ name: 'action', source: 'action' }],
   main(_, props) {
     const { formatList, dataSource = [], onChange, onSave } = props;
     const action = useDynamicList(dataSource);
@@ -42,7 +42,7 @@ const EditList = definePlugin({
       const index = record[ROW_INDEX_NAME];
       if (!cacheRef.current[index]) cacheRef.current[index] = {};
       const dataIndex = column.name || column.dataIndex;
-
+      // TODO 字段是数组时情况处理
       cacheRef.current[index][dataIndex] = value;
       setUpdateRow({});
     });
@@ -60,6 +60,8 @@ const EditList = definePlugin({
       edit(key);
       cacheRef.current.push(Object.assign(item, { [ROW_INDEX_NAME]: cacheRef.current.length }));
     });
+
+    console.log(cacheRef);
 
     const unshift = useMemoizedFn((item) => {
       if (editing) {
@@ -112,21 +114,23 @@ const EditList = definePlugin({
       }
     });
 
+    const tableAction = {
+      ...action,
+      editing,
+      data,
+      edit,
+      setFieldValue,
+      push,
+      pushAndEdit,
+      unshift,
+      unshiftAndEdit,
+      remove,
+      cancel,
+      save,
+    };
+
     return {
-      action: {
-        ...action,
-        editing,
-        data,
-        edit,
-        setFieldValue,
-        push,
-        pushAndEdit,
-        unshift,
-        unshiftAndEdit,
-        remove,
-        cancel,
-        save,
-      },
+      action: tableAction,
     };
   },
 });

@@ -17,7 +17,7 @@ function register(columnInterface) {
   // columnSetter.use(getAliasName(columnAlias, 'name'), {
   //   title: '标题',
   //   width: 'lg',
-  //   inputNode: 'input',
+  //   input: 'input',
   //   render: 'text',
   // });
 
@@ -25,25 +25,25 @@ function register(columnInterface) {
   // columnSetter.use(getAliasName(columnAlias, 'desc'), {
   //   title: '备注',
   //   width: 'xl',
-  //   inputNode: 'textarea',
+  //   input: 'textarea',
   //   render: ['tip', 16],
   // });
 
   // 金额数据列
   // columnSetter.use('indexNumber', {
-  //   inputNode: 'number',
+  //   input: 'number',
   //   render: ['number', { delimiter: ',' }],
   // });
 
   // 身份证号码数据列
   // columnSetter.use('idNumber', {
-  //   inputNode: 'number',
+  //   input: 'number',
   //   render: ['number', { delimiter: ',' }],
   // });
 
   // 手机号码数据列
   // columnSetter.use('phoneNumber', {
-  //   inputNode: 'number',
+  //   input: 'number',
   //   render: ['number', { delimiter: ',' }],
   // });
 

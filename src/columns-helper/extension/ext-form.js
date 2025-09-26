@@ -6,7 +6,7 @@ function run(item, options) {
   const { enable, getNode } = options;
 
   // 转换 inputNode
-  if (!enable.form) return item;
+  if (!enable.form || (getNode && item.getNode === false)) return item;
 
   if (!item.input && !item.inputNode && !getNode) item.input = 'input';
   const defaultProps = childrenPropsSetter.get(item.input);

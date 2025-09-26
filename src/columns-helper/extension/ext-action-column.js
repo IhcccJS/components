@@ -10,7 +10,8 @@ function run(list, options) {
     title: '操作',
     key: '__actions__',
     fixed: 'right',
-    render: ['buttons', { type: 'a', eventMap, data: eventData, ...actionButtons }],
+    renderType: 'buttons',
+    renderProps: { type: 'a', eventMap, data: eventData, ...actionButtons },
     ...actionColumn,
   });
 }

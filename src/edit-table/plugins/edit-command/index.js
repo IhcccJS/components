@@ -40,7 +40,7 @@ const ListCommand = definePlugin({
       const eventMap = {};
 
       if (command.create) {
-        eventMap.create = function ({}) {
+        eventMap.create = function ({ record }) {
           createCommand.run(record);
         };
       }
@@ -67,9 +67,6 @@ const ListCommand = definePlugin({
         return false;
       },
     };
-  },
-  main() {
-    return null;
   },
 });
 

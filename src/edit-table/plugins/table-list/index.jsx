@@ -17,7 +17,7 @@ const TableList = definePlugin({
         <Table
           {...tableProps}
           columns={tableColumns.data}
-          dataSource={action.list}
+          dataSource={action.data}
           components={{
             ...tableProps.components,
             body: {

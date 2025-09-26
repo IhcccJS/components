@@ -1,45 +1,26 @@
 import React from 'react';
-import { ColumnHeightOutlined, VerticalAlignBottomOutlined, VerticalAlignMiddleOutlined } from '@ant-design/icons';
+import { ColumnHeightOutlined, /** VerticalAlignBottomOutlined, */ VerticalAlignMiddleOutlined } from '@ant-design/icons';
 import definePlugin from '../create-component/definePlugin';
+
 const expandAllKeys = (list, rowKey) => {
   return (list || []).map((item) => item[rowKey]);
 };
 
-const expandSomeKeys = (list, rowKey) => {
-  return (list || []).filter((item) => item.deep < 2).map((item) => item[rowKey]);
+const expandSomeKeys = (list, rowKey, deep = 1) => {
+  return (list || []).filter((item) => item.deep < deep).map((item) => item[rowKey]);
 };
 
 export default definePlugin({
   name: 'buttonTableExpand',
   priority: 'CONTENT',
-  props: ['buttonEnabled'],
+  props: ['buttonEnabled', 'rowKey', 'expandable', 'table'],
   before(_, props) {
     const { buttonEnabled = {} } = props;
 
-    if (buttonEnabled.expandAble === false) return;
+    if (buttonEnabled.tableExpand === false) return;
 
     return {
       button: [
-        {
-          key: 'expandSome',
-          group: 'expand',
-          tip: '展开部分',
-          props: ({ expandType }) => ({
-            type: expandType === 'some' ? 'primary' : 'dashed',
-            icon: <VerticalAlignBottomOutlined />,
-          }),
-          sort: 100,
-        },
-        {
-          key: 'expandAll',
-          group: 'expand',
-          tip: '展开全部',
-          props: ({ expandType }) => ({
-            type: expandType === 'all' ? 'primary' : 'dashed',
-            icon: <ColumnHeightOutlined />,
-          }),
-          sort: 100,
-        },
         {
           key: 'expandNone',
           group: 'expand',
@@ -50,13 +31,31 @@ export default definePlugin({
           }),
           sort: 100,
         },
+        // {
+        //   key: 'expandSome',
+        //   group: 'expand',
+        //   tip: '展开部分',
+        //   props: ({ expandType }) => ({
+        //     type: expandType === 'some' ? 'primary' : 'dashed',
+        //     icon: <VerticalAlignBottomOutlined />,
+        //   }),
+        //   sort: 100,
+        // },
+        {
+          key: 'expandAll',
+          group: 'expand',
+          tip: '展开全部',
+          props: ({ expandType }) => ({
+            type: expandType === 'all' ? 'primary' : 'dashed',
+            icon: <ColumnHeightOutlined />,
+          }),
+          sort: 100,
+        },
       ],
     };
   },
   main(_, props) {
     const { buttonEnabled = {}, expandable, table = {}, rowKey: _rowKey = 'key' } = props;
-
-    if (buttonEnabled.tableExpand === false) return;
 
     const rowKey = _rowKey || table.rowKey || 'key';
 
@@ -71,9 +70,7 @@ export default definePlugin({
       }
     };
 
-    if (buttonEnabled.expandAble === false) {
-      return { expandable: {} };
-    }
+    if (buttonEnabled.tableExpand === false) return { expandable: {} };
 
     return {
       expandable: {
@@ -100,7 +97,7 @@ export default definePlugin({
           setExpandType('none');
         },
       },
-      expose: { name: 'expand', source: 'data' },
+      expose: [{ name: 'expand', source: 'data' }],
     };
   },
 });

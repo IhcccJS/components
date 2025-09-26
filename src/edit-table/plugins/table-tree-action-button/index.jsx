@@ -3,6 +3,7 @@ import definePlugin from '../../../create-component/definePlugin';
 const actionColumn = {
   width: 'lg',
   fixed: 'right',
+  getNode: false,
 };
 
 const actionButtons = {

@@ -56,7 +56,6 @@ const GetFormItems = {
               Object.assign(
                 {},
                 item.inputProps,
-                item.inputNodeProps,
                 itemState.inputProps,
                 itemViewType === 'disabled' || itemState.disabled === true ? { disabled: true } : {},
               ),

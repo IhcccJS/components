@@ -9,7 +9,7 @@ export default definePlugin({
   main(instance, props) {
     const { request } = instance.getPlugin('request');
 
-    const buttonExpandAble = instance.getPlugin('buttonExpandAble');
+    const tableExpand = instance.getPlugin('buttonTableExpand');
     const editTableRef = React.useRef();
 
     const eventData = { ...instance.expose, ...props.eventData };
@@ -21,7 +21,7 @@ export default definePlugin({
         eventData={eventData}
         table={{
           ...props.table,
-          expandable: { ...(buttonExpandAble?.expandable || props.table?.expandable) },
+          expandable: { ...(tableExpand?.expandable || props.table?.expandable) },
           loading: request.loading,
           rowKey: props.rowKey,
         }}

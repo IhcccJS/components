@@ -175,13 +175,13 @@ class BaseSystem {
 
       this._collection(impl);
 
-      // console.log('impl::', impl, this.collection);
-
       if (isArray(plugin.expose)) {
         plugin.expose.forEach((item) => {
           this.expose[item.name] = impl[item.source];
         });
       }
+
+      // console.log('impl::', impl, plugin, this.expose);
     }
   }
 

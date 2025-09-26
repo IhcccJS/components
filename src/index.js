@@ -33,4 +33,3 @@ export { default as Theme } from './theme';
 export { default as Tour } from './tour';
 export { default as TransitionRoute } from './transition-route';
 export { default as Upload } from './upload';
-export { default as icons } from './icons';

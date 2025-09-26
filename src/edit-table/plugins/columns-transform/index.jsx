@@ -15,7 +15,7 @@ export function getValue(valuePropName, event) {
 const transferEditCell = {
   type: 'item',
   run: (column, opts) => {
-    if (!column.inputNode) return column;
+    if (!column.input) return column;
     const valuePropName = column?.itemProps?.valuePropName || 'value';
 
     return {
@@ -24,9 +24,9 @@ const transferEditCell = {
         return {
           editing: opts.canEdit(column.editAble, record),
           component: React.createElement(
-            column.input || column.inputNode,
-            Object.assign({}, column.inputProps, column.inputNodeProps, {
-              [valuePropName]: get(record, column.dataIndex, column.inputProps?.defaultValue || column.inputNodeProps?.defaultValue),
+            column.input,
+            Object.assign({}, column.inputProps, {
+              [valuePropName]: get(record, column.dataIndex, column.inputProps?.defaultValue),
               onChange: (event) => opts.setFieldValue?.(record, column, getValue(valuePropName, event)),
             }),
           ),
@@ -38,14 +38,16 @@ const transferEditCell = {
 
 const ColumnsTransform = definePlugin({
   name: 'ColumnsTransform',
-  priority: 'CONTENT',
+  priority: 'TOOL',
+  required: ['EditList', 'TableTreeActionButton'],
   props: ['columns', 'columnsTransformConfig', 'actionColumn', 'eventData', 'eventMap', 'showIndex'],
   collection: () => ({ data: {}, event: {} }),
   main(instance, props) {
     const { table: tableProps = {}, name, columns = [], columnsTransformConfig, actionColumn, eventData, eventMap, showIndex } = props;
 
     const { action } = instance.getPlugin('EditList');
-    const actions = actionColumn || instance.getPlugin('TableTreeActionButton').actionColumn;
+    const innerActionColumn = instance.getPlugin('TableTreeActionButton').actionColumn;
+    const actionButtons = instance.getPlugin('TableTreeActionButton').actionButtons;
 
     const canEdit = (editAbleFn, record, index) => {
       const key = record[tableProps.rowKey];
@@ -81,7 +83,8 @@ const ColumnsTransform = definePlugin({
       },
       getNode: true,
       indexColumn: getIndexType(),
-      actionColumn: actions,
+      actionColumn: actionColumn || innerActionColumn,
+      actionButtons,
       eventData: { ...instance.collection?.data, ...instance.expose, rowKey: tableProps.rowKey, ...eventData },
       eventMap: { ...instance.collection?.event, ...eventMap },
       setFieldValue: action.setFieldValue,
