@@ -18,23 +18,24 @@ const EditList = definePlugin({
       action.resetList(dataSource.map((item, index) => ({ ...item, [ROW_INDEX_NAME]: index })));
     }, [dataSource]);
 
-    const cacheRef = React.useRef([]);
+    const [cacheData, setCacheData] = React.useState([]);
     const [editing, setEditing] = useControllableValue(props, {
       defaultValue: false,
       defaultValuePropName: 'defaultEditing',
       valuePropName: 'editing',
       trigger: 'onEditingChange',
     });
-    const [updateRow, setUpdateRow] = React.useState();
 
     const data = React.useMemo(() => {
-      const list = !editing ? action.list : cacheRef.current;
-      // TODO 不要监听 updateRow 就进行 formatList 操作，可以记录一下更新的数据内变化的路径，在updateRow之后，直接修改数据
+      let list = !editing ? action.list : cacheData;
+      // if(editing) {
+      //   // list =
+      // }
       return formatList?.(list) || list;
-    }, [action.list, editing, updateRow]);
+    }, [editing, action.list, cacheData]);
 
     const edit = useMemoizedFn((key) => {
-      cacheRef.current = cloneDeep(action.list);
+      // setCacheData()
       setEditing(key);
     });
 
@@ -44,7 +45,6 @@ const EditList = definePlugin({
       const dataIndex = column.name || column.dataIndex;
       // TODO 字段是数组时情况处理
       cacheRef.current[index][dataIndex] = value;
-      setUpdateRow({});
     });
 
     const push = useMemoizedFn((item) => {
@@ -60,8 +60,6 @@ const EditList = definePlugin({
       edit(key);
       cacheRef.current.push(Object.assign(item, { [ROW_INDEX_NAME]: cacheRef.current.length }));
     });
-
-    console.log(cacheRef);
 
     const unshift = useMemoizedFn((item) => {
       if (editing) {
