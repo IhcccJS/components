@@ -3,14 +3,8 @@ import get from 'lodash/get';
 import { isFunction } from '@ihccc/utils';
 import columnsHelper from '../../../columns-helper';
 import definePlugin from '../../../create-component/definePlugin';
+import getFieldValue from '../../../utils/get-field-value';
 import EditCell from './edit-cell';
-
-export function getValue(valuePropName, event) {
-  if (event && event.target && typeof event.target === 'object' && valuePropName in event.target) {
-    return event.target[valuePropName];
-  }
-  return event;
-}
 
 const transferEditCell = {
   type: 'item',
@@ -20,14 +14,14 @@ const transferEditCell = {
 
     return {
       ...column,
-      onCell: (record) => {
+      onCell: (record, rowIndex) => {
         return {
           editing: opts.canEdit(column.editAble, record),
           component: React.createElement(
             column.input,
             Object.assign({}, column.inputProps, {
               [valuePropName]: get(record, column.dataIndex, column.inputProps?.defaultValue),
-              onChange: (event) => opts.setFieldValue?.(record, column, getValue(valuePropName, event)),
+              onChange: (event) => opts.setFieldValue?.(rowIndex, column.name || column.dataIndex, getFieldValue(valuePropName, event)),
             }),
           ),
         };
@@ -39,18 +33,27 @@ const transferEditCell = {
 const ColumnsTransform = definePlugin({
   name: 'ColumnsTransform',
   priority: 'TOOL',
-  required: ['EditList', 'TableTreeActionButton'],
-  props: ['columns', 'columnsTransformConfig', 'actionColumn', 'eventData', 'eventMap', 'showIndex'],
-  collection: () => ({ data: {}, event: {} }),
+  required: ['EditList'],
+  props: ['columns', 'columnsTransformConfig', 'actionColumn', 'eventData', 'eventMap', 'indexColumn', 'table', 'rowKey'],
+  collection: () => ({ data: {}, event: {}, actionColumn: {}, actionButtons: {} }),
   main(instance, props) {
-    const { table: tableProps = {}, name, columns = [], columnsTransformConfig, actionColumn, eventData, eventMap, showIndex } = props;
+    const {
+      name,
+      columns = [],
+      columnsTransformConfig,
+      actionColumn,
+      actionButtons,
+      eventData,
+      eventMap,
+      indexColumn,
+      table: tableProps = {},
+      rowKey,
+    } = props;
 
     const { action } = instance.getPlugin('EditList');
-    const innerActionColumn = instance.getPlugin('TableTreeActionButton').actionColumn;
-    const actionButtons = instance.getPlugin('TableTreeActionButton').actionButtons;
 
     const canEdit = (editAbleFn, record, index) => {
-      const key = record[tableProps.rowKey];
+      const key = record[rowKey || tableProps.rowKey];
       const isEditCell = action.editing === true || action.editing === key;
       if (isFunction(editAbleFn)) {
         return editAbleFn(record, index) && isEditCell;
@@ -58,12 +61,14 @@ const ColumnsTransform = definePlugin({
       return isEditCell && editAbleFn !== false;
     };
 
-    const getIndexType = React.useCallback(() => {
-      if (showIndex === 'order') {
-        const { request } = instance.getPlugin('request');
-        return request?.page;
+    const getIndexColumn = React.useCallback(() => {
+      if (indexColumn === false) return;
+      const { type, ...columnConfig } = indexColumn || {};
+      if (type === 'order') {
+        const requestPlugin = instance.getPlugin('request');
+        if (requestPlugin && !columnConfig.page) columnConfig.page = requestPlugin.request?.page;
       }
-      return showIndex;
+      return { ...columnConfig, getNode: false };
     }, []);
 
     const tableColumns = columnsHelper.useColumns(columns, {
@@ -72,7 +77,7 @@ const ColumnsTransform = definePlugin({
       ...columnsTransformConfig,
       name: name || 'list',
       enable: {
-        // indexColumn: true,
+        indexColumn: true,
         actionColumn: true,
         cover: true,
         render: true,
@@ -82,12 +87,12 @@ const ColumnsTransform = definePlugin({
         form: true,
       },
       getNode: true,
-      indexColumn: getIndexType(),
-      actionColumn: actionColumn || innerActionColumn,
-      actionButtons,
-      eventData: { ...instance.collection?.data, ...instance.expose, rowKey: tableProps.rowKey, ...eventData },
-      eventMap: { ...instance.collection?.event, ...eventMap },
-      setFieldValue: action.setFieldValue,
+      indexColumn: getIndexColumn(),
+      actionColumn: { ...instance.collection.actionColumn, ...actionColumn },
+      actionButtons: { ...instance.collection.actionButtons, ...actionButtons },
+      eventData: { ...instance.collection.data, ...instance.expose, rowKey: rowKey || tableProps.rowKey, ...eventData },
+      eventMap: { ...instance.collection.event, ...eventMap },
+      setFieldValue: action.setValue,
       canEdit,
     });
 

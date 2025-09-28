@@ -38,10 +38,8 @@ const columns = [
     dataIndex: 'width',
     width: 'md',
     input: 'select',
-    inputProps: {
-      options: 'front.width',
-    },
-    render: ['formater', 'front.width'],
+    inputProps: { options: 'front.width' },
+    render: ['formater', { options: 'front.width' }],
     defaultValue: null,
   },
   {
@@ -70,7 +68,7 @@ const columns = [
     width: 'lg',
     input: 'autoComplete',
     inputProps: { options: 'generator.input_type' },
-    render: ['formater', 'generator.input_type'],
+    render: ['formater', { options: 'generator.input_type' }],
   },
 ];
 

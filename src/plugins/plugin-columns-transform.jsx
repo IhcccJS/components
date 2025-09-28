@@ -19,16 +19,17 @@ export default definePlugin({
       actionButtons,
       eventData = {},
       eventMap = {},
-      showIndex = true,
+      indexColumn,
     } = props;
 
-    const getIndexType = React.useCallback(() => {
-      if (showIndex === false) return;
-      if (showIndex === 'order') {
-        const { request } = instance.getPlugin('request');
-        return request?.page;
+    const getIndexColumn = React.useCallback(() => {
+      if (indexColumn === false) return;
+      const { type, ...columnConfig } = indexColumn === true || !indexColumn ? {} : indexColumn;
+      if (type === 'order') {
+        const requestPlugin = instance.getPlugin('request');
+        if (requestPlugin && !columnConfig.page) columnConfig.page = requestPlugin.request?.page;
       }
-      return showIndex;
+      return columnConfig;
     }, []);
 
     const tableColumns = columnsHelper.useColumns(columns, {
@@ -45,7 +46,7 @@ export default definePlugin({
         indexColumn: true,
         actionColumn: true,
       },
-      indexColumn: getIndexType(),
+      indexColumn: getIndexColumn(),
       actionColumn: actionColumn,
       actionButtons: actionButtons,
       eventData: { ...eventData, ...instance.collection.data, ...instance.expose },

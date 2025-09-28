@@ -15,12 +15,9 @@ class BaseSystem {
     /** 组件名称 */
     this.name = name;
     /** 安装的插件列表 */
-    this.plugins = plugins;
+    this.plugins = [];
     /** 安装的插件 */
-    this.pluginInstalled = plugins.reduce((store, plugin) => {
-      store[plugin.name] = true;
-      return store;
-    }, {});
+    this.pluginInstalled = {};
     /** 插件实例列表，插件运行后的结果 */
     this.pluginImpls = new Map();
     /** 渲染内容的容器列表，类似于插槽 */
@@ -30,26 +27,37 @@ class BaseSystem {
     /** 上下文列表 */
     this.context = {};
     /** 插件扩展的 props 列表 */
-    this.props = plugins.reduce(
-      (store, plugin) => {
-        const props = plugin.props || plugin.extendProps;
-        if (isArray(props)) {
-          // 支持数组定义、方便 react 组件逻辑，无需校验
-          return props.reduce((s, p) => ((s[p] = null), s), store);
-        } else if (isObject(props)) {
-          // 支持对象定义、主要方便 Vue 组件逻辑
-          Object.assign(store, props);
-        }
-        return store;
-      },
-      { childrenRenderMode: null },
-    );
+    this.props = { childrenRenderMode: null };
     /** 每个插件扩展的 props 列表 */
     this.extendProps = {};
     /** 未在扩展声明内的 props 列表 */
     this.sourceProps = {};
     /** 对组件外暴露的内部变量列表 */
     this.expose = {};
+
+    this.use(plugins);
+  }
+
+  /** 挂载额外的插件 */
+  use(plugins) {
+    const newPlugins = Array.isArray(plugins) ? plugins : [plugins];
+    this.plugins = this.plugins.concat(newPlugins);
+    /** 安装的插件 */
+    this.pluginInstalled = newPlugins.reduce((store, plugin) => {
+      store[plugin.name] = true;
+      return store;
+    }, this.pluginInstalled);
+    this.props = newPlugins.reduce((store, plugin) => {
+      const props = plugin.props || plugin.extendProps;
+      if (isArray(props)) {
+        // 支持数组定义、方便 react 组件逻辑，无需校验
+        return props.reduce((s, p) => ((s[p] = null), s), store);
+      } else if (isObject(props)) {
+        // 支持对象定义、主要方便 Vue 组件逻辑
+        Object.assign(store, props);
+      }
+      return store;
+    }, this.props);
   }
 
   /** 是否安装插件 */

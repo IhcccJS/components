@@ -1,31 +1,30 @@
 import React from 'react';
-import EditTableTree from '../edit-table/edit-table-tree';
+import EditTable from '../edit-table/edit-table-all';
 import definePlugin from '../create-component/definePlugin';
 
 export default definePlugin({
   name: 'listTableEditRow',
   priority: 'CONTENT',
-  props: [],
+  props: ['table', 'eventData', 'rowKey'],
   main(instance, props) {
-    const { request } = instance.getPlugin('request');
-
-    const tableExpand = instance.getPlugin('buttonTableExpand');
     const editTableRef = React.useRef();
 
-    const eventData = { ...instance.expose, ...props.eventData };
+    const { request } = instance.getPlugin('request');
+    const tableExpand = instance.getPlugin('buttonTableExpand');
 
     const content = (
-      <EditTableTree
+      <EditTable
         {...props}
         ref={editTableRef}
-        eventData={eventData}
+        eventData={{ ...instance.expose, ...props.eventData }}
         table={{
+          loading: request.loading,
+          pagination: false,
           ...props.table,
           expandable: { ...(tableExpand?.expandable || props.table?.expandable) },
-          loading: request.loading,
-          rowKey: props.rowKey,
         }}
         dataSource={request.data.list}
+        rowKey={props.rowKey}
       />
     );
 

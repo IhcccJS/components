@@ -145,17 +145,17 @@ toc: content
 
 用于转换列表 `columns` 配置
 
-| 名称                   | 类型               | 默认值      | 描述                                 |
-| :--------------------- | :----------------- | :---------- | :----------------------------------- |
-| access                 | `TAccess`          | `undefined` | 权限配置                             |
-| name                   | `string`           | `list`      | 列表过滤名称                         |
-| columns                | `TColumnItem[]`    | `[]`        | 列表列配置项                         |
-| columnsTransformConfig | `TUseColumns`      | `{}`        | `useColumns` 配置                    |
-| actionColumn           | `TActionColumn`    | `{}`        | 操作列配置                           |
-| actionButtons          | `TButtons`         | `[]`        | 操作列按钮配置                       |
-| eventData              | `TEventData`       | `{}`        | 按钮或列事件回调的参数               |
-| eventMap               | `TEventMap`        | `{}`        | 按钮或列事件回调方法集合             |
-| showIndex              | `boolean\|'order'` | `true`      | 是否显示序号列，`order` 表示连续序号 |
+| 名称                   | 类型                                                                          | 默认值      | 描述                                 |
+| :--------------------- | :---------------------------------------------------------------------------- | :---------- | :----------------------------------- |
+| access                 | `TAccess`                                                                     | `undefined` | 权限配置                             |
+| name                   | `string`                                                                      | `list`      | 列表过滤名称                         |
+| columns                | `TColumnItem[]`                                                               | `[]`        | 列表列配置项                         |
+| columnsTransformConfig | `TUseColumns`                                                                 | `{}`        | `useColumns` 配置                    |
+| actionColumn           | `TActionColumn`                                                               | `{}`        | 操作列配置                           |
+| actionButtons          | `TButtons`                                                                    | `[]`        | 操作列按钮配置                       |
+| eventData              | `TEventData`                                                                  | `{}`        | 按钮或列事件回调的参数               |
+| eventMap               | `TEventMap`                                                                   | `{}`        | 按钮或列事件回调方法集合             |
+| indexColumn            | `boolean\|{ type: 'order', page?: { pageNumber: number, pageSize: number } }` | `true`      | 是否显示序号列，`order` 表示连续序号 |
 
 ### plugin-item-selections
 

@@ -4,22 +4,22 @@ import { setOptions, register, Upload } from '@ihccc/components';
 
 setOptions({
   'front.width': [
-    { label: 'min', value: '50' },
-    { label: 'xs', value: '60' },
-    { label: 'sm', value: '80' },
-    { label: 'md', value: '120' },
-    { label: 'lg', value: '180' },
-    { label: 'xl', value: '260' },
-    { label: 'xxl', value: '360' },
-    { label: 'max', value: '480' },
+    { label: 'min', value: 'min' },
+    { label: 'xs', value: 'xs' },
+    { label: 'sm', value: 'sm' },
+    { label: 'md', value: 'md' },
+    { label: 'lg', value: 'lg' },
+    { label: 'xl', value: 'xl' },
+    { label: 'xxl', value: 'xxl' },
+    { label: 'max', value: 'max' },
   ],
   'generator.input_type': [
-    { label: 'input', value: 'input' },
-    { label: 'select', value: 'select' },
-    { label: 'checkbox', value: 'checkbox' },
-    { label: 'radio', value: 'radio' },
-    { label: 'number', value: 'number' },
-    { label: 'date', value: 'date' },
+    { label: '输入', value: 'input' },
+    { label: '下拉', value: 'select' },
+    { label: '多选框', value: 'checkbox' },
+    { label: '单选框', value: 'radio' },
+    { label: '数字', value: 'number' },
+    { label: '日期', value: 'date' },
   ],
 });
 

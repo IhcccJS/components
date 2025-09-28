@@ -23,7 +23,7 @@ apiHeader: false
 - [x] [DataItem 数据项](/components/data-item)
 - [x] [Detail 详情](/components/detail)
 - [x] [Dialogue 对话列表](/components/dialogue)
-- [ ] [EditTable 编辑表格](/components/edit-table)
+- [x] [EditTable 编辑表格](/components/edit-table)
 - [x] [Feature 状态特征](/components/feature)
 - [x] [FoldSide 折叠侧边栏](/components/fold-side)
 - [x] [Grid 网格布局](/components/grid)

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useApi } from '@ihccc/hooks';
-import definePlugin from '../../../create-component/definePlugin';
+import definePlugin from '../../create-component/definePlugin';
 
 const none = () => {};
 

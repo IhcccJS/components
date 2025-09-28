@@ -1,6 +1,7 @@
 import React from 'react';
 import { useUnmountedRef } from 'ahooks';
 import definePlugin from '../../create-component/definePlugin';
+import { DEFAULT_COLUMNS } from './utils';
 
 const FormRelation = definePlugin({
   name: 'FormRelation',
@@ -8,7 +9,7 @@ const FormRelation = definePlugin({
   // required: [],
   props: ['columns', 'relationEvents'],
   before(instance, props) {
-    const { columns, relationEvents } = props;
+    const { columns = DEFAULT_COLUMNS, relationEvents } = props;
     const { initialValues } = instance.getSourceProps();
 
     const unmountedRef = useUnmountedRef();
@@ -16,7 +17,7 @@ const FormRelation = definePlugin({
 
     // 获取配置中的关联操作
     const relations = React.useMemo(() => {
-      return columns.reduce((list, item) => {
+      return (columns || []).reduce((list, item) => {
         if (Array.isArray(item.trigger)) {
           const name = item.name || item.dataIndex;
           list[name] = item.trigger.map((item) => ({ ...item, from: name }));
@@ -92,7 +93,7 @@ const FormRelation = definePlugin({
     }, []);
 
     React.useEffect(() => {
-      onFormValuesChange(initialValues);
+      // onFormValuesChange(initialValues);
     }, [initialValues]);
 
     if (!relationEvents) return;

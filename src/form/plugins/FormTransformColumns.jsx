@@ -3,6 +3,7 @@ import { Form } from 'antd';
 import { isString } from '@ihccc/utils';
 import columnsHelper from '../../columns-helper';
 import definePlugin from '../../create-component/definePlugin';
+import { DEFAULT_COLUMNS } from './utils';
 
 const defaultStatus = ['disabled', 'readonly'];
 
@@ -73,7 +74,7 @@ const FormTransformColumns = definePlugin({
   collection: () => ({ transformExtension: [], formItemState: {} }),
   props: ['column', 'columns', 'viewType', 'columnsTransformConfig'],
   main(instance, props) {
-    const { type, labelCol, wrapperCol, column, columns = [], viewType, columnsTransformConfig = {} } = props;
+    const { type, labelCol, wrapperCol, column, columns = DEFAULT_COLUMNS, viewType, columnsTransformConfig = {} } = props;
     // const { type, labelCol, wrapperCol } = instance.getSourceProps();
 
     const { access } = columnsTransformConfig;
