@@ -7,12 +7,17 @@ const defaultCloneData = (data) => data.map((item) => ({ ...item }));
 const EditList = definePlugin({
   name: 'EditList',
   priority: 'TOOL',
-  props: ['dataSource', 'formatList', 'onChange', 'onSave'],
+  props: ['defaultEditing', 'editing', 'onEditingChange', 'defaultDataSource', 'dataSource', 'onChange', 'formatList', 'onSave'],
   expose: [{ name: 'action', source: 'action' }],
   main(_, props) {
     const { formatList, cloneData = defaultCloneData, onSave } = props;
 
-    const [cacheData, setCacheData] = React.useState(props.dataSource || props.defaultDataSource || []);
+    const [cacheData, setCacheData] = React.useState(() => {
+      if (props.defaultEditing || props.editing) {
+        return cloneData(props.dataSource || props.defaultDataSource || []);
+      }
+      return [];
+    });
     const [dataSource, setDataSource] = useControllableValue(props, {
       defaultValue: [],
       defaultValuePropName: 'defaultDataSource',
@@ -27,26 +32,26 @@ const EditList = definePlugin({
       trigger: 'onEditingChange',
     });
 
-    const cacheEnabled = !(props.editing === true && !props.onEditingChange);
+    const cacheEnabledRef = React.useRef(!(props.editing === true && !props.onEditingChange));
     // 保存取消模式，编辑时使用 cacheData 渲染
     // 不带保存按钮的，编辑直接修改 dataSource
-    const updateData = cacheEnabled && editing ? setCacheData : setDataSource;
+    const updateData = cacheEnabledRef.current && editing ? setCacheData : setDataSource;
 
     // 当前列表显示的数据
     const data = React.useMemo(() => {
-      let list = cacheEnabled && editing ? cacheData : dataSource;
+      let list = cacheEnabledRef.current && editing ? cacheData : dataSource;
       return formatList?.(list) || list;
     }, [editing, dataSource, cacheData]);
 
     /** 进入编辑状态 */
     const edit = useMemoizedFn((key = true) => {
-      if (cacheEnabled) setCacheData(cloneData(dataSource));
+      if (cacheEnabledRef.current) setCacheData(cloneData(dataSource));
       setEditing(key);
     });
 
     /** 取消编辑模式 */
     const cancel = useMemoizedFn(() => {
-      if (cacheEnabled) setCacheData([]);
+      if (cacheEnabledRef.current) setCacheData([]);
       setEditing(false);
     });
 
@@ -100,9 +105,9 @@ const EditList = definePlugin({
     });
 
     /** 保存 */
-    const save = useMemoizedFn(async (index) => {
+    const save = useMemoizedFn(async () => {
       if (!editing) return;
-      if (cacheEnabled) {
+      if (cacheEnabledRef.current) {
         const execute = await onSave?.(cacheData);
         if (execute === false) return;
         setDataSource(cacheData);
@@ -113,6 +118,7 @@ const EditList = definePlugin({
     const tableAction = {
       editing,
       data,
+      setData: updateData,
       edit,
       setValue,
       push,

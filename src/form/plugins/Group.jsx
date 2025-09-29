@@ -47,7 +47,7 @@ function GroupProvider(props) {
       }
       return group;
     }, {});
-  }, [formColumns]);
+  }, [formColumns.data]);
 
   const renderGroup = React.useCallback((index) => grouped[index], [grouped]);
 

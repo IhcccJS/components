@@ -14,7 +14,7 @@ const columns = [
     width: 'md',
     render: ['text'],
     input: 'input',
-    editAble: false,
+    // editAble: false,
   },
   {
     title: '允许显示',
@@ -71,5 +71,32 @@ const columns = [
     render: ['formater', { options: 'generator.input_type' }],
   },
 ];
+
+const replaceData = (data, current, next) => {
+  const newData = [...data];
+  const currentData = newData[current];
+  newData[current] = newData[next];
+  newData[next] = currentData;
+  return newData;
+};
+
+// 在操作列添加自定义事件和操作按钮
+export const eventMap = {
+  moveUp: ({ action, index }) => action.setData((data) => replaceData(data, index, index - 1)),
+  moveDn: ({ action, index }) => action.setData((data) => replaceData(data, index, index + 1)),
+};
+
+export const actionButtons = {
+  buttons: [
+    {
+      key: 'moveUp',
+      props: ({ index }) => ({ disabled: index === 0, children: '上移' }),
+    },
+    {
+      key: 'moveDn',
+      props: ({ index, action }) => ({ disabled: index === action.data.length - 1, children: '下移' }),
+    },
+  ],
+};
 
 export default columns;

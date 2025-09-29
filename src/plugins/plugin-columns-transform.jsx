@@ -23,7 +23,7 @@ export default definePlugin({
     } = props;
 
     const getIndexColumn = React.useCallback(() => {
-      if (indexColumn === false) return;
+      if (!indexColumn) return;
       const { type, ...columnConfig } = indexColumn === true || !indexColumn ? {} : indexColumn;
       if (type === 'order') {
         const requestPlugin = instance.getPlugin('request');
@@ -49,8 +49,9 @@ export default definePlugin({
       indexColumn: getIndexColumn(),
       actionColumn: actionColumn,
       actionButtons: actionButtons,
-      eventData: { ...eventData, ...instance.collection.data, ...instance.expose },
-      eventMap: { ...eventMap, ...instance.collection.event },
+      // 用户拥有最高权限，可以覆盖内部方法或数据
+      eventData: { ...instance.collection.data, ...instance.expose, ...eventData },
+      eventMap: { ...instance.collection.event, ...eventMap },
     });
 
     return { tableColumns };

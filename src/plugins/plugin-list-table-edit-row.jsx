@@ -1,5 +1,5 @@
 import React from 'react';
-import EditTable from '../edit-table/edit-table-all';
+import EditTable from '../edit-table/edit-table-row';
 import definePlugin from '../create-component/definePlugin';
 
 export default definePlugin({
@@ -24,7 +24,7 @@ export default definePlugin({
           expandable: { ...(tableExpand?.expandable || props.table?.expandable) },
         }}
         dataSource={request.data.list}
-        rowKey={props.rowKey}
+        rowKey={props.rowKey || props.table?.rowKey}
       />
     );
 

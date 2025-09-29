@@ -13,15 +13,21 @@ toc: content
 
 ## 全部编辑
 
-<code src="./demo/edit-table/demo1" background="#8c8c8c1a"></code>
+<!-- <code src="./demo/edit-table/demo1" background="#8c8c8c1a"></code> -->
 
-## 行编辑
+## 行编辑，自定义行操作按钮
 
-<code src="./demo/edit-table/demo2" background="#8c8c8c1a"></code>
+<!-- <code src="./demo/edit-table/demo2" background="#8c8c8c1a"></code> -->
 
 ## 在表单内使用
 
+只开启 `editing`，并且不设置 `onEditingChange`，数据会直接进行回调修改
+
 <code src="./demo/edit-table/demo3" background="#8c8c8c1a"></code>
+
+## 树结构编辑，以及接口调用
+
+<!-- <code src="./demo/edit-table/demo4" background="#8c8c8c1a"></code> -->
 
 ## EditTable Props
 

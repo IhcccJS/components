@@ -40,16 +40,16 @@ function Demo() {
     >
       <EditTableAll
         ref={etRef}
-        table={{
-          bordered: true,
-          size: 'small',
-          pagination: { size: 'small', style: { marginBottom: 0 } },
-        }}
         columns={columns}
         dataSource={dataSource}
         onChange={setDataSource}
         editing={editing}
         onEditingChange={setEditing}
+        table={{
+          bordered: true,
+          size: 'small',
+          pagination: { size: 'small', style: { marginBottom: 0 } },
+        }}
         rowKey="id"
       />
     </Card>

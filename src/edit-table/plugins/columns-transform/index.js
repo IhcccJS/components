@@ -62,7 +62,7 @@ const ColumnsTransform = definePlugin({
     };
 
     const getIndexColumn = React.useCallback(() => {
-      if (indexColumn === false) return;
+      if (!indexColumn) return;
       const { type, ...columnConfig } = indexColumn || {};
       if (type === 'order') {
         const requestPlugin = instance.getPlugin('request');
@@ -89,7 +89,11 @@ const ColumnsTransform = definePlugin({
       getNode: true,
       indexColumn: getIndexColumn(),
       actionColumn: { ...instance.collection.actionColumn, ...actionColumn },
-      actionButtons: { ...instance.collection.actionButtons, ...actionButtons },
+      actionButtons: {
+        ...instance.collection.actionButtons,
+        ...actionButtons,
+        buttons: [...(instance.collection.actionButtons.buttons || []), ...(actionButtons?.buttons || [])],
+      },
       eventData: { ...instance.collection.data, ...instance.expose, rowKey: rowKey || tableProps.rowKey, ...eventData },
       eventMap: { ...instance.collection.event, ...eventMap },
       setFieldValue: action.setValue,
