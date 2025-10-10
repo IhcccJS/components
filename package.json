@@ -39,8 +39,8 @@
   ],
   "peerDependencies": {
     "@ant-design/icons": "^5",
-    "@ihccc/hooks": "~0.0.1",
-    "@ihccc/utils": "~0.1",
+    "@ihccc/hooks": "~0.0.1-local.1",
+    "@ihccc/utils": "~0.1.1-local.1",
     "antd": "^5",
     "highlight.js": "^11.11",
     "react-quill": "^2.0.0",

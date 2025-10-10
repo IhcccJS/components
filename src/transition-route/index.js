@@ -6,12 +6,9 @@ import { TransitionContext } from './context';
 
 export { Transition, Link, useHistory, TransitionContext };
 
-const TransitionRoute = {
-  Transition,
-  Page,
-  Link,
-  useHistory,
-  Context: TransitionContext,
-};
+Transition.Page = Page;
+Transition.Link = Link;
+Transition.useHistory = useHistory;
+Transition.Context = TransitionContext;
 
-export default TransitionRoute;
+export default Transition;

@@ -22,3 +22,5 @@ function groupIt(list, config) {
     return group;
   }, {});
 }
+
+export default groupIt;
