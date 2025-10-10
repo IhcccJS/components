@@ -1,6 +1,6 @@
 import { isString, isObject, isFunction, isArray } from '@ihccc/utils';
 
-class GlobalSetter {
+class GlobalStore {
   constructor(defaultStore) {
     this.store = new Map(defaultStore);
   }
@@ -36,6 +36,6 @@ class GlobalSetter {
   }
 }
 
-const globalSetter = (defaultStore) => new GlobalSetter(defaultStore);
+const globalStore = (defaultStore) => new GlobalStore(defaultStore);
 
-export default globalSetter;
+export default globalStore;

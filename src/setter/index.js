@@ -1,8 +1,8 @@
 import { Button, Switch, Tag } from 'antd';
 import { A, WaitButton } from '../button-list/buttons';
-import globalSetter from '../utils/globalSetter';
+import globalStore from '../utils/global-store';
 
-const buttonSetter = globalSetter([
+const buttonSetter = globalStore([
   [
     'a',
     {
@@ -42,20 +42,20 @@ const buttonSetter = globalSetter([
 
 export { buttonSetter };
 
-const renderSetter = globalSetter();
+const renderSetter = globalStore();
 
 export { renderSetter };
 
-const columnSetter = globalSetter();
+const columnSetter = globalStore();
 
 export { columnSetter };
 
-const childrenSetter = globalSetter();
+const childrenSetter = globalStore();
 
-const childrenPropsSetter = globalSetter();
+const childrenPropsSetter = globalStore();
 
-const ruleSetter = globalSetter();
+const ruleSetter = globalStore();
 
-const formatSetter = globalSetter();
+const formatSetter = globalStore();
 
 export { childrenSetter, childrenPropsSetter, ruleSetter, formatSetter };
