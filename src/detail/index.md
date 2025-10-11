@@ -11,9 +11,9 @@ toc: content
 
 # Detail 详情内容
 
-<!-- ## 简单上手
+## 简单上手
 
-<code src="./demo/base"></code> -->
+<code src="./demo/base"></code>
 
 ## 分组渲染
 

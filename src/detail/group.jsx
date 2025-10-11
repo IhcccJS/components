@@ -3,8 +3,8 @@ import Grid from '../grid';
 import { DetailContext } from './context';
 
 function Group(props) {
-  const { index, className, style, border, children } = props;
-  const { column, gap, renderGroup } = React.useContext(DetailContext);
+  const { index, className, style, children } = props;
+  const { border, column, gap, cellPadding, grouped } = React.useContext(DetailContext);
 
   // if (
   //   (Array.isArray(groupIndex) && groupIndex.indexOf(index) < 0) ||
@@ -14,9 +14,24 @@ function Group(props) {
   //   return null;
   // }
 
-  const items = renderGroup?.(index);
+  const items = grouped[index] || [];
 
-  const content = <Grid className={className} style={style} transferStyle border={border} column={column} gap={gap} template={items} />;
+  // console.log(items);
+
+  if (items.length === 0) return null;
+
+  const content = (
+    <Grid
+      className={className}
+      style={style}
+      transferStyle
+      border={border}
+      column={column}
+      gap={gap}
+      cellPadding={cellPadding}
+      template={items}
+    />
+  );
 
   return React.isValidElement(children) ? React.cloneElement(children, { children: content }) : content;
 }

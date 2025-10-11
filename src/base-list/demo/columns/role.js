@@ -1,17 +1,20 @@
 export default [
   {
+    group: 'group1',
     title: '名称',
     dataIndex: 'name',
     width: 'e8',
     listRender: { as: 'name' },
   },
   {
+    group: 'group1',
     title: '标识',
     dataIndex: 'key',
     width: 'e8',
     listRender: { as: 'title', className: 'column-2' },
   },
   {
+    group: 'group1',
     title: '状态',
     dataIndex: 'enable',
     width: 'e8',

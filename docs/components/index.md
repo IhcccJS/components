@@ -14,7 +14,13 @@ apiHeader: false
 
 - [x] [Access 权限控制](/components/access)
 - [x] [BaseList 基础列表](/components/base-list)
+  - [ ] [悬浮工具栏布局]
+  - [ ] [瀑布流渲染插件]
+  - [ ] [滚动请求插件]
+  - [ ] [地图点位渲染插件]
 - [x] [ButonList 按钮组](/components/button-list)
+  - [ ] [垂直布局]
+  - [ ] [折叠功能]
 - [x] [Card 卡片](/components/card)
 - [x] [CodeViewer 代码片段](/components/code-viewer)
 - [ ] [Config 配置项](/components/config)
@@ -28,6 +34,7 @@ apiHeader: false
 - [x] [FoldSide 折叠侧边栏](/components/fold-side)
 - [x] [Grid 网格布局](/components/grid)
 - [x] [Image 图片](/components/image)
+  - [ ] [懒加载] 不在视口的图片不加载和渲染
 - [ ] [LazyRender 懒加载]
 - [x] [ListItem 列表项](/components/list-item)
 - [x] [Login 登录表单](/components/login)

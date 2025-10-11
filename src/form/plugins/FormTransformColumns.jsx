@@ -71,7 +71,7 @@ const GetFormItems = {
 const FormTransformColumns = definePlugin({
   name: 'FormTransformColumns',
   priority: 'TOOL',
-  collection: () => ({ transformExtension: [], formItemState: {} }),
+  collection: () => ({ afterTransformExtension: [], formItemState: {} }),
   props: ['column', 'columns', 'viewType', 'columnsTransformConfig'],
   main(instance, props) {
     const { type, labelCol, wrapperCol, column, columns = DEFAULT_COLUMNS, viewType, columnsTransformConfig = {} } = props;
@@ -100,8 +100,8 @@ const FormTransformColumns = definePlugin({
       formItemState: instance.collection.formItemState,
       afterExtension: [
         FormatColumns,
-        ...(columnsTransformConfig.transformExtension || []),
-        ...instance.collection.transformExtension,
+        ...(columnsTransformConfig.afterExtension || []),
+        ...instance.collection.afterTransformExtension,
         GetFormItems,
       ],
     });

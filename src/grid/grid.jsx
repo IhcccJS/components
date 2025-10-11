@@ -39,7 +39,7 @@ const Grid = React.forwardRef(function Grid(
         // padding: option.gap,
         gap: gap || option.gap,
         gridTemplateColumns: `repeat(${column || 1}, 1fr)`,
-        '--grid-cell-padding': cellPadding,
+        '--grid-cell-padding': border && !cellPadding ? '6px 12px' : cellPadding,
         ...style,
       }}
     >
