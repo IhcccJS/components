@@ -3,7 +3,7 @@ import List from './list';
 import Preview from './preview';
 import usePreview from './usePreview';
 
-Image.Preview = Preview;
+Image.Provider = Preview;
 Image.List = List;
 Image.usePreview = usePreview;
 

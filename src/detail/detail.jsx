@@ -13,7 +13,7 @@ const renderExtension = {
     const data = options.eventData.record || {};
     const key = item.key || item.name || item.dataIndex;
     const value = get(data, item.dataIndex, '');
-    const element = <DataItem label={item.title}>{item.render?.(value, data, index) || value}</DataItem>;
+    const element = <DataItem label={item.title}>{item.render?.(value, data) || value}</DataItem>;
     return { ...item, key, element };
   },
 };

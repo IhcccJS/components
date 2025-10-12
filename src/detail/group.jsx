@@ -6,17 +6,7 @@ function Group(props) {
   const { index, className, style, children } = props;
   const { border, column, gap, cellPadding, grouped } = React.useContext(DetailContext);
 
-  // if (
-  //   (Array.isArray(groupIndex) && groupIndex.indexOf(index) < 0) ||
-  //   ((typeof groupIndex === 'number' || typeof groupIndex === 'string') && groupIndex !== index) ||
-  //   index < 0
-  // ) {
-  //   return null;
-  // }
-
   const items = grouped[index] || [];
-
-  // console.log(items);
 
   if (items.length === 0) return null;
 
