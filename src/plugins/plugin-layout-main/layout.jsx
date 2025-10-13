@@ -5,7 +5,7 @@ import { isFunction } from '@ihccc/utils';
 const LayoutStyle = 'card';
 
 const Layout = React.forwardRef(function Layout(
-  { className, head, buttonBar, title, children, footer, renderContent = {}, layoutStyle = 'card', inlineHead = false },
+  { className, sticky, head, buttonBar, title, children, footer, renderContent = {}, layoutStyle = 'card', inlineHead = false },
   ref,
 ) {
   const headNode = head && !inlineHead && (
@@ -81,7 +81,7 @@ const Layout = React.forwardRef(function Layout(
   }
 
   return (
-    <div ref={ref} className={clsx('bc-list-layout', className, extendClassName)}>
+    <div ref={ref} className={clsx('bc-list-layout', { 'bc-list-layout-sticky': !!sticky }, extendClassName, className)}>
       {renderListNode}
     </div>
   );

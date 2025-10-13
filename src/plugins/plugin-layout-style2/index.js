@@ -5,6 +5,7 @@ export default definePlugin({
   name: 'layout',
   priority: 'LAYOUT',
   elementKeys: ['layout', 'head', 'buttonBar', 'children', 'footer'],
+  props: ['sticky', 'renderContent', 'className'],
   collection: () => ({
     layout: Layout,
     head: [],
