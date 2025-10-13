@@ -1,5 +1,6 @@
 import React from 'react';
 import { useUnmountedRef } from 'ahooks';
+import { delay } from '@ihccc/utils';
 import { ConfigContext } from '../../config/context';
 import { TransitionContext } from '../context';
 
@@ -27,6 +28,7 @@ function TransitionRoute({
   disabled,
   preLoadPages,
   transitionClassNames,
+  changeDelay = 0,
   eventEmitter,
   onPreNavigation,
   onLoadStart,
@@ -111,6 +113,8 @@ function TransitionRoute({
       }
       // 执行页面退场动画
       if (!disabled) await transitionOut();
+      // 延迟跳转
+      if (changeDelay > 0) await delay(changeDelay);
       // 跳转路径
       pathChange(type, pathname, history);
       // 执行页面进场动画

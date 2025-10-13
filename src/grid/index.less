@@ -1,46 +1,48 @@
-.grid-floating {
-  width: 100%;
-  padding: calc(var(--gap, 12px) / 2);
-  box-sizing: border-box;
+@prefix: ~'bc-grid';
 
-  &::before,
-  &::after {
-    content: '';
-    display: table;
-    clear: both;
-  }
+// .grid-floating {
+//   width: 100%;
+//   padding: calc(var(--gap, 12px) / 2);
+//   box-sizing: border-box;
 
-  .grid-item {
-    display: inline-block;
-    // 间隙 12px 分 3 列
-    // (100% - 间隙宽度 * 列数 / 跨列数) / 列数 * 跨列数
-    width: calc((100% - var(--gap, 12px) * var(--column) / var(--colSpan, 1)) / var(--column) * var(--colSpan, 1));
-    // 基础高度 * 跨行数 + 间隙宽度 * (跨行数 - 1)
-    height: calc(var(--size, 32px) * var(--rowSpan, 1) + var(--gap, 12px) * (var(--rowSpan) - 1));
-    margin: calc(var(--gap, 12px) / 2);
-    box-sizing: border-box;
-    transition: 0.2s;
+//   &::before,
+//   &::after {
+//     content: '';
+//     display: table;
+//     clear: both;
+//   }
 
-    &.float-left {
-      float: left;
-    }
+//   .grid-item {
+//     display: inline-block;
+//     // 间隙 12px 分 3 列
+//     // (100% - 间隙宽度 * 列数 / 跨列数) / 列数 * 跨列数
+//     width: calc((100% - var(--gap, 12px) * var(--column) / var(--colSpan, 1)) / var(--column) * var(--colSpan, 1));
+//     // 基础高度 * 跨行数 + 间隙宽度 * (跨行数 - 1)
+//     height: calc(var(--size, 32px) * var(--rowSpan, 1) + var(--gap, 12px) * (var(--rowSpan) - 1));
+//     margin: calc(var(--gap, 12px) / 2);
+//     box-sizing: border-box;
+//     transition: 0.2s;
 
-    &.float-right {
-      float: right;
-    }
-  }
-}
+//     &.float-left {
+//       float: left;
+//     }
 
-.grid-table {
-  width: 100%;
-  border-spacing: var(--gap, 12px);
+//     &.float-right {
+//       float: right;
+//     }
+//   }
+// }
 
-  .grid-item {
-    // height: var(--size, 32px);
-  }
-}
+// .grid-table {
+//   width: 100%;
+//   border-spacing: var(--gap, 12px);
 
-.grid {
+//   .grid-item {
+//     // height: var(--size, 32px);
+//   }
+// }
+
+.@{prefix} {
   width: 100%;
   display: grid;
   box-sizing: border-box;

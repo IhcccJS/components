@@ -70,7 +70,7 @@ export default definePlugin({
       button: {
         key: 'toggleSearch',
         props: ({ searchVisible }) => ({
-          title: searchVisible ? '显示查询表单' : '收起查询表单',
+          title: searchVisible ? '收起查询表单' : '显示查询表单',
           type: searchVisible ? 'primary' : 'dashed',
           icon: <SearchOutlined />,
         }),

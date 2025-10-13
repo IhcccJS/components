@@ -1,23 +1,19 @@
 // .page-into {
 //   opacity: 0;
-//   transform: translateX(-100%) scale(0.9);
-//   animation: pageInto 0.4s ease-out 1 both;
+//   transform: translateX(-100%) scale(0.6);
+//   animation: pageInto 0.8s ease-out 1 both;
 // }
 
 // .page-out {
 //   opacity: 1;
 //   transform: translateX(0) scale(1);
-//   animation: pageOut 0.4s ease-in 1 both;
+//   animation: pageOut 0.8s ease-in 1 both;
 // }
 
 // @keyframes pageInto {
-//   0% {
-//     opacity: 0;
-//     transform: translateX(-100%) scale(0.9);
-//   }
-//   80% {
+//   60% {
 //     opacity: 1;
-//     transform: translateX(0) scale(0.9);
+//     transform: translateX(0) scale(0.6);
 //   }
 //   100% {
 //     opacity: 1;
@@ -26,17 +22,13 @@
 // }
 
 // @keyframes pageOut {
-//   0% {
+//   40% {
 //     opacity: 1;
-//     transform: translateX(0) scale(1);
-//   }
-//   20% {
-//     opacity: 1;
-//     transform: translateX(0) scale(0.9);
+//     transform: translateX(0) scale(0.6);
 //   }
 //   100% {
 //     opacity: 0;
-//     transform: translateX(100%) scale(0.9);
+//     transform: translateX(-100%) scale(0.6);
 //   }
 // }
 
@@ -55,22 +47,14 @@
 // }
 
 // @keyframes pageInto {
-//   0% {
-//     opacity: 0;
-//     transform: translateY(-100px);
-//   }
-//   100% {
+//   to {
 //     opacity: 1;
 //     transform: translateY(0);
 //   }
 // }
 
 // @keyframes pageOut {
-//   0% {
-//     opacity: 1;
-//     transform: translateY(0);
-//   }
-//   100% {
+//   to {
 //     opacity: 0;
 //     transform: translateY(100px);
 //   }
@@ -93,22 +77,14 @@
 // }
 
 // @keyframes pageInto {
-//   0% {
-//     opacity: 0;
-//     transform: scale(0.9);
-//   }
-//   100% {
+//   to {
 //     opacity: 1;
 //     transform: scale(1);
 //   }
 // }
 
 // @keyframes pageOut {
-//   0% {
-//     opacity: 1;
-//     transform: scale(1);
-//   }
-//   100% {
+//   to {
 //     opacity: 0;
 //     transform: scale(1.2);
 //   }
@@ -131,22 +107,14 @@
 }
 
 @keyframes pageInto {
-  0% {
-    opacity: 0;
-    transform: scale(1.5);
-  }
-  100% {
+  to {
     opacity: 1;
     transform: scale(1);
   }
 }
 
 @keyframes pageOut {
-  0% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  100% {
+  to {
     opacity: 0;
     transform: scale(0.8);
   }

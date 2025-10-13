@@ -4,7 +4,7 @@ import clsx from 'clsx';
 export function Item({ className, colSpan, rowSpan, transferStyle, style, onClick, children }) {
   if (!children) return null;
   const itemProps = {
-    className: clsx(className, 'grid-item'),
+    className: clsx(className, 'bc-grid-item'),
     style: {
       ...(colSpan > 1 ? { gridColumn: `span ${colSpan} / span ${colSpan}` } : {}),
       ...(rowSpan > 1 ? { gridRow: `span ${rowSpan} / span ${rowSpan}` } : {}),
@@ -29,9 +29,9 @@ const Grid = React.forwardRef(function Grid(
     <div
       ref={ref}
       className={clsx(
-        'grid',
+        'bc-grid',
         {
-          'grid-border': border,
+          'bc-grid-border': border,
         },
         className,
       )}
