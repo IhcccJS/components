@@ -57,11 +57,22 @@
   }
 }
 
-.@{prefix}.@{prefix}-sticky {
+.@{prefix}.@{prefix}-sticky-header {
   .@{prefix} {
     &-toolbar {
       position: sticky;
       top: var(--size-layout-header-height, 52px);
+      background: var(--color-bg-component, #fff);
+      z-index: 10;
+    }
+  }
+}
+
+.@{prefix}.@{prefix}-sticky-footer {
+  .@{prefix} {
+    &-footer {
+      position: sticky;
+      bottom: -1px;
       background: var(--color-bg-component, #fff);
       z-index: 10;
     }

@@ -28,7 +28,8 @@ const Layout = React.forwardRef(({ className, sticky, head, buttonBar, children,
         className={clsx(
           'bc-list-layout-style2',
           {
-            'bc-list-layout-style2-sticky': !!sticky,
+            'bc-list-layout-style2-sticky-header': sticky === true || sticky?.header === true,
+            'bc-list-layout-style2-sticky-footer': sticky === true || sticky?.footer === true,
             'bc-list-layout-style2-container': renderPlace === 'outer',
             ['bc-list-layout-style2-container-' + renderDirection]: renderPlace === 'outer',
           },
