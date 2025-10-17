@@ -1,6 +1,6 @@
 {
   "name": "@ihccc/components",
-  "version": "0.1.0-local.14",
+  "version": "0.1.1",
   "description": "A base components library extends antd",
   "license": "MIT",
   "main": "lib/index.js",
@@ -32,17 +32,18 @@
   },
   "publishConfig": {
     "access": "public",
-    "registry": "http://127.0.0.1:4873/"
+    "registry": "https://registry.npmjs.org/"
   },
   "authors": [
     "ihccc-cn <lccc10588@gmail.com>"
   ],
   "peerDependencies": {
     "@ant-design/icons": "^5",
-    "@ihccc/hooks": "~0.0.1-local.1",
-    "@ihccc/utils": "~0.1.1-local.1",
+    "@ihccc/hooks": "~0.1.0",
+    "@ihccc/utils": "~0.1.1",
     "antd": "^5",
     "highlight.js": "^11.11",
+    "markdown-it": "^14.1.0",
     "react-quill": "^2.0.0",
     "react": "~18.2",
     "react-dom": "~18.2"
@@ -52,7 +53,6 @@
     "antd-style": "^3.5.2",
     "clsx": "^2.1.1",
     "lodash": "^4.17.21",
-    "markdown-it": "^14.1.0",
     "react-draggable": "^4.4.6",
     "react-easy-crop": "^3.3.3",
     "react-sortablejs": "^6.1.4",
