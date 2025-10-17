@@ -81,7 +81,18 @@ const Layout = React.forwardRef(function Layout(
   }
 
   return (
-    <div ref={ref} className={clsx('bc-list-layout', { 'bc-list-layout-sticky': !!sticky }, extendClassName, className)}>
+    <div
+      ref={ref}
+      className={clsx(
+        'bc-list-layout',
+        {
+          'bc-list-layout-sticky-header': sticky === true || sticky?.header === true,
+          'bc-list-layout-sticky-footer': sticky === true || sticky?.footer === true,
+        },
+        extendClassName,
+        className,
+      )}
+    >
       {renderListNode}
     </div>
   );
