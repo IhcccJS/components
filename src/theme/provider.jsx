@@ -10,6 +10,10 @@ export const getChangeTheme = function (getSetting) {
     try {
       if (theme === void 0) {
         const setting = getSetting();
+        if (!setting) {
+          console.error('错误：获取不到用户设置数据～');
+          return;
+        }
         if (!setting.THEMES || setting.THEMES.length === 0 || !setting['Theme']) return;
         theme = setting.THEMES.find((item) => item.value === setting['Theme']);
         if (!theme) return;
