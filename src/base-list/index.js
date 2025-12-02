@@ -5,3 +5,4 @@ export { default as ListOfTableEditAble } from './table-edit-able';
 export { default as ListOfTableSelectAble } from './table-select-able';
 export { default as ListOfCard } from './list-card';
 export { default as ListOfNormal } from './list-normal';
+export { default as ListOfAuto } from './table-auto';

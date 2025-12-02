@@ -2,7 +2,7 @@ import createComponent from '../create-component';
 
 import request from '../plugins/plugin-request-pagination';
 import columnsTransform from '../plugins/plugin-columns-transform';
-import ItemSelections from '../plugins/plugin-item-selections';
+import itemSelections from '../plugins/plugin-item-selections';
 import listCommand from '../plugins/plugin-list-command';
 
 import layout from '../plugins/plugin-layout-main';
@@ -20,7 +20,7 @@ const ListAutoRequest = createComponent([
   // 工具
   request,
   columnsTransform,
-  ItemSelections,
+  itemSelections,
   listCommand,
   // 布局
   layout,

@@ -1,7 +1,7 @@
 import { Divider } from 'antd';
 import Item from '../data-item';
 import Card, { Base, Header, Cover, Body, Footer } from './card';
-import Meta from './media';
+import Meta from './meta';
 
 Card.Item = Item;
 Card.Base = Base;
