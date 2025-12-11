@@ -7,8 +7,8 @@ import listCommand from '../plugins/plugin-list-command';
 
 import layout from '../plugins/plugin-layout-main';
 import search from '../plugins/plugin-search-normal';
-import list from '../plugins/plugin-list-normal';
-import list2 from '../plugins/plugin-list-table';
+import list from '../plugins/plugin-list-table';
+import list2 from '../plugins/plugin-list-normal';
 import listPagination from '../plugins/plugin-list-pagination';
 import buttonList from '../plugins/plugin-button-list';
 

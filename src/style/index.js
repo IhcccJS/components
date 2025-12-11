@@ -1,7 +1,7 @@
 import '../button-list/index.less';
 import '../button-list/space.less';
 import '../card/index.less';
-import '../card/media/index.less';
+import '../card/meta/index.less';
 import '../code-viewer/index.less';
 import '../data-item/index.less';
 import '../dialogue/index.less';
