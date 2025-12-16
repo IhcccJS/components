@@ -46,7 +46,7 @@ export default definePlugin({
         sort: 155,
       },
 
-      event: {
+      eventMap: {
         export: ({ popup, request }) => popup.open('export', { data: request.data }),
       },
 

@@ -40,9 +40,9 @@ export default definePlugin({
         sort: 160,
       },
 
-      data: { fullScreenClassName: fsClassName, isFullscreen },
+      eventData: { fullScreenClassName: fsClassName, isFullscreen },
 
-      event: {
+      eventMap: {
         fullScreen: () => toggleFullscreen(),
       },
     };

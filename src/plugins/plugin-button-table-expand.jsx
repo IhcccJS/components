@@ -79,9 +79,9 @@ export default definePlugin({
         onExpand,
       },
 
-      data: { expandType, setExpandType, expandedRowKeys, setExpandedRowKeys },
+      eventData: { expandType, setExpandType, expandedRowKeys, setExpandedRowKeys },
 
-      event: {
+      eventMap: {
         expandSome: ({ request }) => {
           const keys = expandSomeKeys(request.data?.list, rowKey);
           setExpandedRowKeys(keys);
@@ -97,7 +97,7 @@ export default definePlugin({
           setExpandType('none');
         },
       },
-      expose: [{ name: 'expand', source: 'data' }],
+      expose: [{ name: 'expand', source: 'eventData' }],
     };
   },
 });

@@ -119,7 +119,7 @@ function Popup(props, ref) {
 
   if (!open && !openAsync && destroyOnClose) return null;
 
-  const buttonsData = { ...extraButton.data, onHide, onCancel, onOk };
+  const buttonsData = { ...extraButton.eventData, onHide, onCancel, onOk };
 
   const headerNode = header || (
     <div className="bc-popup-header-default">
@@ -129,7 +129,7 @@ function Popup(props, ref) {
         <ButtonList
           space="none"
           buttons={[...(extraButton.buttons || []), ...internalExtraButtons]}
-          data={{ ...extraButton.data, ...buttonsData }}
+          eventData={{ ...extraButton.eventData, ...buttonsData }}
           eventMap={{ ...extraButton.eventMap, ...extraEventMap }}
         />
       </div>
@@ -141,7 +141,7 @@ function Popup(props, ref) {
       <ButtonList
         layout="end"
         buttons={[...(footerButton.buttons || []), ...interalFooterButtons]}
-        data={{ ...footerButton.data, ...buttonsData }}
+        eventData={{ ...footerButton.eventData, ...buttonsData }}
         eventMap={{ ...footerButton.eventMap, ...footerEventMap }}
       />
     </div>

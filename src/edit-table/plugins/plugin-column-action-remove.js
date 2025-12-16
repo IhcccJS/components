@@ -23,7 +23,7 @@ const ColumnActionRemove = definePlugin({
   priority: 'TOOL',
   before() {
     return {
-      event: {
+      eventMap: {
         remove: ({ action, record }) => {
           action.remove((data) => data.filter((item) => item !== record));
         },

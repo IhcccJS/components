@@ -35,7 +35,7 @@ const ColumnsTransform = definePlugin({
   priority: 'TOOL',
   required: ['EditList'],
   props: ['columns', 'columnsTransformConfig', 'actionColumn', 'eventData', 'eventMap', 'indexColumn', 'table', 'rowKey'],
-  collection: () => ({ data: {}, event: {}, actionColumn: {}, actionButtons: {} }),
+  collection: () => ({ eventData: {}, eventMap: {}, actionColumn: {}, actionButtons: {} }),
   main(instance, props) {
     const {
       name,
@@ -94,8 +94,8 @@ const ColumnsTransform = definePlugin({
         ...actionButtons,
         buttons: [...(instance.collection.actionButtons.buttons || []), ...(actionButtons?.buttons || [])],
       },
-      eventData: { ...instance.collection.data, ...instance.expose, rowKey: rowKey || tableProps.rowKey, ...eventData },
-      eventMap: { ...instance.collection.event, ...eventMap },
+      eventData: { ...instance.collection.eventData, ...instance.expose, rowKey: rowKey || tableProps.rowKey, ...eventData },
+      eventMap: { ...instance.collection.eventMap, ...eventMap },
       setFieldValue: action.setValue,
       canEdit,
     });

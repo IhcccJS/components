@@ -10,10 +10,10 @@ import { DetailContext } from './context';
 const renderExtension = {
   type: 'item',
   run(item, options) {
-    const data = options.eventData.record || {};
+    const record = options.eventData.record || {};
     const key = item.key || item.name || item.dataIndex;
-    const value = get(data, item.dataIndex, '');
-    const element = <DataItem label={item.title}>{item.render?.(value, data) || value}</DataItem>;
+    const value = get(record, item.dataIndex, '');
+    const element = <DataItem label={item.title}>{item.render?.(value, record) || value}</DataItem>;
     return { ...item, key, element };
   },
 };

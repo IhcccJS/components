@@ -31,15 +31,19 @@ function run(item, options) {
 
     item.render = function () {
       const events = {};
-      const context = { column: { ...item, event: events }, data: eventData, get: getRender };
+      const context = { column: { ...item, event: events }, eventData, get: getRender };
 
       for (const key in item.event) {
         if (key === 'element' || key === 'tip') continue;
         const event = item.event.click;
         if (isString(event) && isFunction(eventMap[event])) {
-          // 把 item.event 事件全部绑定参数
-          // FIXME 这里绑定的参数和其他方法可能不一致，导致一些问题
-          events[key] = eventMap[event].bind(context, ...arguments, event);
+          // 把 item.event 事件全部绑定好参数
+          events[key] = eventMap[event].bind(item, {
+            ...eventData,
+            value: arguments[0],
+            record: arguments[1],
+            index: arguments[2],
+          });
         }
       }
 

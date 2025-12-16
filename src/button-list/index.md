@@ -32,7 +32,7 @@ toc: content
 | wrap           | `boolean`                                    | `undefined` | 是否允许换行                                                                                                          |
 | reverse        | `boolean`                                    | `undefined` | 是否倒置按钮顺序                                                                                                      |
 | layout         | `string`                                     | `undefined` | 按钮布局，可选 `start \| center \| end \| around \| between \| evenly`，不会影响按钮合并分组和下拉分组的渲染          |
-| data           | `any`                                        | `undefined` | 按钮响应事件可以接收到的参数                                                                                          |
+| eventData      | `any`                                        | `undefined` | 按钮响应事件可以接收到的参数，`data` 已弃用                                                                           |
 | buttons        | [`buttonItem[]`](#特别类型)                  | `[]`        | 按钮配置列表                                                                                                          |
 | baseProps      | [`propsObject`](#特别类型)                   | `undefined` | 默认的组件参数                                                                                                        |
 | sortRenderKeys | `array\|object`                              | `undefined` | 设置按钮排序，优先级更高                                                                                              |

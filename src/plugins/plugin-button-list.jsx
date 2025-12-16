@@ -13,8 +13,8 @@ function Buttons({ instance, extraButtons = {}, eventData, eventMap }) {
       // }}
       {...extraButtons}
       buttons={!extraButtons.buttons ? instance.collection.button : instance.collection.button.concat(extraButtons.buttons)}
-      data={{ ...instance.expose, ...instance.collection.data, ...eventData }}
-      eventMap={{ ...instance.collection.event, ...eventMap }}
+      eventData={{ ...instance.expose, ...instance.collection.eventData, ...eventData }}
+      eventMap={{ ...instance.collection.eventMap, ...eventMap }}
       style={{ flex: 1 }}
     />
   );
@@ -25,6 +25,6 @@ export default definePlugin({
   priority: 'CONTENT',
   required: ['layout'],
   props: ['extraButtons', 'eventData', 'eventMap'],
-  collection: () => ({ button: [], data: {}, event: {} }),
+  collection: () => ({ button: [], eventData: {}, eventMap: {} }),
   content: { buttonBar: Buttons },
 });

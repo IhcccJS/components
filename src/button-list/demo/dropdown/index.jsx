@@ -3,7 +3,7 @@ import { Space } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
 
 const handleEvent = function (...args) {
-  console.log('event data:', ...args);
+  console.log('event-data:', ...args);
 };
 
 const buttons = [
@@ -65,18 +65,8 @@ const buttons = [
 function Demo() {
   return (
     <Space direction="vertical">
-      <ButtonList
-        type="a"
-        buttons={buttons}
-        data={{ name: 'hello' }}
-        baseProps={{ dropdown: { placement: 'bottom' } }}
-      />
-      <ButtonList
-        type="button"
-        buttons={buttons}
-        data={{ name: 'hello' }}
-        baseProps={{ dropdown: { placement: 'bottom' } }}
-      />
+      <ButtonList type="a" buttons={buttons} eventData={{ name: 'hello' }} baseProps={{ dropdown: { placement: 'bottom' } }} />
+      <ButtonList type="button" buttons={buttons} eventData={{ name: 'hello' }} baseProps={{ dropdown: { placement: 'bottom' } }} />
     </Space>
   );
 }

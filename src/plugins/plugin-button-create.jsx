@@ -8,7 +8,7 @@ export default definePlugin({
   before(instance, props) {
     const { buttonEnabled = {}, eventMap = {} } = props;
 
-    if (buttonEnabled.create === false || (!eventMap.create && !instance.collection.event?.create)) return;
+    if (buttonEnabled.create === false || (!eventMap.create && !instance.collection.eventMap?.create)) return;
 
     return {
       button: {

@@ -44,9 +44,9 @@ export default definePlugin({
     return {
       renderType,
 
-      data: { renderType },
+      eventData: { renderType },
 
-      event: {
+      eventMap: {
         // tableRender: ({ fullScreenClassName, isFullscreen }) => {
         tableRender: () => {
           setRenderType('table');

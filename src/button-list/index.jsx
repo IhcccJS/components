@@ -167,10 +167,12 @@ function ButtonList(props) {
     sortRenderKeys,
     render,
     eventMap,
+    eventData: _eventData,
     style,
   } = props;
 
   if ((buttons || []).length === 0) return null;
+  const eventData = _eventData || data;
 
   const accessHandle = Access.useAccess(
     Object.assign(
@@ -198,8 +200,8 @@ function ButtonList(props) {
       .filter(Boolean);
     sortIndex.sort((x, y) => x.sort - y.sort);
     const sortedButtons = sortIndex.map((item) => accessButtons[item.index]);
-    return handleButtonConfig(sortedButtons, data, type);
-  }, [accessHandle?.passedData, data]);
+    return handleButtonConfig(sortedButtons, eventData, type);
+  }, [accessHandle?.passedData, eventData]);
 
   const renderDom = (
     <RenderButtons
@@ -212,13 +214,13 @@ function ButtonList(props) {
       layout={layout}
       buttons={buttonList}
       baseProps={baseProps}
-      eventData={data}
+      eventData={eventData}
       eventMap={eventMap || {}}
       style={style}
     />
   );
 
-  return !render ? renderDom : render(renderDom, data, buttonList);
+  return !render ? renderDom : render(renderDom, eventData, buttonList);
 }
 
 ButtonList.button = buttonSetter;

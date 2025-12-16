@@ -21,7 +21,7 @@ export default definePlugin({
         props: { type: 'link', icon: <QuestionCircleOutlined />, children: '遇到了问题？' },
       },
 
-      event: {
+      eventMap: {
         help: ({ popup }) => popup.open('help'),
       },
 

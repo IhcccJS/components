@@ -34,7 +34,7 @@ export default definePlugin({
             element: (
               <ButtonList
                 layout="end"
-                data={{ foldEnable, foldState, setFoldState }}
+                eventData={{ foldEnable, foldState, setFoldState }}
                 eventMap={{ fold: ({ setFoldState }) => setFoldState((f) => !f) }}
                 buttons={[
                   {
@@ -61,9 +61,9 @@ export default definePlugin({
     return {
       head,
 
-      data: { searchVisible, setSearchVisible },
+      eventData: { searchVisible, setSearchVisible },
 
-      event: {
+      eventMap: {
         toggleSearch: ({ setSearchVisible }) => setSearchVisible((v) => !v),
       },
 

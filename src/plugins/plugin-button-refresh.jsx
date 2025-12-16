@@ -21,7 +21,7 @@ export default definePlugin({
         sort: 180,
       },
 
-      event: {
+      eventMap: {
         refresh: ({ request }) => request.refresh(),
       },
     };

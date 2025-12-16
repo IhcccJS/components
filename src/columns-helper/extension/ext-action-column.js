@@ -1,7 +1,6 @@
 import { isObject } from '@ihccc/utils';
 
 function run(list, options) {
-  // FIXME eventData、data 在全局有命名冲突的问题
   const { enable, actionColumn, actionButtons, eventMap, eventData } = options;
 
   if (!enable.actionColumn || (!isObject(actionColumn) && !actionButtons)) return list;
@@ -11,7 +10,7 @@ function run(list, options) {
     key: '__actions__',
     fixed: 'right',
     renderType: 'buttons',
-    renderProps: { type: 'a', eventMap, data: eventData, ...actionButtons },
+    renderProps: { type: 'a', eventMap, eventData, ...actionButtons },
     ...actionColumn,
   });
 }

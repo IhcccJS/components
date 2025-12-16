@@ -7,7 +7,7 @@ export default definePlugin({
   name: 'columnsTransform',
   priority: 'COLLECTING',
   props: [],
-  collection: () => ({ data: {}, event: {} }),
+  collection: () => ({ eventData: {}, eventMap: {} }),
   main(instance, props) {
     const {
       access,
@@ -50,8 +50,8 @@ export default definePlugin({
       actionColumn: actionColumn,
       actionButtons: actionButtons,
       // 用户拥有最高权限，可以覆盖内部方法或数据
-      eventData: { ...instance.collection.data, ...instance.expose, ...eventData },
-      eventMap: { ...instance.collection.event, ...eventMap },
+      eventData: { ...instance.collection.eventData, ...instance.expose, ...eventData },
+      eventMap: { ...instance.collection.eventMap, ...eventMap },
     });
 
     return { tableColumns };

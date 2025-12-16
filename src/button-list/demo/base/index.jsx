@@ -1,7 +1,7 @@
 import { ButtonList } from '@ihccc/components';
 
 const handleEvent = function (...args) {
-  console.log('event data:', this, ...args);
+  console.log('event-data:', this, ...args);
 };
 
 const buttons = [
@@ -68,7 +68,7 @@ function Demo() {
         button: { size: 'small', shape: 'round' },
         tip: { arrow: false },
       }}
-      data={{ name: 'hello' }}
+      eventData={{ name: 'hello' }}
     />
   );
 }

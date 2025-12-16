@@ -61,7 +61,7 @@ const ListCommand = definePlugin({
     }, []);
 
     return {
-      event: commandEventMap,
+      eventMap: commandEventMap,
 
       onSave: (record) => {
         return false;

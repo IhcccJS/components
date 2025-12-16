@@ -137,7 +137,7 @@ function SettingCenter({ exportName, extraButtons = {} }) {
           <ButtonList
             {...extraButtons}
             buttons={buttons.concat(extraButtons.buttons || [])}
-            data={{ exportName, setting, setSetting: onChange, filterSettingValue, ...extraButtons.data }}
+            eventData={{ exportName, setting, setSetting: onChange, filterSettingValue, ...extraButtons.eventData }}
             eventMap={{ ...eventMap, ...extraButtons.eventMap }}
           />
         </React.Fragment>

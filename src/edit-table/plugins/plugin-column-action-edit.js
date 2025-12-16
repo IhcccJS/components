@@ -39,7 +39,7 @@ const ColumnActionEdit = definePlugin({
   priority: 'TOOL',
   before() {
     return {
-      event: {
+      eventMap: {
         update: ({ action, record, rowKey }) => action.edit(record[rowKey]),
         save: ({ action }) => action.save(),
         cancel: ({ action }) => action.cancel(),

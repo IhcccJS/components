@@ -28,6 +28,6 @@ export default definePlugin({
       />
     );
 
-    return { data: { editTable: editTableRef.current }, children: content };
+    return { eventData: { editTable: editTableRef.current }, children: content };
   },
 });

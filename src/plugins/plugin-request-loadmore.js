@@ -29,7 +29,6 @@ export default definePlugin({
 
     const lastDataRef = React.useRef(initialData.data.list);
 
-    // #FIXME: useApi 暴露了多余的 runNext 方法
     const request = useApi(query || promiseFn, {
       auto: noData,
       initialData: initialData.data,

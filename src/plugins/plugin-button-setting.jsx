@@ -28,7 +28,7 @@ export default definePlugin({
         sort: 155,
       },
 
-      event: {
+      eventMap: {
         setting: ({ popup }) => popup.open('global/sys-setting', { prefix: namespace }),
       },
     };

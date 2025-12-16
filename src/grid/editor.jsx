@@ -191,8 +191,8 @@ function GridEditor({}) {
   return (
     <div className="styled">
       <ButtonList
-        data={{ mode, setMode, column, action, setAction }}
         buttons={buttons}
+        eventData={{ mode, setMode, column, action, setAction }}
         eventMap={{ ...eventMap, reset, push, cAdd, cMinus, output }}
         style={{ margin: '20px 0' }}
       />

@@ -91,14 +91,14 @@ export default definePlugin({
     return {
       selection,
       selectionType: itemSelections?.type,
-      data: {
+      eventData: {
         selection,
         isEmpty: list.length === 0,
         allSelected: selection.allSelected,
         partiallySelected: selection.partiallySelected,
         selected: selection.selected,
       },
-      event: {
+      eventMap: {
         toggleAll: selection.toggleAll,
         clearAll: selection.clearAll,
       },
