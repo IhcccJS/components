@@ -15,7 +15,6 @@ function WrapperDrawer({ popupRef, onCancel, ...restProps }) {
   return <Drawer {...restProps} onClose={handleCancel} />;
 }
 
-// TODO 替换为系统内部封装的弹窗和抽屉，antd 的过于笨重且不符合系统定制需求
 export default {
   popup: InternalPopup,
   drawer: WrapperDrawer,

@@ -36,12 +36,14 @@ function DragablePopup(props) {
   return (
     <Popup
       classNames={{ ...classNames, title: clsx(HANDLE_CLASS, classNames.title) }}
-      popupRender={(popupNode) =>
+      popupRender={(popupNode, wrapperProps) =>
         !dragAble ? (
           popupNode
         ) : (
           <Draggable handle={'.' + (handleClassName || HANDLE_CLASS)} bounds={bounds} onStart={onStart}>
-            <div ref={draggleRef}>{popupNode}</div>
+            <div ref={draggleRef} className={wrapperProps.className} style={wrapperProps.style}>
+              {popupNode}
+            </div>
           </Draggable>
         )
       }

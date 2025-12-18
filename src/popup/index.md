@@ -39,9 +39,9 @@ toc: content
 | afterClose     | `() => any`                     | `undefined` | 完全关闭回调                                       |
 | popupRef       | `string`                        | `undefined` | 唯一的索引                                         |
 | popupRender    | `(popupNode: ReactNode) => any` | `undefined` | 弹出层渲染                                         |
-| onHide         | `() => any`                     | `undefined` | 隐藏按钮触发回调                                   |
-| onCancel       | `() => any`                     | `undefined` | 关闭弹出层触发回调                                 |
-| onOk           | `() => any`                     | `undefined` | 确认按钮触发回调                                   |
+| onHide         | `() => any`                     | `undefined` | 隐藏按钮触发回调，不传隐藏缩小按钮                 |
+| onCancel       | `() => any`                     | `undefined` | 关闭弹出层触发回调，不传隐藏缩关闭按钮和取消按钮   |
+| onOk           | `() => any`                     | `undefined` | 确认按钮触发回调，不传隐藏确认按钮                 |
 | onPopupClick   | `() => any`                     | `undefined` | 弹出层区域点击回调                                 |
 
 

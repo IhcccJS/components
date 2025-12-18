@@ -49,8 +49,8 @@ import ButtonList from '../button-list';
 // }
 
 const internalExtraButtons = [
-  { key: 'hide', props: { type: 'text', icon: <MinusOutlined /> } },
-  { key: 'cancel', props: { type: 'text', icon: <CloseOutlined /> } },
+  { key: 'hide', props: { type: 'text', icon: <MinusOutlined /> }, hidden: ({ onHide }) => !onHide },
+  { key: 'cancel', props: { type: 'text', icon: <CloseOutlined /> }, hidden: ({ onCancel }) => !onCancel },
 ];
 
 const extraEventMap = {
@@ -59,8 +59,8 @@ const extraEventMap = {
 };
 
 const interalFooterButtons = [
-  { key: 'cancel', props: { children: '取消' } },
-  { key: 'ok', props: { type: 'primary', children: '确认' } },
+  { key: 'cancel', props: { children: '取消' }, hidden: ({ onCancel }) => !onCancel },
+  { key: 'ok', props: { type: 'primary', children: '确认' }, hidden: ({ onOk }) => !onOk },
 ];
 
 const footerEventMap = {
@@ -84,6 +84,8 @@ function Popup(props, ref) {
     children,
     mask,
     cancelMask,
+    maskClosable = true,
+    forceRender,
     destroyOnClose,
     classNames = {},
     styles = {},
@@ -98,6 +100,7 @@ function Popup(props, ref) {
 
   const [openAsync, setOpenAsync] = React.useState(false);
   // const [originPosition, setOriginPosition] = React.useState('');
+  const initRenderRef = React.useRef(false);
   const thisPopupRef = React.useRef(null);
 
   const onTransitionEnd = (e) => {
@@ -109,6 +112,7 @@ function Popup(props, ref) {
 
   React.useEffect(() => {
     if (open) setOpenAsync(true);
+    // if (!thisPopupRef.current) return;
     // const elementOffset = offset(thisPopupRef.current);
     // console.log(mousePosition);
     // if (!mousePosition) return;
@@ -117,39 +121,52 @@ function Popup(props, ref) {
 
   // console.log(extraButton);
 
-  if (!open && !openAsync && destroyOnClose) return null;
+  if (!open && !openAsync) {
+    if (!forceRender && !initRenderRef.current) return null;
+    if (destroyOnClose) return null;
+  } else {
+    initRenderRef.current = true;
+  }
 
-  const buttonsData = { ...extraButton.eventData, onHide, onCancel, onOk };
+  const buttonsData = { onHide, onCancel, onOk };
 
-  const headerNode = header || (
-    <div className="bc-popup-header-default">
-      <div className={clsx('bc-popup-header-title', classNames.title)}>{title}</div>
-      <div className="bc-popup-header-buttons">
-        {extra}
-        <ButtonList
-          space="none"
-          buttons={[...(extraButton.buttons || []), ...internalExtraButtons]}
-          eventData={{ ...extraButton.eventData, ...buttonsData }}
-          eventMap={{ ...extraButton.eventMap, ...extraEventMap }}
-        />
-      </div>
-    </div>
-  );
+  const headerNode =
+    header === false && header === null
+      ? null
+      : header || (
+          <div className="bc-popup-header-default">
+            <div className={clsx('bc-popup-header-title', classNames.title)}>{title}</div>
+            <div className="bc-popup-header-buttons">
+              {extra}
+              <ButtonList
+                space="none"
+                {...extraButton}
+                buttons={[...(extraButton.buttons || []), ...internalExtraButtons]}
+                eventData={{ ...buttonsData, ...extraButton.eventData }}
+                eventMap={{ ...extraEventMap, ...extraButton.eventMap }}
+              />
+            </div>
+          </div>
+        );
 
-  const footerNode = footer || (
-    <div className="bc-popup-footer-default">
-      <ButtonList
-        layout="end"
-        buttons={[...(footerButton.buttons || []), ...interalFooterButtons]}
-        eventData={{ ...footerButton.eventData, ...buttonsData }}
-        eventMap={{ ...footerButton.eventMap, ...footerEventMap }}
-      />
-    </div>
-  );
+  const footerNode =
+    footer === false && footer === null
+      ? null
+      : footer || (
+          <div className="bc-popup-footer-default">
+            <ButtonList
+              layout="end"
+              {...footerButton}
+              buttons={[...(footerButton.buttons || []), ...interalFooterButtons]}
+              eventData={{ ...buttonsData, ...footerButton.eventData }}
+              eventMap={{ ...footerEventMap, ...footerButton.eventMap }}
+            />
+          </div>
+        );
 
   const popupNode = (
     <div ref={popupRef} className={clsx('bc-popup-content', classNames.content)} onClick={onPopupClick}>
-      {header !== false && header !== null && (
+      {headerNode && (
         <div className="bc-popup-header" style={styles.header}>
           {headerNode}
         </div>
@@ -157,11 +174,24 @@ function Popup(props, ref) {
       <div className="bc-popup-body" style={styles.body}>
         {children}
       </div>
-      {footer !== false && footer !== null && (
+      {footerNode && (
         <div className="bc-popup-footer" style={styles.footer}>
           {footerNode}
         </div>
       )}
+    </div>
+  );
+
+  const wrapperProps = { className: 'bc-popup-main-wrapper', style: { top, width, zIndex } };
+
+  const popupDom = (
+    <div
+      ref={thisPopupRef}
+      className={clsx('bc-popup-main', classNames.main, !popupRender ? wrapperProps.className : '')}
+      style={{ ...styles.main, ...(!popupRender ? wrapperProps.style : {}) /** , transformOrigin: originPosition */ }}
+      onTransitionEnd={onTransitionEnd}
+    >
+      {popupNode}
     </div>
   );
 
@@ -172,15 +202,10 @@ function Popup(props, ref) {
       className={clsx('bc-popup-root', open && openAsync && 'bc-popup-open', cancelMask && 'bc-popup-mask-event', classNames.root)}
       style={open || openAsync ? { ...styles.root, zIndex } : { ...styles.root, display: 'none' }}
     >
-      {mask !== false && mask !== null && <div className="bc-popup-mask" style={styles.mask} onClick={onCancel}></div>}
-      <div
-        ref={thisPopupRef}
-        className={clsx('bc-popup-main', classNames.main)}
-        style={{ ...styles.main, top, width, zIndex /**, transformOrigin: originPosition */ }}
-        onTransitionEnd={onTransitionEnd}
-      >
-        {popupRender?.(popupNode) || popupNode}
-      </div>
+      {mask !== false && mask !== null && (
+        <div className="bc-popup-mask" style={styles.mask} {...(maskClosable ? { onClick: onCancel || onHide } : {})}></div>
+      )}
+      {popupRender?.(popupDom, wrapperProps) || popupDom}
     </div>,
     document.body,
   );
