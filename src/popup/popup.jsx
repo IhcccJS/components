@@ -131,7 +131,7 @@ function Popup(props, ref) {
   const buttonsData = { onHide, onCancel, onOk };
 
   const headerNode =
-    header === false && header === null
+    header === false || header === null
       ? null
       : header || (
           <div className="bc-popup-header-default">
@@ -150,7 +150,7 @@ function Popup(props, ref) {
         );
 
   const footerNode =
-    footer === false && footer === null
+    footer === false || footer === null
       ? null
       : footer || (
           <div className="bc-popup-footer-default">
