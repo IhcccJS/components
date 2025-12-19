@@ -8,12 +8,12 @@
   flex-direction: column;
 
   &-header {
-    padding: @gap;
+    padding: @gap @gap 0;
   }
 
   &-toolbar {
     display: flex;
-    padding: @gap;
+    padding: @gap @gap 0;
   }
 
   &-toolbar-between {
@@ -23,21 +23,13 @@
   }
 
   &-content {
-    padding: 0 @gap;
+    padding: @gap;
   }
 
   &-footer {
     display: flex;
-    padding: @gap;
+    padding: 0 @gap @gap;
   }
-}
-
-.@{prefix}-header + .@{prefix}-body
-// .@{prefix}-toolbar + .@{prefix}-content,
-// .@{prefix}-toolbar-between + .@{prefix}-content,
-// .@{prefix}-content + .@{prefix}-footer
-{
-  margin-top: @gap;
 }
 
 .@{prefix}-container {
@@ -68,6 +60,18 @@
 .@{prefix}-body.@{prefix}-style-card {
   background: var(--color-bg-component, #fff);
   border-radius: var(--size-border-radius, 6px);
+}
+
+.@{prefix}-header.@{prefix}-style-card + .@{prefix}-body.@{prefix}-style-card
+// .@{prefix}-toolbar + .@{prefix}-content,
+// .@{prefix}-toolbar-between + .@{prefix}-content,
+// .@{prefix}-content + .@{prefix}-footer
+{
+  margin-top: @gap;
+}
+
+.@{prefix}-header.@{prefix}-style-card {
+  padding-bottom: @gap;
 }
 
 .@{prefix}.@{prefix}-sticky-header {
