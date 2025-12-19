@@ -2,7 +2,7 @@
 import { useApi } from '@ihccc/hooks';
 import definePlugin from '../create-component/definePlugin';
 // import { useMemoryGet, useMemorySet } from '@/utils/hooks/useMemory';
-import promiseFn from '../utils/promise-fn';
+import UnknowPromiseFn from '../utils/promise-fn';
 
 export default definePlugin({
   name: 'request',
@@ -25,7 +25,7 @@ export default definePlugin({
       },
     };
 
-    const request = useApi(query || promiseFn, {
+    const request = useApi(query || UnknowPromiseFn, {
       auto: noData,
       initialData: initialData.data,
       defaultParams: { ...defaultParams },

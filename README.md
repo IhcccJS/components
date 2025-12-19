@@ -17,6 +17,8 @@ pnpm i
 pnpm run start
 ```
 
+[文档编写指南](https://d.umijs.org/)
+
 ## 发布
 
 版本语义

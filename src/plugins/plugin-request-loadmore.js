@@ -2,7 +2,7 @@ import React from 'react';
 import { useApi } from '@ihccc/hooks';
 // import { useMemoryGet, useMemorySet } from '@/utils/hooks/useMemory';
 import definePlugin from '../create-component/definePlugin';
-import promiseFn from '../utils/promise-fn';
+import UnknowPromiseFn from '../utils/promise-fn';
 
 export default definePlugin({
   name: 'request',
@@ -29,7 +29,7 @@ export default definePlugin({
 
     const lastDataRef = React.useRef(initialData.data.list);
 
-    const request = useApi(query || promiseFn, {
+    const request = useApi(query || UnknowPromiseFn, {
       auto: noData,
       initialData: initialData.data,
       defaultParams: { ...defaultParams, ...page },

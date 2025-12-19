@@ -6,14 +6,15 @@
   position: relative;
   display: flex;
   flex-direction: column;
+  padding: @gap;
 
   &-header {
-    padding: @gap @gap 0;
+    padding-bottom: @gap;
   }
 
   &-toolbar {
     display: flex;
-    padding: @gap @gap 0;
+    padding-bottom: @gap;
   }
 
   &-toolbar-between {
@@ -23,12 +24,19 @@
   }
 
   &-content {
-    padding: @gap;
+    padding-bottom: @gap;
   }
 
   &-footer {
     display: flex;
-    padding: 0 @gap @gap;
+  }
+
+  // TODO: 修复内容为空时内间距问题，需优化为完全隐藏DOM
+  &-header:empty,
+  &-toolbar:empty,
+  &-content:empty,
+  &-footer:empty {
+    padding: 0;
   }
 }
 
@@ -58,6 +66,7 @@
 
 .@{prefix}-header.@{prefix}-style-card,
 .@{prefix}-body.@{prefix}-style-card {
+  padding: @gap;
   background: var(--color-bg-component, #fff);
   border-radius: var(--size-border-radius, 6px);
 }
@@ -68,10 +77,6 @@
 // .@{prefix}-content + .@{prefix}-footer
 {
   margin-top: @gap;
-}
-
-.@{prefix}-header.@{prefix}-style-card {
-  padding-bottom: @gap;
 }
 
 .@{prefix}.@{prefix}-sticky-header {

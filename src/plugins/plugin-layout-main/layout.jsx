@@ -5,7 +5,7 @@ import { isFunction } from '@ihccc/utils';
 const LayoutStyle = 'card';
 
 const Layout = React.forwardRef(function Layout(
-  { className, sticky, head, buttonBar, title, children, footer, renderContent = {}, layoutStyle = 'card', inlineHead = false },
+  { className, style, sticky, renderContent = {}, layoutStyle = 'card', inlineHead = false, title, head, buttonBar, children, footer },
   ref,
 ) {
   const headNode = head && !inlineHead && (
@@ -92,6 +92,7 @@ const Layout = React.forwardRef(function Layout(
         extendClassName,
         className,
       )}
+      style={style}
     >
       {renderListNode}
     </div>

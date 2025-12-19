@@ -49,7 +49,7 @@ function Demo() {
   return (
     <ListOfTable
       namespace="role"
-      request={{ query, format, cacheKey: 'baseList', staleTime: -1 }}
+      request={{ query, format, successCode: '0', cacheKey: 'baseList', staleTime: -1 }}
       columns={columns}
       eventData={{ renderType, setRenderType }}
       eventMap={eventMap}
@@ -57,7 +57,7 @@ function Demo() {
       extraButtons={{ buttons }}
       actionColumn={{ listRender: { as: 'item' } }}
       actionButtons={{ buttons: actionButtons }}
-      table={{ size: 'small', scroll: { x: 'max-content' } }}
+      table={{ size: 'small' }}
       list={{ grid: { gutter: 16, xs: 1, sm: 2, md: 3, lg: 3, xl: 4, xxl: 5 } }}
       renderList={{
         type: renderType,

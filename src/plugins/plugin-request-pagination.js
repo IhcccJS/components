@@ -2,7 +2,7 @@ import React from 'react';
 import { useApi } from '@ihccc/hooks';
 import definePlugin from '../create-component/definePlugin';
 // import { useMemoryGet, useMemorySet } from '@/utils/hooks/useMemory';
-import promiseFn from '../utils/promise-fn';
+import UnknowPromiseFn from '../utils/promise-fn';
 
 // 刷新，当前分页，当前查询参数
 // 查询，重置分页，新的查询参数
@@ -32,7 +32,7 @@ export default definePlugin({
     };
     const [page, setPage] = React.useState(initialData.page);
 
-    const request = useApi(query || promiseFn, {
+    const request = useApi(query || UnknowPromiseFn, {
       auto: noData,
       initialData: initialData.data,
       // #FIXME: 重新打开页面，refresh 不会携带任何参数
