@@ -8,9 +8,7 @@ const Layout = React.forwardRef(function Layout(
   { className, style, sticky, renderContent = {}, layoutStyle = 'card', inlineHead = false, title, head, buttonBar, children, footer },
   ref,
 ) {
-  const headNode = head && !inlineHead && (
-    <div className={clsx('bc-list-layout-header', { ['bc-list-layout-style-' + layoutStyle]: LayoutStyle === layoutStyle })}>{head}</div>
-  );
+  const headNode = head && !inlineHead && <div className={'bc-list-layout-header'}>{head}</div>;
 
   const toolNode = !inlineHead
     ? (title || buttonBar) && (
@@ -32,10 +30,10 @@ const Layout = React.forwardRef(function Layout(
   let extendClassName = null;
 
   if (isFunction(renderContent)) {
-    const content = <div className={clsx('bc-list-layout-content')}> {children}</div>;
+    const content = <div className={'bc-list-layout-content'}> {children}</div>;
 
     const body = (
-      <div className={clsx('bc-list-layout-body', { ['bc-list-layout-style-' + layoutStyle]: LayoutStyle === layoutStyle })}>
+      <div className={'bc-list-layout-body'}>
         {toolNode}
         {content}
         {footNode}
@@ -51,7 +49,7 @@ const Layout = React.forwardRef(function Layout(
     const mainBody = (
       <React.Fragment>
         {headNode}
-        <div className={clsx('bc-list-layout-body', { ['bc-list-layout-style-' + layoutStyle]: LayoutStyle === layoutStyle })}>
+        <div className={'bc-list-layout-body'}>
           {toolNode}
           <div
             className={clsx('bc-list-layout-content', {
@@ -86,6 +84,7 @@ const Layout = React.forwardRef(function Layout(
       className={clsx(
         'bc-list-layout',
         {
+          ['bc-list-layout-style-' + layoutStyle]: LayoutStyle === layoutStyle,
           'bc-list-layout-sticky-header': sticky === true || sticky?.header === true,
           'bc-list-layout-sticky-footer': sticky === true || sticky?.footer === true,
         },

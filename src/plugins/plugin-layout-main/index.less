@@ -6,7 +6,6 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  padding: @gap;
 
   &-header {
     padding-bottom: @gap;
@@ -64,19 +63,17 @@
   }
 }
 
-.@{prefix}-header.@{prefix}-style-card,
-.@{prefix}-body.@{prefix}-style-card {
-  padding: @gap;
-  background: var(--color-bg-component, #fff);
-  border-radius: var(--size-border-radius, 6px);
-}
+.@{prefix}.@{prefix}-style-card {
+  .@{prefix}-header,
+  .@{prefix}-body {
+    padding: @gap;
+    background: var(--color-bg-component, #fff);
+    border-radius: var(--size-border-radius, 6px);
+  }
 
-.@{prefix}-header.@{prefix}-style-card + .@{prefix}-body.@{prefix}-style-card
-// .@{prefix}-toolbar + .@{prefix}-content,
-// .@{prefix}-toolbar-between + .@{prefix}-content,
-// .@{prefix}-content + .@{prefix}-footer
-{
-  margin-top: @gap;
+  .@{prefix}-header + .@{prefix}-body {
+    margin-top: @gap;
+  }
 }
 
 .@{prefix}.@{prefix}-sticky-header {
@@ -104,13 +101,12 @@
 }
 
 .@{prefix}.@{prefix}-sticky-footer {
-  .@{prefix} {
-    &-footer {
-      position: sticky;
-      bottom: -1px;
-      background: var(--color-bg-component, #fff);
-      border-top: 1px solid var(--color-border, #f1f1f1);
-      z-index: 10;
-    }
+  .@{prefix}-footer {
+    position: sticky;
+    bottom: -1px;
+    background: var(--color-bg-component, #fff);
+    border-top: 1px solid var(--color-border, #f1f1f1);
+    padding-top: @gap;
+    z-index: 10;
   }
 }
