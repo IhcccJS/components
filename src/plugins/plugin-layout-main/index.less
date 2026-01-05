@@ -30,7 +30,7 @@
     display: flex;
   }
 
-  // TODO: 修复内容为空时内间距问题，需优化为完全隐藏DOM
+  // TODO: 修复内容为空时内间距问题，待优化为不渲染DOM
   &-header:empty,
   &-toolbar:empty,
   &-content:empty,
@@ -98,15 +98,30 @@
       padding: @gap;
     }
   }
+
+  &.bc-system-default-page-fullscreen .@{prefix}-header {
+    top: calc(-1 * @gap);
+  }
 }
 
 .@{prefix}.@{prefix}-sticky-footer {
-  .@{prefix}-footer {
-    position: sticky;
-    bottom: -1px;
-    background: var(--color-bg-component, #fff);
-    border-top: 1px solid var(--color-border, #f1f1f1);
-    padding-top: @gap;
-    z-index: 10;
+  .@{prefix} {
+    &-body {
+      padding-bottom: 0;
+    }
+
+    &-footer {
+      position: sticky;
+      bottom: -1px;
+      background: var(--color-bg-component, #fff);
+      border-top: 1px solid var(--color-border, #f1f1f1);
+      padding-top: @gap;
+      padding-bottom: @gap;
+      z-index: 10;
+    }
+  }
+
+  &.bc-system-default-page-fullscreen .@{prefix}-footer {
+    bottom: calc(-1 * @gap - 1px);
   }
 }

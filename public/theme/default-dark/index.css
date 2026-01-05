@@ -45,7 +45,7 @@
   /* 文字颜色，禁用状态 */
   --color-text-disabled: #737373;
   /* 新增：文字颜色，浮动状态 */
-  --color-text-hover: #4d4d4d;
+  --color-text-hover: #a8a8a8;
   /* 新增：文字颜色，激活状态 */
   --color-text-active: #48b177;
   /* 背景色 */

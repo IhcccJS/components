@@ -1,6 +1,7 @@
 [data-theme] .css-var-r0 {
   --ant-color-primary: var(--color-primary);
   --ant-color-primary-hover: var(--color-primary-hover);
+  --ant-color-primary-border-hover: var(--color-primary-hover);
   --ant-color-bg-container: var(--color-bg-component);
   --ant-color-bg-elevated: var(--color-bg-popover);
   --ant-color-border: var(--color-border);
@@ -122,8 +123,8 @@
 [data-theme] .css-var-r0.ant-pagination {
   --ant-pagination-item-bg: var(--color-bg-component);
   --ant-pagination-item-active-bg: var(--color-bg-component);
-  --ant-pagination-hover-bg: var(--color-bg-component-hover);
-  --ant-pagination-active-bg: var(--color-bg-component-hover);
+  --ant-pagination-hover-bg: var(--color-bg-component-secondary);
+  --ant-pagination-active-bg: var(--color-bg-component-secondary);
 }
 
 [data-theme] .css-var-r0.ant-switch {
@@ -138,9 +139,34 @@
   --ant-progress-default-color: var(--color-primary);
 }
 
+[data-theme] .css-var-r0.ant-slider {
+  --ant-slider-rail-bg: var(--color-bg-component-secondary);
+  --ant-slider-rail-hover-bg: var(--color-bg-component-hover);
+  --ant-slider-track-bg: var(--color-primary);
+  --ant-slider-track-hover-bg: var(--color-primary-hover);
+  --ant-slider-handle-color: var(--color-primary);
+  --ant-slider-handle-active-color: var(--color-primary-active);
+  --ant-slider-dot-active-border-color: var(--color-primary-secondary);
+}
+
 [data-theme] .ant-badge {
   color: inherit;
 }
 [data-theme] .ant-badge .ant-badge-count {
   color: var(--color-text-inverse);
+}
+
+[data-theme] .ant-divider-horizontal.ant-divider-with-text {
+  color: var(--color-text-desc);
+  border-block-start: 0 var(--color-border-secondary);
+}
+
+[data-theme] .css-var-r0.ant-menu-css-var {
+  --ant-menu-item-bg: var(--color-bg-layout-side);
+  --ant-menu-sub-menu-item-bg: var(--color-bg);
+  --ant-menu-item-active-bg: var(--color-bg-component-hover);
+  --ant-menu-item-selected-bg: var(--color-primary-secondary);
+  --ant-menu-item-selected-color: var(--color-primary);
+  --ant-menu-item-color: var(--color-text);
+  --ant-menu-item-hover-color: var(--color-text-hover);
 }

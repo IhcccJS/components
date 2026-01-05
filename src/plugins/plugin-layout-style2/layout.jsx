@@ -23,22 +23,21 @@ const Layout = React.forwardRef(({ className, sticky, head, buttonBar, children,
   );
 
   return (
-    <div ref={ref}>
-      <div
-        className={clsx(
-          'bc-list-layout-style2',
-          {
-            'bc-list-layout-style2-sticky-header': sticky === true || sticky?.header === true,
-            'bc-list-layout-style2-sticky-footer': sticky === true || sticky?.footer === true,
-            'bc-list-layout-style2-container': renderPlace === 'outer',
-            ['bc-list-layout-style2-container-' + renderDirection]: renderPlace === 'outer',
-          },
-          className,
-        )}
-      >
-        {renderPlace === 'outer' ? <div className="bc-list-layout-style2-container-main-body">{mainBody}</div> : mainBody}
-        {renderPlace === 'outer' && renderContent.content}
-      </div>
+    <div
+      ref={ref}
+      className={clsx(
+        'bc-list-layout-style2',
+        {
+          'bc-list-layout-style2-sticky-header': sticky === true || sticky?.header === true,
+          'bc-list-layout-style2-sticky-footer': sticky === true || sticky?.footer === true,
+          'bc-list-layout-style2-container': renderPlace === 'outer',
+          ['bc-list-layout-style2-container-' + renderDirection]: renderPlace === 'outer',
+        },
+        className,
+      )}
+    >
+      {renderPlace === 'outer' ? <div className="bc-list-layout-style2-container-main-body">{mainBody}</div> : mainBody}
+      {renderPlace === 'outer' && renderContent.content}
     </div>
   );
 });

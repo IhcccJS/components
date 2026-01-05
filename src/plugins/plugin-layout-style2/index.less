@@ -1,5 +1,5 @@
 @prefix: ~'bc-list-layout-style2';
-@gap: var(--size-cell-gap, 12px);
+@gap: var(--size-cell-gap, 16px);
 
 .@{prefix} {
   position: relative;
@@ -66,6 +66,10 @@
       z-index: 10;
     }
   }
+
+  &.bc-system-default-page-fullscreen .@{prefix}-toolbar {
+    top: calc(-1 * @gap);
+  }
 }
 
 .@{prefix}.@{prefix}-sticky-footer {
@@ -76,5 +80,9 @@
       background: var(--color-bg-component, #fff);
       z-index: 10;
     }
+  }
+
+  &.bc-system-default-page-fullscreen .@{prefix}-footer {
+    bottom: calc(-1 * @gap - 1px);
   }
 }

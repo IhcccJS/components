@@ -113,6 +113,8 @@
   --size-cell-gap-sm: 8px;
   /* 新增：内容间隙大尺寸 */
   --size-cell-gap-lg: 24px;
+  /* 侧边栏折叠宽度 */
+  --size-layout-side-collapse-width: 56px;
   /* 默认页面顶栏高度 */
   --size-layout-header-height: 52px;
   /* 新增：页面顶栏扩展高度，可以显示更多信息 */
