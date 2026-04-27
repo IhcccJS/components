@@ -1,6 +1,6 @@
 {
   "name": "@ihccc/components",
-  "version": "0.1.2-local.17",
+  "version": "0.1.2",
   "description": "A base components library extends antd",
   "license": "MIT",
   "main": "lib/index.js",
@@ -29,10 +29,6 @@
       "eslint --fix",
       "prettier --parser=typescript --write"
     ]
-  },
-  "publishConfig": {
-    "access": "public",
-    "registry": "http://127.0.0.1:4873/"
   },
   "authors": [
     "ihccc-cn <lccc10588@gmail.com>"
